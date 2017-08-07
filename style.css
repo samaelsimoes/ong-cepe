@@ -6661,6 +6661,18 @@ footer {
   /* Safari 7.0+ */
   align-items: center; }
 
+.custom-fontes a {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400 !important; }
+.custom-fontes p {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400 !important; }
+
+.custom-padding-top {
+  padding-top: 95px; }
+
 @media only screen and (max-width: 748px) {
   /*align*/
   .phone-align-left {

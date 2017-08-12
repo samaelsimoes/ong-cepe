@@ -1,0 +1,5 @@
+
+var pessoaFisica = document.querySelector("#tipopessoa").val();
+var pessoaJuridica = document.querySelector("#id").val();
+
+alert(pessoaFisica + " " + pessoaJuridica);

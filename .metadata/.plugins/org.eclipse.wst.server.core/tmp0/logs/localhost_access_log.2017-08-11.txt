@@ -1,5 +1,0 @@
-127.0.0.1 - - [11/Aug/2017:18:52:00 -0300] "GET / HTTP/1.1" 404 951
-0:0:0:0:0:0:0:1 - - [11/Aug/2017:18:52:01 -0300] "GET /ong-cepe/ HTTP/1.1" 200 2636
-0:0:0:0:0:0:0:1 - - [11/Aug/2017:18:52:01 -0300] "GET /ong-cepe/js/bootstrap.min.js HTTP/1.1" 200 37045
-0:0:0:0:0:0:0:1 - - [11/Aug/2017:18:52:01 -0300] "GET /ong-cepe/css/font-awesome/css/font-awesome.min.css HTTP/1.1" 404 1051
-0:0:0:0:0:0:0:1 - - [11/Aug/2017:18:52:01 -0300] "GET /ong-cepe/js/jquery.js HTTP/1.1" 200 84245

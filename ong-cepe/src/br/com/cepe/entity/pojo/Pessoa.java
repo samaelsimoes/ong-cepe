@@ -1,13 +1,26 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.entity.pojo;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import br.com.cepe.datatypes.Status;
 import br.com.cepe.datatypes.Tipo;
 
+@Entity
 public class Pessoa {
-	
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private int id;
+
 private Tipo tipo;
 private Status status;
-
-
 
 private String nome;
 private String email;
@@ -15,11 +28,11 @@ private Long foneFixo;
 private Long foneMovel;
 private String responsavel;
 
-
 private Long cep;
 private String rua;
 private int numero;
 private String bairro;
+@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 private Cidade cidade;
 private String complemento;
 
@@ -104,9 +117,6 @@ public String getComplemento() {
 public void setComplemento(String complemento) {
 	this.complemento = complemento;
 }
-
-
-
 
 
 }

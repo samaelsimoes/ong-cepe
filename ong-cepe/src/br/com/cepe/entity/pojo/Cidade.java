@@ -1,9 +1,20 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.entity.pojo;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Cidade {
-	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nome;
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Estado estado;
 	
 	

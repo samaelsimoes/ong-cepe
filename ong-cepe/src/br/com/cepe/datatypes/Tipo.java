@@ -1,3 +1,6 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.datatypes;
 
 public enum Tipo {

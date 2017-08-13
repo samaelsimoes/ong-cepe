@@ -1,4 +1,9 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.entity.pojo;
+
+
 
 public class PessoaJuridica extends Pessoa{
 	
@@ -11,7 +16,7 @@ public class PessoaJuridica extends Pessoa{
 	public void setCnpj(Long cnpj) {
 		this.cnpj = cnpj;
 	}
-	
+
 	
 
 }

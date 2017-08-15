@@ -1,4 +1,0 @@
-$(document).ready(function(){
-	
-	$('#login').load('resources/paginaInicial.html');
-});

@@ -10,7 +10,7 @@ import javax.persistence.TemporalType;
 
 public class PessoaFisica extends Pessoa{
 	
-	
+	//teste git Guilherme
 	private Long rg;
 	private Long cpf;
 	@Temporal(TemporalType.DATE)

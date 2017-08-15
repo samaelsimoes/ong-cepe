@@ -1,4 +1,0 @@
-
-var tipoPessoa = document.querySelector("#tipopessoa").val();
-
-alert(pessoaFisica + " " + pessoaJuridica);

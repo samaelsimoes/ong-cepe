@@ -1,4 +1,0 @@
-var items = document.getElementById('caminhos');
-items.addEventListener('change', function(){
-    alert(this.value); // o valor que procuras é: this.value
-});

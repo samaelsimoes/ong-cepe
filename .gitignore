@@ -3,7 +3,6 @@
 RemoteSystemsTempFiles
 Servers
 
-ong-cepeBKP
 ong-cepe/.*
 ong-cepe/build
 ong-cepe/lib

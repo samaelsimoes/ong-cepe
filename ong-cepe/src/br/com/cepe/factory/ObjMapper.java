@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import br.com.cepe.datatypes.DataFmt;
+import br.com.cepe.datatype.DataFmt;
 
 public class ObjMapper{
 private ObjectMapper objMapper;

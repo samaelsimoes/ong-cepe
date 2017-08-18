@@ -1,4 +1,4 @@
-package br.com.cepe.datatypes;
+package br.com.cepe.datatype;
 
 public interface DataTypes {
  

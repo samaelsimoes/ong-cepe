@@ -1,7 +1,7 @@
 /**
  * @author  Eduardo Cristian Campigoto
  **/
-package br.com.cepe.datatypes;
+package br.com.cepe.datatype;
 
 public enum Tipo implements DataTypes{
 	PF(0), PJ(1);

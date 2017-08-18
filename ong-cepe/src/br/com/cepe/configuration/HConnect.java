@@ -8,6 +8,21 @@ import javax.persistence.Query;
 public class HConnect {
 	private EntityManagerFactory connection;
 	
+	
+	
+	public EntityManager getEntityManager(){
+		return connect().createEntityManager();
+	}
+	
+	public Query getQuery(String hql){
+		return this.getEntityManager().createQuery(hql);
+	}
+	
+	public void disconnect(){
+		if(connection != null && connection.isOpen())
+			connection.close();
+	}
+	
 	public EntityManagerFactory connect() {
 		try {
 
@@ -23,12 +38,6 @@ public class HConnect {
 		return null;
 	}
 	
-	public EntityManager getEntityManager(){
-		return connect().createEntityManager();
-	}
 	
-	public Query getQuery(String hql){
-		return this.getEntityManager().createQuery(hql);
-	}
 
 }

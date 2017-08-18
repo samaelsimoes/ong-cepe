@@ -10,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import br.com.cepe.datatypes.Status;
-import br.com.cepe.datatypes.Tipo;
+import br.com.cepe.datatype.Status;
+import br.com.cepe.datatype.Tipo;
 
 @Entity
 public class Pessoa {
@@ -35,6 +35,15 @@ public class Pessoa {
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private Cidade cidade;
 	private String complemento;
+
+		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Tipo getTipo() {
 		return tipo;

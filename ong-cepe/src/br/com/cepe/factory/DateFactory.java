@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import br.com.cepe.datatypes.DataFmt;
+import br.com.cepe.datatype.DataFmt;
 
 public class DateFactory {
 

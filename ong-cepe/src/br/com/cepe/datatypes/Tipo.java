@@ -3,11 +3,16 @@
  **/
 package br.com.cepe.datatypes;
 
-public enum Tipo {
+public enum Tipo implements DataTypes{
 	PF(0), PJ(1);
 	
-	int index;
+	public int index;
 	Tipo(int index){
 		this.index = index;
+	}
+	@Override
+	public int getIndex() {
+
+		return this.index;
 	}
 }

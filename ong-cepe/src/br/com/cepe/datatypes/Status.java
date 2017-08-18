@@ -5,12 +5,16 @@ package br.com.cepe.datatypes;
 
 
 
-public enum Status {
+public enum Status implements DataTypes{
 	INATIVO(0), ATIVO(1);
 
-	int index;
+		public int index;
 		Status(int index){
 			this.index = index;
+		}
+	
+		public int getIndex() {
+			return this.index;
 		}
 
 

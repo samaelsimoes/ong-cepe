@@ -19,15 +19,19 @@ private PessoaDAO pessoaDAO;
 	public Pessoa pesquisar(Pessoa pessoa){
 		return pessoaDAO.findId(pessoa.getId());
 	}
+	
+	public void alterar(Pessoa pessoa){
+		pessoaDAO.persist(pessoa);
+	}
+	
 
 	public List<Pessoa> pesquisarStr(String campo, String operacao, String valor){
 		return pessoaDAO.findStr(campo, operacao, valor);
 	}
 	
 	
-	public void excluir(){
-		
-		
+	public void excluir(int id){
+		pessoaDAO.delete(id);
 	}
 	
 	

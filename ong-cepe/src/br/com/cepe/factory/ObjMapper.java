@@ -22,13 +22,12 @@ private DateFactory dateFactory;
 	}
 	
 	
-	public StringWriter getJson(Object obj) throws Exception{
+	public String getJson(Object obj) throws Exception{
 		StringWriter jsonObj = new StringWriter();
 		try{
-			
-			objMapper.setDateFormat(new SimpleDateFormat(dateFactory.getFmt(DataFmt.DTHR_BR)));	
+			objMapper.setDateFormat(new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_BR)));	
 			objMapper.writeValue(jsonObj, obj);			
-			return jsonObj;
+			return jsonObj.toString();
 			
 		}catch(Exception e){
 			e.printStackTrace();

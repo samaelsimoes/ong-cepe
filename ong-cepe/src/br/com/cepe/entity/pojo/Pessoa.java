@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import br.com.cepe.datatype.Status;
-import br.com.cepe.datatype.Tipo;
+import br.com.cepe.datatype.PessoaTipo;
 
 @Entity
 public class Pessoa {
@@ -20,7 +20,7 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private Tipo tipo;
+	private PessoaTipo tipo;
 	private Status status;
 
 	private String nome;
@@ -45,11 +45,11 @@ public class Pessoa {
 		this.id = id;
 	}
 
-	public Tipo getTipo() {
+	public PessoaTipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Tipo tipo) {
+	public void setTipo(PessoaTipo tipo) {
 		this.tipo = tipo;
 	}
 

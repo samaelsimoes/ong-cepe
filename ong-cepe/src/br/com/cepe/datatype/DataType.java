@@ -1,6 +1,6 @@
 package br.com.cepe.datatype;
 
-public interface DataTypes {
+public interface DataType {
  
 	public int getIndex();
 		

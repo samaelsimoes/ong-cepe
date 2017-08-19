@@ -3,11 +3,11 @@
  **/
 package br.com.cepe.datatype;
 
-public enum Tipo implements DataTypes{
+public enum PessoaTipo implements DataType{
 	PF(0), PJ(1);
 	
 	public int index;
-	Tipo(int index){
+	PessoaTipo(int index){
 		this.index = index;
 	}
 	@Override

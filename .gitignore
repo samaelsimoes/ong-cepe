@@ -2,7 +2,7 @@
 !.gitignore
 RemoteSystemsTempFiles
 Servers
-TESTE
+
 ong-cepe/.*
 ong-cepe/build
 ong-cepe/lib

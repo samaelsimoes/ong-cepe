@@ -7,6 +7,10 @@ $(document).ready(function(){
 
 		$('#pesstipo').load('formulario/pessoas/cadpesfisica.html');
 	}
+	cadspesjuri = function(){
+
+		$('#pesstipo').load('formulario/pessoas/cadspesjuridica.html');
+	}
 });
 
 var items = document.getElementById('tipopessoa');

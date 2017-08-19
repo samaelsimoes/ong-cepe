@@ -8,9 +8,9 @@ $(document).ready(function(){
 	
 	buscapefisica = function(listPesF, busca){
 				
-		var html = "<table class='table table-responsive'>";
+		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
-		html += "<thead class='table table-striped'>"+
+		html += "<thead class='table table-striped '>"+
 					"<tr>" +
 						"<p> Pessoas </p>  </br>"+ 
 						"<th> Nome </th> " +

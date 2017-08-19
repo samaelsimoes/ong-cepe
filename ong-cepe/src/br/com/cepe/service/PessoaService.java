@@ -25,9 +25,8 @@ private PessoaDAO pessoaDAO;
 	}
 	
 	
-	public void excluir(){
-		
-		
+	public void excluir(Pessoa pessoa){
+		pessoaDAO.delete(pessoa.getId());
 	}
 	
 	

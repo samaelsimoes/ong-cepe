@@ -25,7 +25,6 @@ private DateFactory dateFactory;
 	public StringWriter getJson(Object obj) throws Exception{
 		StringWriter jsonObj = new StringWriter();
 		try{
-			
 			objMapper.setDateFormat(new SimpleDateFormat(dateFactory.getFmt(DataFmt.DTHR_BR)));	
 			objMapper.writeValue(jsonObj, obj);			
 			return jsonObj;

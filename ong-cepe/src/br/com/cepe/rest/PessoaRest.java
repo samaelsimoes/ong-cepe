@@ -8,13 +8,20 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.cepe.factory.ObjMapper;
+import br.com.cepe.factory.PessoaFactory;
+
 @Path("/Pessoa")
 public class PessoaRest {
-
+public PessoaRest(){
+	PessoaFactory pessoaFactory = new PessoaFactory();
+}
 
 @POST
 @Consumes("application/*")
-public void adicionar(String pessoa){
+public void adicionar(String pessoaStr){
+	ObjMapper map = new ObjMapper();
+	Object pessoa = map.getObject();
 	
 } 
 

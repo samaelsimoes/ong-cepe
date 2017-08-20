@@ -10,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import br.com.cepe.datatype.Status;
 import br.com.cepe.datatype.PessoaType;
+import br.com.cepe.datatype.Status;
 
 @Entity
 public class Pessoa {
@@ -140,5 +140,7 @@ public class Pessoa {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	
+
 
 }

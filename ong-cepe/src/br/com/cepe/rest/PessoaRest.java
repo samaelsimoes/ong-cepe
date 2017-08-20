@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import br.com.cepe.entity.pojo.Pessoa;
 import br.com.cepe.exception.GlobalException;
-import br.com.cepe.factory.entity.PessoaFactory;
+import br.com.cepe.factory.entity.pessoa.PessoaFactory;
 import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.PessoaService;
 

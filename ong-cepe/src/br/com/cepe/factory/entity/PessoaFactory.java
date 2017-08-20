@@ -1,9 +1,9 @@
 /**
  * @author  Eduardo Cristian Campigoto
  **/
-package br.com.cepe.factory;
+package br.com.cepe.factory.entity;
 
-import br.com.cepe.datatype.PessoaTipo;
+import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.entity.pojo.Pessoa;
 import br.com.cepe.entity.pojo.PessoaFisica;
 import br.com.cepe.entity.pojo.PessoaJuridica;
@@ -20,7 +20,7 @@ public class PessoaFactory {
 	 */
 
 	public Pessoa getPessoa(Pessoa pessoa){
-		return (pessoa.getTipo() == PessoaTipo.PF) ? new PessoaFisica() : new PessoaJuridica();
+		return (pessoa.getTipo() == PessoaType.PF) ? new PessoaFisica() : new PessoaJuridica();
 	}
 
 }

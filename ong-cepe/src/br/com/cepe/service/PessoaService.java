@@ -3,7 +3,9 @@ package br.com.cepe.service;
 import java.util.List;
 
 import br.com.cepe.daoconnect.PessoaDAO;
+import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.Pessoa;
+import br.com.cepe.exception.GlobalException;
 
 public class PessoaService {
 private PessoaDAO pessoaDAO;
@@ -23,10 +25,13 @@ private PessoaDAO pessoaDAO;
 	public void alterar(Pessoa pessoa){
 		pessoaDAO.persist(pessoa);
 	}
-	
 
-	public List<Pessoa> pesquisarStr(String campo, String operacao, String valor){
+	public List<Pessoa> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{
 		return pessoaDAO.findStr(campo, operacao, valor);
+	}	
+	
+	public List<Pessoa> pesquisarNome(String valor) throws GlobalException{
+		return pessoaDAO.findStr("nome", HOperator.CONTAINS, valor);
 	}
 	
 	

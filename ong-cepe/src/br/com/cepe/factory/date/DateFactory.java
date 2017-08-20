@@ -1,4 +1,4 @@
-package br.com.cepe.factory;
+package br.com.cepe.factory.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

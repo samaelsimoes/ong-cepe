@@ -1,7 +1,7 @@
 /**
  * @author  Eduardo Cristian Campigoto
  **/
-package br.com.cepe.entity.pojo;
+package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.datatype.Status;
+import br.com.cepe.entity.pojo.Endereco.Cidade;
 
 @Entity
 public class Pessoa {

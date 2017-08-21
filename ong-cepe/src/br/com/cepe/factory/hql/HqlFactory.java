@@ -1,3 +1,6 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.factory.hql;
 
 import br.com.cepe.datatype.HOperator;

@@ -1,21 +1,20 @@
 /**
  * @author  Eduardo Cristian Campigoto
  **/
-package br.com.cepe.entity.pojo;
+package br.com.cepe.entity.pojo.Endereco;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 
 @Entity
-public class Cidade {
+public class Estado {
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nome;
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private Estado estado;
+	private String uf;
 	
 	
 	public int getId() {
@@ -30,11 +29,11 @@ public class Cidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Estado getEstado() {
-		return estado;
+	public String getUf() {
+		return uf;
 	}
-	public void setEstado(Estado estado) {
-		this.estado = estado;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 	
 	

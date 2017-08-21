@@ -4,9 +4,9 @@
 package br.com.cepe.factory.entity.pessoa;
 
 import br.com.cepe.datatype.PessoaType;
-import br.com.cepe.entity.pojo.Pessoa;
-import br.com.cepe.entity.pojo.PessoaFisica;
-import br.com.cepe.entity.pojo.PessoaJuridica;
+import br.com.cepe.entity.pojo.pessoa.Pessoa;
+import br.com.cepe.entity.pojo.pessoa.PessoaFisica;
+import br.com.cepe.entity.pojo.pessoa.PessoaJuridica;
 
 
 public class PessoaFactory {

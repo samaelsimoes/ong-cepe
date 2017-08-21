@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.datatype.Status;
-import br.com.cepe.entity.pojo.Endereco.Cidade;
+import br.com.cepe.entity.pojo.endereco.Cidade;
 
 @Entity
 public class Pessoa {

@@ -1,4 +1,7 @@
-package br.com.cepe.factory;
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
+package br.com.cepe.factory.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

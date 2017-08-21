@@ -1,7 +1,7 @@
 /**
  * @author  Eduardo Cristian Campigoto
  **/
-package br.com.cepe.entity.pojo;
+package br.com.cepe.entity.pojo.endereco;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

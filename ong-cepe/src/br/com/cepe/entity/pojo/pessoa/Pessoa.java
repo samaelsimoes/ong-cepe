@@ -1,7 +1,7 @@
 /**
  * @author  Eduardo Cristian Campigoto
  **/
-package br.com.cepe.entity.pojo;
+package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.datatype.Status;
-import br.com.cepe.datatype.PessoaTipo;
+import br.com.cepe.entity.pojo.endereco.Cidade;
 
 @Entity
 public class Pessoa {
@@ -20,7 +21,7 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private PessoaTipo tipo;
+	private PessoaType tipo;
 	private Status status;
 
 	private String nome;
@@ -45,11 +46,11 @@ public class Pessoa {
 		this.id = id;
 	}
 
-	public PessoaTipo getTipo() {
+	public PessoaType getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(PessoaTipo tipo) {
+	public void setTipo(PessoaType tipo) {
 		this.tipo = tipo;
 	}
 
@@ -140,5 +141,7 @@ public class Pessoa {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	
+
 
 }

@@ -1,3 +1,6 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.exception;
 
 public class GlobalException extends Exception{

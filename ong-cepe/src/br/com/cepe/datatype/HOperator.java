@@ -3,16 +3,16 @@
  **/
 package br.com.cepe.datatype;
 
-public enum PessoaTipo implements DataType{
-	PF(0), PJ(1);
+public enum HOperator implements DataType{
+	EQUALS(0), DIFFERENT(1), LIKE(2), CONTAINS(3), INITS_WITH(4), TERMINATES_WITH(5);
 	
 	public int index;
-	PessoaTipo(int index){
+	HOperator(int index){
 		this.index = index;
 	}
-	@Override
+	
 	public int getIndex() {
-
 		return this.index;
 	}
+
 }

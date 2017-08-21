@@ -1,3 +1,6 @@
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
 package br.com.cepe.rest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -9,10 +12,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.cepe.entity.pojo.Pessoa;
+import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
-import br.com.cepe.factory.ObjMapper;
-import br.com.cepe.factory.PessoaFactory;
+import br.com.cepe.factory.entity.pessoa.PessoaFactory;
+import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.PessoaService;
 
 @Path("/Pessoa")
@@ -39,17 +42,17 @@ public void adicionar(String pessoaStr) throws GlobalException{
 } 
 
 @GET
+@PathParam("nome")
 @Produces({MediaType.APPLICATION_JSON})
-public String pesquisar(String json){
+public String pesquisarNome(@PathParam("nome") String nome){
 	try {
-		Pessoa pessoa = pessoaFactory.getPessoa(getObject().readValue(json, Pessoa.class));
-		return getJson(pessoaService.pesquisar(pessoa));	
+		return getJson(pessoaService.pesquisarNome(nome));
+		
 	} catch (Throwable e) {
 		e.printStackTrace();
 	}
 	return null;
 }
-
 
 @PUT
 @Consumes("application/*")
@@ -67,8 +70,6 @@ public void alterar(String pessoaStr) throws GlobalException{
 public void excluir(@PathParam("id") int id){
 	pessoaService.excluir(id);
 }
-
-
 
 
 }

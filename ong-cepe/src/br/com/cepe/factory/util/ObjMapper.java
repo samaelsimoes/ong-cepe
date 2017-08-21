@@ -1,4 +1,7 @@
-package br.com.cepe.factory;
+/**
+ * @author  Eduardo Cristian Campigoto
+ **/
+package br.com.cepe.factory.util;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
@@ -6,6 +9,7 @@ import java.text.SimpleDateFormat;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.cepe.datatype.DataFmt;
+import br.com.cepe.factory.date.DateFactory;
 
 public class ObjMapper{
 private ObjectMapper objMapper;

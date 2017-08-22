@@ -67,9 +67,9 @@ $(document).ready(function(){
 
 					var valorLista = $("#lista").val();
 
-					var cfg ={
+					var cfg = {
 							
-						url:  "sem url",
+						url: "sem url",
 						
 						success: function(listPesj,busca){
 													
@@ -92,4 +92,9 @@ $(document).ready(function(){
 	}
 	
 	buscapefisica(undefined, "");
+
+
+	// =====----------------------------------------------------------------------------------------------=====
+
+	
 });

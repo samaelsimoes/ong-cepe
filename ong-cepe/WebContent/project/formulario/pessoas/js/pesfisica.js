@@ -3,11 +3,11 @@ $(document).ready(function(){
 		
 	    var valorBusca=$("#conspesf").val();
 	  	
-	    buscapefisica(valorBusca);
+	    buscapefisica(undefined,valorBusca);
 	}		
 	
 	buscapefisica = function(listPesF, busca){
-				
+		
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += "<thead class='table table-striped '>"+
@@ -33,9 +33,9 @@ $(document).ready(function(){
 						"<th> Editar</th>"+
 						"<th> Excluir</th>"+
 					"</tr>" +
-				"</thead>";					
-		
-		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){
+				"</thead>";			
+
+		if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){
 			  
 			  	for(var i = 0; i < listPesF.length; i++){
 
@@ -67,7 +67,7 @@ $(document).ready(function(){
 						html += "</td>";
 					html += "</tr>";  
 			    }
-		    }else{
+		}else{
 			    if(listPesF == undefined || (listPesF != undefined && listPesF.length > 0)){
 					if(busca == ""){						
 						busca = null;
@@ -100,4 +100,16 @@ $(document).ready(function(){
 	}
 	
 	buscapefisica(undefined, "");
+
+	cadpesfisica = function(){
+
+		var msg, exp = "";
+
+			msg+=.validador("Nome ", $("#nome").val());
+			msg+=.validador("Sobrenome ", $("#sobrenome").val());
+			msg+=.validador("Cpf ", $("#cpf").val());
+			msg+=.validador("Rg ", $("#rg").val());
+			msg+=.validador("Data nascimento ", $("#datanascimento").val());
+			msg+=.validador("Cpf ", $("#rg").val());
+	}
 });

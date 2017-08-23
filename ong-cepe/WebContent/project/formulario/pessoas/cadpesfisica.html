@@ -28,16 +28,16 @@
                     <label for="example-text-input" class="col-2 col-form-label">Cpf:</label>
 
                    <div class="col-10">
-                        <input class="form-control" type="text" id="nome" placeholder="cpf">
+                        <input class="form-control" type="text" id="cpf" placeholder="cpf">
                     </div>
                 </div>
 
                 <div class="col-xs-6 col-md-5 coll-md-offset-2">
                     
-                    <label for="example-text-input" class="col-2 col-form-label">Nº RG:</label>
+                    <label for="example-text-input" class="col-2 col-form-label">RG:</label>
 
                     <div class="col-10">
-                        <input class="form-control" type="text" id="sobrenome" placeholder="rg">
+                        <input class="form-control" type="text" id="rg" placeholder="rg">
                     </div>
                 </div>  
             </div>
@@ -93,16 +93,16 @@
                 <div class="col-xs-6 col-md-5">
                     <label class="col-2 col-form-label" for="estado">Estado:</label>
                     
-                    <select class="form-control" id="tipopessoa">
+                    <select class="form-control" id="estado">
                     
                         <option selected>Estado</option>
                     </select>       
                 </div>
                 <div class="col-xs-6 col-md-5 coll-md-offset-2">
                     
-                    <label class="col-2 col-form-label" for="estado">Cidade:</label>
+                    <label class="col-2 col-form-label" for="cidade">Cidade:</label>
                     
-                    <select class="form-control" id="tipopessoa">
+                    <select class="form-control" id="cidade">
                     
                         <option selected>Cidade</option>
                     </select>    
@@ -152,7 +152,7 @@
                    <div class="col-10 custom-class-enviar">
                         <button type="button" class="btn btn-success">
 
-                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"> Cadastrar</span>
+                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" onclick="cadpesfisica()"> Cadastrar</span>
                         </button>
                     </div>  
                 </div>

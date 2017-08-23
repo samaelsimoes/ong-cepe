@@ -33,7 +33,7 @@ public class Pessoa {
 	private String rua;
 	private int numero;
 	private String bairro;
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
 	private Cidade cidade;
 	private String complemento;
 

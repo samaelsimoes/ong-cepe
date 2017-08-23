@@ -28,6 +28,10 @@ public PessoaRest(){
 	pessoaService = new PessoaService();
 }
 
+
+/**
+ * @param pessoaStr - Json da entidade pessoa.
+ * **/
 @POST
 @Consumes("application/*")
 public void adicionar(String pessoaStr) throws GlobalException{

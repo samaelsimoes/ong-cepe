@@ -105,11 +105,106 @@ $(document).ready(function(){
 
 		var msg, exp = "";
 
-			msg+=.validador("Nome ", $("#nome").val());
-			msg+=.validador("Sobrenome ", $("#sobrenome").val());
-			msg+=.validador("Cpf ", $("#cpf").val());
-			msg+=.validador("Rg ", $("#rg").val());
-			msg+=.validador("Data nascimento ", $("#datanascimento").val());
-			msg+=.validador("Cpf ", $("#rg").val());
+		msg+=validador("Nome: ", $("#nome").val());
+		msg+=validador("Sobrenome: ", $("#sobrenome").val());
+		msg+=validador("Cpf: ", $("#cpf").val());
+		msg+=validador("Rg: ", $("#rg").val());
+		msg+=validador("Data nascimento: ", $("#datanascimento").val());
+		msg+=validador("Email: ", $("#email").val());
+		msg+=validador("Telefone Residencial: ", $("#telresidenci").val());
+		msg+=validador("Telefone Comercial: ", $("#telcomercial").val());
+		msg+=validador("Responsavel: ", $("#responsavel").val());
+		msg+=validador("Estado: ", $("#estado").val());
+		msg+=validador("Cidade: ", $("#cidade").val());
+		msg+=validador("Bairro: ", $("#bairro").val());
+		msg+=validador("Rua: ", $("#rua").val());
+		msg+=validador("Complemento: ", $("#complemento").val());
+		msg+=validador("Numero: ", $("#numero").val());
+
+		if(msg == null){
+
+			if($("#email").val().indexOf("@") == -1 || //valida se existe o @
+                $("#email").val().indexOf(".") == -1 || //valida se existe o .
+                $("#email").val().indexOf("@") == 0 || //valida se tem texto antes do @
+                $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
+                ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
+                    
+                exp+="E-mail invalido" +"</br>"
+                + "ex: teste_@teste.com.br"
+                document.getElementById("email").focus();
+            }
+            if(!$("#cpf").val().match(/^\d{10,11}$/)){
+            	exp+="Cpf invalido ! </br> " + "</br>";
+            }
+            if(!$("#rg").val().match(/^\d{7,9}$/)){
+            	exp+="RG invalido ! </br> " + "</br>";
+            }
+            if(!$("#telresidenci").val().match(/^\d{10,13}$/)){    
+                exp+="Telefone Residencial invalido ! </br> " + "</br>";
+            }
+            if(!$("#telcomercial").val().match(/^\d{10,13}$/)){    
+                exp+="Telefone Comercial invalido ! </br> " + "</br>";
+            }
+        
+            /*if(!$("#cep").val().match(/^[0-9]{8}$/)){
+                exp+=" Cep invalido por gentileza informar cep correto" + "<br>"+ "<br>";
+            }  
+            if(!$("#renda").val().match(/^[0-9]{0,15}[,]{0,1}[0-9]{0,4}$/)){
+                exp+=" Gentileza informar a renda em formato numerico " + "<br>" + "<br>";
+            } */
+            
+			if(exp==""){
+
+            	var dadosPesFis= new Object();
+            	
+            	dadosPesFis.nome=$("#nome").val();
+            	dadosPesFis.sobreNome=$("#sobreNome").val();
+            	dadosPesFis.cpf=$("#cpf").val();
+            	dadosPesFis.rg=$("#rg").val();
+            	dadosPesFis.dt_nasc=$("#datanascimento").val();
+            	dadosPesFis.email=$("#email").val();
+            	dadosPesFis.fone_res=$("#telresidenci").val();
+            	dadosPesFis.fone_cel=$("#telcomercial").val();
+            	dadosPesFis.estado=$("#estado").val();
+            	dadosPesFis.cidade=$("#cidade").val()
+            	dadosPesFis.rua=$("#rua").val();
+            	dadosPesFis.complemento=$("#complemento").val();
+            	dadosPesFis.numero=$("#numero").val();
+            	
+            	dadosPesFis.cep=$("#cep").val(); 
+            	
+        	    enviaServidor(dadosPesFis);
+            }else{
+                bootbox.alert(expressao);
+            }
+        }else{
+            bootbox.alert("Caro usuário, gentileza verificar os seguintes campos: <br> " + msg);
+        }
 	}
+	validador=function(campo, valor){
+
+        var msg = "";
+
+        if(valor == null ||  valor.trim() == ""){
+            msg += "- " + campo + " Está Vazio. </br>";
+        }
+        return msg;
+    };
+    enviaServidor = function(){
+
+    	var cfg = {
+							
+			url: "sem url",
+			
+			success: function(listPesj,busca){
+										
+				buscapesJuridica(listPesj,busca);
+			},
+			error: function(err){				
+				
+				bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+			}
+		};					
+		ajax.get(cfg);
+    }
 });

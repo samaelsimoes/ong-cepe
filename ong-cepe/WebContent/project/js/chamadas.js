@@ -3,11 +3,11 @@ $(document).ready(function(){
 	$('#header').load('header.html');
 	$('#footer').load('footer.html');
 
-	cadpesfisica = function(){
+	chamforcadpesfisica = function(){
 
 		$('#pesstipo').load('formulario/pessoas/cadpesfisica.html');
 	}
-	cadspesjuri = function(){
+	chamforcadspesjuri = function(){
 
 		$('#pesstipo').load('formulario/pessoas/cadspesjuridica.html');
 	}

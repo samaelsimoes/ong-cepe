@@ -1,5 +1,5 @@
 
-	//Criando o objeto  ONG
+	//Criando o objeto  do projeto ex
 
 
 //ONG.contextPath = "/OngGenios"; // contexto do 

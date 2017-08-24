@@ -17,7 +17,7 @@ private PessoaDAO pessoaDAO;
 		pessoaDAO = new PessoaDAO();	
 	}
 	
-	public void adicionar(Pessoa pessoa){
+	public void adicionar(Class<?> pessoa){
 		pessoaDAO.persist(pessoa);
 	}
 	

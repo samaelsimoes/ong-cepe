@@ -36,7 +36,7 @@ public PessoaRest(){
 @Consumes("application/*")
 public void adicionar(String pessoaStr) throws GlobalException{
 	try {
-		Pessoa pessoa = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
+		Class<?> pessoa = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
 		pessoaService.adicionar(pessoa);
 		
 	} catch (Throwable e) {

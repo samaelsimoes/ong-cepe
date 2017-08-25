@@ -4,10 +4,15 @@
 package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import br.com.cepe.datatype.PessoaType;
@@ -15,6 +20,9 @@ import br.com.cepe.datatype.Status;
 import br.com.cepe.entity.pojo.endereco.Cidade;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorValue(value = "0")
 public class Pessoa {
 
 	@Id
@@ -33,7 +41,7 @@ public class Pessoa {
 	private String rua;
 	private int numero;
 	private String bairro;
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
 	private Cidade cidade;
 	private String complemento;
 

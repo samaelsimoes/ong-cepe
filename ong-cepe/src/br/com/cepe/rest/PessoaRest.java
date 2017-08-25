@@ -18,7 +18,7 @@ import br.com.cepe.factory.entity.pessoa.PessoaFactory;
 import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.PessoaService;
 
-@Path("/Pessoa")
+@Path("/pessoa")
 public class PessoaRest extends ObjMapper{
 private PessoaFactory pessoaFactory;
 private PessoaService pessoaService;
@@ -42,10 +42,11 @@ public void adicionar(String pessoaStr) throws GlobalException{
 } 
 
 @GET
-@PathParam("nome")
+@PathParam("/pesquisarNome/{nome}")
 @Produces({MediaType.APPLICATION_JSON})
-public String pesquisarNome(@PathParam("nome") String nome){
+public Reponse pesquisarNome(@PathParam("nome") String nome){
 	try {
+		System.out.println("teste" + nome);
 		return getJson(pessoaService.pesquisarNome(nome));
 		
 	} catch (Throwable e) {

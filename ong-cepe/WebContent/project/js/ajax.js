@@ -1,12 +1,12 @@
 
 	//Criando o objeto  do projeto ex
+ONG = new Object();
 
-
-//ONG.contextPath = "/OngGenios"; // contexto do 
+ONG.contextPath = "/ong-cepe"; // contexto do 
 
 	//Criando o sub-objeto ajax do objeto ong.
 
-ajax = new Object();
+ONG.ajax = new Object();
 
 	/*
 	* Processa o pedido, solicitação HTTP Ajax a ser recebido pelo Rest.
@@ -62,7 +62,7 @@ function isObject(o){
 	return $.isArray(o) | $.isPlainObject(o) | $.isFunction(o);
 };
 
-ajax.put = function(cfg){
+ONG.ajax.put = function(cfg){
 	
 	var def = new ajaxRequestDefault();
 	
@@ -73,7 +73,7 @@ ajax.put = function(cfg){
 	$.ajax(config);
 };
 
-ajax.post = function(cfg){
+ONG.ajax.post = function(cfg){
 	
 	/*Inicia o Ajax e processa um pedido de Ajax, a partir de
 	* ajaxRequestDefault().
@@ -108,7 +108,7 @@ ajax.post = function(cfg){
 	$.ajax(config);
 };
 
-ajax.get = function(cfg){
+ONG.ajax.get = function(cfg){
 	
 	var def = new ajaxRequestDefault();
 	
@@ -119,7 +119,7 @@ ajax.get = function(cfg){
 	$.ajax(config);
 };
 
-ajax.delet = function(cfg){
+ONG.ajax.delet = function(cfg){
 	
 	var def = new ajaxRequestDefault();
 	
@@ -130,7 +130,7 @@ ajax.delet = function(cfg){
 	$.ajax(config);
 };
 
-ajax.post = function(cfg){
+ONG.ajax.post = function(cfg){
 	
 	var def = new ajaxRequestDefault();
 	

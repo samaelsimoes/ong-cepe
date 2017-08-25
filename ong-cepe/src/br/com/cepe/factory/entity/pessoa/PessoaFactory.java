@@ -15,6 +15,8 @@ import br.com.cepe.entity.pojo.pessoa.PessoaJuridica;
 
 public class PessoaFactory {
 	
+	
+	
 	/**
 	 * Retorna objeto Pessoa de acordo com o tipo passado por parametro,
 	 * podendo ser pessoa física ou jurídica
@@ -23,7 +25,7 @@ public class PessoaFactory {
 	 * @author Eduardo C. Campigoto
 	 */
 
-	public Pessoa getPessoa(Object object){
+	public <T extends Pessoa> Pessoa getPessoa(Object object){
 			
 		if(object != null){
 		
@@ -47,8 +49,9 @@ public class PessoaFactory {
 			
 			if(object instanceof Patrocinador)
 				return (Patrocinador)object;
-
+				
 		}
+
 		
 		return null;
 	}

@@ -13,9 +13,9 @@ import br.com.cepe.factory.hql.HqlFactory;
 
 public class OperationsDAO<T> extends ConnectionDAO<T> {
 
-	public void persist(Class<?> pessoa){
+	public void persist(T entity){
 		em.getTransaction().begin();
-		em.persist(pessoa);
+		em.persist(entity);
 		em.getTransaction().commit();
 		em.close();
 	}

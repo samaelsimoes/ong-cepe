@@ -36,8 +36,8 @@ public PessoaRest(){
 @Consumes("application/*")
 public void adicionar(String pessoaStr) throws GlobalException{
 	try {
-	//	 Pessoa pessoa = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
-	//	pessoaService.adicionar(pessoa);
+	Pessoa pessoa = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
+	pessoaService.adicionar(pessoa);
 		
 	} catch (Throwable e) {
 		e.printStackTrace();
@@ -62,8 +62,8 @@ public String pesquisarNome(@PathParam("nome") String nome){
 @Consumes("application/*")
 public void alterar(String pessoaStr) throws GlobalException{
 	try {
-		Pessoa pessoa = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
-		pessoaService.alterar(pessoa);
+		Pessoa pessoaObj = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
+		pessoaService.alterar(pessoaObj);
 	} catch (Throwable e) {
 		e.printStackTrace();
 	} 

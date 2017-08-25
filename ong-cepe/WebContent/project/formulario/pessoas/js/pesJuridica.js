@@ -3,7 +3,7 @@ $(document).ready(function(){
 		
 	    var valorBusca=$("#conspesf").val();
 	  	
-	    buscapesJuridica(valorBusca);
+	    buscapesJuridica(undefined,valorBusca);
 	}		
 	
 	buscapesJuridica = function(listPesj, busca){

@@ -77,7 +77,7 @@ $(document).ready(function(){
 
 					var cfg ={
 							
-						url:  "sem url",
+						url:  ONG.contextPath + "/rest/pessoa/pesquisarNome/" + valorLista,
 						
 						success: function(listPesF,busca){
 													
@@ -89,7 +89,7 @@ $(document).ready(function(){
 						}
 					};
 					
-					ajax.get(cfg);
+					ONG.ajax.get(cfg);
 				}else{					
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
@@ -103,7 +103,8 @@ $(document).ready(function(){
 
 	cadpesfisica = function(){
 
-		var msg, exp = "";
+		var msg = "";
+		var exp = "";
 
 		msg+=validador("Nome: ", $("#nome").val());
 		msg+=validador("Sobrenome: ", $("#sobrenome").val());

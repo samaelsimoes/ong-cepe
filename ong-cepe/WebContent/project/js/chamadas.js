@@ -11,6 +11,10 @@ $(document).ready(function(){
 
 		$('#pesstipo').load('formulario/pessoas/cadspesjuridica.html');
 	}
+	chamacadsbeneass = function(){
+
+		$('#pesstipo').load('formulario/pessoas/cadsbeneass.html');
+	}
 });
 
 var items = document.getElementById('tipopessoa');

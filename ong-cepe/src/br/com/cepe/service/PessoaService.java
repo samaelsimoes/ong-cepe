@@ -26,7 +26,7 @@ private PessoaDAO pessoaDAO;
 	}
 	
 	public void alterar(Pessoa pessoa){
-		pessoaDAO.persist(pessoa);
+	//	pessoaDAO.persist(pessoa);
 	}
 
 	public List<Pessoa> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{

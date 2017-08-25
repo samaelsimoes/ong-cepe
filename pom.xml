@@ -1,0 +1,189 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ong-cepe</groupId>
+  <artifactId>ong-cepe</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+<!-- ##################### DEPENDENCIAS  #################### -->  
+  <dependencies>
+  
+  
+  <!-- #### ECLIPSELINK ### -->
+  	<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
+     <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>eclipselink</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+    
+    <!-- #### MYSQL CONNECTOR 6.0.6  ### -->
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>6.0.6</version>
+	</dependency>
+
+    <!-- #### JERSEY CONTAINER  SERVLET CORE 2.25.1  ### -->	
+	<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
+	<dependency>
+	    <groupId>org.glassfish.jersey.containers</groupId>
+	    <artifactId>jersey-container-servlet</artifactId>
+	    <version>2.25.1</version>
+	</dependency>
+		
+	<!-- #### JAVAX SERVLET API 3.1.0  ### -->		
+	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.1.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	
+	<!-- #### JACKSON MAPPER  1.9.13  ### -->
+	<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+	<dependency>
+	    <groupId>org.codehaus.jackson</groupId>
+	    <artifactId>jackson-mapper-asl</artifactId>
+	    <version>1.9.13</version>
+	</dependency>
+	
+    
+    <!-- #### HIBERNATE CORE ### -->
+  	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+    <groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>5.2.10.Final</version>
+	</dependency>
+	
+    <!-- #### HIBERNATE JPA 2.1 ### -->
+  	<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
+<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+	<dependency>
+	    <groupId>org.hibernate.javax.persistence</groupId>
+	    <artifactId>hibernate-jpa-2.1-api</artifactId>
+	    <version>1.0.0.Final</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE COMMON ANNOTATIONS  5.0.1 ### -->
+	<!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
+	<dependency>
+	    <groupId>org.hibernate.common</groupId>
+	    <artifactId>hibernate-commons-annotations</artifactId>
+	    <version>5.0.1.Final</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE ANNOTATIONS  3.5.6 ### -->
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-annotations</artifactId>
+	    <version>3.5.6-Final</version>
+	</dependency>
+	
+
+		
+	<!-- #### HIBERNATE JAVA ASSIST  3.22 ### -->
+	<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+	<dependency>
+	    <groupId>org.javassist</groupId>
+	    <artifactId>javassist</artifactId>
+	    <version>3.22.0-CR2</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE ANTLR 3.0ea8 ### -->
+	<!-- https://mvnrepository.com/artifact/antlr/antlr -->
+	<dependency>
+	    <groupId>antlr</groupId>
+	    <artifactId>antlr</artifactId>
+	    <version>3.0ea8</version>
+	</dependency>
+
+	
+	<!-- #### HIBERNATE CLASSMATE 1.3.3 ### -->
+	<!-- https://mvnrepository.com/artifact/com.fasterxml/classmate -->
+	<dependency>
+	    <groupId>com.fasterxml</groupId>
+	    <artifactId>classmate</artifactId>
+	    <version>1.3.3</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE DOM4J 1.6.1 ### -->
+	<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+	<dependency>
+	    <groupId>dom4j</groupId>
+	    <artifactId>dom4j</artifactId>
+	    <version>1.6.1</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE  JANDEX ### -->
+	<!-- https://mvnrepository.com/artifact/org.jboss/jandex -->
+	<dependency>
+	    <groupId>org.jboss</groupId>
+	    <artifactId>jandex</artifactId>
+	    <version>2.0.3.Final</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE  JBOSS LOGGING  3.3.1### -->
+	<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+	<dependency>
+	    <groupId>org.jboss.logging</groupId>
+	    <artifactId>jboss-logging</artifactId>
+	    <version>3.3.1.Final</version>
+	</dependency>
+		
+	<!-- #### HIBERNATE  TRANSACTION API 1.2 ### -->
+	<!-- https://mvnrepository.com/artifact/org.jboss.spec.javax.transaction/jboss-transaction-api_1.2_spec -->
+	<dependency>
+	    <groupId>org.jboss.spec.javax.transaction</groupId>
+	    <artifactId>jboss-transaction-api_1.2_spec</artifactId>
+	    <version>1.0.1.Final</version>
+	</dependency>
+	
+	<!-- #### HIBERNATE  JPAMODELGEN 5.2.10 ### -->
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-jpamodelgen</artifactId>
+	    <version>5.2.10.Final</version>
+	    <scope>provided</scope>
+	</dependency>
+	
+	
+	
+  
+  </dependencies>
+  
+</project>

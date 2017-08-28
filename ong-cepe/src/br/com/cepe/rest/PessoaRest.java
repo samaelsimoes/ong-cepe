@@ -22,7 +22,6 @@ import br.com.cepe.service.PessoaService;
 public class PessoaRest extends ObjMapper{
 private PessoaService<?> pessoaService;
 
-@SuppressWarnings("rawtypes")
 public PessoaRest(){
 
 }
@@ -47,11 +46,10 @@ public void adicionar(String pessoaStr) throws GlobalException{
 } 
 
 @GET
-@PathParam("/pessoa/{nome}")
+@PathParam("/nome/{nome}")
 @Produces({MediaType.APPLICATION_JSON})
 public String pesquisarNome(@PathParam("nome") String nome){
 	try {
-		System.out.println("teste" + nome);
 		return getJson(pessoaService.pesquisarNome(nome));
 		
 	} catch (Throwable e) {

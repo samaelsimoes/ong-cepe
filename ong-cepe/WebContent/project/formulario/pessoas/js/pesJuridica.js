@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 					var cfg = {
 							
-						url: "sem url",
+						url: ONG.contextPath + "/rest/pessoa/pesquisarNome/" + valorLista,
 						
 						success: function(listPesj,busca){													
 							buscapesJuridica(listPesj,busca);
@@ -78,7 +78,7 @@ $(document).ready(function(){
 							bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
 						}
 					};					
-					ajax.get(cfg);
+					ONG.ajax.get(cfg);
 				}else{					
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}

@@ -46,16 +46,26 @@ public void adicionar(String pessoaStr) throws GlobalException{
 } 
 
 @GET
+<<<<<<< HEAD
 @PathParam("/nome/{nome}")
 @Produces({MediaType.APPLICATION_JSON})
 public String pesquisarNome(@PathParam("nome") String nome){
 	try {
+=======
+@Path("/pessoa/{nome}")
+@Produces({MediaType.APPLICATION_JSON})
+public StringBuilder pesquisarNome(@PathParam("nome")String nome){
+	System.out.println("teste" + nome);
+
+	try {
+		
+>>>>>>> 36aad5a92d348bbd1acff2e5f237c6a52fd50dea
 		return getJson(pessoaService.pesquisarNome(nome));
 		
 	} catch (Throwable e) {
 		e.printStackTrace();
 	}
-	return null;
+
 }
 
 @PUT

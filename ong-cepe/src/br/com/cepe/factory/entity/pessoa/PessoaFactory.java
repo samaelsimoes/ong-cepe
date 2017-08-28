@@ -3,6 +3,8 @@
  **/
 package br.com.cepe.factory.entity.pessoa;
 
+import java.util.List;
+
 import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
@@ -13,48 +15,78 @@ import br.com.cepe.entity.pojo.pessoa.PessoaFisica;
 import br.com.cepe.entity.pojo.pessoa.PessoaJuridica;
 
 
-public class PessoaFactory {
-	
-	
-	
-	/**
-	 * Retorna objeto Pessoa de acordo com o tipo passado por parametro,
-	 * podendo ser pessoa física ou jurídica
-	 * @param tipo
-	 * @return Pessoa
-	 * @author Eduardo C. Campigoto
-	 */
+public class PessoaFactory<T>{
+private List<Pessoa> pessoas;
+/**
+ * Retorna objeto Pessoa de acordo com o tipo passado por parametro,
+ * podendo ser pessoa física ou jurídica
+ * @param tipo
+ * @return Pessoa
+ * @author Eduardo C. Campigoto
+ */
 
-	public <T extends Pessoa> Pessoa getPessoa(Object object){
-			
-		if(object != null){
-		
-			if(object instanceof PessoaFisica)
-				return (PessoaFisica)object;
-			
-			if(object instanceof PessoaJuridica)
-				return (PessoaJuridica)object;
-			
-			if(object instanceof Beneficiario)
-				return (Beneficiario)object;
-			
-			if(object instanceof DoadorPf)
-				return (PessoaFisica)object;
-			
-			if(object instanceof DoadorPj)
-				return (DoadorPj)object;
-			
-			if(object instanceof Atleta)
-				return (Atleta)object;
-			
-			if(object instanceof Patrocinador)
-				return (Patrocinador)object;
-				
-		}
+public PessoaFactory(){
+	
+}
 
+public PessoaFactory(T pessoa){
+	
+	if(pessoa != null){
+	
+		if(pessoa instanceof PessoaFisica){
+			PessoaFisica obj = (PessoaFisica) pessoa;
+			this.pessoas.add(obj);
+		} 
 		
-		return null;
+		if(pessoa instanceof PessoaJuridica){
+			PessoaJuridica obj = (PessoaJuridica) pessoa;
+			this.pessoas.add(obj);
+		} 
+			
+		
+		if(pessoa instanceof Beneficiario){
+			Beneficiario obj = (Beneficiario) pessoa;
+			this.pessoas.add(obj);
+		} 
+		
+		if(pessoa instanceof DoadorPf){
+			DoadorPf obj = (DoadorPf) pessoa;
+			this.pessoas.add(obj);
+		} 
+		
+		if(pessoa instanceof DoadorPj){
+			DoadorPj obj = (DoadorPj) pessoa;
+			this.pessoas.add(obj);
+		} 
+		
+		if(pessoa instanceof Atleta){
+			Atleta obj = (Atleta) pessoa;
+			this.pessoas.add(obj);
+		} 
+		
+		if(pessoa instanceof Patrocinador){
+			Patrocinador obj = (Patrocinador) pessoa;
+			this.pessoas.add(obj);
+		} 
+			
 	}
+	
+}
+	
+public List<Pessoa> getPessoasLista() {
+	return pessoas;
+}
+
+public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
+}
+
+
+public Pessoa getPessoa() {
+	return pessoas.get(0);
+}
+	
+	
 	
 	
 	

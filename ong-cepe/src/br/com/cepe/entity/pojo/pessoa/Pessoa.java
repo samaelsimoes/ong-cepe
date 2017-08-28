@@ -24,7 +24,7 @@ import br.com.cepe.entity.pojo.endereco.Cidade;
 @DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue(value = "0")
 public class Pessoa {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

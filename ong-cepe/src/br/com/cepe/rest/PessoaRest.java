@@ -20,12 +20,11 @@ import br.com.cepe.service.PessoaService;
 
 @Path("/pessoa")
 public class PessoaRest extends ObjMapper{
-private PessoaFactory pessoaFactory;
-private PessoaService pessoaService;
+private PessoaService<?> pessoaService;
 
+@SuppressWarnings("rawtypes")
 public PessoaRest(){
-	pessoaFactory = new PessoaFactory();
-	pessoaService = new PessoaService();
+
 }
 
 
@@ -36,8 +35,10 @@ public PessoaRest(){
 @Consumes("application/*")
 public void adicionar(String pessoaStr) throws GlobalException{
 	try {
-	Pessoa pessoa = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
-	pessoaService.adicionar(pessoa);
+	Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
+	Pessoa pessoa = (Pessoa) new PessoaFactory<Pessoa>(obj).getPessoa();
+	pessoaService = new PessoaService<Pessoa>(pessoa);
+	pessoaService.adicionar();
 		
 	} catch (Throwable e) {
 		e.printStackTrace();
@@ -48,7 +49,7 @@ public void adicionar(String pessoaStr) throws GlobalException{
 @GET
 @PathParam("/pessoa/{nome}")
 @Produces({MediaType.APPLICATION_JSON})
-public StringBuilder pesquisarNome(@PathParam("nome") String nome){
+public String pesquisarNome(@PathParam("nome") String nome){
 	try {
 		System.out.println("teste" + nome);
 		return getJson(pessoaService.pesquisarNome(nome));
@@ -63,8 +64,10 @@ public StringBuilder pesquisarNome(@PathParam("nome") String nome){
 @Consumes("application/*")
 public void alterar(String pessoaStr) throws GlobalException{
 	try {
-		Pessoa pessoaObj = pessoaFactory.getPessoa(getObject().readValue(pessoaStr, Pessoa.class));
-		pessoaService.alterar(pessoaObj);
+		Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
+		Pessoa pessoa = (Pessoa) new PessoaFactory<Pessoa>(obj).getPessoa();
+		pessoaService = new PessoaService<Pessoa>(pessoa);
+		pessoaService.alterar();
 	} catch (Throwable e) {
 		e.printStackTrace();
 	} 

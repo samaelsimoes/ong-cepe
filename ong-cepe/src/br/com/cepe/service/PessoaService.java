@@ -10,31 +10,46 @@ import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
 
-public class PessoaService {
-private PessoaDAO pessoaDAO;
+public class PessoaService<T extends Pessoa> {
+private PessoaDAO pessoaDAO = new PessoaDAO();
+Pessoa pessoa;
 
+	public PessoaService(T obj){
+
+	}
+	
 	public PessoaService(){
-		pessoaDAO = new PessoaDAO();	
+		pessoaDAO = new PessoaDAO();
 	}
 	
-	public void adicionar(Pessoa pessoa){
-		pessoaDAO.persist(pessoa);
+	public void adicionar(){
+		pessoaDAO.persist(this.pessoa);
 	}
 	
-	public Pessoa pesquisar(Pessoa pessoa){
-		return pessoaDAO.findId(pessoa.getId());
+	
+	public void adicionarLista(List<T> pessoas){
+		for (T pessoa : pessoas) {
+			this.pessoa = pessoa;
+			adicionar();
+		}
 	}
 	
-	public void alterar(Pessoa pessoa){
-		pessoaDAO.persist(pessoa);
+	public Pessoa pesquisar(){
+		return pessoaDAO.findId(this.pessoa.getId());
+	}
+	
+	public void alterar(){
+		pessoaDAO.persist(this.pessoa);
 	}
 
-	public List<Pessoa> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{
-		return pessoaDAO.findStr(campo, operacao, valor);
+	@SuppressWarnings("unchecked")
+	public List<T> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{
+		return (List<T>) pessoaDAO.findStr(campo, operacao, valor);
 	}	
 	
-	public List<Pessoa> pesquisarNome(String valor) throws GlobalException{
-		return pessoaDAO.findStr("nome", HOperator.CONTAINS, valor);
+	@SuppressWarnings("unchecked")
+	public List<T> pesquisarNome(String valor) throws GlobalException{
+		return (List<T>)pessoaDAO.findStr("nome", HOperator.CONTAINS, valor);
 	}
 	
 	

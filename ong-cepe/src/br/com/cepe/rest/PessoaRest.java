@@ -21,7 +21,7 @@ import br.com.cepe.service.PessoaService;
 
 @Path("/pessoa")
 public class PessoaRest extends ObjMapper {
-	private PessoaService<?> pessoaService;
+	private PessoaService pessoaService;
 
 	public PessoaRest() {
 
@@ -37,7 +37,7 @@ public class PessoaRest extends ObjMapper {
 		try {
 			Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
 			Pessoa pessoa = (Pessoa) new PessoaFactory<Pessoa>(obj).getPessoa();
-			pessoaService = new PessoaService<Pessoa>(pessoa);
+			pessoaService = new PessoaService(pessoa);
 			pessoaService.adicionar();
 
 		} catch (Throwable e) {
@@ -53,7 +53,8 @@ public class PessoaRest extends ObjMapper {
 
 		try {
 
-			return getJson(pessoaService.pesquisarNome(nome));
+			String ret = getJson(pessoaService.pesquisarNome(nome));
+			return ret;
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -68,7 +69,7 @@ public class PessoaRest extends ObjMapper {
 		try {
 			Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
 			Pessoa pessoa = (Pessoa) new PessoaFactory<Pessoa>(obj).getPessoa();
-			pessoaService = new PessoaService<Pessoa>(pessoa);
+			pessoaService = new PessoaService(pessoa);
 			pessoaService.alterar();
 		} catch (Throwable e) {
 			e.printStackTrace();

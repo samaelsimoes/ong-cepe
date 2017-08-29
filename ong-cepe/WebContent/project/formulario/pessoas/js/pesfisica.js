@@ -73,11 +73,11 @@ $(document).ready(function(){
 						busca = null;
 					}
 
-					var valorLista = $("#lista").val();
+					var valorLista = $("#conspesf").val();
 
 					var cfg ={
 							
-						url:  ONG.contextPath + "/rest/pessoa/pesquisarNome/" + valorLista,
+						url:  "../rest/pessoa/nome/" + valorLista,
 						
 						success: function(listPesF,busca){
 													
@@ -195,7 +195,7 @@ $(document).ready(function(){
 
     	var cfg = {
 							
-			url: "sem url",
+			url: ONG.contextPath+" sem url",
 			
 			success: function(listPesj,busca){
 										

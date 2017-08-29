@@ -52,6 +52,7 @@ public class PessoaRest extends ObjMapper {
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
+			System.out.println("debuggando");
 
 			return getJson(pessoaService.pesquisarNome(nome));
 

@@ -12,7 +12,7 @@ $(document).ready(function(){
 		
 		html += "<thead class='table table-striped '>"+
 					"<tr>" +
-						"<p> Pessoas </p>  </br>"+ 
+//						"<p> Pessoas </p>  </br>"+ 
 						"<th> Nome </th> " +
 						"<th> Sobrenome </th>" +
 						"<th> Cpf </th>" + 

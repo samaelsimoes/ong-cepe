@@ -12,9 +12,9 @@ import br.com.cepe.exception.GlobalException;
 
 public class PessoaService{
 private PessoaDAO pessoaDAO = new PessoaDAO();
-Pessoa pessoa;
+Object pessoa;
 
-	public PessoaService(Pessoa obj){
+	public PessoaService(Object obj){
 
 	}
 	
@@ -27,8 +27,8 @@ Pessoa pessoa;
 	}
 	
 	
-	public void adicionarLista(List<Pessoa> pessoas){
-		for (Pessoa pessoa : pessoas) {
+	public void adicionarLista(List<Object> pessoas){
+		for (Object pessoa : pessoas) {
 			this.pessoa = pessoa;
 			adicionar();
 		}

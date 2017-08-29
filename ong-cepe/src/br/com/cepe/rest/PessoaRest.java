@@ -35,9 +35,9 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {
-			Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
+			Object obj = getObject().readValue(pessoaStr, Pessoa.class);
 			// problema no factory ... 
-			Pessoa pessoa = new PessoaFactory(obj).getPessoa();
+			Object pessoa = new PessoaFactory(obj).getPessoa();
 			//
 			new PessoaService(pessoa).adicionar();
 

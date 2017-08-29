@@ -30,44 +30,45 @@ public PessoaFactory(){
 	
 }
 
-public PessoaFactory(Pessoa pessoa){
+public PessoaFactory(Object obj){
+	Pessoa pessoa = (Pessoa) obj;
 	
 	if(pessoa != null){
 	
 		if(pessoa.getTipo().equals(PessoaType.PF)){
-			PessoaFisica obj = (PessoaFisica) pessoa;
-			this.pessoas.add(obj);
+			PessoaFisica convertido =  (PessoaFisica) obj;
+			this.pessoas.add(convertido);
 		} 
 		
 		if(pessoa.getTipo().equals(PessoaType.PJ)){
-			PessoaJuridica obj = (PessoaJuridica) pessoa;
-			this.pessoas.add(obj);
+			PessoaJuridica convertido =  (PessoaJuridica) obj;
+			this.pessoas.add(convertido);
 		} 
 			
 		
 		if(pessoa.getTipo().equals(PessoaType.BENEFIC)){
-			Beneficiario obj = (Beneficiario) pessoa;
-			this.pessoas.add(obj);
+			Beneficiario convertido =  (Beneficiario) obj;
+			this.pessoas.add(convertido);
 		} 
 		
 		if(pessoa.getTipo().equals(PessoaType.DOADOR_PF)){
-			DoadorPf obj = (DoadorPf) pessoa;
-			this.pessoas.add(obj);
+			DoadorPf convertido =  (DoadorPf) obj;
+			this.pessoas.add(convertido);
 		} 
 		
 		if(pessoa.getTipo().equals(PessoaType.DOADOR_PJ)){
-			DoadorPj obj = (DoadorPj) pessoa;
-			this.pessoas.add(obj);
+			DoadorPj convertido =  (DoadorPj) obj;
+			this.pessoas.add(convertido);
 		} 
 		
 		if(pessoa.getTipo().equals(PessoaType.ATLETA)){
-			Atleta obj = (Atleta) pessoa;
-			this.pessoas.add(obj);
+			Atleta convertido =  (Atleta) obj;
+			this.pessoas.add(convertido);
 		} 
 		
 		if(pessoa.getTipo().equals(PessoaType.PATROCIN)){
-			Patrocinador obj = (Patrocinador) pessoa;
-			this.pessoas.add(obj);
+			Patrocinador convertido =  (Patrocinador) obj;
+			this.pessoas.add(convertido);
 		} 
 			
 	}

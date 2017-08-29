@@ -5,6 +5,7 @@ package br.com.cepe.factory.entity.pessoa;
 
 import java.util.List;
 
+import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
@@ -15,7 +16,7 @@ import br.com.cepe.entity.pojo.pessoa.PessoaFisica;
 import br.com.cepe.entity.pojo.pessoa.PessoaJuridica;
 
 
-public class PessoaFactory<T>{
+public class PessoaFactory{
 private List<Pessoa> pessoas;
 /**
  * Retorna objeto Pessoa de acordo com o tipo passado por parametro,
@@ -29,42 +30,42 @@ public PessoaFactory(){
 	
 }
 
-public PessoaFactory(T pessoa){
+public PessoaFactory(Pessoa pessoa){
 	
 	if(pessoa != null){
 	
-		if(pessoa instanceof PessoaFisica){
+		if(pessoa.getTipo().equals(PessoaType.PF)){
 			PessoaFisica obj = (PessoaFisica) pessoa;
 			this.pessoas.add(obj);
 		} 
 		
-		if(pessoa instanceof PessoaJuridica){
+		if(pessoa.getTipo().equals(PessoaType.PJ)){
 			PessoaJuridica obj = (PessoaJuridica) pessoa;
 			this.pessoas.add(obj);
 		} 
 			
 		
-		if(pessoa instanceof Beneficiario){
+		if(pessoa.getTipo().equals(PessoaType.BENEFIC)){
 			Beneficiario obj = (Beneficiario) pessoa;
 			this.pessoas.add(obj);
 		} 
 		
-		if(pessoa instanceof DoadorPf){
+		if(pessoa.getTipo().equals(PessoaType.DOADOR_PF)){
 			DoadorPf obj = (DoadorPf) pessoa;
 			this.pessoas.add(obj);
 		} 
 		
-		if(pessoa instanceof DoadorPj){
+		if(pessoa.getTipo().equals(PessoaType.DOADOR_PJ)){
 			DoadorPj obj = (DoadorPj) pessoa;
 			this.pessoas.add(obj);
 		} 
 		
-		if(pessoa instanceof Atleta){
+		if(pessoa.getTipo().equals(PessoaType.ATLETA)){
 			Atleta obj = (Atleta) pessoa;
 			this.pessoas.add(obj);
 		} 
 		
-		if(pessoa instanceof Patrocinador){
+		if(pessoa.getTipo().equals(PessoaType.PATROCIN)){
 			Patrocinador obj = (Patrocinador) pessoa;
 			this.pessoas.add(obj);
 		} 

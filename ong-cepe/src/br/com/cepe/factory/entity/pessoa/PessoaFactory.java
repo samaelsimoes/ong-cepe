@@ -5,6 +5,7 @@ package br.com.cepe.factory.entity.pessoa;
 
 import java.util.List;
 
+import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
@@ -15,7 +16,7 @@ import br.com.cepe.entity.pojo.pessoa.PessoaFisica;
 import br.com.cepe.entity.pojo.pessoa.PessoaJuridica;
 
 
-public class PessoaFactory<T>{
+public class PessoaFactory{
 private List<Pessoa> pessoas;
 /**
  * Retorna objeto Pessoa de acordo com o tipo passado por parametro,
@@ -29,44 +30,45 @@ public PessoaFactory(){
 	
 }
 
-public PessoaFactory(T pessoa){
+public PessoaFactory(Object obj){
+	Pessoa pessoa = (Pessoa) obj;
 	
 	if(pessoa != null){
 	
-		if(pessoa instanceof PessoaFisica){
-			PessoaFisica obj = (PessoaFisica) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.PF)){
+			PessoaFisica convertido =  (PessoaFisica) obj;
+			this.pessoas.add(convertido);
 		} 
 		
-		if(pessoa instanceof PessoaJuridica){
-			PessoaJuridica obj = (PessoaJuridica) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.PJ)){
+			PessoaJuridica convertido =  (PessoaJuridica) obj;
+			this.pessoas.add(convertido);
 		} 
 			
 		
-		if(pessoa instanceof Beneficiario){
-			Beneficiario obj = (Beneficiario) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.BENEFIC)){
+			Beneficiario convertido =  (Beneficiario) obj;
+			this.pessoas.add(convertido);
 		} 
 		
-		if(pessoa instanceof DoadorPf){
-			DoadorPf obj = (DoadorPf) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.DOADOR_PF)){
+			DoadorPf convertido =  (DoadorPf) obj;
+			this.pessoas.add(convertido);
 		} 
 		
-		if(pessoa instanceof DoadorPj){
-			DoadorPj obj = (DoadorPj) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.DOADOR_PJ)){
+			DoadorPj convertido =  (DoadorPj) obj;
+			this.pessoas.add(convertido);
 		} 
 		
-		if(pessoa instanceof Atleta){
-			Atleta obj = (Atleta) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.ATLETA)){
+			Atleta convertido =  (Atleta) obj;
+			this.pessoas.add(convertido);
 		} 
 		
-		if(pessoa instanceof Patrocinador){
-			Patrocinador obj = (Patrocinador) pessoa;
-			this.pessoas.add(obj);
+		if(pessoa.getTipo().equals(PessoaType.PATROCIN)){
+			Patrocinador convertido =  (Patrocinador) obj;
+			this.pessoas.add(convertido);
 		} 
 			
 	}

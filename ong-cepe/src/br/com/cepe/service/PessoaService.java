@@ -10,11 +10,11 @@ import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
 
-public class PessoaService<T extends Pessoa> {
+public class PessoaService{
 private PessoaDAO pessoaDAO = new PessoaDAO();
-Pessoa pessoa;
+Object pessoa;
 
-	public PessoaService(T obj){
+	public PessoaService(Object obj){
 
 	}
 	
@@ -27,8 +27,8 @@ Pessoa pessoa;
 	}
 	
 	
-	public void adicionarLista(List<T> pessoas){
-		for (T pessoa : pessoas) {
+	public void adicionarLista(List<Object> pessoas){
+		for (Object pessoa : pessoas) {
 			this.pessoa = pessoa;
 			adicionar();
 		}
@@ -42,14 +42,13 @@ Pessoa pessoa;
 		pessoaDAO.persist(this.pessoa);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<T> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{
-		return (List<T>) pessoaDAO.findStr(campo, operacao, valor);
+	public List<Pessoa> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{
+		return (List<Pessoa>) pessoaDAO.findStr(campo, operacao, valor);
 	}	
 	
-	@SuppressWarnings("unchecked")
-	public List<T> pesquisarNome(String valor) throws GlobalException{
-		return (List<T>)pessoaDAO.findStr("nome", HOperator.CONTAINS, valor);
+
+	public List<Pessoa> pesquisarNome(String valor) throws GlobalException{
+		return (List<Pessoa>)pessoaDAO.findStr("nome", HOperator.CONTAINS, valor);
 	}
 	
 	

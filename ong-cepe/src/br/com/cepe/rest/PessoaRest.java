@@ -21,10 +21,10 @@ import br.com.cepe.service.PessoaService;
 
 @Path("/pessoa")
 public class PessoaRest extends ObjMapper {
-	private PessoaService<?> pessoaService;
+	private PessoaService pessoaService;
 
 	public PessoaRest() {
-
+		
 	}
 
 	/**
@@ -35,10 +35,11 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {
-			Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
-			Pessoa pessoa = (Pessoa) new PessoaFactory<Pessoa>(obj).getPessoa();
-			pessoaService = new PessoaService<Pessoa>(pessoa);
-			pessoaService.adicionar();
+			Object obj = getObject().readValue(pessoaStr, Pessoa.class);
+			// problema no factory ... 
+			Object pessoa = new PessoaFactory(obj).getPessoa();
+			//
+			new PessoaService(pessoa).adicionar();
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -47,14 +48,24 @@ public class PessoaRest extends ObjMapper {
 	}
 
 	@GET
-	@PathParam("/nome/{nome}")
+	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
+<<<<<<< HEAD
 			System.out.println("debuggando");
 
 			return getJson(pessoaService.pesquisarNome(nome));
+=======
+			// TESTE ////////////////////////
+			Pessoa pessoa = new Pessoa();
+			pessoa.setNome(nome);
+			return getJson(pessoa);
+			
+			///----------------------- DEU CERTO.... não tem nada de errado com o rest ;P
+			//return getJson(pessoaService.pesquisarNome(nome));
+>>>>>>> 9f9a4b9f4b57f3ab2efe5be85590bf3fe5b7ca09
 
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -68,16 +79,15 @@ public class PessoaRest extends ObjMapper {
 	public void alterar(String pessoaStr) throws GlobalException {
 		try {
 			Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
-			Pessoa pessoa = (Pessoa) new PessoaFactory<Pessoa>(obj).getPessoa();
-			pessoaService = new PessoaService<Pessoa>(pessoa);
-			pessoaService.alterar();
+			Pessoa pessoa = (Pessoa) new PessoaFactory(obj).getPessoa();
+			new PessoaService(pessoa).alterar();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
 	@DELETE
-	@PathParam("id")
+	@Path("id")
 	public void excluir(@PathParam("id") int id) {
 		pessoaService.excluir(id);
 	}

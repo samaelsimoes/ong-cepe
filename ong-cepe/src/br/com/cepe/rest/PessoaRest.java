@@ -41,7 +41,9 @@ public class PessoaRest extends ObjMapper {
 			Object obj = getObject().readValue(json, Pessoa.class);
 			// problema no factory ... 
 			Object pessoa = new PessoaFactory(obj).getPessoa();
-			//
+			
+			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
+			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
 			return this.buildResponse(" Pessoa Cadastrada com Sucesso "); // ARRUMAR EDUARDO /*/*/*/*/*/*/
 
@@ -57,19 +59,19 @@ public class PessoaRest extends ObjMapper {
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
-<<<<<<< HEAD
-			
+
 			System.out.println("debuggando");
 
 			return getJson(pessoaService.pesquisarNome(nome));
-=======
 			System.out.println("debuggando");
 
-//			return getJson(pessoaService.pesquisarNome(nome));
->>>>>>> 502d0871b9de97173b35de7aa000069d95c71b0d
+			// return getJson(pessoaService.pesquisarNome(nome));
+
 			// TESTE ////////////////////////
+			
 			Pessoa pessoa = new Pessoa();
 			pessoa.setNome(nome);
+			
 			return getJson(pessoa);
 			
 			///----------------------- DEU CERTO.... não tem nada de errado com o rest ;P
@@ -86,8 +88,8 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public void alterar(String pessoaStr) throws GlobalException {
 		try {
-			Pessoa obj = getObject().readValue(pessoaStr, Pessoa.class);
-			Pessoa pessoa = (Pessoa) new PessoaFactory(obj).getPessoa();
+			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
+			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).alterar();
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -99,5 +101,4 @@ public class PessoaRest extends ObjMapper {
 	public void excluir(@PathParam("id") int id) {
 		pessoaService.excluir(id);
 	}
-
 }

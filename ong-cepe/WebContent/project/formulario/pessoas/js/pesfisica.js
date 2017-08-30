@@ -81,7 +81,14 @@ $(document).ready(function(){
 					debugger;
 					var cfg ={
 							
+<<<<<<< HEAD
 						url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
+=======
+						url:  ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
+
+						url:  "../rest/pessoa/nome/" + valorLista,
+
+>>>>>>> 326695d95a9487641c5536c400b8aed4f34a56f4
 						
 						success: function(listPesF,busca){
 													

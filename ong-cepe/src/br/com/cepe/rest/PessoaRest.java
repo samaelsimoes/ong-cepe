@@ -32,7 +32,23 @@ public class PessoaRest extends ObjMapper {
 	 * @param pessoaStr
 	 *            - Json da entidade pessoa.
 	 * **/
+//	@POST
+//	@Consumes("application/*")
+//	public void adicionar(String pessoaStr) throws GlobalException {
+//		try {
+//
+//			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
+//			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
+//			new PessoaService(pessoa).adicionar();
+//
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+	
 	@POST
+<<<<<<< HEAD
 	@Path("/add")	
 	@Consumes("application/*")
 	public Response adicionar(String json) throws GlobalException {
@@ -42,14 +58,26 @@ public class PessoaRest extends ObjMapper {
 			// problema no factory ... 
 			Object pessoa = new PessoaFactory(obj).getPessoa();
 			
+=======
+	@Path("/adicionar")	
+	@Consumes("application/*")
+	public Response adicionar(String pessoaStr) throws GlobalException {
+		try {
+			System.out.println("pessoa/adicionar :"+pessoaStr);
+>>>>>>> 326695d95a9487641c5536c400b8aed4f34a56f4
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
 			return this.buildResponse(" Pessoa Cadastrada com Sucesso "); // ARRUMAR EDUARDO /*/*/*/*/*/*/
 
+			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
+<<<<<<< HEAD
 			return this.buildErrorResponse(" Ocorreu o seguinte erro ao cadastrar pessoa " + e.getMessage()); // ARRUMAR EDUARDO  /*/*/*/*/*/*/*/*/
+=======
+			return this.buildErrorResponse(e.getMessage());
+>>>>>>> 326695d95a9487641c5536c400b8aed4f34a56f4
 		}
 	}
 

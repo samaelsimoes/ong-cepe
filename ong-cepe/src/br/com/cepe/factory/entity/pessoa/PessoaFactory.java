@@ -20,22 +20,23 @@ import br.com.cepe.entity.pojo.pessoa.PessoaJuridica;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.util.ObjMapper;
 
+public class PessoaFactory extends ObjMapper {
+	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
-public class PessoaFactory extends ObjMapper{
-private List<Pessoa> pessoas = new ArrayList<Pessoa>();
-/**
- * Retorna objeto Pessoa de acordo com o tipo passado por parametro,
- * podendo ser pessoa física ou jurídica
- * @param tipo
- * @return Pessoa
- * @author Eduardo C. Campigoto
- */
+	/**
+	 * Retorna objeto Pessoa de acordo com o tipo passado por parametro, podendo
+	 * ser pessoa física ou jurídica
+	 * 
+	 * @param tipo
+	 * @return Pessoa
+	 * @author Eduardo C. Campigoto
+	 */
 
-public PessoaFactory(){
-	
-}
+	public PessoaFactory() {
 
-	public PessoaFactory(String pessoaStr)throws GlobalException {
+	}
+
+	public PessoaFactory(String pessoaStr) throws GlobalException {
 		ObjectNode objNode;
 		try {
 			objNode = getObject().readValue(pessoaStr, ObjectNode.class);
@@ -72,37 +73,31 @@ public PessoaFactory(){
 				if (tipo.equals(PessoaType.PATROCIN.getIndex())) {
 					classe = Patrocinador.class;
 				}
-				
-				if(classe != null){
-					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);				
+
+				if (classe != null) {
+					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr,
+							classe);
 					this.pessoas.add(obj);
-				}else{
-					throw new GlobalException("Erro de factory na classe Pessoa");
+				} else {
+					throw new GlobalException(
+							"Erro de factory na classe Pessoa");
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
-	
-public List<Pessoa> getPessoasLista() {
-	return pessoas;
-}
 
-public void setPessoas(List<Pessoa> pessoas) {
+	public List<Pessoa> getPessoasLista() {
+		return pessoas;
+	}
+
+	public void setPessoas(List<Pessoa> pessoas) {
 		this.pessoas = pessoas;
-}
+	}
 
-
-public Pessoa getPessoa() {
-	return pessoas.get(0);
-}
-	
-
-	
-	
-	
-
+	public Pessoa getPessoa() {
+		return pessoas.get(0);
+	}
 
 }

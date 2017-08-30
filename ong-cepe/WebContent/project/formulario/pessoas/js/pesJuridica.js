@@ -10,31 +10,44 @@ $(document).ready(function(){
 				
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
-		html += "<thead class='table table-striped '>" +
-					"<tr>" +
-						"<p> Pessoas </p>  </br>" + 
-						"<th> Razão Social </th> " +
-						"<th> Responsavel </th>" +
-						"<th> Cnpj </th>" + 
-						"<th> E-mail </th>" +
-						"<th> Tel Responsavel </th>" +
-						"<th> Tel Comercial </th>" +
-						"<th> Estado </th>" +
-						"<th> Cidade </th>" +
-						"<th> Bairro </th>" +
-						"<th> Rua </th>" +
-						"<th> Complemento </th>" +
-						"<th> Número </th>" +
-						"<th> Editar</th>" +
-						"<th> Excluir</th>" +
-					"</tr>" +
-				"</thead>";					
+		html += 
+
+			"<thead class='table table-striped '>" +
+				"<tr>" +
+					"<p> Pessoas </p>  </br>" + 
+					"<th> Razão Social </th> " +
+					"<th> Responsavel </th>" +
+					"<th> Cnpj </th>" + 
+					"<th> E-mail </th>" +
+					"<th> Tel Responsavel </th>" +
+					"<th> Tel Comercial </th>" +
+					"<th> Estado </th>" +
+					"<th> Cidade </th>" +
+					"<th> Bairro </th>" +
+					"<th> Rua </th>" +
+					"<th> Complemento </th>" +
+					"<th> Número </th>" +
+					"<th> Editar</th>" +
+					"<th> Excluir</th>" +
+				"</tr>" +
+			"</thead>";					
 		
 		    if(listPesj != undefined && listPesj.length > 0 && listPesj[0].id != undefined){
 			  
 			  	for(var i = 0; i < listPesj.length; i++){
 
 					html += "<tr>";
+
+						html += "<td>";
+
+							html += "<button type='button' class='btn btn-pencil' onclick='buscID("+listPesj[i].id+")'>Editar</button>"
+						html += "</td>";
+
+						html += "<td>";
+
+							html += "<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"
+						html += "</td>";
+
 						html += "<td>" + listPesj[i].razaosocial + "</td>";
 						html += "<td>" + listPesj[i].responsavel + "</td>";
 						html += "<td>" + listPesj[i].cnpj + "</td>";
@@ -47,16 +60,6 @@ $(document).ready(function(){
 						html += "<td>" + listPesj[i].rua + "</td>";
 						html += "<td>" + listPesj[i].complemento + "</td>";
 						html += "<td>" + listPesj[i].numero + "</td>";
-
-						html += "<td>";
-
-							html += "<button type='button' class='btn btn-pencil' onclick='buscID("+listPesj[i].id+")'>Editar</button>"
-						html += "</td>";
-
-						html += "<td>";
-
-							html += "<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"
-						html += "</td>";
 					html += "</tr>";  
 			    }
 		    }else{
@@ -69,7 +72,7 @@ $(document).ready(function(){
 
 					var cfg = {
 							
-						url: ONG.contextPath + "/rest/pessoa/pesquisarNome/" + valorLista,
+						url: ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
 						
 						success: function(listPesj,busca){													
 							buscapesJuridica(listPesj,busca);

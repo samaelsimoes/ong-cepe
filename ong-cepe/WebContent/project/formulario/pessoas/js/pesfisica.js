@@ -10,63 +10,65 @@ $(document).ready(function(){
 		
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
-		html += "<thead class='table table-striped '>"+
-					"<tr>" +
-//						"<p> Pessoas </p>  </br>"+ 
-						"<th> Nome </th> " +
-						"<th> Sobrenome </th>" +
-						"<th> Cpf </th>" + 
-						"<th> Rg </th>" + 
-						"<th> DataNascimento </th>" + 
-						"<th> Contato Responsavel </th>" +
-						"<th> E-mail </th>" +
-						"<th> Tel Responsavel </th>" +
-						"<th> Tel Comercial </th>" +
-						"<th> E-mail </th>" +
-						"<th> Responsavel </th>" +
-						"<th> Estado </th>" +
-						"<th> Cidade </th>" +
-						"<th> Bairro </th>" +
-						"<th> Rua </th>" +
-						"<th> Complemento </th>" +
-						"<th> Número </th>" +
-						"<th> Editar</th>"+
-						"<th> Excluir</th>"+
-					"</tr>" +
-				"</thead>";			
+		html += 
+			"<thead class='table table-striped '>"+
+				"<tr>" +
+					"<th> Editar</th>"+
+					"<th> Excluir</th>"+
+					"<p> Pessoas </p>  </br>"+ 
+					"<th> Nome </th> " +
+					"<th> Sobrenome </th>" +
+					"<th> Cpf </th>" + 
+					"<th> Rg </th>" + 
+					"<th> DataNascimento </th>" + 
+					"<th> Contato Responsavel </th>" +
+					"<th> E-mail </th>" +
+					"<th> Tel Responsavel </th>" +
+					"<th> Tel Comercial </th>" +
+					"<th> E-mail </th>" +
+					"<th> Responsavel </th>" +
+					"<th> Estado </th>" +
+					"<th> Cidade </th>" +
+					"<th> Bairro </th>" +
+					"<th> Rua </th>" +
+					"<th> Complemento </th>" +
+					"<th> Número </th>" +
+				"</tr>" +
+			"</thead>";			
 
 		if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){
 			  
-			  	for(var i = 0; i < listPesF.length; i++){
+		  	for(var i = 0; i < listPesF.length; i++){
 
-					html += "<tr>";
-						html += "<td>" + listPesF[i].nome + "</td>";
-						html += "<td>" + listPesF[i].sobrenome + "</td>";
-						html += "<td>" + listPesF[i].cpf + "</td>";
-						html += "<td>" + listPesF[i].rg + "</td>";
-						html += "<td>" + listPesF[i].datanascimento + "</td>";
-						html += "<td>" + listPesF[i].telresponsavel + "</td>";
-						html += "<td>" + listPesF[i].telcomercial + "</td>";
-					    html += "<td>" + listPesF[i].email + "</td>";
-						html += "<td>" + listPesF[i].responsavel + "</td>";
-						html += "<td>" + listPesF[i].estado + "</td>";
-						html += "<td>" + listPesF[i].cidade + "</td>";
-						html += "<td>" + listPesF[i].bairro + "</td>";
-						html += "<td>" + listPesF[i].rua + "</td>";
-						html += "<td>" + listPesF[i].complemento + "</td>";
-						html += "<td>" + listPesF[i].numero + "</td>";
+				html += "<tr>";
 
-						html += "<td>";
+					html += "<td>";
 
-							html += "<button type='button' class='btn btn-pencil' onclick='buscID("+listPesF[i].id+")'>Editar</button>"
-						html += "</td>";
+						html += "<button type='button' class='btn btn-pencil' onclick='buscID("+listPesF[i].id+")'>Editar</button>"
+					html += "</td>";
 
-						html += "<td>";
+					html += "<td>";
 
-							html += "<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesF[i].id+")'>Excluir</button>"
-						html += "</td>";
-					html += "</tr>";  
-			    }
+						html += "<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesF[i].id+")'>Excluir</button>"
+					html += "</td>";
+
+					html += "<td>" + listPesF[i].nome + "</td>";
+					html += "<td>" + listPesF[i].sobrenome + "</td>";
+					html += "<td>" + listPesF[i].cpf + "</td>";
+					html += "<td>" + listPesF[i].rg + "</td>";
+					html += "<td>" + listPesF[i].datanascimento + "</td>";
+					html += "<td>" + listPesF[i].telresponsavel + "</td>";
+					html += "<td>" + listPesF[i].telcomercial + "</td>";
+				    html += "<td>" + listPesF[i].email + "</td>";
+					html += "<td>" + listPesF[i].responsavel + "</td>";
+					html += "<td>" + listPesF[i].estado + "</td>";
+					html += "<td>" + listPesF[i].cidade + "</td>";
+					html += "<td>" + listPesF[i].bairro + "</td>";
+					html += "<td>" + listPesF[i].rua + "</td>";
+					html += "<td>" + listPesF[i].complemento + "</td>";
+					html += "<td>" + listPesF[i].numero + "</td>";
+				html += "</tr>";  
+		    }
 		}else{
 			    if(listPesF == undefined || (listPesF != undefined && listPesF.length > 0)){
 					if(busca == ""){						
@@ -77,7 +79,11 @@ $(document).ready(function(){
 
 					var cfg ={
 							
+<<<<<<< HEAD
+						url:  ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
+=======
 						url:  "../rest/pessoa/nome/" + valorLista,
+>>>>>>> 9f9a4b9f4b57f3ab2efe5be85590bf3fe5b7ca09
 						
 						success: function(listPesF,busca){
 													

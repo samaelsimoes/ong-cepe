@@ -6,6 +6,9 @@ package br.com.cepe.factory.util;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.cepe.datatype.DataFmt;
@@ -41,6 +44,29 @@ private DateFactory dateFactory;
 		
 	}
 	
+	
+//ini Guilherme
+	public Response buildResponse(Object objeto){
+		StringWriter fw = new StringWriter();
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+//			objectMapper.setDateFormat(DateFormat.getDateTimeInstance()); //Utilizado para exibir as datas no padrão BR quando retorna do banco
+			objectMapper.writeValue(fw, objeto);
+			return Response.ok(fw.toString()).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return buildErrorResponse(e.getMessage());
+		}
+	}
+
+	public Response buildErrorResponse(String message) {
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+				.entity(message)
+				.type(MediaType.TEXT_PLAIN)
+				.build();
+	}
+	
+//fim Guilherme
 	
 	
 }

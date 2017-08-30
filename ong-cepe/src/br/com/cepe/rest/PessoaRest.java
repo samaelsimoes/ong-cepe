@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
@@ -31,19 +32,36 @@ public class PessoaRest extends ObjMapper {
 	 * @param pessoaStr
 	 *            - Json da entidade pessoa.
 	 * **/
+//	@POST
+//	@Consumes("application/*")
+//	public void adicionar(String pessoaStr) throws GlobalException {
+//		try {
+//
+//			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
+//			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
+//			new PessoaService(pessoa).adicionar();
+//
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+	
 	@POST
+	@Path("/adicionar")	
 	@Consumes("application/*")
-	public void adicionar(String pessoaStr) throws GlobalException {
+	public Response adicionar(String pessoaStr) throws GlobalException {
 		try {
-
+			System.out.println("pessoa/adicionar :"+pessoaStr);
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
 
+			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
 
 	@GET

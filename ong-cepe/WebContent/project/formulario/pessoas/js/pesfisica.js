@@ -79,11 +79,10 @@ $(document).ready(function(){
 
 					var cfg ={
 							
-<<<<<<< HEAD
 						url:  ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
-=======
+
 						url:  "../rest/pessoa/nome/" + valorLista,
->>>>>>> 9f9a4b9f4b57f3ab2efe5be85590bf3fe5b7ca09
+
 						
 						success: function(listPesF,busca){
 													

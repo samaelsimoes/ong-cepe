@@ -141,52 +141,52 @@ $(document).ready(function(){
 //	}
 	
 	
-//	validar = function(cad){
-//		var msg, exp = "";
-//		msg+=validador("Razao Social: ", $("#razsocial").val());
-//		msg+=validador("Responsavel: ", $("#responsavel").val());
-//		msg+=validador("Cnpj: ", $("#cnpj").val());
-//		msg+=validador("Email: ", $("#email").val());
-//		msg+=validador("Telefone comercial: ", $("#telcomercial").val());
-//		msg+=validador("Telefone responsável: ", $("#telresponsavel").val());
-//		msg+=validador("Estado: ", $("#estado").val());
-//		msg+=validador("Cidade: ", $("#cidade").val());
-//		msg+=validador("Bairro: ", $("#bairro").val());
-//		msg+=validador("Rua: ", $("#rua").val());
-//		msg+=validador("Complemento: ", $("#complemento").val());
-//		msg+=validador("Numero: ", $("#numero").val());
-//
-//		if(msg == ""){
-//
-//			if($("#email").val().indexOf("@") == -1 || //valida se existe o @
-//                $("#email").val().indexOf(".") == -1 || //valida se existe o .
-//                $("#email").val().indexOf("@") == 0 || //valida se tem texto antes do @
-//                $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
-//                ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
-//                    
-//                exp+="E-mail invalido" +"</br>"
-//                + "ex: teste_@teste.com.br"
-//                document.getElementById("email").focus();
-//            }
-//            if(!$("#cnpj").val().match(/^\d{14,15}$/)){
-//            	exp+="CNPJ invalido ! </br> " + "</br>";
-//            }
-//            if(!$("#telcomercial").val().match(/^\d{10,13}$/)){    
-//                exp+="Telefone Comercial invalido ! </br> " + "</br>";
-//            }
-//            if(!$("#telresponsavel").val().match(/^\d{10,13}$/)){    
-//                exp+="Telefone do responsável invalido ! </br> " + "</br>";
-//            }
-//            if(exp!= ""){
-//            	bootbox.alert(expressao);
-//    			return false;
-//            }
-//        }else{
-//            bootbox.alert("Caro usuário, gentileza verificar os seguintes campos: <br> " + msg);
-//			return false;
-//        }
-//		return true;
-//		
-//	}
+	validar = function(cad){
+		var msg, exp = "";
+		msg+=validador("Razao Social: ", $("#razsocial").val());
+		msg+=validador("Responsavel: ", $("#responsavel").val());
+		msg+=validador("Cnpj: ", $("#cnpj").val());
+		msg+=validador("Email: ", $("#email").val());
+		msg+=validador("Telefone comercial: ", $("#telcomercial").val());
+		msg+=validador("Telefone responsável: ", $("#telresponsavel").val());
+		msg+=validador("Estado: ", $("#estado").val());
+		msg+=validador("Cidade: ", $("#cidade").val());
+		msg+=validador("Bairro: ", $("#bairro").val());
+		msg+=validador("Rua: ", $("#rua").val());
+		msg+=validador("Complemento: ", $("#complemento").val());
+		msg+=validador("Numero: ", $("#numero").val());
+
+		if(msg == ""){
+
+			if($("#email").val().indexOf("@") == -1 || //valida se existe o @
+                $("#email").val().indexOf(".") == -1 || //valida se existe o .
+                $("#email").val().indexOf("@") == 0 || //valida se tem texto antes do @
+                $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
+                ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
+                    
+                exp+="E-mail invalido" +"</br>"
+                + "ex: teste_@teste.com.br"
+                document.getElementById("email").focus();
+            }
+            if(!$("#cnpj").val().match(/^\d{14,15}$/)){
+            	exp+="CNPJ invalido ! </br> " + "</br>";
+            }
+            if(!$("#telcomercial").val().match(/^\d{10,13}$/)){    
+                exp+="Telefone Comercial invalido ! </br> " + "</br>";
+            }
+            if(!$("#telresponsavel").val().match(/^\d{10,13}$/)){    
+                exp+="Telefone do responsável invalido ! </br> " + "</br>";
+            }
+            if(exp!= ""){
+            	bootbox.alert(expressao);
+    			return false;
+            }
+        }else{
+            bootbox.alert("Caro usuário, gentileza verificar os seguintes campos: <br> " + msg);
+			return false;
+        }
+		return true;
+		
+	}
 	
 });

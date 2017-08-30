@@ -71,19 +71,17 @@ $(document).ready(function(){
 		    }
 		}else{
 			    if(listPesF == undefined || (listPesF != undefined && listPesF.length > 0)){
+					
+
+					var busca = $("#conspesf").val();
+
 					if(busca == ""){						
 						busca = null;
 					}
-
-					var valorLista = $("#conspesf").val();
-
+					debugger;
 					var cfg ={
 							
-<<<<<<< HEAD
-						url:  ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
-=======
-						url:  "../rest/pessoa/nome/" + valorLista,
->>>>>>> 9f9a4b9f4b57f3ab2efe5be85590bf3fe5b7ca09
+						url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
 						
 						success: function(listPesF,busca){
 													
@@ -197,12 +195,12 @@ $(document).ready(function(){
         }
         return msg;
     };
-    enviaServidor = function(){
+    enviaServidor = function(dadosPesFis){
 
     	var cfg = {
 							
-			url: ONG.contextPath+" sem url",
-			
+			url: ONG.contextPath+"/rest/pessoa/add",
+			data:dadosPesFis,
 			success: function(listPesj,busca){
 										
 				buscapesJuridica(listPesj,busca);
@@ -214,4 +212,13 @@ $(document).ready(function(){
 		};					
 		ajax.get(cfg);
     }
+    validador = function(campo, valor){
+
+        var msg = "";
+
+        if(valor == null ||  valor.trim() == ""){
+            msg += "- " + campo + " Está Vazio. </br>";
+        }
+        return msg;
+    };
 });

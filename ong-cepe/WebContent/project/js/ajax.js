@@ -7,11 +7,9 @@ ONG.contextPath = "/ong-cepe"; // contexto do
 	//Criando o sub-objeto ajax do objeto ong.
 
 ONG.ajax = new Object();
-
 	/*
 	* Processa o pedido, solicitação HTTP Ajax a ser recebido pelo Rest.
 	*/
-
 function ajaxRequestDefault() {
 	
 	var def = {
@@ -28,7 +26,6 @@ function ajaxRequestDefault() {
 	};
 	return def;
 }
-
 	/* Verifica o estado do objeto cfg recebido, ou seja, se o identificador cfg
 	* trata-se realmente de uma variável de objeto contendo suas respectivas
 	* propriedades com valores, se isto se confirmar retorna o objeto cfg.
@@ -41,7 +38,6 @@ function ajaxRequestDefault() {
 	* ou se é um objeto simples, criado como {} ou new Object e por último
 	* verifica se trata-se de uma função objeto Javascrit.
 	*/
-
 function verifyObjectData(cfg){
 	
 	if(cfg.data){

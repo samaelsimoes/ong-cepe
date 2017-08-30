@@ -64,15 +64,17 @@ $(document).ready(function(){
 			    }
 		    }else{
 			    if(listPesj == undefined || (listPesj != undefined && listPesj.length > 0)){
+					
+
+					var busca = $("#lista").val();
+					
 					if(busca == ""){						
 						busca = null;
 					}
-
-					var valorLista = $("#lista").val();
-
+					debugger;
 					var cfg = {
 							
-						url: ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
+						url: ONG.contextPath + "/rest/pessoa/nome/" + busca,
 						
 						success: function(listPesj,busca){													
 							buscapesJuridica(listPesj,busca);
@@ -149,7 +151,7 @@ $(document).ready(function(){
             	
             	dadosPesFis.cep=$("#cep").val(); 
             	
-        	    enviaServidor(dadosPesFis);
+        	    enviaServidor(dadosPesJur);
             }else{
                 bootbox.alert(expressao);
             }
@@ -161,7 +163,8 @@ $(document).ready(function(){
 
 		var cfg = {
 							
-			url: "sem url",
+			url: ONG.contextPath+"/rest/pessoa/add",
+			data:dadosPesJur,
 			
 			success: function(listPesj,busca){										
 				buscapesJuridica(listPesj,busca);
@@ -172,4 +175,13 @@ $(document).ready(function(){
 		};					
 		ajax.get(cfg);
 	}
+	validador = function(campo, valor){
+
+        var msg = "";
+
+        if(valor == null ||  valor.trim() == ""){
+            msg += "- " + campo + " Está Vazio. </br>";
+        }
+        return msg;
+    };
 });

@@ -6,10 +6,7 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     <servlet>
-<<<<<<< HEAD
     <display-name>ong-cepe</display-name>
-=======
->>>>>>> 9f9a4b9f4b57f3ab2efe5be85590bf3fe5b7ca09
         <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>

@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
@@ -32,19 +33,22 @@ public class PessoaRest extends ObjMapper {
 	 *            - Json da entidade pessoa.
 	 * **/
 	@POST
+	@Path("/add")	
 	@Consumes("application/*")
-	public void adicionar(String pessoaStr) throws GlobalException {
+	public Response adicionar(String json) throws GlobalException {
 		try {
-			Object obj = getObject().readValue(pessoaStr, Pessoa.class);
+			
+			Object obj = getObject().readValue(json, Pessoa.class);
 			// problema no factory ... 
 			Object pessoa = new PessoaFactory(obj).getPessoa();
 			//
 			new PessoaService(pessoa).adicionar();
+			return this.buildResponse(" Pessoa Cadastrada com Sucesso "); // ARRUMAR EDUARDO /*/*/*/*/*/*/
 
 		} catch (Throwable e) {
 			e.printStackTrace();
+			return this.buildErrorResponse(" Ocorreu o seguinte erro ao cadastrar pessoa " + e.getMessage()); // ARRUMAR EDUARDO  /*/*/*/*/*/*/*/*/
 		}
-
 	}
 
 	@GET
@@ -53,11 +57,10 @@ public class PessoaRest extends ObjMapper {
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
-<<<<<<< HEAD
+			
 			System.out.println("debuggando");
 
 			return getJson(pessoaService.pesquisarNome(nome));
-=======
 			// TESTE ////////////////////////
 			Pessoa pessoa = new Pessoa();
 			pessoa.setNome(nome);
@@ -65,7 +68,6 @@ public class PessoaRest extends ObjMapper {
 			
 			///----------------------- DEU CERTO.... não tem nada de errado com o rest ;P
 			//return getJson(pessoaService.pesquisarNome(nome));
->>>>>>> 9f9a4b9f4b57f3ab2efe5be85590bf3fe5b7ca09
 
 		} catch (Throwable e) {
 			e.printStackTrace();

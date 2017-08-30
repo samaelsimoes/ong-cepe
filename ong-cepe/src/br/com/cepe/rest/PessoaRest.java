@@ -57,10 +57,16 @@ public class PessoaRest extends ObjMapper {
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
+<<<<<<< HEAD
 			
 			System.out.println("debuggando");
 
 			return getJson(pessoaService.pesquisarNome(nome));
+=======
+			System.out.println("debuggando");
+
+//			return getJson(pessoaService.pesquisarNome(nome));
+>>>>>>> 502d0871b9de97173b35de7aa000069d95c71b0d
 			// TESTE ////////////////////////
 			Pessoa pessoa = new Pessoa();
 			pessoa.setNome(nome);

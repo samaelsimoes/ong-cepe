@@ -1,10 +1,10 @@
 
-	//Criando o objeto  do projeto ex
+//Criando o objeto  do projeto ex
 ONG = new Object();
 
 ONG.contextPath = "/ong-cepe"; // contexto do 
 
-	//Criando o sub-objeto ajax do objeto ong.
+//Criando o sub-objeto ajax do objeto ong.
 
 ONG.ajax = new Object();
 	/*

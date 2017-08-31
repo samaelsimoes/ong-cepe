@@ -23,61 +23,24 @@ import br.com.cepe.service.PessoaService;
 @Path("/pessoa")
 public class PessoaRest extends ObjMapper {
 	private PessoaService pessoaService;
-
-	public PessoaRest() {
-		
-	}
-
 	/**
 	 * @param pessoaStr
 	 *            - Json da entidade pessoa.
 	 * **/
-//	@POST
-//	@Consumes("application/*")
-//	public void adicionar(String pessoaStr) throws GlobalException {
-//		try {
-//
-//			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
-//			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
-//			new PessoaService(pessoa).adicionar();
-//
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
-	
 	@POST
-<<<<<<< HEAD
 	@Path("/add")	
-	@Consumes("application/*")
-	public Response adicionar(String json) throws GlobalException {
-		try {
-			
-			Object obj = getObject().readValue(json, Pessoa.class);
-			// problema no factory ... 
-			Object pessoa = new PessoaFactory(obj).getPessoa();
-			
-=======
-	@Path("/adicionar")	
-	@Consumes("application/*")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response adicionar(String pessoaStr) throws GlobalException {
 		try {
 			System.out.println("pessoa/adicionar :"+pessoaStr);
->>>>>>> 326695d95a9487641c5536c400b8aed4f34a56f4
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
-			return this.buildResponse(" Pessoa Cadastrada com Sucesso "); // ARRUMAR EDUARDO /*/*/*/*/*/*/
 
 			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
-<<<<<<< HEAD
-			return this.buildErrorResponse(" Ocorreu o seguinte erro ao cadastrar pessoa " + e.getMessage()); // ARRUMAR EDUARDO  /*/*/*/*/*/*/*/*/
-=======
 			return this.buildErrorResponse(e.getMessage());
->>>>>>> 326695d95a9487641c5536c400b8aed4f34a56f4
 		}
 	}
 
@@ -87,24 +50,14 @@ public class PessoaRest extends ObjMapper {
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
-
-			System.out.println("debuggando");
-
-			return getJson(pessoaService.pesquisarNome(nome));
-			System.out.println("debuggando");
-
-			// return getJson(pessoaService.pesquisarNome(nome));
-
-			// TESTE ////////////////////////
+			
+			System.out.println("OKEY");
 			
 			Pessoa pessoa = new Pessoa();
 			pessoa.setNome(nome);
 			
 			return getJson(pessoa);
 			
-			///----------------------- DEU CERTO.... não tem nada de errado com o rest ;P
-			//return getJson(pessoaService.pesquisarNome(nome));
-
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -116,6 +69,7 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public void alterar(String pessoaStr) throws GlobalException {
 		try {
+			
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).alterar();
@@ -129,4 +83,5 @@ public class PessoaRest extends ObjMapper {
 	public void excluir(@PathParam("id") int id) {
 		pessoaService.excluir(id);
 	}
+
 }

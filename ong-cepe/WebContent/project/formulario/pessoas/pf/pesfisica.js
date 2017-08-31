@@ -1,8 +1,9 @@
+//ONG.pf = new Object(); //verificar colocar padrao em todos metodos ajustar caminhos
+
 $(document).ready(function(){
+	
 	conspesfisi=function(){
-		
 	    var valorBusca=$("#conspesf").val();
-	  	
 	    buscapefisica(undefined,valorBusca);
 	}		
 	
@@ -17,7 +18,7 @@ $(document).ready(function(){
 					"<th> Excluir</th>"+
 					"<p> Pessoas </p>  </br>"+ 
 					"<th> Nome </th> " +
-					"<th> Sobrenome </th>" +
+					//"<th> Sobrenome </th>" +
 					"<th> Cpf </th>" + 
 					"<th> Rg </th>" + 
 					"<th> DataNascimento </th>" + 
@@ -26,7 +27,7 @@ $(document).ready(function(){
 					"<th> Tel Responsavel </th>" +
 					"<th> Tel Comercial </th>" +
 					"<th> E-mail </th>" +
-					"<th> Responsavel </th>" +
+					//"<th> Responsavel </th>" +
 					"<th> Estado </th>" +
 					"<th> Cidade </th>" +
 					"<th> Bairro </th>" +
@@ -41,9 +42,8 @@ $(document).ready(function(){
 		  	for(var i = 0; i < listPesF.length; i++){
 
 				html += "<tr>";
-
 					html += "<td>";
-
+					
 						html += "<button type='button' class='btn btn-pencil' onclick='buscID("+listPesF[i].id+")'>Editar</button>"
 					html += "</td>";
 
@@ -53,11 +53,11 @@ $(document).ready(function(){
 					html += "</td>";
 
 					html += "<td>" + listPesF[i].nome + "</td>";
-					html += "<td>" + listPesF[i].sobrenome + "</td>";
+					//html += "<td>" + listPesF[i].sobrenome + "</td>";
 					html += "<td>" + listPesF[i].cpf + "</td>";
 					html += "<td>" + listPesF[i].rg + "</td>";
 					html += "<td>" + listPesF[i].datanascimento + "</td>";
-					html += "<td>" + listPesF[i].telresponsavel + "</td>";
+					//html += "<td>" + listPesF[i].telresponsavel + "</td>";
 					html += "<td>" + listPesF[i].telcomercial + "</td>";
 				    html += "<td>" + listPesF[i].email + "</td>";
 					html += "<td>" + listPesF[i].responsavel + "</td>";
@@ -70,41 +70,28 @@ $(document).ready(function(){
 				html += "</tr>";  
 		    }
 		}else{
-			    if(listPesF == undefined || (listPesF != undefined && listPesF.length > 0)){
-					
+		     if(listPesF == undefined || (listPesF != undefined && listPesF.length > 0)){
 
-					var busca = $("#conspesf").val();
-
-					if(busca == ""){						
-						busca = null;
-					}
-					debugger;
-					var cfg ={
-							
-<<<<<<< HEAD
-						url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
-=======
-						url:  ONG.contextPath + "/rest/pessoa/nome/" + valorLista,
-
-						url:  "../rest/pessoa/nome/" + valorLista,
-
->>>>>>> 326695d95a9487641c5536c400b8aed4f34a56f4
-						
-						success: function(listPesF,busca){
-													
-							buscapefisica(listPesF,busca);
-						},
-						error: function(err){				
-							
-							bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
-						}
-					};
-					
-					ONG.ajax.get(cfg);
-				}else{					
-					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
+				var busca = $("#conspesf").val();
+				
+				if(busca == ""){						
+					busca = null;
 				}
-		  }
+				
+				var cfg ={
+					url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
+					success: function(listPesF,busca){									
+						buscapefisica(listPesF,busca);
+					},
+					error: function(err){											
+						bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+					}
+				};					
+				ONG.ajax.get(cfg);
+			}else{					
+				html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
+			}
+	  }
 		  
 		  html +="</table>";
 		  $("#resupesfis").html(html);
@@ -112,28 +99,30 @@ $(document).ready(function(){
 	
 	buscapefisica(undefined, "");
 
+	// ------------------------------------------------ ==================================== ------------------------------ ========================================
+	
 	cadpesfisica = function(){
 
 		var msg = "";
 		var exp = "";
-
-		msg+=validador("Nome: ", $("#nome").val());
-		msg+=validador("Sobrenome: ", $("#sobrenome").val());
-		msg+=validador("Cpf: ", $("#cpf").val());
-		msg+=validador("Rg: ", $("#rg").val());
-		msg+=validador("Data nascimento: ", $("#datanascimento").val());
-		msg+=validador("Email: ", $("#email").val());
-		msg+=validador("Telefone Residencial: ", $("#telresidenci").val());
-		msg+=validador("Telefone Comercial: ", $("#telcomercial").val());
-		msg+=validador("Responsavel: ", $("#responsavel").val());
-		msg+=validador("Estado: ", $("#estado").val());
-		msg+=validador("Cidade: ", $("#cidade").val());
-		msg+=validador("Bairro: ", $("#bairro").val());
-		msg+=validador("Rua: ", $("#rua").val());
-		msg+=validador("Complemento: ", $("#complemento").val());
-		msg+=validador("Numero: ", $("#numero").val());
-
-		if(msg == null){
+		
+		msg += validaVazio ("Nome: ", $("#nome").val());
+		//msg+=validaVazio("Sobrenome: ", $("#sobrenome").val());
+		msg += validaVazio ("Cpf: ", $("#cpf").val());
+		msg += validaVazio ("Rg: ", $("#rg").val());
+		msg += validaVazio ("Data nascimento: ", $("#datanascimento").val());
+		msg += validaVazio ("Email: ", $("#email").val());
+		msg += validaVazio ("Telefone Residencial: ", $("#fone_res").val());
+		msg += validaVazio ("Telefone Celular: ", $("#fone_cel").val());
+		//msg+=validaVazio ("Responsavel: ", $("#responsavel").val());
+		msg += validaVazio ("Estado: ", $("#estado").val());
+		msg += validaVazio ("Cidade: ", $("#cidade").val());
+		msg += validaVazio ("Bairro: ", $("#bairro").val());
+		msg += validaVazio ("Rua: ", $("#rua").val());
+		msg += validaVazio ("Complemento: ", $("#complemento").val());
+		msg += validaVazio ("Numero: ", $("#numero").val());
+				
+		if ( msg == "" ){
 
 			if($("#email").val().indexOf("@") == -1 || //valida se existe o @
                 $("#email").val().indexOf(".") == -1 || //valida se existe o .
@@ -145,17 +134,17 @@ $(document).ready(function(){
                 + "ex: teste_@teste.com.br"
                 document.getElementById("email").focus();
             }
-            if(!$("#cpf").val().match(/^\d{10,11}$/)){
+            if(!$("#cpf").val().match(/^\d{10,12}$/)){
             	exp+="Cpf invalido ! </br> " + "</br>";
             }
             if(!$("#rg").val().match(/^\d{7,9}$/)){
             	exp+="RG invalido ! </br> " + "</br>";
             }
-            if(!$("#telresidenci").val().match(/^\d{10,13}$/)){    
+            if(!$("#fone_res").val().match(/^\d{10,13}$/)){    
                 exp+="Telefone Residencial invalido ! </br> " + "</br>";
             }
-            if(!$("#telcomercial").val().match(/^\d{10,13}$/)){    
-                exp+="Telefone Comercial invalido ! </br> " + "</br>";
+            if(!$("#fone_cel").val().match(/^\d{10,13}$/)){    
+                exp+="Telefone Celular invalido ! </br> " + "</br>";
             }
         
             /*if(!$("#cep").val().match(/^[0-9]{8}$/)){
@@ -165,36 +154,52 @@ $(document).ready(function(){
                 exp+=" Gentileza informar a renda em formato numerico " + "<br>" + "<br>";
             } */
             
-			if(exp==""){
+			if ( exp == "") {
 
-            	var dadosPesFis= new Object();
+            	var dadosFS= new Object();
             	
-            	dadosPesFis.nome=$("#nome").val();
-            	dadosPesFis.sobreNome=$("#sobreNome").val();
-            	dadosPesFis.cpf=$("#cpf").val();
-            	dadosPesFis.rg=$("#rg").val();
-            	dadosPesFis.dt_nasc=$("#datanascimento").val();
-            	dadosPesFis.email=$("#email").val();
-            	dadosPesFis.fone_res=$("#telresidenci").val();
-            	dadosPesFis.fone_cel=$("#telcomercial").val();
-            	dadosPesFis.estado=$("#estado").val();
-            	dadosPesFis.cidade=$("#cidade").val()
-            	dadosPesFis.rua=$("#rua").val();
-            	dadosPesFis.complemento=$("#complemento").val();
-            	dadosPesFis.numero=$("#numero").val();
+            	dadosFS.nome=$("#nome").val();
+            	dadosFS.tipo=0;
+            	//dadosFS.sobreNome=$("#sobreNome").val();
+            	dadosFS.cpf=$("#cpf").val();
+            	dadosFS.rg=$("#rg").val();
+            	dadosFS.email=$("#email").val();
+            	dadosFS.dt_nasc=$("#datanascimento").val();
+            	dadosFS.fone_res=$("#fone_res").val();
+            	dadosFS.fone_cel=$("#fone_cel").val();
+            	dadosFS.rua=$("#rua").val();
+            	dadosFS.bairro=$("#bairro").val();
+            	dadosFS.numero=$("#numero").val();
+            	dadosFS.cep=$("#cep").val(); 
+            	dadosFS.complemento=$("#complemento").val();
+            	dadosFS.cidade=$("#cidade").val()
+            	dadosFS.estado=$("#estado").val();         	
             	
-            	dadosPesFis.cep=$("#cep").val(); 
-            	
-        	    enviaServidor(dadosPesFis);
+	     		var cfg = {
+	     			
+	     			url: ONG.contextPath + "/rest/pessoa/add",
+	     			data: dadosFS,
+	     			
+	     			success: function(listPesj,busca){
+	     				buscapesJuridica(listPesj,busca);
+	     			},
+	     			error: function(err){				
+	     				bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+	     			}
+	     		};					
+	         	ONG.ajax.post(cfg);
             }else{
-                bootbox.alert(expressao);
+                bootbox.alert(exp);
             }
         }else{
             bootbox.alert("Caro usuário, gentileza verificar os seguintes campos: <br> " + msg);
         }
 	}
-	validador=function(campo, valor){
-
+	
+	// -------------------------- ========================================================================== -----------------------
+	
+	validaVazio = function ( campo, valor ) {
+		
         var msg = "";
 
         if(valor == null ||  valor.trim() == ""){
@@ -202,30 +207,5 @@ $(document).ready(function(){
         }
         return msg;
     };
-    enviaServidor = function(dadosPesFis){
-
-    	var cfg = {
-							
-			url: ONG.contextPath+"/rest/pessoa/add",
-			data:dadosPesFis,
-			success: function(listPesj,busca){
-										
-				buscapesJuridica(listPesj,busca);
-			},
-			error: function(err){				
-				
-				bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
-			}
-		};					
-		ajax.get(cfg);
-    }
-    validador = function(campo, valor){
-
-        var msg = "";
-
-        if(valor == null ||  valor.trim() == ""){
-            msg += "- " + campo + " Está Vazio. </br>";
-        }
-        return msg;
-    };
+    // -------------------------------- ======================================================================= ------------------------------
 });

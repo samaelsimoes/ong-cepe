@@ -184,7 +184,7 @@ $(document).ready(function(){
 	     				buscapesJuridica(listPesj,busca);
 	     			},
 	     			error: function(err){				
-	     				bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+	     				bootbox.alert("Erro ao cadastrar Pessoa, entrar em contato com o Administrador se o problema persistir!");
 	     			}
 	     		};					
 	         	ONG.ajax.post(cfg);

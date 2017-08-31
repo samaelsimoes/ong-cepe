@@ -31,10 +31,13 @@ public class PessoaRest extends ObjMapper {
 	@Path("/add")	
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response adicionar(String pessoaStr) throws GlobalException {
+		
 		try {
+			
 			System.out.println("pessoa/adicionar :"+pessoaStr);
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
+			
 			new PessoaService(pessoa).adicionar();
 
 			return this.buildResponse("Cadastrado com sucesso.");

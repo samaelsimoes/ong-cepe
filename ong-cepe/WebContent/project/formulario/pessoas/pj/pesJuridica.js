@@ -1,9 +1,9 @@
 $(document).ready(function(){
 	buscapessojuridica=function(){
 		
-	    var valorBusca=$("#conspesf").val();
+	    var busca=$("#conspj").val();
 	  	
-	    buscapesJuridica(undefined,valorBusca);
+	    buscapesJuridica(undefined,busca);
 	}		
 	
 	buscapesJuridica = function(listPesj, busca){
@@ -65,7 +65,6 @@ $(document).ready(function(){
 		    }else{
 			    if(listPesj == undefined || (listPesj != undefined && listPesj.length > 0)){
 
-					var busca = $("#lista").val();
 
 					if(busca == ""){						
 						busca = null;
@@ -98,18 +97,18 @@ $(document).ready(function(){
 
 		var msg, exp = "";
 		
-		msg+=validador("Razao Social: ", $("#razsocial").val());
-		//msg+=validador("Responsavel: ", $("#responsavel").val());
-		msg += validador("Cnpj: ", $("#cnpj").val());
-		msg += validador("Email: ", $("#email").val());
-		msg += validador("Telefone comercial: ", $("#telcomercial").val());
-		msg += validador("Telefone responsavel: ", $("#telresponsavel").val());
-		msg += validador("Estado: ", $("#estado").val());
-		msg += validador("Cidade: ", $("#cidade").val());
-		msg += validador("Bairro: ", $("#bairro").val());
-		msg += validador("Rua: ", $("#rua").val());
-		msg += validador("Complemento: ", $("#complemento").val());
-		msg += validador("Numero: ", $("#numero").val());
+		msg+=validaVazio("Razao Social: ", $("#razsocial").val());
+		//msg+=validaVazio("Responsavel: ", $("#responsavel").val());
+		msg += validaVazio("Cnpj: ", $("#cnpj").val());
+		msg += validaVazio("Email: ", $("#email").val());
+		msg += validaVazio("Telefone comercial: ", $("#telcomercial").val());
+		msg += validaVazio("Telefone responsavel: ", $("#telresponsavel").val());
+		msg += validaVazio("Estado: ", $("#estado").val());
+		msg += validaVazio("Cidade: ", $("#cidade").val());
+		msg += validaVazio("Bairro: ", $("#bairro").val());
+		msg += validaVazio("Rua: ", $("#rua").val());
+		msg += validaVazio("Complemento: ", $("#complemento").val());
+		msg += validaVazio("Numero: ", $("#numero").val());
 
 		if(msg == ""){
 
@@ -168,4 +167,16 @@ $(document).ready(function(){
             bootbox.alert("Caro usuário, gentileza verificar os seguintes campos: <br> " + msg);
         }
 	}
+	
+	//  ====-----------------
+	
+	validaVazio = function ( campo, valor ) {
+		
+        var msg = "";
+
+        if(valor == null ||  valor.trim() == ""){
+            msg += "- " + campo + " Está Vazio. </br>";
+        }
+        return msg;
+    };
 });

@@ -29,11 +29,11 @@ public class HConnect {
 	public EntityManagerFactory connect() {
 		try {
 
-			if (connection != null && connection.isOpen())
+			if (connection != null && connection.isOpen()){
 				return connection;
-			else
-				connection = Persistence.createEntityManagerFactory("CEPE");
-
+			}else{
+				connection = Persistence.createEntityManagerFactory("ongcepe");
+			}
 			return connection;
 		} catch (Exception e) {
 			e.printStackTrace();

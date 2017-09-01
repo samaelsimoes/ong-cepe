@@ -46,33 +46,27 @@ public class PessoaFactory extends ObjMapper {
 
 			if (tipo != 0) {
 
-				if (tipo.equals(PessoaType.PF.getIndex())) {
+				if (tipo.equals(PessoaType.PF.getIndex()))
 					classe = PessoaFisica.class;
-				}
 
-				if (tipo.equals(PessoaType.PJ.getIndex())) {
+				if (tipo.equals(PessoaType.PJ.getIndex()))
 					classe = PessoaJuridica.class;
-				}
 
-				if (tipo.equals(PessoaType.BENEFIC.getIndex())) {
+				if (tipo.equals(PessoaType.BENEFIC.getIndex()))
 					classe = Beneficiario.class;
-				}
 
-				if (tipo.equals(PessoaType.DOADOR_PF.getIndex())) {
+				if (tipo.equals(PessoaType.DOADOR_PF.getIndex()))
 					classe = DoadorPf.class;
-				}
 
-				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex())) {
+				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex()))
 					classe = DoadorPj.class;
-				}
 
-				if (tipo.equals(PessoaType.ATLETA.getIndex())) {
+				if (tipo.equals(PessoaType.ATLETA.getIndex()))
 					classe = PessoaType.class;
-				}
 
-				if (tipo.equals(PessoaType.PATROCIN.getIndex())) {
+				if (tipo.equals(PessoaType.PATROCIN.getIndex()))
 					classe = Patrocinador.class;
-				}
+				
 
 				if (classe != null) {
 					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr,

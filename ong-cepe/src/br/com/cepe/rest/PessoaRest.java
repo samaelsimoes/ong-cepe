@@ -52,13 +52,8 @@ public class PessoaRest extends ObjMapper {
 	public String pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
-			// TESTE ////////////////////////
 			Pessoa pessoa = new Pessoa();
-			pessoa.setNome(nome);
-			return getJson(pessoa);
-			
-			///----------------------- DEU CERTO.... não tem nada de errado com o rest ;P
-			//return getJson(pessoaService.pesquisarNome(nome));
+			return getJson(pessoaService.pesquisarNome(nome));
 
 		} catch (Throwable e) {
 			e.printStackTrace();

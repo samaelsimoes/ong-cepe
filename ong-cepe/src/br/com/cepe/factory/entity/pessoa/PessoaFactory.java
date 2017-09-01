@@ -29,7 +29,6 @@ public class PessoaFactory extends ObjMapper {
 	 * 
 	 * @param tipo
 	 * @return Pessoa
-	 * @author Eduardo C. Campigoto
 	 */
 
 	public PessoaFactory() {
@@ -44,45 +43,52 @@ public class PessoaFactory extends ObjMapper {
 			Integer tipo = objNode.get("tipo").asInt();
 			Class<?> classe = null;
 
-			//if (tipo != 0) {
-
+			if (tipo != null) {
+				//PF TIPE = 0
 				if (tipo.equals(PessoaType.PF.getIndex())) {
+
 					classe = PessoaFisica.class;
 				}
-
+				//PJ TIPE == 1
 				if (tipo.equals(PessoaType.PJ.getIndex())) {
+					
 					classe = PessoaJuridica.class;
 				}
-
-				if (tipo.equals(PessoaType.BENEFIC.getIndex())) {
-					classe = Beneficiario.class;
-				}
-
+				//PF TIPE = 2
 				if (tipo.equals(PessoaType.DOADOR_PF.getIndex())) {
+					
 					classe = DoadorPf.class;
 				}
-
+				//PJ  TIPE == 3
 				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex())) {
+					
 					classe = DoadorPj.class;
 				}
 
 				if (tipo.equals(PessoaType.ATLETA.getIndex())) {
+					
 					classe = PessoaType.class;
 				}
 
 				if (tipo.equals(PessoaType.PATROCIN.getIndex())) {
+					
 					classe = Patrocinador.class;
 				}
-
+				//PJ TIPE = 5
+				if (tipo.equals(PessoaType.BENEFIC.getIndex())) {
+					
+					classe = Beneficiario.class;
+				}
 				if (classe != null) {
-					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr,
-							classe);
+					
+					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);
 					this.pessoas.add(obj);
 				} else {
+
 					throw new GlobalException(
-							"Erro de factory na classe Pessoa");
+					"Erro de factory na classe Pessoa");
 				}
-			//}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -159,7 +159,7 @@ $(document).ready(function(){
             	var dadosFS= new Object();
             	
             	dadosFS.nome=$("#nome").val();
-            	dadosFS.tipo=0;
+            	dadosFS.tipo="";
             	//dadosFS.sobreNome=$("#sobreNome").val();
             	dadosFS.cpf=$("#cpf").val();
             	dadosFS.rg=$("#rg").val();

@@ -164,7 +164,7 @@ $(document).ready(function(){
             	dadosFS.cpf=$("#cpf").val();
             	dadosFS.rg=$("#rg").val();
             	dadosFS.email=$("#email").val();
-            	dadosFS.dt_nasc=$("#datanascimento").val();
+            	dadosFS.nascimento=$("#datanascimento").val() + " T00:00:00";
             	dadosFS.fone_res=$("#fone_res").val();
             	dadosFS.fone_cel=$("#fone_cel").val();
             	dadosFS.rua=$("#rua").val();

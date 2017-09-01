@@ -54,7 +54,7 @@ public class PessoaRest extends ObjMapper {
 
 		try {
 			
-			System.out.println("OKEY");
+			//System.out.println("OKEY");
 			
 			Pessoa pessoa = new Pessoa();
 			pessoa.setNome(nome);

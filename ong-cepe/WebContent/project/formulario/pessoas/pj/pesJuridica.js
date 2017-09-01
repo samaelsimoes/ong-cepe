@@ -95,16 +95,17 @@ $(document).ready(function(){
 	// =====----------------------------------------------------------------------------------------------=====
 	cadspesjuridica = function(){
 
-		var msg, exp = "";
+		var msg  = "";
+		var exp = "";
 		
 		msg+=validaVazio("Razao Social: ", $("#razsocial").val());
-		//msg+=validaVazio("Responsavel: ", $("#responsavel").val());
+		msg+=validaVazio("Responsavel: ", $("#responsavel").val());
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone comercial: ", $("#telcomercial").val());
 		msg += validaVazio("Telefone responsavel: ", $("#telresponsavel").val());
-		msg += validaVazio("Estado: ", $("#estado").val());
-		msg += validaVazio("Cidade: ", $("#cidade").val());
+		//msg += validaVazio("Estado: ", $("#estado").val());
+		//msg += validaVazio("Cidade: ", $("#cidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());
 		msg += validaVazio("Rua: ", $("#rua").val());
 		msg += validaVazio("Complemento: ", $("#complemento").val());
@@ -134,6 +135,7 @@ $(document).ready(function(){
             	var dadosPJ= new Object();
             	
             	dadosPJ.nome=$("#razsocial").val();
+            	dadosPJ.tipo=1;
             	//dadosPesFis.responsavel=$("#responsavel").val();
             	dadosPJ.cnpj=$("#cnpj").val();
             	dadosPJ.email=$("#email").val();
@@ -145,12 +147,11 @@ $(document).ready(function(){
             	dadosPJ.rua=$("#rua").val();
             	dadosPJ.complemento=$("#complemento").val();
             	dadosPJ.numero=$("#numero").val();
-            	dadosPJ.tipo=5;
             	
             	dadosPJ.cep=$("#cep").val(); 
             	
             	var cfg = {
-        			url: ONG.contextPath +"/rest/pessoa/adicionar",
+        			url: ONG.contextPath +"/rest/pessoa/add",
         			data: dadosPJ,
         			success: function(listPesj,busca){										
         				buscapesJuridica(listPesj,busca);

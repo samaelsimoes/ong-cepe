@@ -36,7 +36,7 @@ public class Pessoa {
 	private String email;
 	private Long foneFixo;
 	private Long foneMovel;
-
+	//private  cpf
 	private Long cep;
 	private String rua;
 	private int numero;

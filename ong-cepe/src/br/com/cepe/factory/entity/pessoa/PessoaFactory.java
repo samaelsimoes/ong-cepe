@@ -44,7 +44,7 @@ public class PessoaFactory extends ObjMapper {
 			Integer tipo = objNode.get("tipo").asInt();
 			Class<?> classe = null;
 
-			if (tipo != 0) {
+			//if (tipo != 0) {
 
 				if (tipo.equals(PessoaType.PF.getIndex())) {
 					classe = PessoaFisica.class;
@@ -82,7 +82,7 @@ public class PessoaFactory extends ObjMapper {
 					throw new GlobalException(
 							"Erro de factory na classe Pessoa");
 				}
-			}
+			//}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

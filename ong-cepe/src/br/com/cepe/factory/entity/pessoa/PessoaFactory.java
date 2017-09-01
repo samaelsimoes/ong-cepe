@@ -10,6 +10,7 @@ import java.util.List;
 import org.codehaus.jackson.node.ObjectNode;
 
 import br.com.cepe.datatype.PessoaType;
+import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
 import br.com.cepe.entity.pojo.pessoa.DoadorPj;
@@ -44,7 +45,7 @@ public class PessoaFactory extends ObjMapper {
 			Integer tipo = objNode.get("tipo").asInt();
 			Class<?> classe = null;
 
-			if (tipo != 0) {
+			if (tipo != 0 && tipo != null) {
 
 				if (tipo.equals(PessoaType.PF.getIndex()))
 					classe = PessoaFisica.class;
@@ -62,7 +63,7 @@ public class PessoaFactory extends ObjMapper {
 					classe = DoadorPj.class;
 
 				if (tipo.equals(PessoaType.ATLETA.getIndex()))
-					classe = PessoaType.class;
+					classe = Atleta.class;
 
 				if (tipo.equals(PessoaType.PATROCIN.getIndex()))
 					classe = Patrocinador.class;

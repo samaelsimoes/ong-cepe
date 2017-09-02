@@ -39,13 +39,20 @@ public class PessoaFactory extends ObjMapper {
 
 	public PessoaFactory(String pessoaStr) throws GlobalException {
 		ObjectNode objNode;
+		Class<?> classe = null;
+		String tipoStr = "";
+
 		try {
 			objNode = getObject().readValue(pessoaStr, ObjectNode.class);
+			if (objNode != null)
+				tipoStr = objNode.get("tipo").asText();
+			
+			if(tipoStr.equals("") || tipoStr == null)
+				throw new GlobalException("Erro de factory na classe Pessoa");
 
-			Integer tipo = objNode.get("tipo").asInt();
-			Class<?> classe = null;
 
-			if (tipo != 0 && tipo != null) {
+			if (!tipoStr.equalsIgnoreCase("") && tipoStr != null) {
+				Integer tipo = Integer.parseInt(tipoStr);
 
 				if (tipo.equals(PessoaType.PF.getIndex()))
 					classe = PessoaFisica.class;
@@ -67,22 +74,23 @@ public class PessoaFactory extends ObjMapper {
 
 				if (tipo.equals(PessoaType.PATROCIN.getIndex()))
 					classe = Patrocinador.class;
-				
 
 				if (classe != null) {
-					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr,
-							classe);
+					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);
 					this.pessoas.add(obj);
-				} else {
-					throw new GlobalException(
-							"Erro de factory na classe Pessoa");
-				}
+				} 
+				
+			} else {
+				throw new GlobalException("Erro de factory na classe Pessoa");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
+	
+	
 	public List<Pessoa> getPessoasLista() {
 		return pessoas;
 	}

@@ -5,7 +5,7 @@ package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.DiscriminatorValue;
 
-@DiscriminatorValue(value = "3")
+@DiscriminatorValue(value = "6")
 public class Beneficiario extends PessoaFisica{
 
 }

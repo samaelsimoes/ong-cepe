@@ -10,6 +10,7 @@ import java.util.List;
 import org.codehaus.jackson.node.ObjectNode;
 
 import br.com.cepe.datatype.PessoaType;
+import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
 import br.com.cepe.entity.pojo.pessoa.DoadorPj;
@@ -43,6 +44,7 @@ public class PessoaFactory extends ObjMapper {
 			Integer tipo = objNode.get("tipo").asInt();
 			Class<?> classe = null;
 
+<<<<<<< HEAD
 			if (tipo != null) {
 				//PF TIPE = 0
 				if (tipo.equals(PessoaType.PF.getIndex())) {
@@ -62,9 +64,26 @@ public class PessoaFactory extends ObjMapper {
 				//PJ  TIPE == 3
 				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex())) {
 					
-					classe = DoadorPj.class;
-				}
+=======
+			if (tipo != 0 && tipo != null) {
 
+				if (tipo.equals(PessoaType.PF.getIndex()))
+					classe = PessoaFisica.class;
+
+				if (tipo.equals(PessoaType.PJ.getIndex()))
+					classe = PessoaJuridica.class;
+
+				if (tipo.equals(PessoaType.BENEFIC.getIndex()))
+					classe = Beneficiario.class;
+
+				if (tipo.equals(PessoaType.DOADOR_PF.getIndex()))
+					classe = DoadorPf.class;
+
+				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex()))
+>>>>>>> e0ac1fd0fd98d087041d87eaaa1322714dcc285f
+					classe = DoadorPj.class;
+
+<<<<<<< HEAD
 				if (tipo.equals(PessoaType.ATLETA.getIndex())) {
 					
 					classe = PessoaType.class;
@@ -79,6 +98,15 @@ public class PessoaFactory extends ObjMapper {
 					
 					classe = Beneficiario.class;
 				}
+=======
+				if (tipo.equals(PessoaType.ATLETA.getIndex()))
+					classe = Atleta.class;
+
+				if (tipo.equals(PessoaType.PATROCIN.getIndex()))
+					classe = Patrocinador.class;
+				
+
+>>>>>>> e0ac1fd0fd98d087041d87eaaa1322714dcc285f
 				if (classe != null) {
 					
 					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);

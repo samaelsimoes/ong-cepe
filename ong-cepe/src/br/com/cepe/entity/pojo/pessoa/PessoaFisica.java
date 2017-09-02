@@ -40,5 +40,7 @@ private Date nascimento;
 
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
+
 	}
+
 }

@@ -5,15 +5,15 @@ $(document).ready(function(){
 
 	chamforcadpesfisica = function(){
 
-		$('#pesstipo').load('formulario/pessoas/pf/cadpf.html');
+		$('#pesstipo').load('formulario/pessoas/cadpesfisica.html');
 	}
 	chamforcadspesjuri = function(){
 
-		$('#pesstipo').load('formulario/pessoas/pj/cadpj.html');
+		$('#pesstipo').load('formulario/pessoas/cadspesjuridica.html');
 	}
 	chamacadsbeneass = function(){
 
-		$('#pesstipo').load('formulario/pessoas/beneass/cadbeneass.html');
+		$('#pesstipo').load('formulario/pessoas/cadsbeneass.html');
 	}
 });
 
@@ -23,15 +23,15 @@ var items = document.getElementById('tipopessoa');
 	
 	var valor =	this.value // o valor que procuras é: this.value
 
-	if(valor == 0){	
+	if(valor == 0){
 		
-		$('#pesstipo').load('formulario/pessoas/pf/gridpf.html');
+		$('#pesstipo').load('formulario/pessoas/relpesfisica.html');
 	}else if(valor == 1 ){
 		
-		$('#pesstipo').load('formulario/pessoas/pj/gridpj.html');
+		$('#pesstipo').load('formulario/pessoas/relpesjuridica.html');
 	}else if(valor == 2){
 		
-		$('#pesstipo').load('formulario/pessoas/beneass/gridbeneass.html');
+		$('#pesstipo').load('formulario/pessoas/relbeneass.html');
 	}
 });
 

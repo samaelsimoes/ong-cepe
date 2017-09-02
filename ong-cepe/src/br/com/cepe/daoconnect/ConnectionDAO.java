@@ -19,6 +19,7 @@ public abstract class ConnectionDAO<T> extends HConnect{
 	public String getEntityName(){
 		return getSuperClass().getSimpleName();
 	}
+	
 
 	public Class<T> getEmClass(int id){
 		Class<T> classe = getSuperClass();

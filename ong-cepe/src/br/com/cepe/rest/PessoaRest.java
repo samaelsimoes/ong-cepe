@@ -35,7 +35,6 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {
-
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
@@ -43,22 +42,17 @@ public class PessoaRest extends ObjMapper {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String pesquisarNome(@PathParam("nome") String nome) {
-
 		try {
-			Pessoa pessoa = new Pessoa();
 			return getJson(pessoaService.pesquisarNome(nome));
-
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 

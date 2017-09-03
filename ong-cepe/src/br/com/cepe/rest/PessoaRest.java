@@ -29,6 +29,7 @@ public class PessoaRest extends ObjMapper {
 	 *            - Json da entidade pessoa.
 	 * **/
 	@POST
+	@Path("/add")
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {
@@ -38,18 +39,16 @@ public class PessoaRest extends ObjMapper {
 
 		} catch (Throwable e) {
 			e.printStackTrace();
+			throw new GlobalException("deu erro ", e);
 		}
 	}
 
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
-<<<<<<< HEAD
-	public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
+	//public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
 
-=======
 	public String pesquisarNome(@PathParam("nome") String nome) {
->>>>>>> 6eeb2a0e1d6e93c7e68a7c5fec02f3182eb2e02a
 		try {
 			return getJson(pessoaService.pesquisarNome(nome));
 		} catch (Throwable e) {

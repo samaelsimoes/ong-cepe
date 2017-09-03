@@ -1,7 +1,7 @@
 //ONG.pf = new Object(); //verificar colocar padrao em todos metodos ajustar caminhos
 
 $(document).ready(function(){
-	
+	/*
 	consultapesf=function(){
 		
 	    var valorBusca=$("#conspesf").val();	    
@@ -98,7 +98,7 @@ $(document).ready(function(){
 	}
 	
 	buscapefisica(undefined, "");
-
+*/
 	// ------------------------------------------------ ==================================== ------------------------------ ========================================
 	
 	cadpesfisica = function(){
@@ -159,7 +159,7 @@ $(document).ready(function(){
             	var dadosFS= new Object();
             	
             	dadosFS.nome=$("#nome").val();
-            	dadosFS.tipo="";
+            	dadosFS.tipo="1";
             	//dadosFS.sobreNome=$("#sobreNome").val();
             	dadosFS.cpf=$("#cpf").val();
             	dadosFS.rg=$("#rg").val();
@@ -180,8 +180,10 @@ $(document).ready(function(){
 	     			url: ONG.contextPath + "/rest/pessoa/add",
 	     			data: dadosFS,
 	     			
-	     			success: function(listPesj,busca){
-	     				buscapesJuridica(listPesj,busca);
+	     			success: function(msg){
+	     				alert("deu certo o cadastro");
+	     				bootbox.alert("Cadastrado com sucesso " + msg);
+	     				//buscapesJuridica(listPesj,busca);
 	     			},
 	     			error: function(err){				
 	     				bootbox.alert("Erro ao cadastrar Pessoa, entrar em contato com o Administrador se o problema persistir!");

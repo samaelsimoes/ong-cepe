@@ -81,6 +81,7 @@ public class PessoaFactory extends ObjMapper {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new GlobalException("Erro de factory na classe Pessoa");
 		}
 	}
 

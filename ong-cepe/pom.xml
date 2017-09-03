@@ -38,6 +38,15 @@
   <dependencies>
   
   
+    <!-- #### JAVAX PERSISTENCE API 1.0.2 ### -->
+  <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
+	<dependency>
+	    <groupId>javax.persistence</groupId>
+	    <artifactId>persistence-api</artifactId>
+	    <version>1.0.2</version>
+	</dependency>
+  
+  
   <!-- #### ECLIPSELINK ### -->
   	<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
      <dependency>
@@ -58,7 +67,7 @@
 	<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
 	<dependency>
 	    <groupId>org.glassfish.jersey.containers</groupId>
-	    <artifactId>jersey-container-servlet</artifactId>
+	    <artifactId>jersey-container-servlet</artifactId>	
 	    <version>2.25.1</version>
 	</dependency>
 		

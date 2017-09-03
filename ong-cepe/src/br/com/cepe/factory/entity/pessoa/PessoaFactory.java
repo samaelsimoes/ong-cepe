@@ -55,7 +55,6 @@ public class PessoaFactory extends ObjMapper {
 				//type = 1 
 				if (tipo == PessoaType.PF.getIndex())
 					classe = PessoaFisica.class;
-<<<<<<< HEAD
 				
 				//type = 2
 				if (tipo == PessoaType.PJ.getIndex())
@@ -70,8 +69,7 @@ public class PessoaFactory extends ObjMapper {
 					classe = DoadorPj.class;
 				
 				// type = 5
-				if (tipo == PessoaType.PATROCIN.getIndex())
-=======
+				//if (tipo == PessoaType.PATROCIN.getIndex())
 
 				else if (tipo == PessoaType.PJ.getIndex())
 					classe = PessoaJuridica.class;
@@ -89,7 +87,6 @@ public class PessoaFactory extends ObjMapper {
 					classe = Atleta.class;
 
 				else if (tipo == PessoaType.PATROCIN.getIndex())
->>>>>>> 6e24ad6681dc41898884ed90a6db6c81a55a4b41
 					classe = Patrocinador.class;
 				
 				//type = 6

@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
@@ -33,27 +35,29 @@ public class PessoaRest extends ObjMapper {
 	 * **/
 	@POST
 	@Consumes("application/*")
-	public void adicionar(String pessoaStr) throws GlobalException {
+	public ResponseBuilder adicionar(String pessoaStr) throws GlobalException {
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
-
+			return Response.status(1);
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public String pesquisarNome(@PathParam("nome") String nome) {
+	public String pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
 		try {
 			return getJson(pessoaService.pesquisarNome(nome));
 		} catch (Throwable e) {
 			e.printStackTrace();
+			throw new GlobalException("Erro ao fazer a consulta por nome");
 		}
-		return null;
 	}
 
 	@PUT
@@ -63,15 +67,23 @@ public class PessoaRest extends ObjMapper {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).alterar();
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
+			throw new GlobalException("Erro ao fazer a alteração do usuário");
 		}
 	}
 
 	@DELETE
 	@Path("id")
-	public void excluir(@PathParam("id") int id) {
+	public ResponseBuilder excluir(@PathParam("id") int id) throws Exception {
+		try{
 		pessoaService.excluir(id);
+		}catch(Throwable e){
+			e.printStackTrace();
+			throw new Exception("Erro ao deletar usuário");
+		}
+		return null;
 	}
 
 }

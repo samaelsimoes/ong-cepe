@@ -19,7 +19,7 @@
        
        		<!-- configurações do hibernate -->
        		<!-- MysQL 5.5 -->
-       		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL55Dialect"/>
+       		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL56Dialect"/>
        		<property name="hibernate.show_sql" value="true"/>
        		<property name="hibernate.format_sql" value="true"/>
        		

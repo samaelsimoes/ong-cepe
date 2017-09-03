@@ -2,13 +2,14 @@
 
 $(document).ready(function(){
 	
-	conspesfisi=function(){
-	    var valorBusca=$("#conspesf").val();
+	consultapesf=function(){
+		
+	    var valorBusca=$("#conspesf").val();	    
 	    buscapefisica(undefined,valorBusca);
 	}		
 	
 	buscapefisica = function(listPesF, busca){
-		
+
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
@@ -77,7 +78,7 @@ $(document).ready(function(){
 				if(busca == ""){						
 					busca = null;
 				}
-				
+				debugger;
 				var cfg ={
 					url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
 					success: function(listPesF,busca){									

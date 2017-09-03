@@ -23,6 +23,7 @@ var items = document.getElementById('tipopessoa');
 	
 	var valor =	this.value // o valor que procuras é: this.value
 
+	console.log(valor);
 	if(valor == 0){	
 		
 		$('#pesstipo').load('formulario/pessoas/pf/gridpf.html');

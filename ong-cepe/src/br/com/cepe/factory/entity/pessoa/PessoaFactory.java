@@ -1,6 +1,3 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
 package br.com.cepe.factory.entity.pessoa;
 
 import java.io.IOException;
@@ -26,7 +23,7 @@ public class PessoaFactory extends ObjMapper {
 
 	/**
 	 * Retorna objeto Pessoa de acordo com o tipo passado por parametro, podendo
-	 * ser pessoa fÃ­sica ou jurÃ­dica
+	 * ser pessoa física ou jurídica
 	 * 
 	 * @param tipo
 	 * @return Pessoa
@@ -38,34 +35,20 @@ public class PessoaFactory extends ObjMapper {
 
 	public PessoaFactory(String pessoaStr) throws GlobalException {
 		ObjectNode objNode;
+		Class<?> classe = null;
+		String tipoStr = "";
+
 		try {
 			objNode = getObject().readValue(pessoaStr, ObjectNode.class);
+			if (objNode != null)
+				tipoStr = objNode.get("tipo").asText();
+			
+			if(tipoStr.equals("") || tipoStr == null)
+				throw new GlobalException("Erro de factory na classe Pessoa");
 
-			Integer tipo = objNode.get("tipo").asInt();
-			Class<?> classe = null;
 
-<<<<<<< HEAD
-			if (tipo != null) {
-				//PF TIPE = 0
-				if (tipo.equals(PessoaType.PF.getIndex())) {
-
-					classe = PessoaFisica.class;
-				}
-				//PJ TIPE == 1
-				if (tipo.equals(PessoaType.PJ.getIndex())) {
-					
-					classe = PessoaJuridica.class;
-				}
-				//PF TIPE = 2
-				if (tipo.equals(PessoaType.DOADOR_PF.getIndex())) {
-					
-					classe = DoadorPf.class;
-				}
-				//PJ  TIPE == 3
-				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex())) {
-					
-=======
-			if (tipo != 0 && tipo != null) {
+			if (!tipoStr.equalsIgnoreCase("") && tipoStr != null) {
+				Integer tipo = Integer.parseInt(tipoStr);
 
 				if (tipo.equals(PessoaType.PF.getIndex()))
 					classe = PessoaFisica.class;
@@ -80,48 +63,30 @@ public class PessoaFactory extends ObjMapper {
 					classe = DoadorPf.class;
 
 				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex()))
->>>>>>> e0ac1fd0fd98d087041d87eaaa1322714dcc285f
 					classe = DoadorPj.class;
 
-<<<<<<< HEAD
-				if (tipo.equals(PessoaType.ATLETA.getIndex())) {
-					
-					classe = PessoaType.class;
-				}
-
-				if (tipo.equals(PessoaType.PATROCIN.getIndex())) {
-					
-					classe = Patrocinador.class;
-				}
-				//PJ TIPE = 5
-				if (tipo.equals(PessoaType.BENEFIC.getIndex())) {
-					
-					classe = Beneficiario.class;
-				}
-=======
 				if (tipo.equals(PessoaType.ATLETA.getIndex()))
 					classe = Atleta.class;
 
 				if (tipo.equals(PessoaType.PATROCIN.getIndex()))
 					classe = Patrocinador.class;
-				
 
->>>>>>> e0ac1fd0fd98d087041d87eaaa1322714dcc285f
 				if (classe != null) {
-					
 					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);
 					this.pessoas.add(obj);
-				} else {
-
-					throw new GlobalException(
-					"Erro de factory na classe Pessoa");
-				}
+				} 
+				
+			} else {
+				throw new GlobalException("Erro de factory na classe Pessoa");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
+	
+	
 	public List<Pessoa> getPessoasLista() {
 		return pessoas;
 	}

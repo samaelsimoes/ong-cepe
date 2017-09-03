@@ -1,6 +1,4 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
+
 package br.com.cepe.rest;
 
 import javax.ws.rs.Consumes;
@@ -18,6 +16,8 @@ import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.pessoa.PessoaFactory;
 import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.PessoaService;
+import javax.ws.rs.core.Response;
+
 
 @Path("/pessoa")
 public class PessoaRest extends ObjMapper {
@@ -50,18 +50,20 @@ public class PessoaRest extends ObjMapper {
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public String pesquisarNome(@PathParam("nome") String nome) {
+	public Response pesquisarNome(@PathParam("nome") String nome) {
 
 		try {
 			
-			Pessoa pessoa = new Pessoa();
-			return getJson(pessoaService.pesquisarNome(nome));
-
+			System.out.println(nome);
+			
+			//Pessoa pessoa = new Pessoa();			
+			 
+			//getJson(pessoaService.pesquisarNome(nome));
+			return null;
 		} catch (Throwable e) {
 			e.printStackTrace();
-		}
-
-		return null;
+			return null; // mensagem de erro
+		}		
 	}
 
 	@PUT

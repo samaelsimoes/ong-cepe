@@ -1,4 +1,3 @@
-
 package br.com.cepe.rest;
 
 import javax.ws.rs.Consumes;
@@ -16,8 +15,6 @@ import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.pessoa.PessoaFactory;
 import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.PessoaService;
-import javax.ws.rs.core.Response;
-
 
 @Path("/pessoa")
 public class PessoaRest extends ObjMapper {
@@ -32,7 +29,6 @@ public class PessoaRest extends ObjMapper {
 	 *            - Json da entidade pessoa.
 	 * **/
 	@POST
-	@Path("/add")
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {
@@ -50,25 +46,22 @@ public class PessoaRest extends ObjMapper {
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response pesquisarNome(@PathParam("nome") String nome) {
+	public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
 
 		try {
-			
-			System.out.println(nome);
-			
-			//Pessoa pessoa = new Pessoa();			
-			 
-			//getJson(pessoaService.pesquisarNome(nome));
-			return null;
+			Pessoa pessoa = new Pessoa();
+			return getJson(pessoaService.pesquisarNome(nome));
+
 		} catch (Throwable e) {
 			e.printStackTrace();
-			return null; // mensagem de erro
-		}		
+		}
+
+		return null;
 	}
 
 	@PUT
 	@Consumes("application/*")
-	public void alterar(String pessoaStr) throws GlobalException {
+	public void alterar(String pessoaStr) throws GlobalException { 
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();

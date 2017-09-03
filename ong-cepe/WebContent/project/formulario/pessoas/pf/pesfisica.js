@@ -78,7 +78,6 @@ $(document).ready(function(){
 				if(busca == ""){						
 					busca = null;
 				}
-				debugger;
 				var cfg ={
 					url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
 					success: function(listPesF,busca){									

@@ -57,22 +57,22 @@ public class PessoaFactory extends ObjMapper {
 				if (tipo == PessoaType.PF.getIndex())
 					classe = PessoaFisica.class;
 
-				if (tipo == PessoaType.PJ.getIndex())
+				else if (tipo == PessoaType.PJ.getIndex())
 					classe = PessoaJuridica.class;
 
-				if (tipo == PessoaType.BENEFIC.getIndex())
+				else if (tipo == PessoaType.BENEFIC.getIndex())
 					classe = Beneficiario.class;
 
-				if (tipo == PessoaType.DOADOR_PF.getIndex())
+				else if (tipo == PessoaType.DOADOR_PF.getIndex())
 					classe = DoadorPf.class;
 
-				if (tipo == PessoaType.DOADOR_PJ.getIndex())
+				else if (tipo == PessoaType.DOADOR_PJ.getIndex())
 					classe = DoadorPj.class;
 
-				if (tipo == PessoaType.ATLETA.getIndex())
+				else if (tipo == PessoaType.ATLETA.getIndex())
 					classe = Atleta.class;
 
-				if (tipo == PessoaType.PATROCIN.getIndex())
+				else if (tipo == PessoaType.PATROCIN.getIndex())
 					classe = Patrocinador.class;
 
 				if (classe != null) {

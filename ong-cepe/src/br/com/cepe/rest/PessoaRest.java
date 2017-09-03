@@ -29,7 +29,6 @@ public class PessoaRest extends ObjMapper {
 	 *            - Json da entidade pessoa.
 	 * **/
 	@POST
-	@Path("/add")
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {

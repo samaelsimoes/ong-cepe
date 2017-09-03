@@ -177,7 +177,7 @@ $(document).ready(function(){
             	
 	     		var cfg = {
 	     			
-	     			url: ONG.contextPath + "/rest/pessoa/add",
+	     			url: ONG.contextPath + "/rest/pessoa/",
 	     			data: dadosFS,
 	     			
 	     			success: function(msg){

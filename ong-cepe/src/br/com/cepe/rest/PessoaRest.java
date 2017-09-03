@@ -32,7 +32,6 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public void adicionar(String pessoaStr) throws GlobalException {
 		try {
-
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
@@ -40,22 +39,22 @@ public class PessoaRest extends ObjMapper {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
+<<<<<<< HEAD
 	public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
 
+=======
+	public String pesquisarNome(@PathParam("nome") String nome) {
+>>>>>>> 6eeb2a0e1d6e93c7e68a7c5fec02f3182eb2e02a
 		try {
-			Pessoa pessoa = new Pessoa();
 			return getJson(pessoaService.pesquisarNome(nome));
-
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 

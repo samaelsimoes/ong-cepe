@@ -15,7 +15,7 @@ private PessoaDAO pessoaDAO = new PessoaDAO();
 Pessoa pessoa;
 
 	public PessoaService(Pessoa obj){
-
+		this.pessoa = obj;
 	}
 	
 	public PessoaService(){

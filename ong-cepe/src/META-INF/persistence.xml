@@ -15,7 +15,7 @@
 	       	<property name="javax.persistence.jdbc.password" value="master"></property>
 	
 			<!-- automatiza updates do banco e criação de tabelas -->
-       		<property name="hibernate.hbm2ddl.auto" value="update"></property>	       	
+       		<property name="hibernate.hbm2ddl.auto" value="create"></property>	       	
        
        		<!-- configurações do hibernate -->
        		<!-- MysQL 5.6 -->

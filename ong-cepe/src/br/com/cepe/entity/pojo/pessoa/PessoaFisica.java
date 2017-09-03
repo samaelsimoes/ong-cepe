@@ -1,6 +1,4 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
+
 package br.com.cepe.entity.pojo.pessoa;
 
 import java.util.Date;
@@ -15,6 +13,7 @@ import javax.persistence.TemporalType;
 public class PessoaFisica extends Pessoa {
 private Long rg;
 private Long cpf;
+
 @Temporal(TemporalType.DATE)
 private Date nascimento;
 

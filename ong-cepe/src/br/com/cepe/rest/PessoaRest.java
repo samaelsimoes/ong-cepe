@@ -37,25 +37,21 @@ public class PessoaRest extends ObjMapper {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).adicionar();
-			return Response.status(1);
-			
+
+			return Response.status(1);	
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new GlobalException("deu erro ", e);
 		}
-		return null;
 	}
 
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
-<<<<<<< HEAD
 	//public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
 
-	public String pesquisarNome(@PathParam("nome") String nome) {
-=======
+	//public String pesquisarNome(@PathParam("nome") String nome) {
 	public String pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
->>>>>>> a9354373a741748cee67a9016d3288c71bb0f417
 		try {
 			return getJson(pessoaService.pesquisarNome(nome));
 		} catch (Throwable e) {

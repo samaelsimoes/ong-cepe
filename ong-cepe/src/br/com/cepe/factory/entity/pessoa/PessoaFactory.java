@@ -38,7 +38,9 @@ public class PessoaFactory extends ObjMapper {
 		Class<?> classe = null;
 		int	tipo = 0;
 		try {
+			
 			objNode = getObject().readValue(pessoaStr, ObjectNode.class);
+			
 			if (objNode != null)
 				tipo = objNode.get("tipo").asInt();
 			else
@@ -49,28 +51,35 @@ public class PessoaFactory extends ObjMapper {
 
 
 			if (tipo != 0) {
-
+				
+				//type = 1 
 				if (tipo == PessoaType.PF.getIndex())
 					classe = PessoaFisica.class;
-
+				
+				//type = 2
 				if (tipo == PessoaType.PJ.getIndex())
 					classe = PessoaJuridica.class;
-
-				if (tipo == PessoaType.BENEFIC.getIndex())
-					classe = Beneficiario.class;
-
+				
+				//type = 3
 				if (tipo == PessoaType.DOADOR_PF.getIndex())
 					classe = DoadorPf.class;
-
+				
+				//type = 4
 				if (tipo == PessoaType.DOADOR_PJ.getIndex())
 					classe = DoadorPj.class;
-
-				if (tipo == PessoaType.ATLETA.getIndex())
-					classe = Atleta.class;
-
+				
+				// type = 5
 				if (tipo == PessoaType.PATROCIN.getIndex())
 					classe = Patrocinador.class;
-
+				
+				//type = 6
+				if (tipo == PessoaType.BENEFIC.getIndex())
+					classe = Beneficiario.class;
+				
+				// type 7
+				if (tipo == PessoaType.ATLETA.getIndex())
+					classe = Atleta.class;
+				
 				if (classe != null) {
 					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);
 					this.pessoas.add(obj);

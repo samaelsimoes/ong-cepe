@@ -158,22 +158,23 @@ $(document).ready(function(){
 
             	var dadosFS= new Object();
             	
-            	dadosFS.nome=$("#nome").val();
-            	dadosFS.tipo="1";
+            	dadosFS.nome = $("#nome").val();
+            	dadosFS.tipo = 1;
+            	dadosFS.status = 1;
             	//dadosFS.sobreNome=$("#sobreNome").val();
-            	dadosFS.cpf=$("#cpf").val();
-            	dadosFS.rg=$("#rg").val();
-            	dadosFS.email=$("#email").val();
-            	dadosFS.nascimento=$("#datanascimento").val() + " T00:00:00";
-            	dadosFS.fone_res=$("#fone_res").val();
-            	dadosFS.fone_cel=$("#fone_cel").val();
-            	dadosFS.rua=$("#rua").val();
-            	dadosFS.bairro=$("#bairro").val();
-            	dadosFS.numero=$("#numero").val();
-            	dadosFS.cep=$("#cep").val(); 
-            	dadosFS.complemento=$("#complemento").val();
-            	dadosFS.cidade=$("#cidade").val()
-            	dadosFS.estado=$("#estado").val();         	
+            	dadosFS.cpf = $("#cpf").val();
+            	dadosFS.rg = $("#rg").val();
+            	dadosFS.email = $("#email").val();
+            	dadosFS.nascimento = $("#datanascimento").val() + " T00:00:00";
+            	dadosFS.fone_res = $("#fone_res").val();
+            	dadosFS.fone_cel = $("#fone_cel").val();
+            	dadosFS.rua = $("#rua").val();
+            	dadosFS.bairro = $("#bairro").val();
+            	dadosFS.numero = $("#numero").val();
+            	dadosFS.cep = $("#cep").val(); 
+            	dadosFS.complemento = $("#complemento").val();
+            	dadosFS.cidade = $("#cidade").val()
+            	dadosFS.estado = $("#estado").val();         	
             	
 	     		var cfg = {
 	     			

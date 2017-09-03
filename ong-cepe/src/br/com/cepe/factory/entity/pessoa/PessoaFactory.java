@@ -36,39 +36,39 @@ public class PessoaFactory extends ObjMapper {
 	public PessoaFactory(String pessoaStr) throws GlobalException {
 		ObjectNode objNode;
 		Class<?> classe = null;
-		String tipoStr = "";
-
+		int	tipo = 0;
 		try {
 			objNode = getObject().readValue(pessoaStr, ObjectNode.class);
 			if (objNode != null)
-				tipoStr = objNode.get("tipo").asText();
+				tipo = objNode.get("tipo").asInt();
+			else
+				throw new GlobalException("Falha ao receber o atributo tipo de Pessoa");
 			
-			if(tipoStr.equals("") || tipoStr == null)
+			if(tipo == 0)
 				throw new GlobalException("Erro de factory na classe Pessoa");
 
 
-			if (!tipoStr.equalsIgnoreCase("") && tipoStr != null) {
-				Integer tipo = Integer.parseInt(tipoStr);
+			if (tipo != 0) {
 
-				if (tipo.equals(PessoaType.PF.getIndex()))
+				if (tipo == PessoaType.PF.getIndex())
 					classe = PessoaFisica.class;
 
-				if (tipo.equals(PessoaType.PJ.getIndex()))
+				if (tipo == PessoaType.PJ.getIndex())
 					classe = PessoaJuridica.class;
 
-				if (tipo.equals(PessoaType.BENEFIC.getIndex()))
+				if (tipo == PessoaType.BENEFIC.getIndex())
 					classe = Beneficiario.class;
 
-				if (tipo.equals(PessoaType.DOADOR_PF.getIndex()))
+				if (tipo == PessoaType.DOADOR_PF.getIndex())
 					classe = DoadorPf.class;
 
-				if (tipo.equals(PessoaType.DOADOR_PJ.getIndex()))
+				if (tipo == PessoaType.DOADOR_PJ.getIndex())
 					classe = DoadorPj.class;
 
-				if (tipo.equals(PessoaType.ATLETA.getIndex()))
+				if (tipo == PessoaType.ATLETA.getIndex())
 					classe = Atleta.class;
 
-				if (tipo.equals(PessoaType.PATROCIN.getIndex()))
+				if (tipo == PessoaType.PATROCIN.getIndex())
 					classe = Patrocinador.class;
 
 				if (classe != null) {

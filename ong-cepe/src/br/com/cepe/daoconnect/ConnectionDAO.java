@@ -11,7 +11,7 @@ import br.com.cepe.configuration.HConnect;
 
 public abstract class ConnectionDAO<T> extends HConnect{
 	protected EntityManager em;
-	
+
 	
 	
 	public ConnectionDAO(){

@@ -4,6 +4,7 @@
 package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -15,8 +16,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
-import br.com.cepe.datatype.PessoaType;
-import br.com.cepe.datatype.Status;
 import br.com.cepe.entity.pojo.endereco.Cidade;
 
 @Entity
@@ -28,9 +27,9 @@ public class Pessoa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	private PessoaType tipo;
-	private Status status;
+	@Column(name="tipo")
+	private int tipo;
+	private int status;
 
 	private String nome;
 	private String email;
@@ -54,19 +53,19 @@ public class Pessoa {
 		this.id = id;
 	}
 
-	public PessoaType getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(PessoaType tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 
-	public Status getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

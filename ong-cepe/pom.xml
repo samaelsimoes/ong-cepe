@@ -57,11 +57,19 @@
     
     <!-- #### MYSQL CONNECTOR 6.0.6  ### -->
 	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<!-- 	<dependency> -->
+<!-- 	    <groupId>mysql</groupId> -->
+<!-- 	    <artifactId>mysql-connector-java</artifactId> -->
+<!-- 	    <version>6.0.6</version> -->
+<!-- 	</dependency> -->
+
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 	<dependency>
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
-	    <version>6.0.6</version>
+	    <version>5.1.34</version>
 	</dependency>
+	
 
     <!-- #### JERSEY CONTAINER  SERVLET CORE 2.25.1  ### -->	
 	<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
@@ -108,19 +116,19 @@
 	
 	<!-- #### HIBERNATE COMMON ANNOTATIONS  5.0.1 ### -->
 	<!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
-	<dependency>
-	    <groupId>org.hibernate.common</groupId>
-	    <artifactId>hibernate-commons-annotations</artifactId>
-	    <version>5.0.1.Final</version>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 	    <groupId>org.hibernate.common</groupId> -->
+<!-- 	    <artifactId>hibernate-commons-annotations</artifactId> -->
+<!-- 	    <version>5.0.1.Final</version> -->
+<!-- 	</dependency> -->
 	
 	<!-- #### HIBERNATE ANNOTATIONS  3.5.6 ### -->
 	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
-	<dependency>
-	    <groupId>org.hibernate</groupId>
-	    <artifactId>hibernate-annotations</artifactId>
-	    <version>3.5.6-Final</version>
-	</dependency>
+<!-- 	<DEPENDENCY> -->
+<!-- 	    <GROUPID>ORG.HIBERNATE</GROUPID> -->
+<!-- 	    <ARTIFACTID>HIBERNATE-ANNOTATIONS</ARTIFACTID> -->
+<!-- 	    <VERSION>3.5.6-FINAL</VERSION> -->
+<!-- 	</DEPENDENCY> -->
 	
 
 		

@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +19,7 @@ import br.com.cepe.entity.pojo.endereco.Cidade;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.INTEGER)
-@DiscriminatorValue(value = "0")
+@DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.INTEGER)
 public class Pessoa {
 	
 	@Id

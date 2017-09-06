@@ -14,8 +14,7 @@ public class Estado {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nome;
-	private String uf;
-	
+	private String sigla;	
 	
 	public int getId() {
 		return id;
@@ -30,10 +29,10 @@ public class Estado {
 		this.nome = nome;
 	}
 	public String getUf() {
-		return uf;
+		return sigla;
 	}
 	public void setUf(String uf) {
-		this.uf = uf;
+		this.sigla = uf;
 	}
 	
 	

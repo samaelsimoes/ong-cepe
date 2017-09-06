@@ -19,14 +19,14 @@ import br.com.cepe.entity.pojo.endereco.Cidade;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.INTEGER)
+//@DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.INTEGER)
 public class Pessoa {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name="tipo")
-	private int tipo;
+	private Integer tipo;
 	private int status;
 
 	private String nome;

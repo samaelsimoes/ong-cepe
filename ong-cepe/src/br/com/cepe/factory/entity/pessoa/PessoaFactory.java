@@ -2,11 +2,11 @@ package br.com.cepe.factory.entity.pessoa;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.codehaus.jackson.node.ObjectNode;
 
-import br.com.cepe.datatype.PessoaType;
 import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
@@ -20,6 +20,7 @@ import br.com.cepe.factory.util.ObjMapper;
 
 public class PessoaFactory extends ObjMapper {
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
+<<<<<<< HEAD
 
 	/**
 	 * Retorna objeto Pessoa de acordo com o tipo passado por parametro, podendo
@@ -31,26 +32,43 @@ public class PessoaFactory extends ObjMapper {
 
 	public PessoaFactory() {
 
+=======
+	private Class<?> pessoaClasse;
+	private ObjectNode objNode;
+	
+	static final HashMap<Integer, Class<?>> PESSOA_CLASSES =  new HashMap<Integer, Class<?>>();
+	static{
+		PESSOA_CLASSES.put(0, null);
+		PESSOA_CLASSES.put(1, PessoaFisica.class);
+		PESSOA_CLASSES.put(2, PessoaJuridica.class);
+		PESSOA_CLASSES.put(3, DoadorPf.class);
+		PESSOA_CLASSES.put(4, DoadorPj.class);
+		PESSOA_CLASSES.put(5, Patrocinador.class);
+		PESSOA_CLASSES.put(6, Beneficiario.class);
+		PESSOA_CLASSES.put(7, Atleta.class);
+>>>>>>> a8157f5e48da82cffed964c4e8fd53f9e49e8146
 	}
+	
 
 	public PessoaFactory(String pessoaStr) throws GlobalException {
-		ObjectNode objNode;
-		Class<?> classe = null;
-		int	tipo = 0;
+
+		int tipo = 0;
 		try {
 			
 			objNode = getObject().readValue(pessoaStr, ObjectNode.class);
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> a8157f5e48da82cffed964c4e8fd53f9e49e8146
 			if (objNode != null)
 				tipo = objNode.get("tipo").asInt();
 			else
-				throw new GlobalException("Falha ao receber o atributo tipo de Pessoa");
-			
-			if(tipo == 0)
-				throw new GlobalException("Erro de factory na classe Pessoa");
-
+				throw new GlobalException(
+						"Falha ao receber o atributo tipo de Pessoa");
 
 			if (tipo != 0) {
+<<<<<<< HEAD
 				
 				//type = 1 
 				if (tipo == PessoaType.PF.getIndex())
@@ -99,22 +117,29 @@ public class PessoaFactory extends ObjMapper {
 				
 				if (classe != null) {
 					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr, classe);
+=======
+				this.pessoaClasse = PESSOA_CLASSES.get(tipo);
+
+				if (this.pessoaClasse != null) {
+					Pessoa obj = (Pessoa) getObject().readValue(pessoaStr,
+							this.pessoaClasse);
+>>>>>>> a8157f5e48da82cffed964c4e8fd53f9e49e8146
 					this.pessoas.add(obj);
-				} 
-				
-			} else {
-				throw new GlobalException("Erro de factory na classe Pessoa");
+				}
 			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new GlobalException("Erro de factory na classe Pessoa");
 		}
 	}
 
+
+	public PessoaFactory(int tipo){
+		this.pessoaClasse = PESSOA_CLASSES.get(tipo);
+	}
 	
-	
-	
-	public List<Pessoa> getPessoasLista() {
+	public List<Pessoa> getLista() {
 		return pessoas;
 	}
 
@@ -125,5 +150,11 @@ public class PessoaFactory extends ObjMapper {
 	public Pessoa getPessoa() {
 		return pessoas.get(0);
 	}
+	
+	
+	public Class<?> getClasse(){
+		return this.pessoaClasse;
+	}
+	
 
 }

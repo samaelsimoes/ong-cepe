@@ -18,16 +18,10 @@
        		<property name="hibernate.hbm2ddl.auto" value="update"></property>	       	
        
        		<!-- configurações do hibernate -->
-       		<!-- MysQL 5.6 -->
-<<<<<<< HEAD
-       		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"></property>
-       		<property name="hibernate.show_sql" value="true"></property>
-       		<property name="hibernate.format_sql" value="true"></property>
-=======
+
        		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
        		<property name="hibernate.show_sql" value="true"/>
        		<property name="hibernate.format_sql" value="true"/>
->>>>>>> 254c32a16862fc99749a2c819c0eb2b5fd2f19d1
        		
        	
        		

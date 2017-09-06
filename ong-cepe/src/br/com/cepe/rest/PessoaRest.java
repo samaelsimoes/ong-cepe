@@ -39,7 +39,12 @@ public class PessoaRest extends ObjMapper {
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
-			new PessoaService(pessoa).adicionar();
+			
+			if(pessoa != null)
+				new PessoaService(pessoa).adicionar();
+			else
+				throw new GlobalException("Valor nulo enviado ao REST");
+			
 			return Response.status(1);
 			
 		} catch (Throwable e) {

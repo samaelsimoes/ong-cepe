@@ -12,7 +12,7 @@
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cepe"></property>
 			<property name="javax.persistence.jdbc.database" value="cepe"></property>
 	       	<property name="javax.persistence.jdbc.user" value="root"></property>
-	       	<property name="javax.persistence.jdbc.password" value="root"></property>
+	       	<property name="javax.persistence.jdbc.password" value="master"></property>
 	
 			<!-- automatiza updates do banco e criação de tabelas -->
        		<property name="hibernate.hbm2ddl.auto" value="update"></property>	       	

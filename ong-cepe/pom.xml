@@ -60,6 +60,7 @@
         <artifactId>eclipselink</artifactId>
       <version>2.5.0</version>
     </dependency>		
+
 	 <!-- #### JAVAX PERSISTENCE API 1.0 ### -->
 	 <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
 <!-- 	<dependency> -->

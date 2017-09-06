@@ -7,6 +7,6 @@ ong-cepe/.*
 ong-cepe/build
 ong-cepe/lib
 ong-cepe/target
-ong-cepe/src/META-INF
+ong-cepe/src/META-INF/*
 ong-cepe/WebContent/META-INF
 ong-cepe/WebContent/lib/node_modules

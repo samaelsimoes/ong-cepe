@@ -13,7 +13,7 @@ private static final long serialVersionUID = 1L;
 	
 	public GlobalException (String msg, Throwable cause){
 		
-		super("Ocorreu um erro ao realizar a opera√ß√£o "+msg, cause);
+		super("Ocorreu um erro ao realizar a OPERA«√O "+msg, cause);
 	}
 
 }

@@ -28,7 +28,7 @@ public class PessoaRest extends ObjMapper {
 
 	/**
 	 * @param pessoaStr
-	 *            - Json da entidade pessoa.
+	 * - Json da entidade pessoa.
 	 * **/
 	@POST
 	@Consumes("application/*")

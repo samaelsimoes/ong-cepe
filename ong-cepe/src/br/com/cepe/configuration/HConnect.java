@@ -1,6 +1,3 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
 package br.com.cepe.configuration;
 
 import javax.persistence.EntityManager;
@@ -10,8 +7,6 @@ import javax.persistence.Query;
 
 public class HConnect {
 	private EntityManagerFactory connection;
-	
-	
 	
 	public EntityManager getEntityManager(){
 		return connect().createEntityManager();
@@ -40,7 +35,4 @@ public class HConnect {
 		}
 		return null;
 	}
-	
-	
-
 }

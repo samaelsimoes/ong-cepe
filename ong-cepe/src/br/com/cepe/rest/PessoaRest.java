@@ -38,12 +38,8 @@ public class PessoaRest extends ObjMapper {
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
-<<<<<<< HEAD
 			new PessoaService(pessoa).adicionar();
-
-			return Response.status(1);	
-=======
-			
+						
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
 			else
@@ -51,7 +47,6 @@ public class PessoaRest extends ObjMapper {
 			
 			return Response.status(1);
 			
->>>>>>> a8157f5e48da82cffed964c4e8fd53f9e49e8146
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new GlobalException("deu erro ", e);

@@ -15,7 +15,7 @@ private String valor;
 	}
 	
 	public String getSelect(String entity, String campo){
-		String select = "SELECT e FROM "+entity+" e WHERE "+campo;
+		String select = "SELECT e FROM "+entity+" e WHERE "+campo+" ";
 		return select;
 	}
 	
@@ -37,15 +37,15 @@ private String valor;
 	private String setQuery() throws GlobalException{
 		String iniPercent = "'%";
 		String fimPercent = "%'";		
-		if(operacao.equals(HOperator.EQUALS))
+		if(this.operacao.equals(HOperator.EQUALS))
 			return this.select+" = "+this.valor;		
-		if(operacao.equals(HOperator.DIFFERENT))
+		if(this.operacao.equals(HOperator.DIFFERENT))
 			return this.select+" != "+this.valor;
-		if(operacao.equals(HOperator.CONTAINS))
+		if(this.operacao.equals(HOperator.CONTAINS))
 			return this.select+" LIKE "+iniPercent+this.valor+fimPercent;		
-		if(operacao.equals(HOperator.INITS_WITH))
+		if(this.operacao.equals(HOperator.INITS_WITH))
 			return this.select+" LIKE "+this.valor+fimPercent;		
-		if(operacao.equals(HOperator.TERMINATES_WITH))
+		if(this.operacao.equals(HOperator.TERMINATES_WITH))
 			return this.select+" LIKE "+iniPercent+this.valor;	
 
 		return null;

@@ -8,7 +8,4 @@ import br.com.cepe.entity.pojo.pessoa.Pessoa;
 
 public class PessoaDAO extends OperationsDAO<Pessoa> implements GenericEntityDAO {
 	
-	public String getEntityName() {
-		return getEntityName();
-	}
 }

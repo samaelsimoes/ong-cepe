@@ -3,6 +3,8 @@
  **/
 package br.com.cepe.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.pessoa.PessoaFactory;
@@ -26,7 +29,6 @@ public class PessoaRest extends ObjMapper {
 	private PessoaService pessoaService;
 
 	public PessoaRest() {
-		
 	}
 
 	/**
@@ -58,7 +60,23 @@ public class PessoaRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
 		try {
-			return getJson(pessoaService.pesquisarNome(nome));
+			
+			List<Pessoa> pessoas = (List<Pessoa>) new PessoaService(nome).pesquisarNome();
+			return getJson(pessoas);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			throw new GlobalException("Erro ao fazer a consulta por nome");
+		}
+	}
+	
+	@GET
+	@Path("/tipo/{tipo}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public String pesquisarTipo(@PathParam("tipo") String tipo) throws GlobalException {
+		try {
+			return getJson(pessoaService.pesquisarStr("tipo", HOperator.EQUALS, tipo));
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new GlobalException("Erro ao fazer a consulta por nome");

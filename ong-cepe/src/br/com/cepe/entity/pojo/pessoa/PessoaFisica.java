@@ -5,13 +5,11 @@ package br.com.cepe.entity.pojo.pessoa;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@DiscriminatorValue(value = "1")
 public class PessoaFisica extends Pessoa {
 private Long rg;
 private Long cpf;

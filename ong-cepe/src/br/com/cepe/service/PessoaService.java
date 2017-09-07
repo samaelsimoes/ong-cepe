@@ -13,9 +13,14 @@ import br.com.cepe.exception.GlobalException;
 public class PessoaService{
 private PessoaDAO pessoaDAO = new PessoaDAO();
 Pessoa pessoa;
+String valorStr;
 
 	public PessoaService(Pessoa obj){
 		this.pessoa = obj;
+	}
+	
+	public PessoaService(String valorStr){
+		this.valorStr = valorStr;
 	}
 	
 	public PessoaService(){
@@ -47,8 +52,8 @@ Pessoa pessoa;
 	}	
 	
 
-	public List<Pessoa> pesquisarNome(String valor) throws GlobalException{
-		return (List<Pessoa>)pessoaDAO.findStr("nome", HOperator.CONTAINS, valor);
+	public List<Pessoa> pesquisarNome() throws GlobalException{
+		return (List<Pessoa>)pessoaDAO.findStr("nome", HOperator.CONTAINS, this.valorStr);
 	}
 	
 	

@@ -30,8 +30,8 @@ public class OperationsDAO<T> extends ConnectionDAO<T> {
 	
 	public List<T> findStr(String campo, HOperator operacao, String valor) throws GlobalException{
 		HqlFactory hqlFactory = new HqlFactory();		
-		String queryStr = hqlFactory.getSelect(getEntityName(), campo);
-		queryStr+= hqlFactory.getQuery(queryStr, operacao, valor);
+		String select = hqlFactory.getSelect(getEntityName(), campo);
+		String queryStr = hqlFactory.getQuery(select, operacao, valor);
 		Query query = super.getQuery(queryStr);
 		@SuppressWarnings("unchecked")
 		List<T> list = query.getResultList();

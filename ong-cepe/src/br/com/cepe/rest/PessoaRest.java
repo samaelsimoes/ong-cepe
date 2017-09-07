@@ -1,6 +1,3 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
 package br.com.cepe.rest;
 
 import java.util.List;
@@ -33,7 +30,7 @@ public class PessoaRest extends ObjMapper {
 
 	/**
 	 * @param pessoaStr
-	 *            - Json da entidade pessoa.
+	 * - Json da entidade pessoa.
 	 * **/
 	@POST
 	@Consumes("application/*")
@@ -41,6 +38,11 @@ public class PessoaRest extends ObjMapper {
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
+<<<<<<< HEAD
+			new PessoaService(pessoa).adicionar();
+
+			return Response.status(1);	
+=======
 			
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
@@ -49,15 +51,19 @@ public class PessoaRest extends ObjMapper {
 			
 			return Response.status(1);
 			
+>>>>>>> a8157f5e48da82cffed964c4e8fd53f9e49e8146
 		} catch (Throwable e) {
 			e.printStackTrace();
+			throw new GlobalException("deu erro ", e);
 		}
-		return null;
 	}
 
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
+	//public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
+
+	//public String pesquisarNome(@PathParam("nome") String nome) {
 	public String pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
 		try {
 			
@@ -85,7 +91,7 @@ public class PessoaRest extends ObjMapper {
 
 	@PUT
 	@Consumes("application/*")
-	public void alterar(String pessoaStr) throws GlobalException {
+	public void alterar(String pessoaStr) throws GlobalException { 
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();

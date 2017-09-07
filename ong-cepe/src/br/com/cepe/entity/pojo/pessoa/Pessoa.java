@@ -143,7 +143,4 @@ public class Pessoa {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	
-
-
 }

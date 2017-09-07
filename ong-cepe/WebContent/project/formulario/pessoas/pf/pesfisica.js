@@ -1,14 +1,15 @@
 //ONG.pf = new Object(); //verificar colocar padrao em todos metodos ajustar caminhos
 
 $(document).ready(function(){
-	
-	conspesfisi=function(){
-	    var valorBusca=$("#conspesf").val();
+	/*
+	consultapesf=function(){
+		
+	    var valorBusca=$("#conspesf").val();	    
 	    buscapefisica(undefined,valorBusca);
 	}		
 	
 	buscapefisica = function(listPesF, busca){
-		
+
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
@@ -77,7 +78,6 @@ $(document).ready(function(){
 				if(busca == ""){						
 					busca = null;
 				}
-				
 				var cfg ={
 					url:  ONG.contextPath + "/rest/pessoa/nome/" + busca,
 					success: function(listPesF,busca){									
@@ -98,7 +98,7 @@ $(document).ready(function(){
 	}
 	
 	buscapefisica(undefined, "");
-
+*/
 	// ------------------------------------------------ ==================================== ------------------------------ ========================================
 	
 	cadpesfisica = function(){
@@ -158,30 +158,33 @@ $(document).ready(function(){
 
             	var dadosFS= new Object();
             	
-            	dadosFS.nome=$("#nome").val();
-            	dadosFS.tipo=0;
+            	dadosFS.nome = $("#nome").val();
+            	dadosFS.tipo = 1;
+            	dadosFS.status = 1;
             	//dadosFS.sobreNome=$("#sobreNome").val();
-            	dadosFS.cpf=$("#cpf").val();
-            	dadosFS.rg=$("#rg").val();
-            	dadosFS.email=$("#email").val();
-            	dadosFS.nascimento=$("#datanascimento").val() + " T00:00:00";
-            	dadosFS.fone_res=$("#fone_res").val();
-            	dadosFS.fone_cel=$("#fone_cel").val();
-            	dadosFS.rua=$("#rua").val();
-            	dadosFS.bairro=$("#bairro").val();
-            	dadosFS.numero=$("#numero").val();
-            	dadosFS.cep=$("#cep").val(); 
-            	dadosFS.complemento=$("#complemento").val();
-            	dadosFS.cidade=$("#cidade").val()
-            	dadosFS.estado=$("#estado").val();         	
+            	dadosFS.cpf = $("#cpf").val();
+            	dadosFS.rg = $("#rg").val();
+            	dadosFS.email = $("#email").val();
+            	dadosFS.nascimento = $("#datanascimento").val() + " T00:00:00";
+            	dadosFS.fone_res = $("#fone_res").val();
+            	dadosFS.fone_cel = $("#fone_cel").val();
+            	dadosFS.rua = $("#rua").val();
+            	dadosFS.bairro = $("#bairro").val();
+            	dadosFS.numero = $("#numero").val();
+            	dadosFS.cep = $("#cep").val(); 
+            	dadosFS.complemento = $("#complemento").val();
+            	dadosFS.cidade = $("#cidade").val()
+            	dadosFS.estado = $("#estado").val();         	
             	
 	     		var cfg = {
 	     			
-	     			url: ONG.contextPath + "/rest/pessoa/add",
+	     			url: ONG.contextPath + "/rest/pessoa/",
 	     			data: dadosFS,
 	     			
-	     			success: function(listPesj,busca){
-	     				buscapesJuridica(listPesj,busca);
+	     			success: function(msg){
+	     				alert("deu certo o cadastro");
+	     				bootbox.alert("Cadastrado com sucesso " + msg);
+	     				//buscapesJuridica(listPesj,busca);
 	     			},
 	     			error: function(err){				
 	     				bootbox.alert("Erro ao cadastrar Pessoa, entrar em contato com o Administrador se o problema persistir!");

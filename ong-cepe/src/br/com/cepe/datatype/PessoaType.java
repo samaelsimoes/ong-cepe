@@ -1,6 +1,3 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
 package br.com.cepe.datatype;
 
 public enum PessoaType implements DataType{

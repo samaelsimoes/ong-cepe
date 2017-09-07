@@ -3,9 +3,9 @@ $(document).ready(function(){
 		
 	    var busca=$("#conspj").val();
 	  	
-	    buscapesJuridica(undefined,busca);
+	    //buscapesJuridica(undefined,busca);
 	}		
-	
+	/*
 	buscapesJuridica = function(listPesj, busca){
 				
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
@@ -91,7 +91,7 @@ $(document).ready(function(){
 	}
 	
 	buscapesJuridica(undefined, "");
-
+*/
 	// =====----------------------------------------------------------------------------------------------=====
 	cadspesjuridica = function(){
 

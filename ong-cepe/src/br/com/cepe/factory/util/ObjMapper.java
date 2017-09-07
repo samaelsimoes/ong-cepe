@@ -6,8 +6,6 @@ package br.com.cepe.factory.util;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import br.com.cepe.datatype.DataFmt;
 import br.com.cepe.factory.date.DateFactory;
 

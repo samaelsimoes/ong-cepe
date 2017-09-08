@@ -13,8 +13,8 @@ import br.com.cepe.factory.hql.HqlFactory;
 
 public class OperationsDAO<T> extends ConnectionDAO<T>{
 
-	protected T entity;
-	protected int num;
+	public T entity;
+	public int num;
 	
 	public OperationsDAO(){
 		

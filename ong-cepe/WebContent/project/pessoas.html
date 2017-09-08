@@ -13,7 +13,6 @@
 	<link href="../lib/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">    
 	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap-theme.css">
-		
 </head>
 <body>
 
@@ -32,25 +31,25 @@
 					<div class="form-group row ">
 						<div class="col-xs-6 col-md-7">
 						   <label class="col-2 col-form-label" for="tipopessoa">Tipo pessoa:</label>
-		
-						   <select class="form-control" id="tipopessoa">
-		
+						   <select class="form-control" id="tipopessoa">		
 								<option selected>Tipo...</option>
 								<option value="0">Pessoa Física</option>
 								<option value="1">Pessoa Juridica</option>
 								<option value="2">Beneficiarios / Associado</option>
-
+								<option value="3">Pessoa Física ou Jurídica</option>
 						    </select>                   
 						</div>  
 					</div>					
+					<div class="row">
+						<div class="col">
+							<!-- CHAMADA DO MEU RELATÓRIO PESSOA FISICA -->
+							<section class="section" id="pesstipo"></section>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<!-- CHAMADA DO MEU RELATÓRIO PESSOA FISICA -->
-	<section class="section" id="pesstipo"></section>
-
 	<section id="footer" class="custom-footer"></section>
 </body>
 

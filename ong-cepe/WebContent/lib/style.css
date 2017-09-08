@@ -6708,7 +6708,10 @@ footer {
   .phone-align-center > * {
     text-align: center;
     margin: 0 auto;
-    float: none; } }
+    float: none; }
+
+  .navbar-collapse {
+    margin-top: 40px; } }
 .container-table {
   width: 1800px;
   padding-right: 15px;

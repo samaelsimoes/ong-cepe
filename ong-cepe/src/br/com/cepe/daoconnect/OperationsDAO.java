@@ -11,24 +11,39 @@ import br.com.cepe.datatype.HOperator;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.hql.HqlFactory;
 
-public class OperationsDAO<T> extends ConnectionDAO<T> {
+public class OperationsDAO<T> extends ConnectionDAO<T>{
 
-	public void persist(T entity){
+	protected T entity;
+	protected int num;
+	
+	public OperationsDAO(){
+		
+	}
+	
+	public OperationsDAO(T entity){
+		this.entity = entity;
+	}
+	
+	public OperationsDAO(int num){
+		this.num = num;
+	}
+	
+	public void persist(){
 		em.getTransaction().begin();
-		em.persist(entity);
+		em.persist(this.entity);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public T findId(int id){
+	public T findId(){
 		@SuppressWarnings("unchecked")
-		T obj = (T) getEmClass(id);
+		T obj = (T) getEmClass(this.num);
 		em.getTransaction().commit();
 		em.close();
 		return obj;
 	}
 	
-	public List<T> findStr(String campo, HOperator operacao, String valor) throws GlobalException{
+	public List<T> findGeneric(String campo, HOperator operacao, String valor) throws GlobalException{
 		HqlFactory hqlFactory = new HqlFactory();		
 		String select = hqlFactory.getSelect(getEntityName(), campo);
 		String queryStr = hqlFactory.getQuery(select, operacao, valor);
@@ -39,15 +54,15 @@ public class OperationsDAO<T> extends ConnectionDAO<T> {
 		return list;
 	}
 	
-	public void update(T entity){
+	public void update(){
 		em.getTransaction().begin();
-		em.merge(entity);
+		em.merge(this.entity);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public void delete(int id){
-		Class<T> classe = getEmClass(id);
+	public void delete(){
+		Class<T> classe = getEmClass(this.num);
 		em.getTransaction().begin();
 		em.remove(classe);
 		em.getTransaction().commit();

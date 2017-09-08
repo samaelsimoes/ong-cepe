@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 
 @Entity
-@DiscriminatorValue(value = "3")
+@DiscriminatorValue("3")
 public class DoadorPf extends PessoaFisica{
 	
 	private String teste;

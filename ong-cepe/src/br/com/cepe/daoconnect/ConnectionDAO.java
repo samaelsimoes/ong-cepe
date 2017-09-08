@@ -8,11 +8,10 @@ import java.lang.reflect.ParameterizedType;
 import javax.persistence.EntityManager;
 
 import br.com.cepe.configuration.HConnect;
+import br.com.cepe.dao.GenericEntityDAO;
 
-public abstract class ConnectionDAO<T> extends HConnect{
+public abstract class ConnectionDAO<T> extends HConnect implements GenericEntityDAO{
 	protected EntityManager em;
-
-	
 	
 	public ConnectionDAO(){
 		em = getEntityManager();
@@ -35,8 +34,5 @@ public abstract class ConnectionDAO<T> extends HConnect{
 		Class<T> classe = (Class<T>)superclass.getActualTypeArguments()[0];
 		return classe;
 	}
-	
-	
-	
 
 }

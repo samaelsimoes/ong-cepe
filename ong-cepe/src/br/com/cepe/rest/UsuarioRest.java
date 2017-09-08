@@ -14,32 +14,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import br.com.cepe.entity.pojo.pessoa.Pessoa;
+import br.com.cepe.entity.pojo.usuario.Usuario;
 import br.com.cepe.exception.GlobalException;
-import br.com.cepe.factory.entity.pessoa.PessoaFactory;
+import br.com.cepe.factory.entity.usuario.UsuarioFactory;
 import br.com.cepe.factory.util.ObjMapper;
-import br.com.cepe.service.PessoaService;
+import br.com.cepe.service.UsuarioService;
 
-@Path("/pessoa")
-public class PessoaRest extends ObjMapper {
-
-	public PessoaRest() {
-	}
+@Path("usuario")
+public class UsuarioRest extends ObjMapper{
 
 	/**
-	 * @param pessoaStr
-	 * - Json da entidade pessoa.
+	 * @param usuarioStr
+	 * - Json da entidade usuario.
 	 * **/
 	@POST
 	@Consumes("application/*")
-	public ResponseBuilder adicionar(String pessoaStr) throws GlobalException {
+	public ResponseBuilder adicionar(String usuarioStr) throws GlobalException {
 		try {
-			 
-			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa();
-			new PessoaService(pessoa).adicionar();
+			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
+			new UsuarioService(usuario).adicionar();
 						
-			if(pessoa != null)
-				new PessoaService(pessoa).adicionar();
+			if(usuario != null)
+				new UsuarioService(usuario).adicionar();
 			else
 				throw new GlobalException("Valor nulo enviado ao REST");
 			
@@ -57,8 +53,8 @@ public class PessoaRest extends ObjMapper {
 	public Response pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
 		try {
 			
-			List<Pessoa> pessoas = new PessoaService(nome).pesquisaNomeContem();
-			String resp = getJson(pessoas);
+			List<Usuario> usuarios = new UsuarioService(nome).pesquisaNomeContem();
+			String resp = getJson(usuarios);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
@@ -70,39 +66,24 @@ public class PessoaRest extends ObjMapper {
 	@GET
 	@Path("/tipo/{tipo}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response pesquisarTipo(@PathParam("tipo") int tipo) throws GlobalException {
+	public Response pesquisarTipo(@PathParam("tipo") String tipo) throws GlobalException {
 		try {
-			List<Pessoa> pessoas = new PessoaService(tipo).pesquisaTipoIgual();
-			String resp = getJson(pessoas);
+			List<Usuario> usuarios = new UsuarioService(tipo).pesquisaTipoIgual();
+			String resp = getJson(usuarios);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por tipo");
-		}
-	}
-	
-	@GET
-	@Path("/id/{id}")
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
-		try {
-			Pessoa pessoa = new PessoaService(id).pesquisaId();
-			String resp = getJson(pessoa);
-			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
-			
-		} catch (Throwable e) {
-			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por tipo");
+			throw new GlobalException("Erro ao fazer a consulta por nome");
 		}
 	}
 
 	@PUT
 	@Consumes("application/*")
-	public ResponseBuilder alterar(String pessoaStr) throws GlobalException { 
+	public ResponseBuilder alterar(String usuarioStr) throws GlobalException { 
 		try {
-			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa(); 
-			new PessoaService(pessoa).alterar();
+			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
+			new UsuarioService(usuario).alterar();
 			return Response.status(1);
 			
 		} catch (Throwable e) {
@@ -115,7 +96,7 @@ public class PessoaRest extends ObjMapper {
 	@Path("id")
 	public ResponseBuilder excluir(@PathParam("id") int id) throws Exception {
 		try{
-		 new PessoaService(id).excluir();
+		new UsuarioService(id).excluir();
 		return Response.status(1);
 		
 		}catch(Throwable e){
@@ -123,5 +104,7 @@ public class PessoaRest extends ObjMapper {
 			throw new Exception("Erro ao deletar usuário");
 		}
 	}
+	
+	
 
 }

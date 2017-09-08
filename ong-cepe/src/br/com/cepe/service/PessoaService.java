@@ -9,59 +9,67 @@ import br.com.cepe.daoconnect.PessoaDAO;
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
+import br.com.cepe.interfaces.Service;
 
-public class PessoaService{
-private PessoaDAO pessoaDAO = new PessoaDAO();
-Pessoa pessoa;
-String valorStr;
+public class PessoaService  implements Service<Pessoa>{	
 
-	public PessoaService(Pessoa obj){
-		this.pessoa = obj;
-	}
+
+	protected Pessoa pessoa;
+	protected String valorStr;
+	protected int num;
 	
-	public PessoaService(String valorStr){
+	
+	public PessoaService() {
+	}
+
+	public PessoaService(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public PessoaService(String valorStr) {
 		this.valorStr = valorStr;
 	}
-	
-	public PessoaService(){
+
+	public PessoaService(int num) {
+		this.num = num;
 	}
-	
-	public void adicionar(){
-		pessoaDAO.persist(this.pessoa);
+
+	public void adicionar()  throws GlobalException {
+		new PessoaDAO(pessoa).persist();
 	}
-	
-	
-	public void adicionarLista(List<Pessoa> pessoas){
+
+	public void adicionarLista (List<Pessoa> pessoas) throws GlobalException {
 		for (Pessoa pessoa : pessoas) {
 			this.pessoa = pessoa;
 			adicionar();
 		}
 	}
 	
-	public Pessoa pesquisa(){
-		return pessoaDAO.findId(this.pessoa.getId());
+	public Pessoa pesquisaId()  throws GlobalException {
+		return new PessoaDAO(num).findId();
 	}
 	
-	public void alterar(){
-		pessoaDAO.persist(this.pessoa);
+	public List<Pessoa> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {
+		return (List<Pessoa>) new PessoaDAO().findGeneric(campo, operacao, valor);
 	}
 
-	public List<Pessoa> pesquisaGeneric(String campo, HOperator operacao, String valor) throws GlobalException{
-		return (List<Pessoa>) pessoaDAO.findStr(campo, operacao, valor);
-	}	
-	
-	public List<Pessoa> pesquisaTipoIgual() throws GlobalException{
-		return (List<Pessoa>) pessoaDAO.findStr("tipo", HOperator.EQUALS, this.valorStr);
-	}	
-	
+	public List<Pessoa> pesquisaTipoIgual() throws GlobalException {
+		String tipo = Integer.toString(this.num);
+		return (List<Pessoa>) new PessoaDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
+	}
 
-	public List<Pessoa> pesquisaNome() throws GlobalException{
-		return (List<Pessoa>)pessoaDAO.findStr("nome", HOperator.CONTAINS, this.valorStr);
+	public List<Pessoa> pesquisaNomeContem() throws GlobalException {
+		return (List<Pessoa>) new PessoaDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
 	}
-	
-	public void excluir(int id){
-		pessoaDAO.delete(id);
+
+	public void excluir()  throws GlobalException {
+		new PessoaDAO(this.num).delete();
 	}
-	
-	
+
+	public void alterar()  throws GlobalException{
+		new PessoaDAO(this.num).update();
+	}
+
+
+
 }

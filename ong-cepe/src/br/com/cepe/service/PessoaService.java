@@ -24,7 +24,6 @@ String valorStr;
 	}
 	
 	public PessoaService(){
-		pessoaDAO = new PessoaDAO();
 	}
 	
 	public void adicionar(){
@@ -39,7 +38,7 @@ String valorStr;
 		}
 	}
 	
-	public Pessoa pesquisar(){
+	public Pessoa pesquisa(){
 		return pessoaDAO.findId(this.pessoa.getId());
 	}
 	
@@ -47,15 +46,18 @@ String valorStr;
 		pessoaDAO.persist(this.pessoa);
 	}
 
-	public List<Pessoa> pesquisarStr(String campo, HOperator operacao, String valor) throws GlobalException{
+	public List<Pessoa> pesquisaGeneric(String campo, HOperator operacao, String valor) throws GlobalException{
 		return (List<Pessoa>) pessoaDAO.findStr(campo, operacao, valor);
 	}	
 	
+	public List<Pessoa> pesquisaTipoIgual() throws GlobalException{
+		return (List<Pessoa>) pessoaDAO.findStr("tipo", HOperator.EQUALS, this.valorStr);
+	}	
+	
 
-	public List<Pessoa> pesquisarNome() throws GlobalException{
+	public List<Pessoa> pesquisaNome() throws GlobalException{
 		return (List<Pessoa>)pessoaDAO.findStr("nome", HOperator.CONTAINS, this.valorStr);
 	}
-	
 	
 	public void excluir(int id){
 		pessoaDAO.delete(id);

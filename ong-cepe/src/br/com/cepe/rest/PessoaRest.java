@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.pessoa.PessoaFactory;
@@ -56,14 +55,12 @@ public class PessoaRest extends ObjMapper {
 	@GET
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	//public String pesquisarNome(@PathParam("nome") String nome) { // tipo string ? nao deveria ser response ? ta em um loop ferrado 
-
-	//public String pesquisarNome(@PathParam("nome") String nome) {
-	public String pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
+	public Response pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
 		try {
 			
-			List<Pessoa> pessoas = (List<Pessoa>) new PessoaService(nome).pesquisarNome();
-			return getJson(pessoas);
+			List<Pessoa> pessoas = (List<Pessoa>) new PessoaService(nome).pesquisaNome();
+			String resp = getJson(pessoas);
+			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -74,9 +71,11 @@ public class PessoaRest extends ObjMapper {
 	@GET
 	@Path("/tipo/{tipo}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public String pesquisarTipo(@PathParam("tipo") String tipo) throws GlobalException {
+	public Response pesquisarTipo(@PathParam("tipo") String tipo) throws GlobalException {
 		try {
-			return getJson(pessoaService.pesquisarStr("tipo", HOperator.EQUALS, tipo));
+			List<Pessoa> pessoas = new PessoaService(tipo).pesquisaTipoIgual();
+			String resp = getJson(pessoas);
+			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -86,11 +85,12 @@ public class PessoaRest extends ObjMapper {
 
 	@PUT
 	@Consumes("application/*")
-	public void alterar(String pessoaStr) throws GlobalException { 
+	public ResponseBuilder alterar(String pessoaStr) throws GlobalException { 
 		try {
 			PessoaFactory pessoaFactory =  new PessoaFactory(pessoaStr); 
 			Pessoa pessoa = (Pessoa) pessoaFactory.getPessoa();
 			new PessoaService(pessoa).alterar();
+			return Response.status(1);
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -103,11 +103,12 @@ public class PessoaRest extends ObjMapper {
 	public ResponseBuilder excluir(@PathParam("id") int id) throws Exception {
 		try{
 		pessoaService.excluir(id);
+		return Response.status(1);
+		
 		}catch(Throwable e){
 			e.printStackTrace();
 			throw new Exception("Erro ao deletar usuário");
 		}
-		return null;
 	}
 
 }

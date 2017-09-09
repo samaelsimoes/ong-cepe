@@ -278,9 +278,8 @@ th {
     border: 1px solid #ddd !important; } }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("bootstrap/fonts/glyphicons-halflings-regular.eot");
-  src: url("bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("bootstrap/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("bootstrap/fonts/glyphicons-halflings-regular.woff") format("woff"), url("bootstrap/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
-.glyphicon {
+  src: url("/lib/node_modules/bootstrap/fonts/glyphicons-halflings-regular.eot");
+  src: url("/lib/node_modules/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/lib/node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("/lib/node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/lib/node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("/lib/node_modules/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
   position: relative;
   top: 1px;
   display: inline-block;
@@ -290,7 +289,6 @@ th {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
-
 .glyphicon-asterisk:before {
   content: "\002a"; }
 

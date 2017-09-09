@@ -184,7 +184,6 @@ $(document).ready(function(){
 	     			success: function(msg){
 	     				alert("deu certo o cadastro");
 	     				bootbox.alert("Cadastrado com sucesso " + msg);
-	     				//buscapesJuridica(listPesj,busca);
 	     			},
 	     			error: function(err){				
 	     				bootbox.alert("Erro ao cadastrar Pessoa, entrar em contato com o Administrador se o problema persistir!");

@@ -3,9 +3,9 @@ $(document).ready(function(){
 		
 	    var busca=$("#conspj").val();
 	  	
-	    //buscapesJuridica(undefined,busca);
+	    buscapesJuridica(undefined,busca);
 	}		
-	/*
+	
 	buscapesJuridica = function(listPesj, busca){
 				
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
@@ -91,8 +91,7 @@ $(document).ready(function(){
 	}
 	
 	buscapesJuridica(undefined, "");
-*/
-	// =====----------------------------------------------------------------------------------------------=====
+
 	cadspesjuridica = function(){
 
 		var msg  = "";
@@ -135,34 +134,33 @@ $(document).ready(function(){
             	var dadosPJ= new Object();
             	
             	dadosPJ.nome=$("#razsocial").val();
-            	dadosPJ.tipo=1;
+            	dadosPJ.tipo=2;
             	//dadosPesFis.responsavel=$("#responsavel").val();
             	dadosPJ.cnpj=$("#cnpj").val();
             	dadosPJ.email=$("#email").val();
             	dadosPJ.dt_nasc=$("#datanascimento").val();
-            	dadosPJ.fone_res=$("#telcomercial").val();
-            	dadosPJ.fone_cel=$("#telresponsavel").val();
+            	dadosPJ.foneFixo=$("#telcomercial").val();
+            	dadosPJ.foneMovel=$("#telresponsavel").val();
             	dadosPJ.estado=$("#estado").val();
             	dadosPJ.cidade=$("#cidade").val()
             	dadosPJ.rua=$("#rua").val();
             	dadosPJ.complemento=$("#complemento").val();
             	dadosPJ.numero=$("#numero").val();
-            	
             	dadosPJ.cep=$("#cep").val(); 
-            	
+
             	var cfg = {
-        			url: ONG.contextPath +"/rest/pessoa/add",
+        			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPJ,
-        			success: function(listPesj,busca){										
-        				buscapesJuridica(listPesj,busca);
+        			success: function(listPesj, undefined){										
+        				buscapesJuridica(listPesj);
         			},
         			error: function(err){								
-        				bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+        				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
         			}
         		};					
         		ONG.ajax.post(cfg);
             }else{
-                bootbox.alert(expressao);
+                bootbox.alert(exp);
             }
         }else{
             bootbox.alert("Caro usuário, gentileza verificar os seguintes campos: <br> " + msg);

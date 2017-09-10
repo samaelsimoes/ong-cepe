@@ -12,11 +12,11 @@ public class PessoaDAO extends OperationsDAO<Pessoa>{
 	}
 	
 	public PessoaDAO(int num) {
-		super(num);
+		this.num = num;
 	}
 	
 	public PessoaDAO(Pessoa pessoa){
-		super(pessoa);
+		this.entity = pessoa;
 	}
 	
 }

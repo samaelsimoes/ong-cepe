@@ -8,11 +8,11 @@ public class UsuarioDAO extends OperationsDAO<Usuario> {
 	}
 
 	public UsuarioDAO(int num) {
-		super(num);
+		super.num = num;
 	}
 
 	public UsuarioDAO(Usuario usuario) {
-		super(usuario);
+		super.entity = usuario;
 	}
 
 }

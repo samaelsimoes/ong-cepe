@@ -36,8 +36,7 @@ public class PessoaRest extends ObjMapper {
 		try {
 			 
 			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa();
-			new PessoaService(pessoa).adicionar();
-						
+					
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
 			else

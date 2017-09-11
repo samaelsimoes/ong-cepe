@@ -35,7 +35,7 @@ public class PessoaService  implements Service<Pessoa>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		new PessoaDAO(pessoa).persist();
+		new PessoaDAO(this.pessoa).persist();
 	}
 
 	public void adicionarLista (List<Pessoa> pessoas) throws GlobalException {
@@ -46,7 +46,7 @@ public class PessoaService  implements Service<Pessoa>{
 	}
 	
 	public Pessoa pesquisaId()  throws GlobalException {
-		return new PessoaDAO(num).findId();
+		return new PessoaDAO(this.num).findId();
 	}
 	
 	public List<Pessoa> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {

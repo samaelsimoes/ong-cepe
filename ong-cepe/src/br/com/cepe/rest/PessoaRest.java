@@ -32,7 +32,7 @@ public class PessoaRest extends ObjMapper {
 	 * **/
 	@POST
 	@Consumes("application/*")
-	public ResponseBuilder adicionar(String pessoaStr) throws GlobalException {
+	public Response adicionar(String pessoaStr) throws GlobalException {
 		try {
 			 
 			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa();
@@ -42,11 +42,12 @@ public class PessoaRest extends ObjMapper {
 			else
 				throw new GlobalException("Valor nulo enviado ao REST");
 			
-			return Response.status(1);
-			
+//			return Response.status(1);
+			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("deu erro ", e);
+//			throw new GlobalException("deu erro ", e);
+			return this.buildErrorResponse(e.getMessage());
 		}
 	}
 

@@ -135,6 +135,7 @@ $(document).ready(function(){
             	
             	dadosPJ.nome=$("#razsocial").val();
             	dadosPJ.tipo=2;
+            	dadosPJ.status=5;
             	//dadosPesFis.responsavel=$("#responsavel").val();
             	dadosPJ.cnpj=$("#cnpj").val();
             	dadosPJ.email=$("#email").val();

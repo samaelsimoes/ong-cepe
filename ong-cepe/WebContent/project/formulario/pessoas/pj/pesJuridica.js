@@ -69,7 +69,8 @@ $(document).ready(function(){
 					if(busca == ""){						
 						busca = null;
 					}
-					
+					alert("1");
+					console.log("parte 2 ");
 					var cfg = {
 							
 						url: ONG.contextPath + "/rest/pessoa/nome/" + busca,

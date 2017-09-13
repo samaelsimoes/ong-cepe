@@ -14,21 +14,18 @@ $(document).ready(function(){
 
 			"<thead class='table table-striped '>" +
 				"<tr>" +
-					"<p> Pessoas </p>  </br>" + 
-					"<th> Razão Social </th> " +
-					//"<th> Responsavel </th>" +
+					
 					"<th> Cnpj </th>" + 
+					"<th> Razão Social </th> " +
 					"<th> E-mail </th>" +
-					"<th> Tel Responsavel </th>" +
-					"<th> Tel Comercial </th>" +
-					"<th> Estado </th>" +
-					"<th> Cidade </th>" +
-					"<th> Bairro </th>" +
+					"<th> Telefone contato </th>" +
+					"<th> Cep </th>" +
+					/*"<th> Estado </th>" +
+					"<th> Cidade </th>" +*/
 					"<th> Rua </th>" +
 					"<th> Complemento </th>" +
 					"<th> Número </th>" +
-					"<th> Editar</th>" +
-					"<th> Excluir</th>" +
+					"<th> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
 		
@@ -36,30 +33,37 @@ $(document).ready(function(){
 			  
 			  	for(var i = 0; i < listPesj.length; i++){
 
-					html += "<tr>";
-
-						html += "<td>";
-
-							html += "<button type='button' class='btn btn-pencil' onclick='buscID("+listPesj[i].id+")'>Editar</button>"
-						html += "</td>";
-
-						html += "<td>";
-
-							html += "<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"
-						html += "</td>";
-
-						html += "<td>" + listPesj[i].razaosocial + "</td>";
-						//html += "<td>" + listPesj[i].responsavel + "</td>";
+					html += "<tr>";					
 						html += "<td>" + listPesj[i].cnpj + "</td>";
+						html += "<td>" + listPesj[i].nome + "</td>";
 						html += "<td>" + listPesj[i].email + "</td>";
-						//html += "<td>" + listPesj[i].telresponsavel + "</td>";
-						html += "<td>" + listPesj[i].telcomercial + "</td>";
-						html += "<td>" + listPesj[i].estado + "</td>";
-						html += "<td>" + listPesj[i].cidade + "</td>";
-						html += "<td>" + listPesj[i].bairro + "</td>";
+						
+						if(listPesj[i].foneFixo != null && listPesj[i].foneMovel != null){
+							html += "<td>"+	 
+										listPesj[i].foneFixo + " - " + listPesj[i].foneMovel +										
+									"</td>";
+						}else if(listPesj[i].foneFixo != null && listPesj[i].foneMovel == null){
+							html += "<td>"+
+										listPesj[i].foneFixo+
+									"</td>"
+						}else if( listPesj[i].foneMovel != null && listPesj[i].foneFixo == null){
+							html += "<td>"+
+										listPesj[i].foneMovel+
+									"</td>"
+						}
+						
+						html += "<td>" + listPesj[i].cep + "</td>";
+						/*html += "<td>" + listPesj[i].estado + "</td>";
+						html += "<td>" + listPesj[i].cidade + "</td>";*/
 						html += "<td>" + listPesj[i].rua + "</td>";
 						html += "<td>" + listPesj[i].complemento + "</td>";
 						html += "<td>" + listPesj[i].numero + "</td>";
+	
+						html += "<td>"+
+									"<button type='button' class='btn btn-pencil' onclick='buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
+									"<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"+
+								"</td>";
+						
 					html += "</tr>";  
 			    }
 		    }else{
@@ -97,12 +101,12 @@ $(document).ready(function(){
 		var msg  = "";
 		var exp = "";
 		
-		msg+=validaVazio("Razao Social: ", $("#razsocial").val());
-		msg+=validaVazio("Responsavel: ", $("#responsavel").val());
+		msg += validaVazio("Razao Social: ", $("#razsocial").val());
+		msg += validaVazio("Responsavel: ", $("#responsavel").val());
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
-		msg += validaVazio("Telefone comercial: ", $("#telcomercial").val());
-		msg += validaVazio("Telefone responsavel: ", $("#telresponsavel").val());
+		msg += validaVazio("Telefone Fixo: ", $("#telcomercial").val());
+		//msg += validaVazio("Telefone Movel: ", $("#telresponsavel").val());
 		//msg += validaVazio("Estado: ", $("#estado").val());
 		//msg += validaVazio("Cidade: ", $("#cidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());
@@ -126,7 +130,7 @@ $(document).ready(function(){
             	exp+="CNPJ invalido ! </br> " + "</br>";
             }
             if(!$("#telcomercial").val().match(/^\d{10,13}$/)){    
-                exp+="Telefone Comercial invalido ! </br> " + "</br>";
+                exp+="Telefone Fixo invalido ! </br> " + "</br>";
             }
             
             if(exp==""){

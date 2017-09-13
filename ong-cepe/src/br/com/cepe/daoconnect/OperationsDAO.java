@@ -38,7 +38,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	public T findId(){
 		@SuppressWarnings("unchecked")
 		T obj = (T) getEmClass(this.num);
-		em.getTransaction().commit();
+//		em.getTransaction().commit();
 		em.close();
 		return obj;
 	}

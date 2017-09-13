@@ -93,7 +93,7 @@ public class PessoaRest extends ObjMapper {
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por tipo");
+			throw new GlobalException("Erro ao fazer a consulta por id");
 		}
 	}
 

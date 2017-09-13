@@ -69,11 +69,10 @@ $(document).ready(function(){
 					if(busca == ""){						
 						busca = null;
 					}
-					alert("1");
-					console.log("parte 2 ");
+					var tipo = 2;
 					var cfg = {
 							
-						url: ONG.contextPath + "/rest/pessoa/nome/" + busca,
+						url: ONG.contextPath + "/rest/pessoa/tipo/" + tipo,
 						
 						success: function(listPesj,busca){													
 							buscapesJuridica(listPesj,busca);
@@ -94,7 +93,7 @@ $(document).ready(function(){
 	buscapesJuridica(undefined, "");
 
 	cadspesjuridica = function(){
-
+		alert('cadastro');
 		var msg  = "";
 		var exp = "";
 		
@@ -153,8 +152,8 @@ $(document).ready(function(){
             	var cfg = {
         			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPJ,
-        			success: function(listPesj, undefined){										
-        				buscapesJuridica(listPesj);
+        			success: function(msg){		
+        				bootbox.alert("Realizado cadastro com sucesso ");
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");

@@ -1,6 +1,3 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
 package br.com.cepe.service;
 
 import java.util.List;
@@ -13,11 +10,9 @@ import br.com.cepe.interfaces.Service;
 
 public class PessoaService  implements Service<Pessoa>{	
 
-
 	protected Pessoa pessoa;
 	protected String valorStr;
 	protected int num;
-	
 	
 	public PessoaService() {
 	}

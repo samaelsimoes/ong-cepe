@@ -36,9 +36,8 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	}
 	
 	public T findId(){
-		@SuppressWarnings("unchecked")
-		T obj = (T) getEmClass(this.num);
-		em.getTransaction().commit();
+		Class<T> classe = getEmClass();
+		T obj = em.find(classe, this.num);
 		em.close();
 		return obj;
 	}
@@ -62,9 +61,10 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	}
 	
 	public void delete(){
-		Class<T> classe = getEmClass(this.num);
+		Class<T> classe = getEmClass();
+		T obj = em.find(classe, this.num);
 		em.getTransaction().begin();
-		em.remove(classe);
+		em.remove(obj);
 		em.getTransaction().commit();
 		em.close();
 	}

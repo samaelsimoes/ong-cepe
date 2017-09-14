@@ -39,13 +39,13 @@ private String valor;
 		String fimPercent = "%'";		
 		if(this.operacao.equals(HOperator.EQUALS))
 			return this.select+" = "+this.valor;		
-		if(this.operacao.equals(HOperator.DIFFERENT))
+		else if(this.operacao.equals(HOperator.DIFFERENT))
 			return this.select+" != "+this.valor;
-		if(this.operacao.equals(HOperator.CONTAINS))
+		else if(this.operacao.equals(HOperator.CONTAINS))
 			return this.select+" LIKE "+iniPercent+this.valor+fimPercent;		
-		if(this.operacao.equals(HOperator.INITS_WITH))
+		else if(this.operacao.equals(HOperator.INITS_WITH))
 			return this.select+" LIKE "+this.valor+fimPercent;		
-		if(this.operacao.equals(HOperator.TERMINATES_WITH))
+		else if(this.operacao.equals(HOperator.TERMINATES_WITH))
 			return this.select+" LIKE "+iniPercent+this.valor;	
 
 		return null;

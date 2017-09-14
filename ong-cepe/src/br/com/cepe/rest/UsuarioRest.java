@@ -12,7 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.com.cepe.entity.pojo.usuario.Usuario;
 import br.com.cepe.exception.GlobalException;
@@ -29,7 +28,7 @@ public class UsuarioRest extends ObjMapper{
 	 * **/
 	@POST
 	@Consumes("application/*")
-	public ResponseBuilder adicionar(String usuarioStr) throws GlobalException {
+	public Response adicionar(String usuarioStr) throws GlobalException {
 		try {
 			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
 			new UsuarioService(usuario).adicionar();
@@ -39,11 +38,11 @@ public class UsuarioRest extends ObjMapper{
 			else
 				throw new GlobalException("Valor nulo enviado ao REST");
 			
-			return Response.status(1);
+			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("deu erro ", e);
+			return this.buildErrorResponse(e.getMessage());
 		}
 	}
 
@@ -59,7 +58,7 @@ public class UsuarioRest extends ObjMapper{
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por nome");
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome");
 		}
 	}
 	
@@ -74,34 +73,35 @@ public class UsuarioRest extends ObjMapper{
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por nome");
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome");
 		}
 	}
 
 	@PUT
 	@Consumes("application/*")
-	public ResponseBuilder alterar(String usuarioStr) throws GlobalException { 
+	public Response alterar(String usuarioStr) throws GlobalException { 
 		try {
 			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
 			new UsuarioService(usuario).alterar();
-			return Response.status(1);
+			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
+
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a alteração do usuário");
+			return this.buildErrorResponse("Erro ao fazer a alteração do usuário");
 		}
 	}
 
 	@DELETE
 	@Path("id")
-	public ResponseBuilder excluir(@PathParam("id") int id) throws Exception {
+	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 		new UsuarioService(id).excluir();
-		return Response.status(1);
+		return Response.ok().build();
 		
 		}catch(Throwable e){
 			e.printStackTrace();
-			throw new Exception("Erro ao deletar usuário");
+			return this.buildErrorResponse("Erro ao deletar usuário");
 		}
 	}
 	

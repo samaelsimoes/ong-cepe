@@ -40,13 +40,10 @@ public class ModalidadeRest extends ObjMapper {
 			if(modalidade != null)
 				new ModalidadeService(modalidade).adicionar();
 			else
-				throw new GlobalException("Valor nulo enviado ao REST");
-			
-//			return Response.status(1);
+				throw new GlobalException("Valor nulo enviado ao servidor");
 			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
-//			throw new GlobalException("deu erro ", e);
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
@@ -55,10 +52,11 @@ public class ModalidadeRest extends ObjMapper {
 	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
+		String resp = null;
 		try {
 			
 			List<Modalidade> modalidades = new ModalidadeService(nome).pesquisaNomeContem();
-			String resp = getJson(modalidades);
+			resp = getJson(modalidades);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {

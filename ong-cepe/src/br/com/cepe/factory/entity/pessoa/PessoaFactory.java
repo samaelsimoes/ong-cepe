@@ -65,7 +65,24 @@ public class PessoaFactory extends ObjMapper {
 		}
 	}
 	
+	public PessoaFactory(Object obj){
+		if(obj instanceof PessoaFisica)
+			this.pessoas.add((PessoaFisica) obj);
+		else if(obj instanceof PessoaJuridica)
+			this.pessoas.add((PessoaJuridica) obj);
+		else if(obj instanceof DoadorPf)
+			this.pessoas.add((DoadorPf) obj);
+		else if(obj instanceof Patrocinador)
+			this.pessoas.add((Patrocinador) obj);
+		else if(obj instanceof Beneficiario)
+			this.pessoas.add((Beneficiario) obj);
+		else if(obj instanceof Atleta)
+			this.pessoas.add((Atleta) obj);
+		else
+			this.pessoas.add(null);
+	}
 
+	
 	public PessoaFactory(int tipo){
 		this.pessoaClasse = PESSOA_CLASSES.get(tipo);
 	}

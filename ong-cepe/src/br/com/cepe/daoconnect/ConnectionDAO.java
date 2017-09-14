@@ -22,9 +22,8 @@ public abstract class ConnectionDAO<T> extends HConnect implements GenericEntity
 	}
 	
 
-	public Class<T> getEmClass(int id){
+	public Class<T> getEmClass(){
 		Class<T> classe = getSuperClass();
-		em.find(classe, id);
 		return classe;
 	}
 	

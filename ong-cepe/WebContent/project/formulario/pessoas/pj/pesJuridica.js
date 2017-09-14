@@ -68,7 +68,6 @@ $(document).ready(function(){
 		    }else{
 			    if(listPesj == undefined || (listPesj != undefined && listPesj.length > 0)){
 
-
 					if(busca == ""){						
 						busca = null;
 					}

@@ -36,8 +36,14 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	}
 	
 	public T findId(){
+<<<<<<< HEAD
 		Class<T> classe = getEmClass();
 		T obj = em.find(classe, this.num);
+=======
+		@SuppressWarnings("unchecked")
+		T obj = (T) getEmClass(this.num);
+//		em.getTransaction().commit();
+>>>>>>> d464d5d065c7771ee852fb440049fc2a7940e2d3
 		em.close();
 		return obj;
 	}

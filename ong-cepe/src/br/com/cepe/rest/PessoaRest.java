@@ -96,7 +96,11 @@ public class PessoaRest extends ObjMapper {
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
+<<<<<<< HEAD
 			return this.buildErrorResponse(e.getMessage());
+=======
+			throw new GlobalException("Erro ao fazer a consulta por id");
+>>>>>>> d464d5d065c7771ee852fb440049fc2a7940e2d3
 		}
 	}
 

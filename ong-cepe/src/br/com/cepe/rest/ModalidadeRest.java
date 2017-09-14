@@ -12,7 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.com.cepe.entity.pojo.modalidade.Modalidade;
 import br.com.cepe.exception.GlobalException;
@@ -41,6 +40,7 @@ public class ModalidadeRest extends ObjMapper {
 				new ModalidadeService(modalidade).adicionar();
 			else
 				throw new GlobalException("Valor nulo enviado ao servidor");
+			
 			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -84,10 +84,14 @@ public class ModalidadeRest extends ObjMapper {
 	@Path("/id/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
+		String resp = null;
 		try {
 			Modalidade modalidade = new ModalidadeService(id).pesquisaId();
-			String resp = getJson(modalidade);
-			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			resp = getJson(modalidade);
+			if(resp != null)
+				return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			else 
+				throw new GlobalException("Erro ao consultar modalidade por ID !");
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -97,11 +101,12 @@ public class ModalidadeRest extends ObjMapper {
 
 	@PUT
 	@Consumes("application/*")
-	public ResponseBuilder alterar(String modalidadeStr) throws GlobalException { 
+	public Response alterar(String modalidadeStr) throws GlobalException { 
 		try {
 			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade(); 
 			new ModalidadeService(modalidade).alterar();
-			return Response.status(1);
+			
+			return Response.ok(modalidade, "Modalidade atualizada com sucesso!").build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -111,10 +116,10 @@ public class ModalidadeRest extends ObjMapper {
 
 	@DELETE
 	@Path("id")
-	public ResponseBuilder excluir(@PathParam("id") int id) throws Exception {
+	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 		 new ModalidadeService(id).excluir();
-		return Response.status(1);
+		return Response.ok("Modalidade excluída com sucesso! ").build();
 		
 		}catch(Throwable e){
 			e.printStackTrace();

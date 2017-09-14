@@ -1,11 +1,12 @@
-package br.com.cepe.hashmd5;
+package br.com.cepe.security;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
-public class hashmd5 {
+public class Criptografia {
 
 	public static String criptografar(String pwd) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		
@@ -17,5 +18,16 @@ public class hashmd5 {
 	    
 	    return crip;
 	}	
+	
+	
+	public String decode64(String senha){
+		
+		  String byteArray = decode64(senha);
+			
+		  Arrays.toString(senha.getBytes());
+		  String decodedString = new String(byteArray);
+		  
+		  return decodedString;
+		}
 
 }

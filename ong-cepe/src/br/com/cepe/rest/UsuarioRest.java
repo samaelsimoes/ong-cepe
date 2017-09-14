@@ -31,7 +31,6 @@ public class UsuarioRest extends ObjMapper{
 	public Response adicionar(String usuarioStr) throws GlobalException {
 		try {
 			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
-			new UsuarioService(usuario).adicionar();
 						
 			if(usuario != null)
 				new UsuarioService(usuario).adicionar();
@@ -69,6 +68,22 @@ public class UsuarioRest extends ObjMapper{
 		try {
 			List<Usuario> usuarios = new UsuarioService(tipo).pesquisaTipoIgual();
 			String resp = getJson(usuarios);
+			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome");
+		}
+	}
+	
+	
+	@GET
+	@Path("/id/{id}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response pesquisarTipo(@PathParam("id") int id) throws GlobalException {
+		try {
+			Usuario usuario = new UsuarioService(id).pesquisaId();
+			String resp = getJson(usuario);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {

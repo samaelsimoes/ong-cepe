@@ -1,62 +1,153 @@
-
-
 <meta charset="utf-8">
+<div class="form-group row">
+    <div class="col-xs-6 col-md-7">
+        
+        <label for="buscar" class="col-2 col-form-label">Buscar:</label>
 
-<section> <!-- Campo pesquisar-->
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 custom-fontes">
-                <div class="form-group row">
-                    <div class="col-xs-6 col-md-7">
-                        
-                        <label for="buscar" class="col-2 col-form-label">Buscar:</label>
+        <input class="form-control" type="text" id="conspj" placeholder="Buscar">
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <label class="col-2 col-form-label"> </label>
+        <div class="col-10">
 
-                        <input class="form-control" type="text" id="conspj" placeholder="Buscar">
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <label class="col-2 col-form-label"> </label>
-                        <div class="col-10">
-
-                            <button type="button" class="btn btn-primary" onclick="buscapessojuridica()">
-                					
-                				<span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
-                			</button>
-                        </div>
-                    </div>
-                </div>	
-            </div>
+            <button type="button" class="btn btn-primary" onclick="buscapessojuridica()">
+                    
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+            </button>
         </div>
     </div>
-</section>
+</div>  
+<div class="form-group row">
+    <div class="col-xs-9 col-md-12 bd-content align-left">
+        <button type="button" class="btn btn-primary btn-success" onclick="chamforcadspesjuri()">
+        
+            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
+        </button>
+    </div>
+</div>
+<div class="form-group row"> 
+    <div class="col-12 col-md-12 pull-md-7 bd-content">
+        <div id = "resupesjuridica" class = "divResultado"></div>
+    </div>
+</div>
 
- <!-- BOTTAO  -->
-    <div class="container-table">
-        <div class="row">
-            <div class="col-8 col-md-8 pull-md-7 bd-content align-left">
-
-                <button type="button" class="btn btn-success active" onclick="chamforcadspesjuri()">
-                
-                    <span class="glyphicon glyphicon-ok-circle"></span> Cadastrar
+<!-- stats modal -->
+<div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edição Pessoa Juridica:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        </div>
-    </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <label for="razsocial" class="form-control-label">Razão Social:</label>
+                                <input class="form-control" type="text" id="razsocial" placeholder="Razão social">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="responsavel" class="form-control-label">Responsável:</label>
+                                <input class="form-control" type="text" id="responsavel" placeholder="Responsavel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <label for="cnpj" class="form-control-label">CNPJ:</label>
+                                <input class="form-control" type="text" id="cnpj" placeholder="CNPJ">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="email" class="form-control-label">E-mail:</label>
+                                <input class="form-control" type="text" id="email" placeholder="E-mail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <label for="telfixo" class="form-control-label">Telefone fixo:</label>
+                                <input class="form-control" type="text" id="telfixo" placeholder="Telefone fixo">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="telmovel" class="form-control-label">Telefone móvel:</label>
+                                <input class="form-control" type="text" id="telmovel" placeholder="Telefone Móvel">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <label class="col-2 col-form-label" for="estado">Estado:</label>
+                                <select class="form-control" id="estado">
+                                
+                                    <option selected>Estado</option>
+                                </select>     
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="col-2 col-form-label" for="cidade">Cidade:</label>
+                    
+                                <select class="form-control" id="cidade">
+                                
+                                    <option selected>Cidade</option>
+                                </select>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <label for="bairro" class="col-2 col-form-label">Bairro:</label>
+                                <input class="form-control" type="text"  id="bairro" placeholder="Bairro">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="rua" class="col-2 col-form-label">Rua:</label>
+                                <input class="form-control" type="text" id="rua" placeholder="Rua">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <label for="complemento" class="col-2 col-form-label">Complemento:</label>
+                                <input class="form-control" type="text"  id="complemento" placeholder="Complemento">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="numero" class="col-2 col-form-label">Número:</label>
+                                <input class="form-control" type="text" id="numero" placeholder="numero">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="cep" class="col-2 col-form-label">CEP:</label>
+                                <input class="form-control" type="text" id="cep" placeholder="CEP">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
 
- <!-- RelatÃ³rio -->
-    <div class="container-table ">
-        <div class="row"> 
-            <div class="col-12 col-md-12 pull-md-7 bd-content">
-                <div id = "resupesjuridica" class = "divResultado"></div>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Sair</button>
+                <button type="button" class="btn btn-success">Salvar</button>
             </div>
         </div>
     </div>
+</div>
 
-	<!-- Chamada da minha funcao do relatÃ³rio -->
+<!-- end modal -->
+<!-- Chamada da minha funcao da grid-->
 
-	<script src="formulario/pessoas/pj/pesJuridica.js"></script>
-    <script type = "text/javascript"> 
-       
-	    window.onload = function(){        
-	        buscapessojuridica();
-	    }
-	</script>
+<script src="formulario/pessoas/pj/pesJuridica.js"></script>
+<script type = "text/javascript"> 
+   
+    window.onload = function(){        
+        buscapessojuridica();
+    }
+</script>

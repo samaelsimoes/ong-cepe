@@ -86,6 +86,7 @@ public class PessoaRest extends ObjMapper {
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
 		String resp = null;
 		try {
+			System.out.println(id);
 			Pessoa pessoa = new PessoaService(id).pesquisaId();
 			if(pessoa != null)
 				resp = getJson(pessoa);

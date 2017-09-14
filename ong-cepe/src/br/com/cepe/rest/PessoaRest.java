@@ -86,7 +86,6 @@ public class PessoaRest extends ObjMapper {
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
 		String resp = null;
 		try {
-			System.out.println(id);
 			Pessoa pessoa = new PessoaService(id).pesquisaId();
 			if(pessoa != null)
 				resp = getJson(pessoa);
@@ -97,11 +96,7 @@ public class PessoaRest extends ObjMapper {
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-<<<<<<< HEAD
 			return this.buildErrorResponse(e.getMessage());
-=======
-			throw new GlobalException("Erro ao fazer a consulta por id");
->>>>>>> d464d5d065c7771ee852fb440049fc2a7940e2d3
 		}
 	}
 

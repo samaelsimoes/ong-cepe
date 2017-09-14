@@ -12,7 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
@@ -40,13 +39,12 @@ public class PessoaRest extends ObjMapper {
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
 			else
-				throw new GlobalException("Valor nulo enviado ao REST");
+				throw new GlobalException("Valor nulo enviado ao servidor! ");
 			
-//			return Response.status(1);
-			return this.buildResponse("Cadastrado com sucesso.");
+			return this.buildResponse("Cadastro concluído com sucesso.");
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
-//			throw new GlobalException("deu erro ", e);
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
@@ -59,11 +57,11 @@ public class PessoaRest extends ObjMapper {
 			
 			List<Pessoa> pessoas = new PessoaService(nome).pesquisaNomeContem();
 			String resp = getJson(pessoas);
-			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por nome");
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome! ");
 		}
 	}
 	
@@ -78,7 +76,7 @@ public class PessoaRest extends ObjMapper {
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por tipo");
+			return this.buildErrorResponse("Erro ao fazer a consulta por tipo");
 		}
 	}
 	
@@ -86,42 +84,46 @@ public class PessoaRest extends ObjMapper {
 	@Path("/id/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
+		String resp = null;
 		try {
-			System.out.println(id);
 			Pessoa pessoa = new PessoaService(id).pesquisaId();
-			String resp = getJson(pessoa);
+			if(pessoa != null)
+				resp = getJson(pessoa);
+			else
+				throw new GlobalException("Erro ao buscar pessoa por Id! ");
+			
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a consulta por id");
+			return this.buildErrorResponse(e.getMessage());
 		}
 	}
 
 	@PUT
 	@Consumes("application/*")
-	public ResponseBuilder alterar(String pessoaStr) throws GlobalException { 
+	public Response alterar(String pessoaStr) throws GlobalException { 
 		try {
 			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa(); 
 			new PessoaService(pessoa).alterar();
-			return Response.status(1);
+			return Response.ok( pessoa ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a alteração do usuário");
+			return this.buildErrorResponse("Erro ao fazer a alteração do usuário");
 		}
 	}
 
 	@DELETE
-	@Path("id")
-	public ResponseBuilder excluir(@PathParam("id") int id) throws Exception {
+	@Path("/id/{id}")
+	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 		 new PessoaService(id).excluir();
-		return Response.status(1);
+		return Response.ok().build();
 		
 		}catch(Throwable e){
 			e.printStackTrace();
-			throw new Exception("Erro ao deletar usuário");
+			return this.buildErrorResponse("Erro ao deletar usuário");
 		}
 	}
 

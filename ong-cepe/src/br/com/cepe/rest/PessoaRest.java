@@ -87,6 +87,7 @@ public class PessoaRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
 		try {
+			System.out.println(id);
 			Pessoa pessoa = new PessoaService(id).pesquisaId();
 			String resp = getJson(pessoa);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();

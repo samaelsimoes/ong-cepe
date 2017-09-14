@@ -58,13 +58,12 @@ $(document).ready(function(){
 						html += "<td>" + listPesj[i].rua + "</td>";
 						html += "<td>" + listPesj[i].complemento + "</td>";
 						html += "<td>" + listPesj[i].numero + "</td>";
-	
+
 						html += "<td>"+
-									"<button type='button' class='btn btn-pencil' onclick='buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
+									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
 									"<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"+
-								"</td>";
-						
-					html += "</tr>";  
+								"</td>";						
+						html += "</tr>";  
 			    }
 		    }else{
 			    if(listPesj == undefined || (listPesj != undefined && listPesj.length > 0)){
@@ -105,8 +104,8 @@ $(document).ready(function(){
 		msg += validaVazio("Responsavel: ", $("#responsavel").val());
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
-		msg += validaVazio("Telefone Fixo: ", $("#telcomercial").val());
-		//msg += validaVazio("Telefone Movel: ", $("#telresponsavel").val());
+		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
+		//msg += validaVazio("Telefone Movel: ", $("#telmovel").val());
 		//msg += validaVazio("Estado: ", $("#estado").val());
 		//msg += validaVazio("Cidade: ", $("#cidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());
@@ -129,7 +128,7 @@ $(document).ready(function(){
             if(!$("#cnpj").val().match(/^\d{14,15}$/)){
             	exp+="CNPJ invalido ! </br> " + "</br>";
             }
-            if(!$("#telcomercial").val().match(/^\d{10,13}$/)){    
+            if(!$("#telfixo").val().match(/^\d{10,13}$/)){    
                 exp+="Telefone Fixo invalido ! </br> " + "</br>";
             }
             
@@ -144,8 +143,8 @@ $(document).ready(function(){
             	dadosPJ.cnpj=$("#cnpj").val();
             	dadosPJ.email=$("#email").val();
             	dadosPJ.dt_nasc=$("#datanascimento").val();
-            	dadosPJ.foneFixo=$("#telcomercial").val();
-            	dadosPJ.foneMovel=$("#telresponsavel").val();
+            	dadosPJ.foneFixo=$("#telfixo").val();
+            	dadosPJ.foneMovel=$("#telmovel").val();
             	dadosPJ.estado=$("#estado").val();
             	dadosPJ.cidade=$("#cidade").val()
             	dadosPJ.rua=$("#rua").val();
@@ -183,4 +182,23 @@ $(document).ready(function(){
         }
         return msg;
     };
+
+    // ------------------------
+
+    buscID = function( id ){
+
+    	$.ajax({
+			  
+			url: ONG.contextPath + "/rest/pessoa/id/" + id,
+				  
+			success:function(dados){
+
+				console.log(dados);
+			},
+			
+			error: function(err){				
+				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
+			}
+		});
+    }
 });

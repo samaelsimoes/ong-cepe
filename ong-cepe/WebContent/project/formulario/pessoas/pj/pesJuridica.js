@@ -95,9 +95,8 @@ $(document).ready(function(){
 	buscapesJuridica(undefined, "");
 
 	cadspesjuridica = function(){
-		alert('cadastro');
+
 		var msg  = "";
-		var exp = "";
 		
 		msg += validaVazio("Razao Social: ", $("#razsocial").val());
 		msg += validaVazio("Responsavel: ", $("#responsavel").val());
@@ -113,24 +112,7 @@ $(document).ready(function(){
 		msg += validaVazio("Numero: ", $("#numero").val());
 
 		if(msg == ""){
-
-			if($("#email").val().indexOf("@") == -1 || //valida se existe o @
-                $("#email").val().indexOf(".") == -1 || //valida se existe o .
-                $("#email").val().indexOf("@") == 0 || //valida se tem texto antes do @
-                $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
-                ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
-                    
-                exp+="E-mail invalido" +"</br>"
-                + "ex: teste_@teste.com.br"
-                document.getElementById("email").focus();
-            }
-            if(!$("#cnpj").val().match(/^\d{14,15}$/)){
-            	exp+="CNPJ invalido ! </br> " + "</br>";
-            }
-            if(!$("#telfixo").val().match(/^\d{10,13}$/)){    
-                exp+="Telefone Fixo invalido ! </br> " + "</br>";
-            }
-            
+			var exp = validaCampos();
             if(exp==""){
 
             	var dadosPJ= new Object();
@@ -144,8 +126,8 @@ $(document).ready(function(){
             	dadosPJ.dt_nasc=$("#datanascimento").val();
             	dadosPJ.foneFixo=$("#telfixo").val();
             	dadosPJ.foneMovel=$("#telmovel").val();
-            	dadosPJ.estado=$("#estado").val();
-            	dadosPJ.cidade=$("#cidade").val()
+            	//dadosPJ.estado=$("#estado").val();
+            	//dadosPJ.cidade=$("#cidade").val()
             	dadosPJ.rua=$("#rua").val();
             	dadosPJ.complemento=$("#complemento").val();
             	dadosPJ.numero=$("#numero").val();
@@ -170,7 +152,7 @@ $(document).ready(function(){
         }
 	}
 	
-	//  ====-----------------
+	//  ====----------------- VALIDAÇÕES
 	
 	validaVazio = function ( campo, valor ) {
 		
@@ -181,7 +163,33 @@ $(document).ready(function(){
         }
         return msg;
     };
+    validaCampos = function(){
 
+    	var exp = "";
+
+    	if($("#email").val().indexOf("@") == -1 || //valida se existe o @
+            $("#email").val().indexOf(".") == -1 || //valida se existe o .
+            $("#email").val().indexOf("@") == 0 || //valida se tem texto antes do @
+            $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
+            ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
+                
+            exp+="E-mail invalido" +"</br>"
+            + "ex: teste_@teste.com.br"
+            document.getElementById("email").focus();
+        }
+        if(!$("#cnpj").val().match(/^\d{14,15}$/)){
+        	exp+="CNPJ invalido ! </br> " + "</br>";
+        }
+        if(!$("#cep").val().match(/^\d{8,9}$/)){
+        	exp+="Cep invalido ! </br> " + "</br>";
+        }
+        if(!$("#telfixo").val().match(/^\d{10,13}$/)){    
+            exp+="Telefone Fixo invalido ! </br> " + "</br>";
+        }
+            alert(exp);
+            console.log(exp);
+    	return exp;
+    };
     // ------------------------
 
     buscID = function( id ){
@@ -192,12 +200,30 @@ $(document).ready(function(){
 				  
 			success:function(dados){
 
-				console.log(dados);
+				if(dados != ""){
+		    		$("#razaosocial").val(dados.nome);
+		    		$("#responsavel").val(dados.responsavel);
+		    		$("#cnpj").val(dados.cnpj);
+		    		$("#email").val(dados.email);
+		    		$("#telfixo").val(dados.foneFixo);
+		    		$("#telmovel").val(dados.foneMovel);
+		    		$("#bairro").val(dados.bairro);
+		    		$("#rua").val(dados.rua);
+					$("#complemento").val(dados.complemento);
+					$("#numero").val(dados.numero);
+					$("#cep").val(dados.cep);
+		    	}			
 			},
 			
 			error: function(err){				
 				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
 			}
 		});
+    };
+
+    editar = function(){
+
+    	alert
+    	
     }
 });

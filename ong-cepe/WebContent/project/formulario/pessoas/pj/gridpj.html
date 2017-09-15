@@ -46,8 +46,8 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-6 ">
-                                <label for="razsocial" class="form-control-label">Razão Social:</label>
-                                <input class="form-control" type="text" id="razsocial" placeholder="Razão social">
+                                <label for="razaosocial" class="form-control-label">Razão Social:</label>
+                                <input class="form-control" type="text" id="razaosocial" placeholder="Razão social">
                             </div>
                             <div class="col-xs-6">
                                 <label for="responsavel" class="form-control-label">Responsável:</label>
@@ -59,7 +59,7 @@
                         <div class="row">
                             <div class="col-xs-6 ">
                                 <label for="cnpj" class="form-control-label">CNPJ:</label>
-                                <input class="form-control" type="text" id="cnpj" placeholder="CNPJ">
+                                <input class="form-control" type="text" id="cnpj" placeholder="CNPJ"  maxlength="15">
                             </div>
                             <div class="col-xs-6">
                                 <label for="email" class="form-control-label">E-mail:</label>
@@ -71,11 +71,11 @@
                         <div class="row">
                             <div class="col-xs-6 ">
                                 <label for="telfixo" class="form-control-label">Telefone fixo:</label>
-                                <input class="form-control" type="text" id="telfixo" placeholder="Telefone fixo">
+                                <input class="form-control" type="text" id="telfixo" placeholder="Telefone fixo"  maxlength="13">
                             </div>
                             <div class="col-xs-6">
                                 <label for="telmovel" class="form-control-label">Telefone móvel:</label>
-                                <input class="form-control" type="text" id="telmovel" placeholder="Telefone Móvel">
+                                <input class="form-control" type="text" id="telmovel" placeholder="Telefone Móvel"  maxlength="13">
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <div class="row">
                             <div class="col-xs-6 ">
                                 <label for="complemento" class="col-2 col-form-label">Complemento:</label>
-                                <input class="form-control" type="text"  id="complemento" placeholder="Complemento">
+                                <input class="form-control" type="text" id="complemento" placeholder="Complemento">
                             </div>
                             <div class="col-xs-6">
                                 <label for="numero" class="col-2 col-form-label">Número:</label>
@@ -126,7 +126,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label for="cep" class="col-2 col-form-label">CEP:</label>
-                                <input class="form-control" type="text" id="cep" placeholder="CEP">
+                                <input class="form-control" type="text" id="cep" placeholder="CEP"  maxlength="9">
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-info" data-dismiss="modal">Sair</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="editar()">Sair</button>
                 <button type="button" class="btn btn-success">Salvar</button>
             </div>
         </div>

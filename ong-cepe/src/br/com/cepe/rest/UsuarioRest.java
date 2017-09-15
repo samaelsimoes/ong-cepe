@@ -53,11 +53,14 @@ public class UsuarioRest extends ObjMapper{
 			
 			List<Usuario> usuarios = new UsuarioService(nome).pesquisaNomeContem();
 			String resp = getJson(usuarios);
-			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			if(resp != null)
+				return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			else
+				throw new GlobalException("Erro ao fazer a consulta por nome");
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao fazer a consulta por nome");
+			return this.buildErrorResponse(e.getMessage());
 		}
 	}
 	
@@ -68,11 +71,14 @@ public class UsuarioRest extends ObjMapper{
 		try {
 			List<Usuario> usuarios = new UsuarioService(tipo).pesquisaTipoIgual();
 			String resp = getJson(usuarios);
-			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			if(resp != null)
+				return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			else
+				throw new GlobalException("Erro ao fazer a consulta por tipo");
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao fazer a consulta por nome");
+			return this.buildErrorResponse(e.getMessage());
 		}
 	}
 	
@@ -84,11 +90,14 @@ public class UsuarioRest extends ObjMapper{
 		try {
 			Usuario usuario = new UsuarioService(id).pesquisaId();
 			String resp = getJson(usuario);
-			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			if(resp != null)
+				return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			else
+				throw new GlobalException("Erro ao fazer a consulta por id");
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao fazer a consulta por nome");
+			return this.buildErrorResponse(e.getMessage());
 		}
 	}
 

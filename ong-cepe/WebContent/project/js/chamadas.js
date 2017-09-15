@@ -17,9 +17,9 @@ $(document).ready(function(){
 	}
 });
 
-var items = document.getElementById('tipopessoa');
+var items = document.querySelector('#tipopessoa');
 
-	items.addEventListener('change', function(){
+items.addEventListener('change', function(){
 	
 	var valor =	this.value // o valor que procuras é: this.value
 

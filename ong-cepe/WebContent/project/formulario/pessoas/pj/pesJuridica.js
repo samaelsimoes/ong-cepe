@@ -126,8 +126,8 @@ $(document).ready(function(){
             	dadosPJ.dt_nasc=$("#datanascimento").val();
             	dadosPJ.foneFixo=$("#telfixo").val();
             	dadosPJ.foneMovel=$("#telmovel").val();
-            	//dadosPJ.estado=$("#estado").val();
-            	//dadosPJ.cidade=$("#cidade").val()
+            	dadosPJ.estado=$("#estado").val();
+            	dadosPJ.cidade=$("#cidade").val()
             	dadosPJ.rua=$("#rua").val();
             	dadosPJ.complemento=$("#complemento").val();
             	dadosPJ.numero=$("#numero").val();
@@ -225,5 +225,58 @@ $(document).ready(function(){
 
     	alert
     	
+    };
+
+    buscaEstado = function(){
+    	var cfg = {							
+			url: ONG.contextPath + "/rest/estado/estado/" + tipo,
+			success: function(listEstado){													
+				montaSelectEstado();
+			},
+			error: function(err){							
+				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + listEstado);
+			}
+		};					
+		ONG.ajax.get(cfg);
     }
+    buscaCidade = function(){
+    	var cfg = {							
+			url: ONG.contextPath + "/rest/cidade/cidade/" + tipo,
+			success: function(listEstado){													
+				montaSelectCidade();
+			},
+			error: function(err){							
+				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + listEstado);
+			}
+		};					
+		ONG.ajax.get(cfg);
+    }
+    montaSelectEstado = function(listEstado){
+    	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined){ // montando meus estados
+			for(var i = 0; i < listEstado.length; i++){
+				var option = $("<option></option>").appendTo($('#estado'));
+				option.attr("value", listEstado[i].id);
+				option.html(listEstado[i].estado);
+			}
+		}
+    }
+    montaSelectCidade = function(listcidade){
+    	if(listcidade != undefined && listcidade.length > 0 && listcidade[0].id != undefined){ // montando meus estados
+			for(var i = 0; i < listcidade.length; i++){
+				var option = $("<option></option>").appendTo($('#cidade'));
+				option.attr("value", listcidade[i].id);
+				option.html(listcidade[i].estado);
+			}
+		}
+    }
+});
+//var items = document.getElementById('estado');
+// ou querySelector
+var items = document.querySelector('#estado');
+
+items.addEventListener('change', function(){
+	var valor =	this.value // o valor que procuras é: this.value
+	if(valor != ""){
+		buscaCidade(); 
+	}
 });

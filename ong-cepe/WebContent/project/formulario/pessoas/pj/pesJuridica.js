@@ -224,17 +224,16 @@ $(document).ready(function(){
     editar = function(){
 
     	alert
-    	
     };
 
     buscaEstado = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + tipo,
+			url: ONG.contextPath + "/rest/estado/estado/" + 1,
 			success: function(listEstado){													
-				montaSelectEstado();
+				montaSelectEstado(listEstado);
 			},
 			error: function(err){							
-				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + listEstado);
+				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + err);
 			}
 		};					
 		ONG.ajax.get(cfg);
@@ -246,17 +245,17 @@ $(document).ready(function(){
 				montaSelectCidade();
 			},
 			error: function(err){							
-				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + listEstado);
+				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
 			}
 		};					
 		ONG.ajax.get(cfg);
     }
-    montaSelectEstado = function(listEstado){
-    	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined){ // montando meus estados
-			for(var i = 0; i < listEstado.length; i++){
-				var option = $("<option></option>").appendTo($('#estado'));
-				option.attr("value", listEstado[i].id);
-				option.html(listEstado[i].estado);
+    montaSelectEstado = function(listEstado) {
+    	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listEstado.length; i++) {
+				var option = $( "<option></option>" ).appendTo($( '#estado' ));
+				option.attr( "value", listEstado[i].id );
+				option.html( listEstado[i].nome );
 			}
 		}
     }
@@ -265,10 +264,12 @@ $(document).ready(function(){
 			for(var i = 0; i < listcidade.length; i++){
 				var option = $("<option></option>").appendTo($('#cidade'));
 				option.attr("value", listcidade[i].id);
-				option.html(listcidade[i].estado);
+				option.html(listcidade[i].nome + " uf: " + listcidade[i].uf);
 			}
 		}
     }
+	var teste = $("#estado option:selected").val();
+	console.log(teste);
 });
 //var items = document.getElementById('estado');
 // ou querySelector
@@ -276,6 +277,7 @@ var items = document.querySelector('#estado');
 
 items.addEventListener('change', function(){
 	var valor =	this.value // o valor que procuras é: this.value
+	console.valor
 	if(valor != ""){
 		buscaCidade(); 
 	}

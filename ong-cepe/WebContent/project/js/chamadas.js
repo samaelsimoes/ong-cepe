@@ -4,15 +4,13 @@ $(document).ready(function(){
 	$('#footer').load('footer.html');
 
 	chamforcadpesfisica = function(){
-
 		$('#pesstipo').load('formulario/pessoas/pf/cadpf.html');
 	}
 	chamforcadspesjuri = function(){
-
 		$('#pesstipo').load('formulario/pessoas/pj/cadpj.html');
+		buscaEstado();
 	}
 	chamacadsbeneass = function(){
-
 		$('#pesstipo').load('formulario/pessoas/beneass/cadbeneass.html');
 	}
 });
@@ -23,7 +21,6 @@ items.addEventListener('change', function(){
 	
 	var valor =	this.value // o valor que procuras é: this.value
 
-	console.log(valor);
 	if(valor == 0){	
 		
 		$('#pesstipo').load('formulario/pessoas/pf/gridpf.html');

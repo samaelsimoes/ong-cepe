@@ -29,7 +29,7 @@ public class EstadoService{
 			this.num = num;
 		}
 		
-		public Estado pesquisaId()  throws GlobalException {
+		/*public Estado pesquisaId()  throws GlobalException {
 			return new EstadoDAO(this.num).findId();
 		}
 
@@ -40,7 +40,10 @@ public class EstadoService{
 
 		public List<Estado> pesquisaNomeContem() throws GlobalException {
 			return (List<Estado>) new EstadoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
+		}*/
+
+		public List<Estado> pesquisaEstado() throws GlobalException {
+			String nome = Integer.toString(this.num);
+			return (List<Estado>) new EstadoDAO().findGeneric("nome", HOperator.EQUALS, nome);
 		}
-
-
 }

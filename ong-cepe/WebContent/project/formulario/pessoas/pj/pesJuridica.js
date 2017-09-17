@@ -125,9 +125,9 @@ $(document).ready(function(){
             	dadosPJ.dt_nasc=$("#datanascimento").val();
             	dadosPJ.foneFixo=$("#telfixo").val();
             	dadosPJ.foneMovel=$("#telmovel").val();
-            	//dadosPJ.estado=$("#estado").val();
-            	dadosPJ.cidade=$("#cidade").val()
-            	dadosPJ.rua=$("#rua").val();
+            	//dadosPJ.estado=$("#estado").val();           	
+				dadosPJ.cidade:{ id: $("#cidadeId").val()};            	
+				dadosPJ.rua=$("#rua").val();
             	dadosPJ.complemento=$("#complemento").val();
             	dadosPJ.numero=$("#numero").val();
             	dadosPJ.cep=$("#cep").val(); 

@@ -24,6 +24,7 @@ public class EstadoRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarPorEstado(@PathParam("estado") String estado){		
 		try {
+			
 			List<Estado> estados = new EstadoService().pesquisaEstado();
 
 			String resp = getJson(estados);

@@ -1,6 +1,3 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
 package br.com.cepe.daoconnect;
 
 import br.com.cepe.entity.pojo.endereco.Cidade;
@@ -18,5 +15,4 @@ public class CidadeDAO extends OperationsDAO<Cidade>{
 	public CidadeDAO(Cidade cidade){
 		this.entity = cidade;
 	}
-	
 }

@@ -47,7 +47,6 @@ public class PessoaFactory extends ObjMapper {
 			else
 				throw new GlobalException(
 						"Falha ao receber o atributo tipo de Pessoa");
-
 			if (tipo != 0) {
 				
 				this.pessoaClasse = PESSOA_CLASSES.get(tipo);
@@ -58,7 +57,6 @@ public class PessoaFactory extends ObjMapper {
 					this.pessoas.add(obj);
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new GlobalException("Erro de factory na classe Pessoa");
@@ -81,7 +79,6 @@ public class PessoaFactory extends ObjMapper {
 		else
 			this.pessoas.add(null);
 	}
-
 	
 	public PessoaFactory(int tipo){
 		this.pessoaClasse = PESSOA_CLASSES.get(tipo);
@@ -103,6 +100,4 @@ public class PessoaFactory extends ObjMapper {
 	public Class<?> getClasse(){
 		return this.pessoaClasse;
 	}
-	
-
 }

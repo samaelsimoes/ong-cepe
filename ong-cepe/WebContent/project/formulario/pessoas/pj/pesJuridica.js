@@ -97,15 +97,14 @@ $(document).ready(function(){
 	cadspesjuridica = function(){
 
 		var msg  = "";
-		
 		msg += validaVazio("Razao Social: ", $("#razsocial").val());
 		msg += validaVazio("Responsavel: ", $("#responsavel").val());
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
 		//msg += validaVazio("Telefone Movel: ", $("#telmovel").val());
-		//msg += validaVazio("Estado: ", $("#estado").val());
-		//msg += validaVazio("Cidade: ", $("#cidade").val());
+		msg += validaVazio("Estado: ", $("#estado").val());
+		msg += validaVazio("Cidade: ", $("#cidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());
 		msg += validaVazio("Rua: ", $("#rua").val());
 		msg += validaVazio("Complemento: ", $("#complemento").val());
@@ -126,13 +125,13 @@ $(document).ready(function(){
             	dadosPJ.dt_nasc=$("#datanascimento").val();
             	dadosPJ.foneFixo=$("#telfixo").val();
             	dadosPJ.foneMovel=$("#telmovel").val();
-            	dadosPJ.estado=$("#estado").val();
+            	//dadosPJ.estado=$("#estado").val();
             	dadosPJ.cidade=$("#cidade").val()
             	dadosPJ.rua=$("#rua").val();
             	dadosPJ.complemento=$("#complemento").val();
             	dadosPJ.numero=$("#numero").val();
             	dadosPJ.cep=$("#cep").val(); 
-
+            	console.log(dadosPJ);
             	var cfg = {
         			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPJ,
@@ -187,7 +186,6 @@ $(document).ready(function(){
             exp+="Telefone Fixo invalido ! </br> " + "</br>";
         }
             alert(exp);
-            console.log(exp);
     	return exp;
     };
     // ------------------------
@@ -238,11 +236,11 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-    buscaCidade = function(){
-    	var cfg = {							
-			url: ONG.contextPath + "/rest/cidade/cidade/" + tipo,
-			success: function(listEstado){													
-				montaSelectCidade();
+    buscaCidade = function(id){
+    	var cfg = {							 
+			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
+			success: function(listaCidade){		
+				montaSelectCidade(listaCidade);
 			},
 			error: function(err){							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -257,28 +255,21 @@ $(document).ready(function(){
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
+			var items = document.querySelector('#estado');
+			items.addEventListener('change', function(){
+				var valor =	this.value // o valo
+				buscaCidade( valor );
+			});
 		}
     }
-    montaSelectCidade = function(listcidade){
-    	if(listcidade != undefined && listcidade.length > 0 && listcidade[0].id != undefined){ // montando meus estados
-			for(var i = 0; i < listcidade.length; i++){
-				var option = $("<option></option>").appendTo($('#cidade'));
-				option.attr("value", listcidade[i].id);
-				option.html(listcidade[i].nome + " uf: " + listcidade[i].uf);
+    montaSelectCidade = function( listaCidade ) {
+    	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listaCidade.length; i++){
+				var option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
+				option.attr( "value", listaCidade[i].id );
+				option.html( listaCidade[i].nome );
 			}
 		}
     }
-	var teste = $("#estado option:selected").val();
-	console.log(teste);
 });
-//var items = document.getElementById('estado');
-// ou querySelector
-var items = document.querySelector('#estado');
 
-items.addEventListener('change', function(){
-	var valor =	this.value // o valor que procuras é: this.value
-	console.valor
-	if(valor != ""){
-		buscaCidade(); 
-	}
-});

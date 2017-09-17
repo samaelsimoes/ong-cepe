@@ -7,7 +7,6 @@ import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.endereco.Cidade;
 import br.com.cepe.exception.GlobalException;
 
-
 public class CidadeService{	
 
 		protected Cidade cidade;

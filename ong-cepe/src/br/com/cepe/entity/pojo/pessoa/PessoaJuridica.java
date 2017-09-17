@@ -1,6 +1,4 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
+
 package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.Entity;
@@ -26,5 +24,4 @@ public class PessoaJuridica extends Pessoa {
 	public void setResponsavel(String responsavel) {
 		this.responsavel = responsavel;
 	}
-
 }

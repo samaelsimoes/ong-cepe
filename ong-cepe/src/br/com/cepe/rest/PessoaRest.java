@@ -37,7 +37,7 @@ public class PessoaRest extends ObjMapper {
 			else
 				throw new GlobalException("Valor nulo enviado ao servidor! ");
 			
-			return this.buildResponse("Cadastro concluído com sucesso.");
+			return this.buildResponse("Cadastro concluido com sucesso.");
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -100,6 +100,7 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String pessoaStr) throws GlobalException { 
 		try {
+
 			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa(); 
 			new PessoaService(pessoa).alterar();
 			return Response.ok( pessoa ,MediaType.APPLICATION_JSON).build();
@@ -111,12 +112,12 @@ public class PessoaRest extends ObjMapper {
 	}
 
 	@DELETE
-	@Path("/id/{id}")
+	@Path("/idexcluir/{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
-		 new PessoaService(id).excluir();
-		return Response.ok().build();
-		
+			System.out.println(" id deletando " + id);
+			new PessoaService(id).excluir();
+			return this.buildResponse("Excluido com sucesso.");
 		}catch(Throwable e){
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro ao deletar usuário");

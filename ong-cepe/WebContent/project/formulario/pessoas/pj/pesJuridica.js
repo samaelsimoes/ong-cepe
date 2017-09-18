@@ -96,12 +96,10 @@ $(document).ready(function(){
 	cadspesjuridica = function(){
 
 		var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razsocial").val());
-		msg += validaVazio("Responsavel: ", $("#responsavel").val());
+		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
-		//msg += validaVazio("Telefone Movel: ", $("#telmovel").val());
 		msg += validaVazio("Estado: ", $("#estado").val());
 		msg += validaVazio("Cidade: ", $("#cidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());
@@ -113,25 +111,24 @@ $(document).ready(function(){
 			var exp = validaCampos();
             if(exp==""){
 
-            	var dadosPJ= new Object();
+            	var dadosPJ = {
             	
-            	dadosPJ.nome=$("#razsocial").val();
-            	dadosPJ.tipo=2;
-            	dadosPJ.status=5;
-            	//dadosPesFis.responsavel=$("#responsavel").val();
-            	dadosPJ.cnpj=$("#cnpj").val();
-            	dadosPJ.email=$("#email").val();
-            	dadosPJ.dt_nasc=$("#datanascimento").val();
-            	dadosPJ.foneFixo=$("#telfixo").val();
-            	dadosPJ.foneMovel=$("#telmovel").val();
-            	//dadosPJ.estado=$("#estado").val();           	
-				dadosPJ.cidade={ 
-					id: $("#cidadeId").val()
-				};            	
-				dadosPJ.rua=$("#rua").val();
-            	dadosPJ.complemento=$("#complemento").val();
-            	dadosPJ.numero=$("#numero").val();
-            	dadosPJ.cep=$("#cep").val(); 
+	            	nome: $("#razaosocial").val(),
+					tipo: 2,
+					status: 5,
+					cnpj: $("#cnpj").val(),
+					email: $("#email").val(),
+	            	dt_nasc: $("#datanascimento").val(),
+	            	foneFixo: $("#telfixo").val(),
+	            	foneMovel: $("#telmovel").val(),
+					cidade:{ 
+						id: $("#cidade").val()
+					},
+					rua: $("#rua").val(),
+	            	complemento: $("#complemento").val(),
+	            	numero: $("#numero").val(),
+	            	cep: $("#cep").val() 
+	            };
             	var cfg = {
         			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPJ,
@@ -200,7 +197,6 @@ $(document).ready(function(){
 
 				if(dados != ""){
 		    		$("#razaosocial").val(dados.nome);
-		    		$("#responsavel").val(dados.responsavel);
 		    		$("#cnpj").val(dados.cnpj);
 		    		$("#email").val(dados.email);
 		    		$("#telfixo").val(dados.foneFixo);
@@ -223,8 +219,7 @@ $(document).ready(function(){
     editarPJ = function(){
 
     	var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razsocial").val());
-		msg += validaVazio("Responsavel: ", $("#responsavel").val());
+		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
@@ -238,38 +233,42 @@ $(document).ready(function(){
 
     	if(msg == ""){
     		var exp = validaCampos();
-
+    		
     		if(exp == ""){
-		    	var dadosPJ= new Object();
+		    	var dadosPJ= {
 		            	
-		    	dadosPJ.nome=$("#razsocial").val();
-		    	dadosPJ.tipo=2;
-		    	dadosPJ.status=5;
-		    	dadosPJ.cnpj=$("#cnpj").val();
-		    	dadosPJ.email=$("#email").val();
-		    	dadosPJ.dt_nasc=$("#datanascimento").val();
-		    	dadosPJ.foneFixo=$("#telfixo").val();
-		    	dadosPJ.foneMovel=$("#telmovel").val();
-				dadosPJ.cidade={ 
-					id: $("#cidadeId").val()
-				};            	
-				dadosPJ.rua=$("#rua").val();
-		    	dadosPJ.complemento=$("#complemento").val();
-		    	dadosPJ.numero=$("#numero").val();
-		    	dadosPJ.cep=$("#cep").val(); 
-
-		    	var cfg = {
-							
-					url: ONG.contextPath + "/rest/pessoa/" + dadosPJ,
+		    		nome : $("#razsocial").val(),
+		    		tipo : 2,
+		    		status : 5,
+		    		cnpj : $("#cnpj").val(),
+		    		email : $("#email").val(),
+		    		dt_nasc : $("#datanascimento").val(),
+		    		foneFixo : $("#telfixo").val(),
+		    		foneMovel : $("#telmovel").val(),
+		    		rua : $("#rua").val(),
+		    		complemento : $("#complemento").val(),
+		    		numero : $("#numero").val(),
+		    		cep : $("#cep").val(),
+					cidade : { 
+						id: $("#cidade").val() 
+					}					
+		    	}
+		    	$.ajax({
+				
+					type: 'PUT',
+					url:ONG.contextPath + "/rest/pessoa/",
+					data: JSON.stringify(dadosPJ),
 					
-					success: function(listPesj,busca){													
-						buscapesJuridica(listPesj,busca);
+					dataType:'text',
+					contentType:'application/json',
+					
+					success:function(data){	
+						bootbox.alert(data);						
 					},
-					error: function(err){							
-						bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+					error: function(err){	
+						bootbox.alert( err.responseText); 
 					}
-				};					
-				ONG.ajax.put(cfg);
+				});
 		    }else{
 		    	bootbox.laert(exp);
 		    }

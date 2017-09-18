@@ -182,17 +182,14 @@ $(document).ready(function(){
         if(!$("#telfixo").val().match(/^\d{10,13}$/)){    
             exp+="Telefone Fixo invalido ! </br> " + "</br>";
         }
-            alert(exp);
     	return exp;
     };
     // ------------------------
 
     buscID = function( id ){
-
     	$.ajax({
 			  
-			url: ONG.contextPath + "/rest/pessoa/id/" + id,
-				  
+			url: ONG.contextPath + "/rest/pessoa/id/" + id,				  
 			success:function(dados){
 
 				if(dados != ""){
@@ -208,8 +205,7 @@ $(document).ready(function(){
 					$("#cep").val(dados.cep);
 					buscaEstado();
 		    	}			
-			},
-			
+			},			
 			error: function(err){				
 				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
 			}
@@ -223,7 +219,6 @@ $(document).ready(function(){
 		msg += validaVazio("Cnpj: ", $("#cnpj").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
-		//msg += validaVazio("Telefone Movel: ", $("#telmovel").val());
 		msg += validaVazio("Estado: ", $("#estado").val());
 		msg += validaVazio("Cidade: ", $("#cidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());
@@ -277,6 +272,43 @@ $(document).ready(function(){
 	    }
     };
 
+    confExcluir = function(id){
+    	bootbox.confirm({
+
+		    message: "Você Desejea EXCLUIr este beneficiario?",
+		    buttons: {
+		        confirm: {
+
+		            label: 'Sim',
+		            className: 'btn-success',
+		        },
+		        cancel: {
+
+		            label: 'Não',
+		            className: 'btn-danger'
+		        }
+		    },		    
+		    callback: function (result) {		        
+		        if(result == true){
+		        	
+		           var cfg={
+			
+					url:  ONG.contextPath + "/rest/pessoa/idexcluir/" + id,
+					success: function (data){
+						
+						bootbox.alert(data);	
+						buscapesJuridica();	            	
+					},
+					error: function (err){				
+						bootbox.alert("Erro ao deletar o contato: " + err.responseText);
+					}
+				};
+				ONG.ajax.delet(cfg);
+		        }
+		    }
+		});		
+    }
+
     buscaEstado = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
@@ -301,6 +333,7 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
+
     montaSelectEstado = function(listEstado) {
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
@@ -315,6 +348,7 @@ $(document).ready(function(){
 			});
 		}
     }
+
     montaSelectCidade = function( listaCidade ) {
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){

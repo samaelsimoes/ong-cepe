@@ -120,5 +120,4 @@ public class PessoaRest extends ObjMapper {
 			return this.buildErrorResponse("Erro ao deletar usuário");
 		}
 	}
-
 }

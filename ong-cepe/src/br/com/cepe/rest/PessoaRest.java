@@ -100,11 +100,9 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String pessoaStr) throws GlobalException { 
 		try {
-
 			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa(); 
 			new PessoaService(pessoa).alterar();
 			return Response.ok( pessoa ,MediaType.APPLICATION_JSON).build();
-			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro ao fazer a alteração do usuário");
@@ -115,7 +113,6 @@ public class PessoaRest extends ObjMapper {
 	@Path("/idexcluir/{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
-			System.out.println(" id deletando " + id);
 			new PessoaService(id).excluir();
 			return this.buildResponse("Excluido com sucesso.");
 		}catch(Throwable e){

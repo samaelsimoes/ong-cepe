@@ -17,7 +17,6 @@ import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.pessoa.PessoaFactory;
 import br.com.cepe.factory.util.ObjMapper;
-import br.com.cepe.service.CidadeService;
 import br.com.cepe.service.PessoaService;
 
 @Path("/pessoa")
@@ -104,9 +103,14 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String pessoaStr) throws GlobalException { 
 		try {
-			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa(); 
-			new PessoaService(pessoa).alterar();
-			return Response.ok( pessoa ,MediaType.APPLICATION_JSON).build();
+			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa();
+			if(pessoa != null)
+				new PessoaService(pessoa).alterar();
+			else
+				throw new GlobalException("Valor nulo enviado ao servidor! ");
+			
+			return this.buildResponse("Pessoa editada com sucesso.");
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro ao fazer a alteração do usuário");

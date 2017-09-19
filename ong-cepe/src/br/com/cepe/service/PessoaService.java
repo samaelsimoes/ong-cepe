@@ -30,11 +30,13 @@ public class PessoaService  implements Service<Pessoa>{
 	}
 
 	public void adicionar()  throws GlobalException {
+		pessoa.setCidade(new CidadeService(this.pessoa.getCidade()).pesquisaId());
 		new PessoaDAO(this.pessoa).persist();
 	}
 
 	public void adicionarLista (List<Pessoa> pessoas) throws GlobalException {
 		for (Pessoa pessoa : pessoas) {
+			pessoa.setCidade(new CidadeService(pessoa.getCidade()).pesquisaId());
 			this.pessoa = pessoa;
 			adicionar();
 		}

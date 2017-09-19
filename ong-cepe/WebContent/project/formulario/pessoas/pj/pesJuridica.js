@@ -79,7 +79,7 @@ $(document).ready(function(){
 							buscapesJuridica(listPesj,busca);
 						},
 						error: function(err){							
-							bootbox.alert("Erro ao Buscar Pessoa, entrar em contato com o Administrador se o problema persistir!");
+							bootbox.alert("Erro ao Buscar Pessoa Juridica, entrar em contato com o Administrador se o problema persistir!");
 						}
 					};					
 					ONG.ajax.get(cfg);
@@ -115,14 +115,14 @@ $(document).ready(function(){
             	
 	            	nome: $("#razaosocial").val(),
 					tipo: 2,
-					status: 5,
+					status: 1,
 					cnpj: $("#cnpj").val(),
 					email: $("#email").val(),
 	            	dt_nasc: $("#datanascimento").val(),
 	            	foneFixo: $("#telfixo").val(),
 	            	foneMovel: $("#telmovel").val(),
 					cidade:{ 
-						id: $("#cidade").val()
+						id: parseInt($("#cidade").val())
 					},
 					rua: $("#rua").val(),
 	            	complemento: $("#complemento").val(),
@@ -234,7 +234,7 @@ $(document).ready(function(){
 		            	
 		    		nome : $("#razsocial").val(),
 		    		tipo : 2,
-		    		status : 5,
+		    		status : 1,
 		    		cnpj : $("#cnpj").val(),
 		    		email : $("#email").val(),
 		    		dt_nasc : $("#datanascimento").val(),
@@ -244,8 +244,9 @@ $(document).ready(function(){
 		    		complemento : $("#complemento").val(),
 		    		numero : $("#numero").val(),
 		    		cep : $("#cep").val(),
+		    		
 					cidade : { 
-						id: $("#cidade").val() 
+						id: parseInt($("#cidade").val())
 					}					
 		    	}
 		    	$.ajax({

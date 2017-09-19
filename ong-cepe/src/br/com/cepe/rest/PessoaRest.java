@@ -35,7 +35,7 @@ public class PessoaRest extends ObjMapper {
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
 			else
-				throw new GlobalException("Valor nulo enviado ao servidor! ");
+				throw new GlobalException("Revisar os seguintes campo! ");
 			
 			return this.buildResponse("Cadastro concluido com sucesso.");
 			

@@ -76,5 +76,4 @@ public class CidadeRest extends ObjMapper {
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-
 }

@@ -12,8 +12,7 @@ $(document).ready(function(){
 		html += 
 
 			"<thead class='table table-striped '>" +
-				"<tr>" +
-					
+				"<tr>" +					
 					"<p> Pessoas </p>  </br>"+ 
 					"<th> Nome </th> " +
 					//"<th> Sobrenome </th>" +
@@ -40,8 +39,7 @@ $(document).ready(function(){
 			  
 			  	for(var i = 0; i < listPesF.length; i++){
 
-					html += "<tr>";			
-
+					html += "<tr>";		
 					html += "<td>" + listPesF[i].nome + "</td>";
 					html += "<td>" + listPesF[i].cpf + "</td>";
 					html += "<td>" + listPesF[i].rg + "</td>";
@@ -61,7 +59,6 @@ $(document).ready(function(){
 									listPesF[i].foneMovel+
 								"</td>"
 					}
-
 					html += "<td>" + listPesF[i].responsavel + "</td>";
 					html += "<td>" + listPesF[i].estado + "</td>";
 					html += "<td>" + listPesF[i].cidade + "</td>";
@@ -101,16 +98,16 @@ $(document).ready(function(){
 				}
 		    }
 		html +="</table>";
-		$("#resupesjuridica").html(html);
+		$("#buscpesjuridica").html(html);
 	}
 	
 	buscapesJuridica(undefined, "");
 
-	cadspesjuridica = function(){
+	cadpesFisica = function(){
 
 		var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
-		msg += validaVazio("Cnpj: ", $("#cnpj").val());
+		msg += validaVazio("Nome: ", $("#nome").val());
+		msg += validaVazio("Cpf: ", $("#cpf").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
 		msg += validaVazio("Estado: ", $("#estado").val());

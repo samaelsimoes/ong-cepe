@@ -36,7 +36,7 @@ public class PessoaRest extends ObjMapper {
 				new PessoaService(pessoa).adicionar();
 							
 			else
-				throw new GlobalException("Valor nulo enviado ao servidor! ");
+				throw new GlobalException("Revisar os seguintes campo! ");
 			
 			
 			

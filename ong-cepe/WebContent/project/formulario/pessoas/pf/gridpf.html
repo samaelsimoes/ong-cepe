@@ -10,7 +10,7 @@
         <label class="col-2 col-form-label"> </label>
         <div class="col-10">
 
-            <button type="button" class="btn btn-primary" onclick="buscapessojuridica()">
+            <button type="button" class="btn btn-primary" onclick="consultapesf()">
                     
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
             </button>
@@ -19,7 +19,7 @@
 </div>  
 <div class="form-group row">
     <div class="col-xs-9 col-md-12 bd-content align-left">
-        <button type="button" class="btn btn-primary btn-success" onclick="chamforcadspesjuri()">
+        <button type="button" class="btn btn-primary btn-success" onclick="cadpesFisica()">
         
             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
         </button>
@@ -27,7 +27,7 @@
 </div>
 <div class="form-group row"> 
     <div class="col-12 col-md-12 pull-md-7 bd-content">
-        <div id = "resupesjuridica" class = "divResultado"></div>
+        <div id = "buscpesjuridica" class = "divResultado"></div>
     </div>
 </div>
 
@@ -149,6 +149,6 @@
 
 <script type = "text/javascript"> 
     window.onload = function(){        
-        buscapessojuridica();
+        consultapesf();
     }
 </script>

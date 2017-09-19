@@ -17,6 +17,7 @@ import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.pessoa.PessoaFactory;
 import br.com.cepe.factory.util.ObjMapper;
+import br.com.cepe.service.CidadeService;
 import br.com.cepe.service.PessoaService;
 
 @Path("/pessoa")
@@ -34,8 +35,11 @@ public class PessoaRest extends ObjMapper {
 					
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
+							
 			else
 				throw new GlobalException("Revisar os seguintes campo! ");
+			
+			
 			
 			return this.buildResponse("Cadastro concluido com sucesso.");
 			

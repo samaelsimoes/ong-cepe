@@ -9,12 +9,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.cepe.datatype.HOperator;
-import br.com.cepe.entity.pojo.endereco.Cidade;
 import br.com.cepe.entity.pojo.endereco.Estado;
-import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.util.ObjMapper;
-import br.com.cepe.service.CidadeService;
 import br.com.cepe.service.EstadoService;
 
 @Path("/estado")

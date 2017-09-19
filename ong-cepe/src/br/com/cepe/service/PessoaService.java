@@ -65,8 +65,7 @@ public class PessoaService  implements Service<Pessoa>{
 
 	public void alterar()  throws GlobalException{
 		pessoa.setCidade(new CidadeService(pessoa.getCidade()).pesquisaId());
-		PessoaDAO pessoaDAO = new PessoaDAO(this.pessoa);		
-		pessoaDAO.update();
+		new PessoaDAO(this.pessoa).update();		
 	}
 
 

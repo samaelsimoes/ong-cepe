@@ -133,7 +133,8 @@ $(document).ready(function(){
         			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPJ,
         			success: function(msg){		
-        				bootbox.alert("Realizado cadastro com sucesso ");
+        				bootbox.alert(msg);
+        				buscapesJuridica();	            	
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -258,10 +259,11 @@ $(document).ready(function(){
 					dataType:'text',
 					contentType:'application/json',
 					
-					success:function(data){	
-						bootbox.alert(data);						
+					success:function(data) {	
+						bootbox.alert(data);	
+						buscapesJuridica();	            	
 					},
-					error: function(err){	
+					error: function(err) {	
 						bootbox.alert( err.responseText); 
 					}
 				});
@@ -273,7 +275,7 @@ $(document).ready(function(){
 	    }
     };
 
-    confExcluir = function(id){
+    confExcluir = function(id) {
     	bootbox.confirm({
 
 		    message: "Você Desejea EXCLUIr este beneficiario?",
@@ -295,12 +297,12 @@ $(document).ready(function(){
 		           var cfg={
 			
 					url:  ONG.contextPath + "/rest/pessoa/idexcluir/" + id,
-					success: function (data){
+					success: function (data) {
 						
 						bootbox.alert(data);	
 						buscapesJuridica();	            	
 					},
-					error: function (err){				
+					error: function (err) {				
 						bootbox.alert("Erro ao deletar o contato: " + err.responseText);
 					}
 				};
@@ -316,19 +318,19 @@ $(document).ready(function(){
 			success: function(listEstado){													
 				montaSelectEstado(listEstado);
 			},
-			error: function(err){							
+			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + err);
 			}
 		};					
 		ONG.ajax.get(cfg);
     }
-    buscaCidade = function(id){
+    buscaCidade = function(id) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
-			success: function(listaCidade){		
+			success: function(listaCidade) {		
 				montaSelectCidade(listaCidade);
 			},
-			error: function(err){							
+			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
 			}
 		};					

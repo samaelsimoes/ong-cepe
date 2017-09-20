@@ -37,9 +37,6 @@ public class PessoaRest extends ObjMapper {
 							
 			else
 				throw new GlobalException("Revisar os seguintes campo! ");
-			
-			
-			
 			return this.buildResponse("Cadastro concluido com sucesso.");
 			
 		} catch (Throwable e) {

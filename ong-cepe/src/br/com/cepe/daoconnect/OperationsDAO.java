@@ -1,7 +1,6 @@
 package br.com.cepe.daoconnect;
 
 import java.util.List;
-
 import javax.persistence.Query;
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.exception.GlobalException;
@@ -23,7 +22,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	public OperationsDAO(int num){
 		this.num = num;
 	}
-	
+
 	public void persist(){
 		em.getTransaction().begin();
 		em.persist(this.entity);

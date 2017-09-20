@@ -6,10 +6,10 @@ $(document).ready(function(){
 	chamforcadpesfisica = function(){
 		$('#pesstipo').load('formulario/pessoas/pf/cadpf.html');
 	}
-	chamforcadspesjuri = function(){
+	/*chamforcadspesjuri = function(){
 		$('#pesstipo').load('formulario/pessoas/pj/cadpj.html');
 		buscaEstado();
-	}
+	}*/
 	chamacadsbeneass = function(){
 		$('#pesstipo').load('formulario/pessoas/beneass/cadbeneass.html');
 	}

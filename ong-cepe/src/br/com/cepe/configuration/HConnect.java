@@ -7,9 +7,13 @@ import javax.persistence.Query;
 
 public class HConnect {
 	private EntityManagerFactory connection;
+	private static EntityManager em = null;
 	
 	public EntityManager getEntityManager(){
-		return connect().createEntityManager();
+		if (em == null){
+			em = connect().createEntityManager(); 
+		}
+		return em;
 	}
 	
 	public Query getQuery(String hql){

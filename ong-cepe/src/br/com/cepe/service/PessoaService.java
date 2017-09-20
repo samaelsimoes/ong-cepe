@@ -63,8 +63,8 @@ public class PessoaService  implements Service<Pessoa>{
 		new PessoaDAO(this.num).delete();
 	}
 
-	public void alterar()  throws GlobalException{
-		pessoa.setCidade(new CidadeService(pessoa.getCidade()).pesquisaId());
+	public void alterar()  throws GlobalException{		
+		//pessoa.setCidade(new CidadeService(pessoa.getCidade()).pesquisaId());
 		new PessoaDAO(this.pessoa).update();		
 	}
 

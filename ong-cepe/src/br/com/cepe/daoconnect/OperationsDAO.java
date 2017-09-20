@@ -28,13 +28,11 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		em.getTransaction().begin();
 		em.persist(this.entity);
 		em.getTransaction().commit();
-		em.close();
 	}
 	
 	public T findId(){
 		Class<T> classe = getEmClass();
 		T obj = em.find(classe, this.num);
-		em.close();
 		return obj;
 	}
 	
@@ -45,15 +43,14 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		Query query = super.getQuery(queryStr);
 		@SuppressWarnings("unchecked")
 		List<T> list = query.getResultList();
-		disconnect();
+		//disconnect();
 		return list;
 	}
 	
 	public void update(){
-		em.getTransaction().begin();
+		em.getTransaction().begin();		
 		em.merge(this.entity);
 		em.getTransaction().commit();
-		em.close();
 	}
 	
 	public void delete(){
@@ -62,7 +59,6 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		em.getTransaction().begin();
 		em.remove(obj);
 		em.getTransaction().commit();
-		em.close();
 	}
 
 }

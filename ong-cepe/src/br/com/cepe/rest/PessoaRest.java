@@ -29,17 +29,12 @@ public class PessoaRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response adicionar(String pessoaStr) throws GlobalException {
 		try {
-			 
 			Pessoa pessoa = new PessoaFactory(pessoaStr).getPessoa();
 					
 			if(pessoa != null)
 				new PessoaService(pessoa).adicionar();
-							
 			else
 				throw new GlobalException("Revisar os seguintes campo! ");
-			
-			
-			
 			return this.buildResponse("Cadastro concluido com sucesso.");
 			
 		} catch (Throwable e) {

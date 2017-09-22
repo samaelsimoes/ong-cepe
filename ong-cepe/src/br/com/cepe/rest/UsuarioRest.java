@@ -37,7 +37,9 @@ public class UsuarioRest extends ObjMapper{
 			else
 				throw new GlobalException("Valor nulo enviado ao REST");
 			
-			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
+//			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
+			return this.buildResponse("Cadastrado com sucesso.");
+
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -117,12 +119,14 @@ public class UsuarioRest extends ObjMapper{
 	}
 
 	@DELETE
-	@Path("id")
+	@Path("{id}")
+	@Consumes("application/*")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 		new UsuarioService(id).excluir();
-		return Response.ok().build();
-		
+//		return Response.ok().build();
+		return this.buildResponse("Excluído com sucesso.");
+
 		}catch(Throwable e){
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro ao deletar usuário");

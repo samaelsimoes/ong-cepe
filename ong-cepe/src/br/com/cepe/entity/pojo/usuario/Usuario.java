@@ -16,7 +16,6 @@ public class Usuario {
 	private int id;
 	private int tipo;
 	private String nome;
-	private String sobrenome;
 	private String email;
 	private String senha;
 	private String usuario;
@@ -39,12 +38,6 @@ public class Usuario {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
 	}
 	public String getEmail() {
 		return email;

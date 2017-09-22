@@ -13,6 +13,9 @@
 	Front end: Html, css, SCSS, JavaScript, JQuery, Ajax, JSon.
 	Back end: Java, Rest, Servlet, Hibernate, Mave.
 */
+.actions>.btn{
+	margin-left: 3px;
+}
 body, html {
   width: 100%;
   height: 100%; }

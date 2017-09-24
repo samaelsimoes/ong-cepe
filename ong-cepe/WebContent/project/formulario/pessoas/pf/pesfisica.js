@@ -6,7 +6,7 @@ $(document).ready(function(){
 	}		
 	
 	buscapefisica = function(listPesF, busca){
-		alert("teste");
+
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
@@ -98,11 +98,10 @@ $(document).ready(function(){
 				}
 		    }
 		html +="</table>";
-		console.log(html);
 		$("#resupsfisica").html(html);
 	}
 	
-	buscapesJuridica(undefined, "");
+	buscapefisica(undefined, "");
 
 	cadpesFisica = function(){
 
@@ -144,6 +143,7 @@ $(document).ready(function(){
 	            	numero: $("#numero").val(),
 	            	cep: $("#cep").val() 
 	            };
+
             	var cfg = {
         			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPF,
@@ -362,6 +362,7 @@ $(document).ready(function(){
 				var option = $( "<option></option>" ).appendTo($( '#estado' ));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
+				console.log(listEstado[i].nome);
 			}
 			var items = document.querySelector('#estado');
 			items.addEventListener('change', function(){

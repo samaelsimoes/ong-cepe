@@ -2,12 +2,14 @@
 <div class="form-group row">
     <div class="col-xs-6 col-md-7">
         
-        <label for="buscar" class="col-2 col-form-label">Buscar:</label>
+        <label for="conspf" class="col-2 col-form-label">Buscar:</label>
 
-        <input class="form-control" type="text" id="conspj" placeholder="Buscar">
+        <input class="form-control" type="text" id="conspf" placeholder="Buscar">
     </div>
     <div class="col-xs-6 col-md-3">
+
         <label class="col-2 col-form-label"> </label>
+
         <div class="col-10">
 
             <button type="button" class="btn btn-primary" onclick="consultapesf()">
@@ -19,121 +21,122 @@
 </div>  
 <div class="form-group row">
     <div class="col-xs-9 col-md-12 bd-content align-left">
-        <button type="button" class="btn btn-primary btn-success" onclick="cadpesFisica()">
-        
+        <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="buscaEstado()">
+
             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
         </button>
     </div>
 </div>
+<!-- GRID -->
 <div class="form-group row"> 
     <div class="col-12 col-md-12 pull-md-7 bd-content">
-        <div id = "buscpesjuridica" class = "divResultado"></div>
+
+        <div id="resupsfisica" class="divResultado"></div>
     </div>
 </div>
 
 <!-- stats modal -->
-<div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modaledit" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
                 <h5 class="modal-title" id="exampleModalLabel">Edição Pessoa Juridica:</h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-10 ">
-                                <label for="razaosocial" class="form-control-label">Razão Social:</label>
-                                <input class="form-control" type="text" id="razaosocial" placeholder="Razão social">
-                            </div>
+                <div class="col">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-12">
+                            <label for="example-text-input" class="col-2 col-form-label">Nome:</label>
+                            <input class="form-control" type="text" id="nome" placeholder="Nome:">
+                        </div>
+                         <div class="col-xs-6 col-md-6 ">
+                            <label for="example-text-input" class="col-2 col-form-label">E-mail:</label>
+                            <input class="form-control" type="text" id="email" placeholder="E-mail">
+                        </div>  
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="example-text-input" class="col-2 col-form-label">CPF:</label>
+                            <input class="form-control" type="text" id="cpf" placeholder="CPF" maxlength="11">
+                        </div>
+
+                        <div class="col-xs-6 col-md-6">
+                            <label for="example-text-input" class="col-2 col-form-label">RG:</label>
+                            <input class="form-control" type="text" id="rg" placeholder="RG" maxlength="13">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="telfixo" class="col-2 col-form-label">Telefone Fixo:</label>
+                            <input class="form-control" type="text" id="telfixo" placeholder="Telefone Fixo" maxlength="13">
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <label for="telmovel" class="col-2 col-form-label">Telefone Móvel:</label>
+                            <input class="form-control" type="text" id="telmovel" placeholder="Telefone Móvel" maxlength="13">
+                        </div>  
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="estado">Estado:</label>
                             
+                            <select class="form-control" name="estado" id="estado">
+                            
+                                <option >Selecione o estado:</option>
+                            </select>       
                         </div>
+                        <div class="col-xs-6 col-md-6">
+                            
+                            <label class="col-2 col-form-label" for="cidade">Cidade:</label>
+                            
+                            <select class="form-control" name="cidade" id="cidade">
+                            
+                                <option selected>Selecione a cidade:</option>
+                            </select>    
+                        </div>  
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6 ">
-                                <label for="cnpj" class="form-control-label">CNPJ:</label>
-                                <input class="form-control" type="text" id="cnpj" placeholder="CNPJ"  maxlength="15">
-                            </div>
-                            <div class="col-xs-6">
-                                <label for="email" class="form-control-label">E-mail:</label>
-                                <input class="form-control" type="text" id="email" placeholder="E-mail">
-                            </div>
+
+                     <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="bairro" class="col-2 col-form-label">Bairro:</label>
+                            <input class="form-control" type="text"  id="bairro" placeholder="Bairro">
                         </div>
+                        <div class="col-xs-6 col-md-6">                    
+                            <label for="rua" class="col-2 col-form-label">Rua:</label>
+                            <input class="form-control" type="text" id="rua" placeholder="rua">
+                        </div>  
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6 ">
-                                <label for="telfixo" class="form-control-label">Telefone fixo:</label>
-                                <input class="form-control" type="text" id="telfixo" placeholder="Telefone fixo"  maxlength="13">
-                            </div>
-                            <div class="col-xs-6">
-                                <label for="telmovel" class="form-control-label">Telefone móvel:</label>
-                                <input class="form-control" type="text" id="telmovel" placeholder="Telefone Móvel"  maxlength="13">
-                            </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="bairro" class="col-2 col-form-label">Complemento:</label>
+                            <input class="form-control" type="text"  id="complemento" placeholder="Complemento">
                         </div>
+                        <div class="col-xs-6 col-md-3 ">
+                            
+                            <label for="rua" class="col-2 col-form-label">Número:</label>
+                            <input class="form-control" type="text" id="numero" placeholder="numero">
+                        </div>  
+                        <div class="col-xs-6 col-md-3 ">
+                            
+                            <label for="cep" class="col-2 col-form-label">CEP:</label>
+                            <input class="form-control" type="text" id="cep" placeholder="cep" maxlength="9">
+                        </div>                  
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6 ">
-                                <label class="col-2 col-form-label" for="estado">Estado:</label>
-                                <select class="form-control" name="estado" id="estado">
-                                
-                                    <option>Estado</option>
-                                </select>     
-                            </div>
-                            <div class="col-xs-6">
-                                <label class="col-2 col-form-label" for="cidade">Cidade:</label>
-                    
-                                <select class="form-control" name="cidade" id="cidade">
-                                
-                                    <option>Cidade</option>
-                                </select>   
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6 ">
-                                <label for="bairro" class="col-2 col-form-label">Bairro:</label>
-                                <input class="form-control" type="text"  id="bairro" placeholder="Bairro">
-                            </div>
-                            <div class="col-xs-6">
-                                <label for="rua" class="col-2 col-form-label">Rua:</label>
-                                <input class="form-control" type="text" id="rua" placeholder="Rua">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6 ">
-                                <label for="complemento" class="col-2 col-form-label">Complemento:</label>
-                                <input class="form-control" type="text" id="complemento" placeholder="Complemento">
-                            </div>
-                            <div class="col-xs-6">
-                                <label for="numero" class="col-2 col-form-label">Número:</label>
-                                <input class="form-control" type="text" id="numero" placeholder="numero">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label for="cep" class="col-2 col-form-label">CEP:</label>
-                                <input class="form-control" type="text" id="cep" placeholder="CEP"  maxlength="9">
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-info" data-dismiss="modal">Sair</button>
+                <button type="button" class="btn" data-dismiss="modal">Sair</button>
 
-                <button type="button" class="btn btn-success" onclick="editarPJ()">
+                <button type="button" class="btn btn-primary btn-success" onclick="editarPF()">
 
                     <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
                 </button>                
@@ -141,14 +144,119 @@
         </div>
     </div>
 </div>
-
 <!-- end modal -->
 <!-- Chamada da minha funcao da grid-->
+<!-- Modal add -->
+<div class="modal fade" id="modaladd" tabindex="-1" role="dialog" aria-labelledby="modaladd" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro Pessoa Juridica</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col">
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="example-text-input" class="col-2 col-form-label">Nome:</label>
+                            <input class="form-control" type="text" id="nome" placeholder="Nome:">
+                        </div>
+                         <div class="col-xs-6 col-md-6 ">
+                            <label for="example-text-input" class="col-2 col-form-label">E-mail:</label>
+                            <input class="form-control" type="text" id="email" placeholder="E-mail">
+                        </div>  
+                    </div>
 
-<script src="formulario/pessoas/pj/pesJuridica.js"></script>
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="example-text-input" class="col-2 col-form-label">CPF:</label>
+                            <input class="form-control" type="text" id="cpf" placeholder="CPF" maxlength="11">
+                        </div>
+
+                        <div class="col-xs-6 col-md-6">
+                            <label for="example-text-input" class="col-2 col-form-label">RG:</label>
+                            <input class="form-control" type="text" id="rg" placeholder="RG" maxlength="13">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="telfixo" class="col-2 col-form-label">Telefone Fixo:</label>
+                            <input class="form-control" type="text" id="telfixo" placeholder="Telefone Fixo" maxlength="13">
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <label for="telmovel" class="col-2 col-form-label">Telefone Móvel:</label>
+                            <input class="form-control" type="text" id="telmovel" placeholder="Telefone Móvel" maxlength="13">
+                        </div>  
+                    </div>
+
+                     <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="estado">Estado:</label>
+                            
+                            <select class="form-control" name="estado" id="estado">
+                            
+                                <option >Selecione o estado:</option>
+                            </select>       
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            
+                            <label class="col-2 col-form-label" for="cidade">Cidade:</label>
+                            
+                            <select class="form-control" name="cidade" id="cidade">
+                            
+                                <option selected>Selecione a cidade:</option>
+                            </select>    
+                        </div>  
+                    </div>
+
+                     <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="bairro" class="col-2 col-form-label">Bairro:</label>
+                            <input class="form-control" type="text"  id="bairro" placeholder="Bairro">
+                        </div>
+                        <div class="col-xs-6 col-md-6">                    
+                            <label for="rua" class="col-2 col-form-label">Rua:</label>
+                            <input class="form-control" type="text" id="rua" placeholder="rua">
+                        </div>  
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-6">
+                            <label for="bairro" class="col-2 col-form-label">Complemento:</label>
+                            <input class="form-control" type="text"  id="complemento" placeholder="Complemento">
+                        </div>
+                        <div class="col-xs-6 col-md-3 ">
+                            
+                            <label for="rua" class="col-2 col-form-label">Número:</label>
+                            <input class="form-control" type="text" id="numero" placeholder="numero">
+                        </div>  
+                        <div class="col-xs-6 col-md-3 ">
+                            
+                            <label for="cep" class="col-2 col-form-label">CEP:</label>
+                            <input class="form-control" type="text" id="cep" placeholder="cep" maxlength="9">
+                        </div>                  
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                    <button type="button" class="btn" data-dismiss="modal">Sair</button>          
+                
+                    <button type="button" class="btn btn-primary btn-success" onclick="cadpesFisica()">
+
+                        <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
+                    </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="formulario/pessoas/pf/pesFisica.js"></script>
 
 <script type = "text/javascript"> 
     window.onload = function(){        
-        consultapesf();
+    	consultapesf();
     }
 </script>

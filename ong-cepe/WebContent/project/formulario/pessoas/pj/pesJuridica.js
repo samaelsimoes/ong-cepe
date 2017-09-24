@@ -278,7 +278,7 @@ $(document).ready(function(){
     confExcluir = function(id) {
     	bootbox.confirm({
 
-		    message: "Você Desejea EXCLUIr este beneficiario?",
+		    message: "Você Desejea excluir esse beneficiario?",
 		    buttons: {
 		        confirm: {
 

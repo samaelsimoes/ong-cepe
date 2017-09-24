@@ -50,8 +50,8 @@ public class UsuarioService implements Service<Usuario>{
 	}
 
 	public List<Usuario> pesquisaTipoIgual() throws GlobalException {
-		String tipo = Integer.toString(this.num);
-		return (List<Usuario>) new UsuarioDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
+//		String tipo = Integer.toString(this.num);
+		return (List<Usuario>) new UsuarioDAO().findGeneric("tipo", HOperator.EQUALS, this.valorStr);
 	}
 
 	public List<Usuario> pesquisaNomeContem() throws GlobalException {

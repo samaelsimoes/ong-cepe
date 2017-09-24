@@ -11,16 +11,15 @@
 	<title>Centro esportivo para pessoas especiais - Joinville</title>
 	
 	<link href="../lib/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">    
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap.css">    
 	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap-theme.css">
-	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap.css">
-		
 </head>
 <body>
 
 	<section id="header" class="custom-padding-header"></section>
 	
-	<section class="padding-vertical-small">
+	<section id="conteudo" class="padding-vertical-small">
 		<div class="container">
 			<div id="top" class="row">
 				<div class="col-md-3">
@@ -28,27 +27,33 @@
 				</div>
 				
 				<div class="col-md-5">
-						<input name="search" class="form-control h2" id="valorPesquisa" type="text">
+						<input name="search" class="form-control h2" id="valorPesquisa" type="text" placeholder="Nome">
 				</div>
 				<div class="col-md-4">
-					<a href="#" class="btn btn-info btn-md h2 "><span class="glyphicon glyphicon-search"></span> Buscar</a>
-					<a href="#" class="btn btn-info btn-md pull-right h2">Incluir</a>			
+					<a href="#" onClick="return ONG.usuario.pesquisar()" class="btn btn-primary btn-md h2 "><span class="glyphicon glyphicon-search"></span> Buscar</a>
+					<a href="#" onClick="return ONG.usuario.btnCadastrar()" class="btn btn-primary btn-success btn-md pull-right h2"><span class="glyphicon glyphicon-ok"></span> Cadastrar</a>			
 				</div>
 			</div> <!-- /#top -->
 		</div>
 	</section>
-	
-	<!-- CHAMADA DA GRID -->
-	<section class="section" id="grid"></section>
-	
+	<section id="conteudo">
+					<div class="container">
+						<div class="form-group row"> 
+						    <div class="col-12 col-md-12 pull-md-7 bd-content">
+						        <div id = "exibiList" class = "divResultado"></div>
+						    </div>
+						</div>
+					</div>
+	</section>
 	<section id="footer" class="custom-footer"></section>
 </body>
 
     <script src="../lib/node_modules/jquery/dist/jquery.js"></script>
     <script src="../lib/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    
-    <script src="js/chamadas.js"></script>
 	<script src="js/bootbox.min.js"></script>
+    
 	<script src="js/ajax.js"></script>
+    <script src="formulario/usuarios/usuariosRest.js"></script>
+    <script src="formulario/usuarios/usuarios.js"></script>
 	
 </html>

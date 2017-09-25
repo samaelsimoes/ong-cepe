@@ -2,17 +2,10 @@ $(document).ready(function(){
 	
 	$('#header').load('header.html');
 	$('#footer').load('footer.html');
-
-	chamforcadpesfisica = function(){
-		$('#pesstipo').load('formulario/pessoas/pf/cadpf.html');
-	}
-	/*chamforcadspesjuri = function(){
-		$('#pesstipo').load('formulario/pessoas/pj/cadpj.html');
-		buscaEstado();
-	}*/
+/*
 	chamacadsbeneass = function(){
 		$('#pesstipo').load('formulario/pessoas/beneass/cadbeneass.html');
-	}
+	}*/
 });
 
 var items = document.querySelector('#tipopessoa');

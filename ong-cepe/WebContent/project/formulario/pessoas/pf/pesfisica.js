@@ -1,12 +1,12 @@
 $(document).ready(function(){
 	consultapesf=function(){
 		
-	    var busca=$("#conspj").val();	  	
+	    var busca=$("#conspf").val();	  	
 	    buscapefisica(undefined,busca);
 	}		
 	
 	buscapefisica = function(listPesF, busca){
-				
+
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
@@ -16,8 +16,8 @@ $(document).ready(function(){
 					"<p> Pessoas </p>  </br>"+ 
 					"<th> Nome </th> " +
 					//"<th> Sobrenome </th>" +
-					"<th> Cpf </th>" + 
-					"<th> Rg </th>" + 
+					"<th> CPF </th>" + 
+					"<th> RG </th>" + 
 					"<th> DataNascimento </th>" + 
 					"<th> Contato Responsavel </th>" +
 					"<th> E-mail </th>" +
@@ -98,16 +98,17 @@ $(document).ready(function(){
 				}
 		    }
 		html +="</table>";
-		$("#buscpesjuridica").html(html);
+		$("#resupsfisica").html(html);
 	}
 	
-	buscapesJuridica(undefined, "");
+	buscapefisica(undefined, "");
 
 	cadpesFisica = function(){
 
 		var msg  = "";
 		msg += validaVazio("Nome: ", $("#nome").val());
-		msg += validaVazio("Cpf: ", $("#cpf").val());
+		msg += validaVazio("CPF: ", $("#cpf").val());
+		msg += validaVazio("RG: ", $("#rg").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
 		msg += validaVazio("Estado: ", $("#estado").val());
@@ -123,22 +124,26 @@ $(document).ready(function(){
 
             	var dadosPF = {
             	
-	            	nome: $("#razaosocial").val(),
+	            	nome: $("#nome").val(),
 					tipo: 1,
 					status: 1,
-					cnpj: $("#cnpj").val(),
+					cpf: $("#cpf").val(),
+					rg: $("#rg").val(),
 					email: $("#email").val(),
 	            	dt_nasc: $("#datanascimento").val(),
 	            	foneFixo: $("#telfixo").val(),
 	            	foneMovel: $("#telmovel").val(),
+
 					cidade:{ 
 						id: $("#cidade").val()
 					},
+
 					rua: $("#rua").val(),
 	            	complemento: $("#complemento").val(),
 	            	numero: $("#numero").val(),
 	            	cep: $("#cep").val() 
 	            };
+
             	var cfg = {
         			url: ONG.contextPath +"/rest/pessoa/",
         			data: dadosPF,
@@ -183,8 +188,11 @@ $(document).ready(function(){
             + "ex: teste_@teste.com.br"
             document.getElementById("email").focus();
         }
-        if(!$("#cnpj").val().match(/^\d{14,15}$/)){
-        	exp+="CNPJ invalido ! </br> " + "</br>";
+        if(!$("#cpf").val().match(/^\d{11,12}$/)){
+        	exp+="cpf invalido ! </br> " + "</br>";
+        }
+        if(!$("#rg").val().match(/^\d{9,13}$/)){
+        	exp+="rg invalido ! </br> " + "</br>";
         }
         if(!$("#cep").val().match(/^\d{8,9}$/)){
         	exp+="Cep invalido ! </br> " + "</br>";
@@ -204,7 +212,8 @@ $(document).ready(function(){
 
 				if(dados != ""){
 		    		$("#razaosocial").val(dados.nome);
-		    		$("#cnpj").val(dados.cnpj);
+		    		$("#rg").val(dados.rg);
+		    		$("#cpf").val(dados.cpf);
 		    		$("#email").val(dados.email);
 		    		$("#telfixo").val(dados.foneFixo);
 		    		$("#telmovel").val(dados.foneMovel);
@@ -222,11 +231,12 @@ $(document).ready(function(){
 		});
     };
 
-    editarPJ = function(){
+    editarPF = function(){
 
     	var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
-		msg += validaVazio("Cnpj: ", $("#cnpj").val());
+		msg += validaVazio("Nome ", $("#nome").val());
+		msg += validaVazio("CPF: ", $("#cpf").val());
+		msg += validaVazio("RG: ", $("#rg").val());
 		msg += validaVazio("Email: ", $("#email").val());
 		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
 		msg += validaVazio("Estado: ", $("#estado").val());
@@ -240,12 +250,13 @@ $(document).ready(function(){
     		var exp = validaCampos();
     		
     		if(exp == ""){
-		    	var dadosPJ= {
+		    	var dadosPF= {
 		            	
-		    		nome : $("#razsocial").val(),
+		    		nome : $("#nome").val(),
 		    		tipo : 1,
 		    		status : 1,
-		    		cnpj : $("#cnpj").val(),
+		    		cpf : $("#cpf").val(),
+		    		rg : $("#rg").val(),
 		    		email : $("#email").val(),
 		    		dt_nasc : $("#datanascimento").val(),
 		    		foneFixo : $("#telfixo").val(),
@@ -263,7 +274,7 @@ $(document).ready(function(){
 				
 					type: 'PUT',
 					url:ONG.contextPath + "/rest/pessoa/",
-					data: JSON.stringify(dadosPJ),
+					data: JSON.stringify(dadosPF),
 					
 					dataType:'text',
 					contentType:'application/json',
@@ -286,7 +297,7 @@ $(document).ready(function(){
     confExcluir = function(id){
     	bootbox.confirm({
 
-		    message: "Você Desejea EXCLUIr este beneficiario?",
+		    message: "Você Desejea excluir este beneficiario?",
 		    buttons: {
 		        confirm: {
 
@@ -351,6 +362,7 @@ $(document).ready(function(){
 				var option = $( "<option></option>" ).appendTo($( '#estado' ));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
+				console.log(listEstado[i].nome);
 			}
 			var items = document.querySelector('#estado');
 			items.addEventListener('change', function(){

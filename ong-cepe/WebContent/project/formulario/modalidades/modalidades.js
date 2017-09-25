@@ -1,10 +1,10 @@
-ONG.usuario = new Object();
+ONG.modalidade = new Object();
 $(document).ready(function(){
 	$('#header').load('header.html');
 	$('#footer').load('footer.html');
 	
-	ONG.usuario.btnCadastrar = function() {
-		$("#conteudo").load("formulario/usuarios/cad.html",function(){
+	ONG.modalidade.btnCadastrar = function() {
+		$("#conteudo").load("formulario/modalidades/cad.html",function(){
 			$( "#exibiList" ).hide();		
 		});
 		return false;
@@ -17,22 +17,23 @@ $(document).ready(function(){
 //	};
 	$('#valorPesquisa').keypress(function(e) {
 	    if(e.which == 13) 
-	        	ONG.usuario.pesquisar();
+	        	ONG.modalidade.pesquisar();
 	});
 
-	ONG.usuario.pesquisar = function() {
+	ONG.modalidade.pesquisar = function() {
 		var valorPesquisa = $("#valorPesquisa").val();
-		ONG.usuario.exibirLista(undefined, valorPesquisa);
+		ONG.modalidade.exibirLista(undefined, valorPesquisa);
 	};
-	ONG.usuario.exibirLista = function(lista, valorPesquisa){
+	ONG.modalidade.exibirLista = function(lista, valorPesquisa){
 		var html = "<table id='tabela'  class='table table-responsive custom-table-margin-b' >";
 		html +=
 					"<thead table table-striped>" +
 						"<tr>" +
 							"<th>Nome</th>" +
-							"<th>Email</th>" +
+							"<th>Descrição</th>" +
 							"<th>Tipo</th>" +
-							"<th>Login</th>" +
+							"<th>Restrições</th>" +
+							"<th>Observações</th>" +
 							"<th class='actions col-md-2'>Ações</th>" +
 						"</tr>" +
 					"</thead>";
@@ -41,23 +42,24 @@ $(document).ready(function(){
 			for(var i=0; i<lista.length; i++){
 				html += "<tr>"+
 				"<td>"+lista[i].nome+"</td>"+
-				"<td>"+lista[i].email+"</td>"+				
+				"<td>"+lista[i].descricao+"</td>"+				
 				"<td>"+lista[i].tipo+"</td>"+				
-				"<td>"+lista[i].usuario+"</td>"+				
+				"<td>"+lista[i].restricoes+"</td>"+				
+				"<td>"+lista[i].observacoes+"</td>"+				
 				"<td class='actions  text-center'>"+
 				"<a class='btn btn-warning btn-xs' href='#' onclick='TARGUS.aluno.carregarAluno("+ lista[i].id+ ")'>Editar</a>" +
-				"<a class='btn btn-danger btn-xs'  href='#' onclick='ONG.usuario.excluir("+ lista[i].id+ ")'>Excluir</a>"+ 
+				"<a class='btn btn-danger btn-xs'  href='#' onclick='ONG.modalidade.excluir("+ lista[i].id+ ")'>Excluir</a>"+ 
 				"</td>"+
 				"</tr>";
 			}
 		} else {
 			if(lista == undefined || (lista != undefined && lista.length > 0)){
 				if(valorPesquisa == ""){ valorPesquisa = "*"; }
-
-				ONG.usuarioRest.pesquisarNome({
+				
+				ONG.modalidadeRest.pesquisarNome({
 					data : valorPesquisa,
 					success : function(lista) {
-						ONG.usuario.exibirLista(lista);
+						ONG.modalidade.exibirLista(lista);
 					},
 					error : function(err) {	console.log('err lista' ,err); } 
 				});
@@ -77,27 +79,26 @@ $(document).ready(function(){
 //		});
 		//$('#tabela').tablesorter();
 	};
-	ONG.usuario.exibirLista(undefined, "");
+	ONG.modalidade.exibirLista(undefined, "");
 
-	ONG.usuario.cadastrar = function(){
-		var senha = btoa($("#senha").val());
+	ONG.modalidade.cadastrar = function(){
 
 		var newCad = {
 				nome: $("#nome").val(),
-				email:$("#email").val(),
-				usuario:$("#login").val(),
+				descricao:$("#descricao").val(),
+				restricoes:$("#restricoes").val(),
 				tipo:$("#tipo").val(),
-				senha:senha,
+				observacoes:$("#observacoes").val(),
 		};
 		console.log('novo cadastro',newCad);
-		if (ONG.usuario.validar(newCad)) {
+		if (ONG.modalidade.validar(newCad)) {
 			
-			ONG.usuarioRest.inserir({
+			ONG.modalidadeRest.inserir({
 				data : newCad,
 				success : function(msg) {
 					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/usuarios.html'); });
+						$(location).attr('href', ONG.contextPath+'/project/modalidades.html'); });
 					
 				},
 				error : function(err) {
@@ -108,15 +109,15 @@ $(document).ready(function(){
 		}// IF
 	};// CADASTRAR
 
-	ONG.usuario.excluir = function(id){
+	ONG.modalidade.excluir = function(id){
 		bootbox.confirm("Deseja Excluir?", function(confirmed) {
 			if(confirmed) {
 				
-				ONG.usuarioRest.excluir({
+				ONG.modalidadeRest.excluir({
 					data : id,
 					success : function(msg) {
 						  console.log(msg);
-						  ONG.usuario.pesquisar();
+						  ONG.modalidade.pesquisar();
 					},
 					error : function(err) {
 						  console.log('err' ,err);
@@ -127,27 +128,20 @@ $(document).ready(function(){
 		}); 
 	};
 
-	ONG.usuario.validar = function(usuario) {
-		debugger;
-		var senhaConf = btoa($("#senhaConf").val());
-		
+	ONG.modalidade.validar = function(modalidade) {
 		var aux = "";
 
 
-		if (usuario.nome == "") {
+		if (modalidade.nome == "") {
 			aux += "Nome é Obrigatório <br/>";
-		}if (usuario.email == "") {
-			aux += "Email é Obrigatório <br/>";
-		}if (usuario.tipo == "" ) {
+		}if (modalidade.descricao == "") {
+			aux += "Descrição é Obrigatório <br/>";
+		}if (modalidade.tipo == "" ) {
 			aux += "Tipo é Obrigatório <br/>";
-		}if (usuario.usuario == "" ) {
-			aux += "Login é Obrigatório <br/>";
-		}if (usuario.senha ==""){
-			aux += "Senha é Obrigatório <br/>";
-		}if (usuario.senha != senhaConf ) {
-				aux += "Senhas inválidas <br/>";
-				$("#senha").val("");
-				$("#senhaConf").val("");
+		}if (modalidade.restricoes == "" ) {
+			aux += "Restrições é Obrigatório <br/>";
+		}if (modalidade.observacoes ==""){
+			aux += "Observações é Obrigatório <br/>";
 		}
 		
 		

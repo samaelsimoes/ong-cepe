@@ -19,13 +19,12 @@ import br.com.cepe.factory.entity.usuario.UsuarioFactory;
 import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.UsuarioService;
 
-@Path("usuario")
+@Path("/usuario")
 public class UsuarioRest extends ObjMapper{
 
-	/**
-	 * @param usuarioStr
-	 * - Json da entidade usuario.
-	 * **/
+	public UsuarioRest() {
+	}
+	
 	@POST
 	@Consumes("application/*")
 	public Response adicionar(String usuarioStr) throws GlobalException {
@@ -37,10 +36,7 @@ public class UsuarioRest extends ObjMapper{
 			else
 				throw new GlobalException("Valor nulo enviado ao REST");
 			
-//			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
 			return this.buildResponse("Cadastrado com sucesso.");
-
-			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

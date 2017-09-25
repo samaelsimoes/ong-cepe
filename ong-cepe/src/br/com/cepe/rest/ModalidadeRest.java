@@ -25,15 +25,10 @@ public class ModalidadeRest extends ObjMapper {
 	public ModalidadeRest() {
 	}
 
-	/**
-	 * @param modalidadeStr
-	 * - Json da entidade modalidade.
-	 * **/
 	@POST
 	@Consumes("application/*")
 	public Response adicionar(String modalidadeStr) throws GlobalException {
 		try {
-			 
 			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade();
 					
 			if(modalidade != null)
@@ -115,11 +110,12 @@ public class ModalidadeRest extends ObjMapper {
 	}
 
 	@DELETE
-	@Path("id")
+	@Path("{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
-		 new ModalidadeService(id).excluir();
-		return Response.ok("Modalidade excluída com sucesso! ").build();
+			new ModalidadeService(id).excluir();
+//			return Response.ok("Modalidade excluída com sucesso! ").build();
+			return this.buildResponse("Excluído com sucesso.");
 		
 		}catch(Throwable e){
 			e.printStackTrace();

@@ -34,7 +34,7 @@ public class ModalidadeFactory extends ObjMapper {
 	static final HashMap<Integer, Class<?>> MODALIDADE_CLASSES =  new HashMap<Integer, Class<?>>();
 	static{
 		MODALIDADE_CLASSES.put(0, null);
-		MODALIDADE_CLASSES.put(1,	Atletismo.class);
+		MODALIDADE_CLASSES.put(1,  Atletismo.class);
 		MODALIDADE_CLASSES.put(2,  AtletismoArrem.class);
 		MODALIDADE_CLASSES.put(3,  AtletismoArremDardo.class);
 		MODALIDADE_CLASSES.put(4,  AtletismoArremPeso.class);

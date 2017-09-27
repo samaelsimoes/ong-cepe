@@ -24,7 +24,7 @@ $(document).ready(function(){
 					"<th> Rua </th>" +
 					"<th> Complemento </th>" +
 					"<th> Número </th>" +
-					"<th> Ações</th>" +
+					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
 		
@@ -185,6 +185,31 @@ $(document).ready(function(){
         }
     	return exp;
     };
+    validaCamposedit = function(){
+
+    	var exp = "";
+
+    	if($("#emailedit").val().indexOf("@") == -1 || //valida se existe o @
+            $("#emailedit").val().indexOf(".") == -1 || //valida se existe o .
+            $("#emailedit").val().indexOf("@") == 0 || //valida se tem texto antes do @
+            $("#emailedit").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
+            ($("#emailedit").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
+                
+            exp+="E-mail invalido" +"</br>"
+            + "ex: teste_@teste.com.br"
+            document.getElementById("emailedit").focus();
+        }
+        if(!$("#cnpjedit").val().match(/^\d{14,15}$/)){
+        	exp+="CNPJ invalido ! </br> " + "</br>";
+        }
+        if(!$("#cepedit").val().match(/^\d{8,9}$/)){
+        	exp+="Cep invalido ! </br> " + "</br>";
+        }
+        if(!$("#telfixoedit").val().match(/^\d{10,13}$/)){    
+            exp+="Telefone Fixo invalido ! </br> " + "</br>";
+        }
+    	return exp;
+    };
     // ------------------------
 
     buscID = function( id ){
@@ -194,17 +219,17 @@ $(document).ready(function(){
 			success:function(dados){
 
 				if(dados != ""){
-		    		$("#razaosocial").val(dados.nome);
-		    		$("#cnpj").val(dados.cnpj);
-		    		$("#email").val(dados.email);
-		    		$("#telfixo").val(dados.foneFixo);
-		    		$("#telmovel").val(dados.foneMovel);
-		    		$("#bairro").val(dados.bairro);
-		    		$("#rua").val(dados.rua);
-					$("#complemento").val(dados.complemento);
-					$("#numero").val(dados.numero);
-					$("#cep").val(dados.cep);
-					buscaEstado();
+		    		$("#razaosocialedit").val(dados.nome);
+		    		$("#cnpjedit").val(dados.cnpj);
+		    		$("#emailedit").val(dados.email);
+		    		$("#telfixoedit").val(dados.foneFixo);
+		    		$("#telmoveledit").val(dados.foneMovel);
+		    		$("#bairroedit").val(dados.bairro);
+		    		$("#ruaedit").val(dados.rua);
+					$("#complementoedit").val(dados.complemento);
+					$("#numeroedit").val(dados.numero);
+					$("#cepedit").val(dados.cep);
+					buscaEstadoedit();
 		    	}			
 			},			
 			error: function(err){				
@@ -216,38 +241,38 @@ $(document).ready(function(){
     editarPJ = function(){
 
     	var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
-		msg += validaVazio("Cnpj: ", $("#cnpj").val());
-		msg += validaVazio("Email: ", $("#email").val());
-		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
-		msg += validaVazio("Estado: ", $("#estado").val());
-		msg += validaVazio("Cidade: ", $("#cidade").val());
-		msg += validaVazio("Bairro: ", $("#bairro").val());
-		msg += validaVazio("Rua: ", $("#rua").val());
-		msg += validaVazio("Complemento: ", $("#complemento").val());
-		msg += validaVazio("Numero: ", $("#numero").val());
+		msg += validaVazio("Razao Social: ", $("#razaosocialedit").val());
+		msg += validaVazio("Cnpj: ", $("#cnpjedit").val());
+		msg += validaVazio("Email: ", $("#emailedit").val());
+		msg += validaVazio("Telefone Fixo: ", $("#telfixoedit").val());
+		msg += validaVazio("Estado: ", $("#estadoedit").val());
+		msg += validaVazio("Cidade: ", $("#cidadeedit").val());
+		msg += validaVazio("Bairro: ", $("#bairroedit").val());
+		msg += validaVazio("Rua: ", $("#ruaedit").val());
+		msg += validaVazio("Complemento: ", $("#complementoedit").val());
+		msg += validaVazio("Numero: ", $("#numeroedit").val());
 
     	if(msg == ""){
-    		var exp = validaCampos();
+    		var exp = validaCamposedit();
     		
     		if(exp == ""){
 		    	var dadosPJ= {
 		            	
-		    		nome : $("#razsocial").val(),
+		    		nome : $("#razsocialedit").val(),
 		    		tipo : 2,
 		    		status : 1,
-		    		cnpj : $("#cnpj").val(),
-		    		email : $("#email").val(),
-		    		dt_nasc : $("#datanascimento").val(),
-		    		foneFixo : $("#telfixo").val(),
-		    		foneMovel : $("#telmovel").val(),
-		    		rua : $("#rua").val(),
-		    		complemento : $("#complemento").val(),
-		    		numero : $("#numero").val(),
-		    		cep : $("#cep").val(),
+		    		cnpj : $("#cnpjedit").val(),
+		    		email : $("#emailedit").val(),
+		    		nascimento : $("#datanascimentoedit").val(),
+		    		foneFixo : $("#telfixoedit").val(),
+		    		foneMovel : $("#telmoveledit").val(),
+		    		rua : $("#ruaedit").val(),
+		    		complemento : $("#complementoedit").val(),
+		    		numero : $("#numeroedit").val(),
+		    		cep : $("#cepedit").val(),
 		    		
 					cidade : { 
-						id: parseInt($("#cidade").val())
+						id: parseInt($("#cidadeedit").val())
 					}					
 		    	}
 		    	$.ajax({
@@ -278,7 +303,7 @@ $(document).ready(function(){
     confExcluir = function(id) {
     	bootbox.confirm({
 
-		    message: "Você Desejea excluir esse beneficiario?",
+		    message: "Você Desejea excluir?",
 		    buttons: {
 		        confirm: {
 
@@ -303,7 +328,7 @@ $(document).ready(function(){
 						buscapesJuridica();	            	
 					},
 					error: function (err) {				
-						bootbox.alert("Erro ao deletar o contato: " + err.responseText);
+						bootbox.alert("Erro ao deletar: " + err.responseText);
 					}
 				};
 				ONG.ajax.delet(cfg);
@@ -356,6 +381,58 @@ $(document).ready(function(){
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
 				var option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
+				option.attr( "value", listaCidade[i].id );
+				option.html( listaCidade[i].nome );
+			}
+		}
+    }
+
+    // EDITAR CIDADE E ESTADO
+
+    buscaEstadoedit = function(){
+    	var cfg = {							
+			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			success: function(listEstado){													
+				montaSelectEstadoedit(listEstado);
+			},
+			error: function(err) {							
+				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + err);
+			}
+		};					
+		ONG.ajax.get(cfg);
+    }
+    buscaCidadeedit = function(id) {
+    	var cfg = {							 
+			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
+			success: function(listaCidade) {		
+				montaSelectCidadeedit(listaCidade);
+			},
+			error: function(err) {							
+				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
+			}
+		};					
+		ONG.ajax.get(cfg);
+    }
+
+    montaSelectEstadoedit = function(listEstado) {
+    	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listEstado.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#estadoedit'));
+				option.attr( "value", listEstado[i].id );
+				option.html( listEstado[i].nome );
+			}
+			var items = document.querySelector('#estadoedit');
+			items.addEventListener('change', function(){
+				var valor =	this.value // o valo
+				buscaCidadeedit( valor );
+			});
+		}
+    }
+
+    montaSelectCidadeedit = function( listaCidade ) {
+    	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listaCidade.length; i++){
+				var option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}

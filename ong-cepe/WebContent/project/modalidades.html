@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+	<title>Centro esportivo para pessoas especiais - Joinville</title>
+	
+	<link href="../lib/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap.css">    
+	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap-theme.css">
+</head>
+<body>
+
+	<section id="header" class="custom-padding-header"></section>
+	
+	<section id="conteudo" class="padding-vertical-small">
+		<div class="container">
+			<div id="top" class="row">
+				<div class="col-md-3">
+					<h2>Modalidades</h2>
+				</div>
+				
+				<div class="col-md-5">
+						<input name="search" class="form-control h2" id="valorPesquisa" type="text" placeholder="Nome">
+				</div>
+				<div class="col-md-4">
+					<a href="#" onClick="return ONG.modalidade.pesquisar()" class="btn btn-primary btn-md h2 "><span class="glyphicon glyphicon-search"></span> Buscar</a>
+					<a href="#" onClick="return ONG.modalidade.btnCadastrar()" class="btn btn-primary btn-success btn-md pull-right h2"><span class="glyphicon glyphicon-ok"></span> Cadastrar</a>			
+				</div>
+			</div> <!-- /#top -->
+		</div>
+	</section>
+	<section id="conteudo">
+					<div class="container">
+						<div class="form-group row"> 
+						    <div class="col-12 col-md-12 pull-md-7 bd-content">
+						        <div id = "exibiList" class = "divResultado"></div>
+						    </div>
+						</div>
+					</div>
+	</section>
+	<section id="footer" class="custom-footer"></section>
+</body>
+
+    <script src="../lib/node_modules/jquery/dist/jquery.js"></script>
+    <script src="../lib/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="js/bootbox.min.js"></script>
+    
+	<script src="js/ajax.js"></script>
+    <script src="formulario/modalidades/modalidadesRest.js"></script>
+    <script src="formulario/modalidades/modalidades.js"></script>
+	
+</html>

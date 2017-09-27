@@ -3,7 +3,7 @@
 <div class="container">
 	<div id="top" class="row">
 		<div class="col-md-12">
-			<h3>Adicionar Usuários</h3>
+			<h3>Adicionar Modalidades</h3>
 		</div>
 	</div> 
   
@@ -14,16 +14,16 @@
             <div class="form-group row">
 
                 <div class="col-xs-6 col-md-4">
-                    <label for="example-text-input" class="col-2 col-form-label">Nome Completo:</label>
+                    <label for="nome" class="col-2 col-form-label">Nome:</label>
                    <div class="col-10">
                         <input class="form-control" type="text" id="nome" placeholder="Nome">
                     </div>
                 </div>
 
                 <div class="col-xs-6 col-md-4 coll-md-offset-2">
-                    <label for="email" class="col-2 col-form-label">Email:</label>
+                    <label for="descricao" class="col-2 col-form-label">Descrição:</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" id="email" placeholder="Email">
+                        <input class="form-control" type="text" id="descricao" placeholder="Descrição">
                  	</div>
                 </div>
                  
@@ -32,9 +32,9 @@
             
              <div class="form-group row">
                 <div class="col-xs-6 col-md-3 coll-md-offset-2">
-                    <label for="email" class="col-2 col-form-label">Login:</label>
+                    <label for="restricoes" class="col-2 col-form-label">Restrições:</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" id="login" placeholder="Login">
+                        <input class="form-control" type="text" id="restricoes" placeholder="Restrições">
                  	</div>
                 </div>                              
 
@@ -45,24 +45,18 @@
                     <select class="form-control" id="tipo">
                     
                         <option value="">Selecione</option>
-                        <option value="1">Administrador</option>
-                        <option value="3">Financeiro</option>
-                        <option value="2">Professor</option>
+                        <option value="1">Tipo 1</option>
+                        <option value="2">Tipo 2</option>
+                        <option value="3">Tipo 3</option>
                     </select>       
                 </div>
             </div>
             
              <div class="form-group row">            
                 <div class="col-xs-6 col-md-3 coll-md-offset-2">
-                    <label for="email" class="col-2 col-form-label">Senha:</label>
+                    <label for="observacoes" class="col-2 col-form-label">Observações:</label>
                     <div class="col-10">
-                        <input class="form-control" type="password" id="senha" placeholder="Senha">
-                 	</div>
-                </div>  
-                <div class="col-xs-6 col-md-3 coll-md-offset-2">
-                    <label for="email" class="col-2 col-form-label">Confirmar Senha:</label>
-                    <div class="col-10">
-                        <input class="form-control" type="password" id="senhaConf" placeholder="Confirmar Senha">
+                        <input class="form-control" type="text" id="observacoes" placeholder="Observações">
                  	</div>
                 </div>  
             </div>
@@ -72,7 +66,7 @@
             <div class="form-group row space-vertical">
                 <div class="col-xs-6 col-md-8 align-left">
                    <div class="col-10 custom-class-enviar">
-                        <button type="button" class="btn btn-success" onclick="ONG.usuario.cadastrar()">
+                        <button type="button" class="btn btn-success" onclick="ONG.modalidade.cadastrar()">
 
                             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" ></span> Salvar
                         </button>

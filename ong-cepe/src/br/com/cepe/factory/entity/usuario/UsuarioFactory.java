@@ -16,7 +16,6 @@ import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.util.ObjMapper;
 
 public class UsuarioFactory extends ObjMapper{
-	
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	private Class<?> usuarioClasse;
 	private ObjectNode objNode;

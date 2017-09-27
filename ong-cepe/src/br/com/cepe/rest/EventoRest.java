@@ -59,6 +59,22 @@ public class EventoRest extends ObjMapper {
 		}
 	}
 	
+	@GET
+	@Path("/data/{data}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response pesquisarData(@PathParam("data") String data) throws GlobalException {
+		try {
+			
+			List<Evento> eventos = new EventoService(data).pesquisaDataContem();
+			String resp = getJson(eventos);
+			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return this.buildErrorResponse("Erro ao fazer a consulta por data! ");
+		}
+	}
+	
 	
 	
 	@GET

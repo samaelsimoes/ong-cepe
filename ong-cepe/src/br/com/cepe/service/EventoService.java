@@ -23,6 +23,7 @@ public class EventoService  implements Service<Evento>{
 	public EventoService(Evento evento) {
 		this.evento = evento;
 	}
+	
 
 	public EventoService(String valorStr) {
 		this.valorStr = valorStr;
@@ -33,7 +34,7 @@ public class EventoService  implements Service<Evento>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		evento.setCidade(new CidadeService(this.evento.getCidade()).pesquisaId());
+		//evento.setCidade(new CidadeService(this.evento.getCidade()).pesquisaId());
 		new EventoDAO(this.evento).persist();
 	}
 
@@ -62,7 +63,6 @@ public class EventoService  implements Service<Evento>{
 		return (List<Evento>) new EventoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
 	}
 	
-	
 	public List<Evento> pesquisaCidadeContem() throws GlobalException {
 		List<Evento> eventosBusca = null;
 		List<Evento> eventos = null;
@@ -87,6 +87,10 @@ public class EventoService  implements Service<Evento>{
 			throw new GlobalException("Não existem eventos para esta cidade");
 
 		return eventos;
+	}
+	
+	public List<Evento> pesquisaDataContem()throws GlobalException{
+		return (List<Evento>) new EventoDAO().findGeneric("data", HOperator.CONTAINS, valorStr);
 	}
 
 	public void excluir()  throws GlobalException {

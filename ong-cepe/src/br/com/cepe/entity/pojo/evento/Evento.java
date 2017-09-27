@@ -32,91 +32,75 @@ public class Evento {
 	protected String rua;
 	protected int numero;
 	protected String complemento;
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	public Integer getTipo() {
+		return tipo;
+	}
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 	public Date getData() {
 		return data;
 	}
-
 	public void setData(Date data) {
 		this.data = data;
 	}
-
 	public String getHora() {
 		return hora;
 	}
-
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-
 	public long getCep() {
 		return cep;
 	}
-
 	public void setCep(long cep) {
 		this.cep = cep;
 	}
-
 	public Cidade getCidade() {
 		return cidade;
 	}
-
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-
 	public String getBairro() {
 		return bairro;
 	}
-
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-
 	public String getRua() {
 		return rua;
 	}
-
 	public void setRua(String rua) {
 		this.rua = rua;
 	}
-
 	public int getNumero() {
 		return numero;
 	}
-
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-
 	public String getComplemento() {
 		return complemento;
 	}
-
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}

@@ -123,14 +123,14 @@ $(document).ready(function(){
 					cpf: $("#cpf").val(),
 					rg: $("#rg").val(),
 					email: $("#email").val(),
-					bairro: $("bairro").val(),
+					bairro: $("#bairro").val(),
 	            	nascimento: d.getTime(),
 
 	            	foneFixo: $("#telfixo").val(),
 	            	foneMovel: $("#telmovel").val(),
 
 					cidade:{ 
-						id: $("#cidade").val()
+						id: parseInt($("#cidade").val())
 					},
 
 					rua: $("#rua").val(),
@@ -205,7 +205,7 @@ $(document).ready(function(){
                 
             exp += "E-mail invalido" +"</br>"
             + "ex: teste_@teste.com.br"
-            document.getElementById("email").focus();
+            document.getElementById("emailedit").focus();
         }
         if(!$("#cpfedit").val().match(/^\d{11,12}$/)){
         	exp += "cpf invalido ! </br> " + "</br>";

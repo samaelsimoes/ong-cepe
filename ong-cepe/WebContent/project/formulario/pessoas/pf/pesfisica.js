@@ -10,7 +10,6 @@ $(document).ready(function(){
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
-
 			"<thead class='table table-striped'>" +
 				"<tr>" +	
 					"<th> CPF </th>" + 
@@ -22,12 +21,9 @@ $(document).ready(function(){
 					"<th> Número </th>" +
 					"<th> Ações</th>" +
 				"</tr>" +
-			"</thead>";					
-		
-		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){
-			  
+			"</thead>";							
+		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){			  
 			  	for(var i = 0; i < listPesF.length; i++){
-
 					html += "<tr>";		
 					html += "<td>" + listPesF[i].cpf + "</td>";
 					html += "<td>" + listPesF[i].nome + "</td>";
@@ -144,7 +140,9 @@ $(document).ready(function(){
         			data: dadosPF,
         			success: function(msg){		
         				bootbox.alert("Realizado cadastro com sucesso ");
-        				buscapefisica();
+        				setTimeout(function(){
+	    	    	         location.reload();
+	    	    	    }, 1000);
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -266,10 +264,9 @@ $(document).ready(function(){
 		msg += validaVazio("Numero: ", $("#numeroedit").val());
 
     	if(msg == ""){
-    		var exp = validaCamposEdit();
-    		
+    		var exp = validaCamposEdit();    		
     		if(exp == ""){
-		    	var dadosPF= {
+		    	var dadosPF = {
 		            	
 		    		nome: $("#nomeedit").val(),
 		    		tipo: 1,
@@ -284,8 +281,7 @@ $(document).ready(function(){
 		    		rua: $("#ruaedit").val(),
 		    		complemento: $("#complementoedit").val(),
 		    		numero: $("#numeroedit").val(),
-		    		cep: $("#cepedit").val(),
-		    		
+		    		cep: $("#cepedit").val(),		    		
 					cidade: { 
 						id: $("#cidadeedit").val() 
 					}	
@@ -294,13 +290,15 @@ $(document).ready(function(){
 				
 					type: 'PUT',
 					url:ONG.contextPath + "/rest/pessoa/",
-					data: JSON.stringify(dadosPF),
-					
+					data: JSON.stringify(dadosPF),					
 					dataType:'text',
 					contentType:'application/json',
 					
 					success:function(data){	
-						bootbox.alert(data);						
+						bootbox.alert(data);
+						setTimeout(function(){
+	    	    	        location.reload();
+	    	    	    }, 1000);						
 					},
 					error: function(err){	
 						bootbox.alert( err.responseText); 
@@ -339,7 +337,9 @@ $(document).ready(function(){
 					success: function (data){
 						
 						bootbox.alert(data);	
-						buscapesJuridica();	            	
+						setTimeout(function(){
+	    	    	         location.reload();
+	    	    	    }, 1000);           	
 					},
 					error: function (err){				
 						bootbox.alert("Erro ao deletar o contato: " + err.responseText);
@@ -403,10 +403,9 @@ $(document).ready(function(){
 		}
     }
 
-
     // EDITAR
 
-     buscaEstadoEdit = function(){
+    buscaEstadoEdit = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
 			success: function(listEstado){													
@@ -418,6 +417,7 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
+
     buscaCidadeEdit = function(id){
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
@@ -432,7 +432,6 @@ $(document).ready(function(){
     }
 
     montaSelectEstadoEdit = function(listEstado) {
-
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
 				var option = $( "<option></option>" ).appendTo($('#estadoedit'));

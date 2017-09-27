@@ -134,7 +134,9 @@ $(document).ready(function(){
         			data: dadosPJ,
         			success: function(msg){		
         				bootbox.alert(msg);
-        				buscapesJuridica();	            	
+        				setTimeout(function(){
+	    	    	         location.reload();
+	    	    	    }, 2000);            	
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -286,7 +288,9 @@ $(document).ready(function(){
 					
 					success:function(data) {	
 						bootbox.alert(data);	
-						buscapesJuridica();	            	
+						setTimeout(function(){
+	    	    	         location.reload();
+	    	    	    }, 1000);
 					},
 					error: function(err) {	
 						bootbox.alert( err.responseText); 
@@ -302,16 +306,13 @@ $(document).ready(function(){
 
     confExcluir = function(id) {
     	bootbox.confirm({
-
 		    message: "Você Desejea excluir?",
 		    buttons: {
 		        confirm: {
-
 		            label: 'Sim',
 		            className: 'btn-success',
 		        },
 		        cancel: {
-
 		            label: 'Não',
 		            className: 'btn-danger'
 		        }
@@ -319,13 +320,14 @@ $(document).ready(function(){
 		    callback: function (result) {		        
 		        if(result == true){
 		        	
-		           var cfg={
+		           var cfg = {
 			
-					url:  ONG.contextPath + "/rest/pessoa/idexcluir/" + id,
-					success: function (data) {
-						
+					url: ONG.contextPath + "/rest/pessoa/idexcluir/" + id,
+					success: function (data) {						
 						bootbox.alert(data);	
-						buscapesJuridica();	            	
+						setTimeout(function(){
+	    	    	         location.reload();
+	    	    	    }, 1000);	            	
 					},
 					error: function (err) {				
 						bootbox.alert("Erro ao deletar: " + err.responseText);
@@ -388,7 +390,6 @@ $(document).ready(function(){
     }
 
     // EDITAR CIDADE E ESTADO
-
     buscaEstadoedit = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
@@ -422,7 +423,7 @@ $(document).ready(function(){
 				option.html( listEstado[i].nome );
 			}
 			var items = document.querySelector('#estadoedit');
-			items.addEventListener('change', function(){
+			items.addEventListener('change', function() {
 				var valor =	this.value // o valo
 				buscaCidadeedit( valor );
 			});

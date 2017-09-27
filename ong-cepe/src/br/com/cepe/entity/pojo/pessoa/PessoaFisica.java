@@ -18,26 +18,19 @@ private Long cpf;
 	public Long getRg() {
 		return rg;
 	}
-
 	public void setRg(Long rg) {
 		this.rg = rg;
 	}
-
 	public Long getCpf() {
 		return cpf;
 	}
-
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
-
 	public Date getNascimento() {
 		return nascimento;
 	}
-
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
-
 	}
-
 }

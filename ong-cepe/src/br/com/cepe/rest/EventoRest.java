@@ -59,6 +59,24 @@ public class EventoRest extends ObjMapper {
 		}
 	}
 	
+	
+	
+	@GET
+	@Path("/cidade/{cidade}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response pesquisarCidade(@PathParam("cidade") String cidade) throws GlobalException {
+		try {
+			
+			List<Evento> eventos = new EventoService(cidade).pesquisaCidadeContem();
+			String resp = getJson(eventos);
+			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome! ");
+		}
+	}
+	
 	@GET
 	@Path("/tipo/{tipo}")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -123,4 +141,7 @@ public class EventoRest extends ObjMapper {
 			return this.buildErrorResponse("Erro ao deletar usuário");
 		}
 	}
+	
+	
+	
 }

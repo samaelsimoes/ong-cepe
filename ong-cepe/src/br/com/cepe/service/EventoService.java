@@ -1,9 +1,12 @@
 package br.com.cepe.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cepe.daoconnect.CidadeDAO;
 import br.com.cepe.daoconnect.EventoDAO;
 import br.com.cepe.datatype.HOperator;
+import br.com.cepe.entity.pojo.endereco.Cidade;
 import br.com.cepe.entity.pojo.evento.Evento;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.interfaces.Service;
@@ -57,6 +60,33 @@ public class EventoService  implements Service<Evento>{
 
 	public List<Evento> pesquisaNomeContem() throws GlobalException {
 		return (List<Evento>) new EventoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
+	}
+	
+	
+	public List<Evento> pesquisaCidadeContem() throws GlobalException {
+		List<Evento> eventosBusca = null;
+		List<Evento> eventos = null;
+		List<Cidade> cidades = new CidadeDAO().findGeneric("nome",
+				HOperator.CONTAINS, this.valorStr);
+
+		for (Cidade cidade : cidades) {
+			String cidadeId = Integer.toString(cidade.getId());
+			eventosBusca = new EventoDAO().findGeneric("cidade",
+					HOperator.CONTAINS, cidadeId);
+
+			if (!eventosBusca.isEmpty() || eventosBusca != null) {
+				eventos = new ArrayList<Evento>();
+				for (Evento evento : eventosBusca) {
+					if (evento != null)
+						eventos.add(evento);
+				}
+			}
+
+		}
+		if (eventos.isEmpty() || eventos == null)
+			throw new GlobalException("Não existem eventos para esta cidade");
+
+		return eventos;
 	}
 
 	public void excluir()  throws GlobalException {

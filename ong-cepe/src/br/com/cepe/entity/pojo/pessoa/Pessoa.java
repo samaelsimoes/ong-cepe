@@ -1,6 +1,4 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
+
 package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.CascadeType;
@@ -20,6 +18,7 @@ public class Pessoa {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
 	private Integer tipo;
 	private int status;
@@ -36,7 +35,6 @@ public class Pessoa {
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
 	private Cidade cidade;
 	private String complemento;
-
 		
 	public int getId() {
 		return id;

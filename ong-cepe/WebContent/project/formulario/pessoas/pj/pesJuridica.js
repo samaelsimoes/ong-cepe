@@ -33,36 +33,36 @@ $(document).ready(function(){
 			  	for(var i = 0; i < listPesj.length; i++){
 
 					html += "<tr>";					
-						html += "<td>" + listPesj[i].cnpj + "</td>";
-						html += "<td>" + listPesj[i].nome + "</td>";
-						html += "<td>" + listPesj[i].email + "</td>";
-						
-						if(listPesj[i].foneFixo != null && listPesj[i].foneMovel != null){
-							html += "<td>"+	 
-										listPesj[i].foneFixo + " - " + listPesj[i].foneMovel +										
-									"</td>";
-						}else if(listPesj[i].foneFixo != null && listPesj[i].foneMovel == null){
-							html += "<td>"+
-										listPesj[i].foneFixo+
-									"</td>"
-						}else if( listPesj[i].foneMovel != null && listPesj[i].foneFixo == null){
-							html += "<td>"+
-										listPesj[i].foneMovel+
-									"</td>"
-						}
-						
-						html += "<td>" + listPesj[i].cep + "</td>";
-						/*html += "<td>" + listPesj[i].estado + "</td>";
-						html += "<td>" + listPesj[i].cidade + "</td>";*/
-						html += "<td>" + listPesj[i].rua + "</td>";
-						html += "<td>" + listPesj[i].complemento + "</td>";
-						html += "<td>" + listPesj[i].numero + "</td>";
-
+					html += "<td>" + listPesj[i].cnpj + "</td>";
+					html += "<td>" + listPesj[i].nome + "</td>";
+					html += "<td>" + listPesj[i].email + "</td>";
+					
+					if(listPesj[i].foneFixo != null && listPesj[i].foneMovel != null){
+						html += "<td>"+	 
+									listPesj[i].foneFixo + " - " + listPesj[i].foneMovel +										
+								"</td>";
+					}else if(listPesj[i].foneFixo != null && listPesj[i].foneMovel == null){
 						html += "<td>"+
-									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
-									"<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"+
-								"</td>";						
-						html += "</tr>";  
+									listPesj[i].foneFixo+
+								"</td>"
+					}else if( listPesj[i].foneMovel != null && listPesj[i].foneFixo == null){
+						html += "<td>"+
+									listPesj[i].foneMovel+
+								"</td>"
+					}
+					
+					html += "<td>" + listPesj[i].cep + "</td>";
+					/*html += "<td>" + listPesj[i].estado + "</td>";
+					html += "<td>" + listPesj[i].cidade + "</td>";*/
+					html += "<td>" + listPesj[i].rua + "</td>";
+					html += "<td>" + listPesj[i].complemento + "</td>";
+					html += "<td>" + listPesj[i].numero + "</td>";
+
+					html += "<td>"+
+								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
+								"<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"+
+							"</td>";						
+					html += "</tr>";  
 			    }
 		    }else{
 			    if(listPesj == undefined || (listPesj != undefined && listPesj.length > 0)){
@@ -340,7 +340,7 @@ $(document).ready(function(){
     montaSelectEstado = function(listEstado) {
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($( '#estado' ));
+				var option = $( "<option></option>" ).appendTo($('#estado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}

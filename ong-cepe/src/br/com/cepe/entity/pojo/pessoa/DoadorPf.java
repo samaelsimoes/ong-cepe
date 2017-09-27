@@ -1,6 +1,4 @@
-/**
- * @author  Eduardo Cristian Campigoto
- **/
+
 package br.com.cepe.entity.pojo.pessoa;
 
 import javax.persistence.Entity;
@@ -18,7 +16,4 @@ public class DoadorPf extends PessoaFisica{
 	public void setTeste(String teste) {
 		this.teste = teste;
 	}
-	
-	
-
 }

@@ -30,7 +30,7 @@ private String entity;
 		if (!select.equals(null) && operacao != null && !valor.equals(null) && !valor.equals("*"))
 			query=setQuery();		
 		else if (valor.equals("*"))
-			query= "Select * from "+entity;
+			query= "SELECT e FROM "+entity+" e ";
 		else
 			throw new GlobalException(" Não é possível montar a query com campos vazios!");
 		

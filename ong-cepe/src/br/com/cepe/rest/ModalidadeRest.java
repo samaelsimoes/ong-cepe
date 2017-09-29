@@ -114,7 +114,6 @@ public class ModalidadeRest extends ObjMapper {
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 			new ModalidadeService(id).excluir();
-//			return Response.ok("Modalidade excluída com sucesso! ").build();
 			return this.buildResponse("Excluído com sucesso.");
 		
 		}catch(Throwable e){

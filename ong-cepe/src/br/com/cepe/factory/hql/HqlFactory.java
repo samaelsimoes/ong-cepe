@@ -10,11 +10,13 @@ public class HqlFactory {
 private String select;
 private HOperator operacao;
 private String valor;
+private String entity;
 
 	public HqlFactory()	throws GlobalException {
 	}
 	
 	public String getSelect(String entity, String campo){
+		this.entity = entity;
 		String select = "SELECT e FROM "+entity+" e WHERE "+campo+" ";
 		return select;
 	}
@@ -25,8 +27,10 @@ private String valor;
 		this.valor = valor;
 		String query = null;
 		
-		if (!select.equals(null) && operacao != null && !valor.equals(null))
-			query=setQuery();
+		if (!select.equals(null) && operacao != null && !valor.equals(null) && !valor.equals("*"))
+			query=setQuery();		
+		else if (valor.equals("*"))
+			query= "Select * from "+entity;
 		else
 			throw new GlobalException(" Não é possível montar a query com campos vazios!");
 		

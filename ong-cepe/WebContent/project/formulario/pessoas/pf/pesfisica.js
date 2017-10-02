@@ -142,7 +142,7 @@ $(document).ready(function(){
         				bootbox.alert("Realizado cadastro com sucesso ");
         				setTimeout(function(){
 	    	    	         location.reload();
-	    	    	    }, 1000);
+	    	    	    }, 2000);
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -228,6 +228,8 @@ $(document).ready(function(){
 			success:function(dados){
 
 				if(dados != ""){
+					
+					$("#id").val(dados.id);
 		    		$("#nomeedit").val(dados.nome);
 		    		$("#rgedit").val(dados.rg);
 		    		$("#cpfedit").val(dados.cpf);
@@ -248,9 +250,14 @@ $(document).ready(function(){
 		});
     };
 
-    editarPF = function(){
+    editarPF = function() {
 
     	var msg  = "";
+    	
+    	if($("#id").val() == ""){
+    		msg += " Entrar em contato com o administrador, falha ao editar pessoas, campo id vindo vazio";
+    	}
+    	
 		msg += validaVazio("Nome ", $("#nomeedit").val());
 		msg += validaVazio("CPF: ", $("#cpfedit").val());
 		msg += validaVazio("RG: ", $("#rgedit").val());
@@ -267,7 +274,8 @@ $(document).ready(function(){
     		var exp = validaCamposEdit();    		
     		if(exp == ""){
 		    	var dadosPF = {
-		            	
+		            
+		    		id: $("#id").val(),
 		    		nome: $("#nomeedit").val(),
 		    		tipo: 1,
 		    		status: 1,
@@ -295,10 +303,12 @@ $(document).ready(function(){
 					contentType:'application/json',
 					
 					success:function(data){	
+						
 						bootbox.alert(data);
+						
 						setTimeout(function(){
 	    	    	        location.reload();
-	    	    	    }, 1000);						
+	    	    	    }, 2000);					
 					},
 					error: function(err){	
 						bootbox.alert( err.responseText); 
@@ -377,14 +387,12 @@ $(document).ready(function(){
     }
 
     montaSelectEstado = function(listEstado) {
-
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
 				var option = $( "<option></option>" ).appendTo($('#estado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
-
 			var items = document.querySelector('#estado');
 			items.addEventListener('change', function(){
 				var valor =	this.value // o valo
@@ -392,7 +400,6 @@ $(document).ready(function(){
 			});
 		}
     }
-
     montaSelectCidade = function( listaCidade ) {
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){

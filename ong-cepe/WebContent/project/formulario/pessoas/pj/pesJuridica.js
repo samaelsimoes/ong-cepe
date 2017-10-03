@@ -221,6 +221,7 @@ $(document).ready(function(){
 			success:function(dados){
 
 				if(dados != ""){
+					$("#id").val(dados.id);
 		    		$("#razaosocialedit").val(dados.nome);
 		    		$("#cnpjedit").val(dados.cnpj);
 		    		$("#emailedit").val(dados.email);
@@ -243,6 +244,11 @@ $(document).ready(function(){
     editarPJ = function(){
 
     	var msg  = "";
+    	
+    	if($("#id").val() == ""){
+    		msg += " Impossivel editar pessoa Juridica, gentileza entrar em contato com o administrador, motivo sem campo id";
+    	}
+    	
 		msg += validaVazio("Razao Social: ", $("#razaosocialedit").val());
 		msg += validaVazio("Cnpj: ", $("#cnpjedit").val());
 		msg += validaVazio("Email: ", $("#emailedit").val());
@@ -259,19 +265,20 @@ $(document).ready(function(){
     		
     		if(exp == ""){
 		    	var dadosPJ= {
-		            	
-		    		nome : $("#razsocialedit").val(),
-		    		tipo : 2,
-		    		status : 1,
-		    		cnpj : $("#cnpjedit").val(),
-		    		email : $("#emailedit").val(),
-		    		nascimento : $("#datanascimentoedit").val(),
-		    		foneFixo : $("#telfixoedit").val(),
-		    		foneMovel : $("#telmoveledit").val(),
-		    		rua : $("#ruaedit").val(),
-		    		complemento : $("#complementoedit").val(),
-		    		numero : $("#numeroedit").val(),
-		    		cep : $("#cepedit").val(),
+		            
+		    		id: $("#id").val(),
+		    		nome: $("#razaosocialedit").val(),
+		    		tipo: 2,
+		    		status: 1,
+		    		cnpj: $("#cnpjedit").val(),
+		    		email: $("#emailedit").val(),
+		    		nascimento: $("#datanascimentoedit").val(),
+		    		foneFixo: $("#telfixoedit").val(),
+		    		foneMovel: $("#telmoveledit").val(),
+		    		rua: $("#ruaedit").val(),
+		    		complemento: $("#complementoedit").val(),
+		    		numero: $("#numeroedit").val(),
+		    		cep: $("#cepedit").val(),
 		    		
 					cidade : { 
 						id: parseInt($("#cidadeedit").val())

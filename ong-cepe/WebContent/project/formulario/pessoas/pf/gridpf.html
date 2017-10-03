@@ -21,7 +21,7 @@
 </div>  
 <div class="form-group row">
     <div class="col-xs-9 col-md-12 bd-content align-left">
-        <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="buscaEstado()">
+        <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addmodal" onclick="buscaEstado()">
 
             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
         </button>
@@ -38,7 +38,7 @@
 <!-- end modal -->
 <!-- Chamada da minha funcao da grid-->
 <!-- Modal add -->
-<div class="modal fade" id="modaladd" tabindex="-1" role="dialog" aria-labelledby="modaladd" aria-hidden="true">
+<div class="modal fade" id="addmmodal" tabindex="-1" role="dialog" aria-labelledby="addmodal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -159,6 +159,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <input name="id" id="id" type="hidden">
             </div>
             <div class="modal-body">
                 <div class="col">
@@ -252,10 +253,10 @@
 
                 <button type="button" class="btn" data-dismiss="modal">Sair</button>
 
-                <button type="button" class="btn btn-primary btn-success" onclick="editarPF()">
+                <a type="button" class="btn btn-primary btn-success" onclick="editarPF()">
 
                     <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
-                </button>                
+                </a>                
             </div>
         </div>
     </div>

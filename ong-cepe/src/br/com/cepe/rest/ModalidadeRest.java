@@ -98,14 +98,16 @@ public class ModalidadeRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String modalidadeStr) throws GlobalException { 
 		try {
+			System.out.println(modalidadeStr);
 			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade(); 
 			new ModalidadeService(modalidade).alterar();
 			
-			return Response.ok(modalidade, "Modalidade atualizada com sucesso!").build();
-			
+//			return Response.ok(modalidade, "Modalidade atualizada com sucesso!").build();
+			return this.buildResponse("Cadastrado com sucesso.");
+
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a alteração do usuário");
+			throw new GlobalException("Erro ao fazer a alteração da modalidade");
 		}
 	}
 

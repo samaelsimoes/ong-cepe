@@ -23,7 +23,7 @@ $(document).ready(function(){
 	
 	ONG.usuarioRest.pesquisarId = function(config){
 		ONG.ajax.get({
-			url : "rest/pessoas/pesquisarId?id="+config.data.valor1 + "&tipo=" + config.data.valor2,
+			url : ONG.contextPath+"/rest/usuario/id/"+config.data,
 			success : config.success,
 			error : config.error
 		});
@@ -39,7 +39,7 @@ $(document).ready(function(){
 	
 	ONG.usuarioRest.editar = function(config){
 		ONG.ajax.put({
-			url : "rest/pessoas/editar",
+			url : ONG.contextPath+"/rest/usuario",
 			data : config.data,
 			success : config.success,
 			error : config.error

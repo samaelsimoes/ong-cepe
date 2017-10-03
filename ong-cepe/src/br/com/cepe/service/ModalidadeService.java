@@ -67,7 +67,7 @@ public class ModalidadeService  implements Service<Modalidade>{
 	}
 
 	public void alterar()  throws GlobalException{
-		new ModalidadeDAO(this.num).update();
+		new ModalidadeDAO(this.modalidade).update();
 	}
 
 

@@ -10,9 +10,7 @@ $(document).ready(function(){
 		return false;
 	};
 	ONG.modalidade.btnCancelar = function() {
-		$("#conteudo").load("private/aluno/gerenciar.html",function(){
-			TARGUS.mask.maskUser();
-		});
+		$(location).attr('href', ONG.contextPath+'/project/modalidades.html');
 		return false;
 	};
 	$('#valorPesquisa').keypress(function(e) {

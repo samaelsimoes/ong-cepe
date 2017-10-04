@@ -6,18 +6,8 @@ import javax.persistence.Entity;
 public class Beneficente extends Evento{
 
 	
-	protected long custo;
 	protected long arrecadacao;
 
-	public long getCusto() {
-		return custo;
-	}
-
-	public void setCusto(long custo) {
-		this.custo = custo;
-	}
-
-	
 	public long getArrecadacao() {
 		return arrecadacao;
 	}

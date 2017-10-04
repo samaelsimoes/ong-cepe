@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+
+import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -19,6 +22,9 @@ public class Modalidade {
 	private String descricao;
 	private String restricoes;
 	private String observacoes;
+	@OneToOne
+	private CentroCusto centroCusto; 
+	
 	public int getId() {
 		return id;
 	}
@@ -54,6 +60,12 @@ public class Modalidade {
 	}
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+	public CentroCusto getCentroCusto() {
+		return centroCusto;
+	}
+	public void setCentroCusto(CentroCusto centroCusto) {
+		this.centroCusto = centroCusto;
 	}
 	@Override
 	public String toString() {

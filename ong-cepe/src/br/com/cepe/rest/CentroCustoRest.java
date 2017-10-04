@@ -13,26 +13,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.cepe.entity.pojo.modalidade.Modalidade;
+import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 import br.com.cepe.exception.GlobalException;
-import br.com.cepe.factory.entity.modalidade.ModalidadeFactory;
+import br.com.cepe.factory.entity.centroCusto.CentroCustoFactory;
 import br.com.cepe.factory.util.ObjMapper;
-import br.com.cepe.service.ModalidadeService;
+import br.com.cepe.service.CentroCustoService;
 
-@Path("/modalidade")
-public class ModalidadeRest extends ObjMapper {
+@Path("/centroCusto")
+public class CentroCustoRest extends ObjMapper {
 
-	public ModalidadeRest() {
+	public CentroCustoRest() {
 	}
 
 	@POST
 	@Consumes("application/*")
-	public Response adicionar(String modalidadeStr) throws GlobalException {
+	public Response adicionar(String centroCustoStr) throws GlobalException {
 		try {
-			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade();
+			CentroCusto centroCusto = new CentroCustoFactory(centroCustoStr).getCentroCusto();
 					
-			if(modalidade != null)
-				new ModalidadeService(modalidade).adicionar();
+			if(centroCusto != null)
+				new CentroCustoService(centroCusto).adicionar();
 			else
 				throw new GlobalException("Valor nulo enviado ao servidor");
 			
@@ -50,8 +50,8 @@ public class ModalidadeRest extends ObjMapper {
 		String resp = null;
 		try {
 			
-			List<Modalidade> modalidades = new ModalidadeService(nome).pesquisaNomeContem();
-			resp = getJson(modalidades);
+			List<CentroCusto> centroCustos = new CentroCustoService(nome).pesquisaNomeContem();
+			resp = getJson(centroCustos);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
@@ -65,8 +65,8 @@ public class ModalidadeRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarTipo(@PathParam("tipo") int tipo) throws GlobalException {
 		try {
-			List<Modalidade> modalidades = new ModalidadeService(tipo).pesquisaTipoIgual();
-			String resp = getJson(modalidades);
+			List<CentroCusto> centroCustos = new CentroCustoService(tipo).pesquisaTipoIgual();
+			String resp = getJson(centroCustos);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			
 		} catch (Throwable e) {
@@ -81,12 +81,12 @@ public class ModalidadeRest extends ObjMapper {
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
 		String resp = null;
 		try {
-			Modalidade modalidade = new ModalidadeService(id).pesquisaId();
-			resp = getJson(modalidade);
+			CentroCusto centroCusto = new CentroCustoService(id).pesquisaId();
+			resp = getJson(centroCusto);
 			if(resp != null)
 				return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			else 
-				throw new GlobalException("Erro ao consultar modalidade por ID !");
+				throw new GlobalException("Erro ao consultar centro de custo por ID !");
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -96,18 +96,16 @@ public class ModalidadeRest extends ObjMapper {
 
 	@PUT
 	@Consumes("application/*")
-	public Response alterar(String modalidadeStr) throws GlobalException { 
+	public Response alterar(String centroCustoStr) throws GlobalException { 
 		try {
-			System.out.println(modalidadeStr);
-			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade(); 
-			new ModalidadeService(modalidade).alterar();
+			CentroCusto centroCusto = new CentroCustoFactory(centroCustoStr).getCentroCusto(); 
+			new CentroCustoService(centroCusto).alterar();
 			
-//			return Response.ok(modalidade, "Modalidade atualizada com sucesso!").build();
-			return this.buildResponse("Cadastrado com sucesso.");
-
+			return Response.ok(centroCusto, "Centro de custo atualizado com sucesso!").build();
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a alteração da modalidade");
+			throw new GlobalException("Erro ao fazer a alteração do centro de custo");
 		}
 	}
 
@@ -115,12 +113,12 @@ public class ModalidadeRest extends ObjMapper {
 	@Path("{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
-			new ModalidadeService(id).excluir();
-			return this.buildResponse("Excluído com sucesso.");
+			new CentroCustoService(id).excluir();
+			return this.buildResponse("Centro de custo excluído com sucesso.");
 		
 		}catch(Throwable e){
 			e.printStackTrace();
-			throw new Exception("Erro ao deletar usuário");
+			throw new Exception("Erro ao deletar centro de custo");
 		}
 	}
 

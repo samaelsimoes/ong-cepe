@@ -9,12 +9,10 @@ $(document).ready(function(){
 		});
 		return false;
 	};
-//	TARGUS.aluno.btnCancelar = function() {
-//		$("#conteudo").load("private/aluno/gerenciar.html",function(){
-//			TARGUS.mask.maskUser();
-//		});
-//		return false;
-//	};
+	ONG.usuario.btnCancelar = function() {
+		$(location).attr('href', ONG.contextPath+'/project/usuarios.html');
+		return false;
+	};
 	$('#valorPesquisa').keypress(function(e) {
 	    if(e.which == 13) 
 	        	ONG.usuario.pesquisar();
@@ -45,8 +43,8 @@ $(document).ready(function(){
 				"<td>"+lista[i].tipo+"</td>"+				
 				"<td>"+lista[i].usuario+"</td>"+				
 				"<td class='actions  text-center'>"+
-				"<a class='btn btn-warning btn-xs' href='#' onclick='TARGUS.aluno.carregarAluno("+ lista[i].id+ ")'>Editar</a>" +
-				"<a class='btn btn-danger btn-xs'  href='#' onclick='ONG.usuario.excluir("+ lista[i].id+ ")'>Excluir</a>"+ 
+				"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.usuario.carregarUsuario("+lista[i].id+")'>Editar</button>"+ " " + " " +
+				"<button type='button' class='btn btn-trash' onclick='ONG.usuario.excluir("+ lista[i].id+ ")'>Excluir</button>"+
 				"</td>"+
 				"</tr>";
 			}
@@ -97,8 +95,8 @@ $(document).ready(function(){
 				success : function(msg) {
 					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/usuarios.html'); });
-					
+						$(location).attr('href', ONG.contextPath+'/project/usuarios.html'); 
+					});
 				},
 				error : function(err) {
 					console.log('err' ,err);
@@ -125,6 +123,53 @@ $(document).ready(function(){
 				});
 			}
 		}); 
+	};
+	
+	ONG.usuario.carregarUsuario = function(id){
+				ONG.usuarioRest.pesquisarId({
+					data : id,
+					success : function(usuarioEdit) {
+						$("#idEdit").val(usuarioEdit.id);
+						$("#nomeEdit").val(usuarioEdit.nome);
+						$("#emailEdit").val(usuarioEdit.email);
+						$("#tipoEdit").val(usuarioEdit.tipo);
+						$("#loginEdit").val(usuarioEdit.usuario);
+					},
+					error : function(err) {
+						bootbox.alert("Erro ao exibir a edição: " + err.responseText);
+					} 
+				});
+	};
+	
+	ONG.usuario.editar = function(){
+		var senha = btoa($("#senhaEdit").val());
+		
+		var EditCad = {
+				id: $("#idEdit").val(),
+				nome: $("#nomeEdit").val(),
+				email:$("#emailEdit").val(),
+				usuario:$("#loginEdit").val(),
+				tipo:$("#tipoEdit").val(),
+				senha:senha,
+		};
+		console.log('editar cadastro',EditCad);
+		if (ONG.usuario.validar(EditCad)) {
+			ONG.usuarioRest.editar({
+				data : EditCad,
+				success : function(msg) {
+					bootbox.alert(msg, function(){ 
+						debugger;
+						ONG.usuario.exibirLista(undefined, "");
+						$('input').val('');
+						$('#modaledit').modal('toggle');
+					});				
+				},
+				error : function(err) {
+					console.log('err' ,err);
+					bootbox.alert("Erro ao editar: "	+ err.responseText);
+				} 
+			});
+		}// IF		
 	};
 
 	ONG.usuario.validar = function(usuario) {

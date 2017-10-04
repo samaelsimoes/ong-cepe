@@ -32,6 +32,8 @@ public class Evento {
 	protected String rua;
 	protected int numero;
 	protected String complemento;
+	protected long custo;
+	
 	public int getId() {
 		return id;
 	}
@@ -104,5 +106,13 @@ public class Evento {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	public long getCusto() {
+		return custo;
+	}
+	public void setCusto(long custo) {
+		this.custo = custo;
+	}
+	
+	
 
 }

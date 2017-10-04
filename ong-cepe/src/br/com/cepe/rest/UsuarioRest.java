@@ -105,9 +105,9 @@ public class UsuarioRest extends ObjMapper{
 		try {
 			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
 			new UsuarioService(usuario).alterar();
-			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
+//			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
 
-			
+			return this.buildResponse("Editado com sucesso.");
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro ao fazer a alteração do usuário");

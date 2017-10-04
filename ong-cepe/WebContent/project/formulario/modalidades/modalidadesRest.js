@@ -13,7 +13,6 @@ $(document).ready(function(){
 	
 	
 	ONG.modalidadeRest.pesquisarNome = function(config){
-//		url : "rest/pessoas/pesquisarNome?nome="+config.data.valor1 + "&tipo=" + config.data.valor2 ,
 		ONG.ajax.get({
 			url : ONG.contextPath+"/rest/modalidade/nome/"+config.data,
 			success : config.success,
@@ -23,7 +22,7 @@ $(document).ready(function(){
 	
 	ONG.modalidadeRest.pesquisarId = function(config){
 		ONG.ajax.get({
-			url : "rest/pessoas/pesquisarId?id="+config.data.valor1 + "&tipo=" + config.data.valor2,
+			url : ONG.contextPath+"/rest/modalidade/id/"+config.data,
 			success : config.success,
 			error : config.error
 		});
@@ -39,7 +38,7 @@ $(document).ready(function(){
 	
 	ONG.modalidadeRest.editar = function(config){
 		ONG.ajax.put({
-			url : "rest/pessoas/editar",
+			url : ONG.contextPath+"/rest/modalidade",
 			data : config.data,
 			success : config.success,
 			error : config.error

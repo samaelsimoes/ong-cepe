@@ -26,7 +26,6 @@ public class EventoFactory extends ObjMapper {
 		EVENTO_CLASSES.put(2, Sessao.class);
 		EVENTO_CLASSES.put(3, Viagem.class);
 	}
-	
 
 	public EventoFactory(String eventoStr) throws GlobalException {
 

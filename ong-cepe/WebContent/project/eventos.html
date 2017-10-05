@@ -12,7 +12,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">    
 	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap-theme.css">
 	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap.css">
-	
 </head>
 <body>
 
@@ -25,29 +24,28 @@
 		        	<div class="form-group row">
 						<div class="col-6.col-md-4">
 		
-							<h1>Gerenciamento de Pessoas:</h1>
+							<h1>Gerenciamento de Eventos:</h1>
 						</div>
-		        	</div>
-					<div class="form-group row ">
+		        	</div>	
+			        <div class="form-group row ">
 						<div class="col-xs-6 col-md-7">
 						
-						   <label class="col-2 col-form-label" for="tipopessoa">Tipo pessoa:</label>
+						   <label class="col-2 col-form-label" for="tipoevento">Tipo de evento:</label>
 						   
-						   <select class="form-control" id="tipopessoa">		
-								<option selected>Selecione uma da opções</option>
-								<option value="0">Pessoa Física</option>
-								<option value="1">Pessoa Juridica</option>
-								<option value="2">Beneficiarios / Associado</option>
-								<option value="3">Pessoa Física ou Jurídica</option>
+						   <select class="form-control" id="tipoevento">		
+								<option selected>Selecione uma das opções</option>
+								<option value="1">Beneficiente</option>
+								<option value="2">Sessao</option>
+								<option value="3">Viagem</option>
 						    </select>                   
 						</div>  
-					</div>				
-				</div>
+					</div>			
+				</div>	
 			</div>
 			<div class="row ">
 				<div class="col-xs-12">
-					<!-- CHAMADA DO MEU RELATÓRIO PESSOA FISICA -->
-					<div class="section form-group" id="pesstipo"></div>
+					<!-- CHAMADA DO MEU RELATÓRIO eventos -->
+					<div class="section form-group" id="eventos"></div>
 				</div>
 			</div>
 		</div>
@@ -59,8 +57,7 @@
     <script src="../lib/node_modules/jquery/dist/jquery.js"></script>
     <script src="../lib/node_modules/bootstrap/dist/js/bootstrap.js"></script>
     
-    <script src="js/pessoas/chamadas.js"></script>
+    <script src="js/eventos/chamadas.js"></script>
 	<script src="js/bootbox.min.js"></script>
 	<script src="js/ajax.js"></script>
-	
 </html>

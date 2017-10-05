@@ -74,9 +74,7 @@ public class EventoRest extends ObjMapper {
 			return this.buildErrorResponse("Erro ao fazer a consulta por data! ");
 		}
 	}
-	
-	
-	
+
 	@GET
 	@Path("/cidade/{cidade}")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -98,6 +96,8 @@ public class EventoRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarTipo(@PathParam("tipo") int tipo) throws GlobalException {
 		try {
+			System.out.println( "teste ");
+			System.out.println(tipo);
 			List<Evento> eventos = new EventoService(tipo).pesquisaTipoIgual();
 			String resp = getJson(eventos);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
@@ -157,7 +157,5 @@ public class EventoRest extends ObjMapper {
 			return this.buildErrorResponse("Erro ao deletar usuário");
 		}
 	}
-	
-	
-	
+
 }

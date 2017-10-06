@@ -110,7 +110,7 @@ public class CentroCustoRest extends ObjMapper {
 	}
 
 	@DELETE
-	@Path("{id}")
+	@Path("/id/{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 			new CentroCustoService(id).excluir();

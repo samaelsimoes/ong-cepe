@@ -38,6 +38,20 @@ private String entity;
 	}
 	
 	
+	public String getQuery(String select, HOperator operacao, int num) throws GlobalException{
+		this.select = select;
+		this.operacao = operacao;
+		String query = null;
+		
+		if (!select.equals(null) && operacao != null && num != 0)
+			query=setQuery();		
+		else
+			throw new GlobalException(" Não é possível montar a query com campos vazios!");
+		
+		return query;
+	}
+	
+	
 	private String setQuery() throws GlobalException{
 		String iniPercent = "'%";
 		String fimPercent = "%'";		

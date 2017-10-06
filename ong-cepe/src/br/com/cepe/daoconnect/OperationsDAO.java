@@ -46,6 +46,17 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		return list;
 	}
 	
+	public List<T> findGenericInt(String campo, HOperator operacao, int valor) throws GlobalException{
+		HqlFactory hqlFactory = new HqlFactory();		
+		String select = hqlFactory.getSelect(getEntityName(), campo);
+		String queryStr = hqlFactory.getQuery(select, operacao, valor);
+		Query query = super.getQuery(queryStr);
+		@SuppressWarnings("unchecked")
+		List<T> list = query.getResultList();
+		//disconnect();
+		return list;
+	}
+	
 	public void update(){
 		em.getTransaction().begin();		
 		em.merge(this.entity);

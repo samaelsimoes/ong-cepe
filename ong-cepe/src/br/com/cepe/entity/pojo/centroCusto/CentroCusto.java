@@ -1,10 +1,13 @@
 package br.com.cepe.entity.pojo.centroCusto;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import br.com.cepe.entity.pojo.modalidade.Modalidade;
 
@@ -16,10 +19,10 @@ public class CentroCusto {
 	private int id;
 	private String nome;
 	private String descricao;
-	@OneToOne
-	private Modalidade modalidade;
-	//@OneToMany(mappedBy = "centroCusto", targetEntity=Modalidade.class, cascade=CascadeType.ALL)
-	//private List<Modalidade> modalidades;
+	//@ManyToOne(cascade=CascadeType.ALL)
+	//private Modalidade modalidade;
+	@OneToMany(mappedBy = "centroCusto", targetEntity=Modalidade.class, cascade=CascadeType.ALL)
+	private List<Modalidade> modalidades;
 	
 	public int getId() {
 		return id;
@@ -41,29 +44,18 @@ public class CentroCusto {
 		this.descricao = descricao;
 	}
 
-	public Modalidade getModalidade() {
-		return modalidade;
-	}
 	
-	public void setModalidade(Modalidade modalidade) {
-			this.modalidade = modalidade;
-	}	
-	
-	
-	
-	/*
-	public List<Modalidade> getModalidade() {
+	public List<Modalidade> getModalidades() {
 		return modalidades;
 	}
 	
-	public void setModalidade(List<Modalidade> modalidades) {
+	public void setModalidades(List<Modalidade> modalidades) {
 		for(Modalidade modalidade : modalidades){
 			this.modalidades.add(modalidade);
 		}
 	}
 		
 	
-	*/
 	
 	
 

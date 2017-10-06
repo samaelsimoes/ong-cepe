@@ -3,11 +3,13 @@
  **/
 package br.com.cepe.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cepe.daoconnect.CentroCustoDAO;
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
+import br.com.cepe.entity.pojo.modalidade.Modalidade;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.interfaces.Service;
 
@@ -35,12 +37,18 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		//this.centroCusto.setModalidade(new ModalidadeService(this.centroCusto.getModalidade()).pesquisaId());
+		List<Modalidade> listaModalidades = new ArrayList<Modalidade>();
+		for(Modalidade modalidade: this.centroCusto.getModalidades()){
+			modalidade = new ModalidadeService(modalidade).pesquisaId();			
+			if(modalidade != null)	
+				listaModalidades.add(modalidade);
+		}
+		this.centroCusto.setModalidades(listaModalidades);
 		new CentroCustoDAO(this.centroCusto).persist();
 	}
 
-	public void adicionarLista (List<CentroCusto> centroCustos) throws GlobalException {
-		for (CentroCusto centroCusto : centroCustos) {
+	public void adicionarLista (List<CentroCusto> centroCustoLista) throws GlobalException {
+		for (CentroCusto centroCusto : centroCustoLista) {
 			this.centroCusto = centroCusto;
 			adicionar();
 		}

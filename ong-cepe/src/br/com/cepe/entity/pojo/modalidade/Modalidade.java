@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 
@@ -22,8 +22,9 @@ public class Modalidade {
 	private String descricao;
 	private String restricoes;
 	private String observacoes;
-	@OneToOne(mappedBy="modalidade")
+	@ManyToOne
 	private CentroCusto centroCusto;
+
 	
 	public int getId() {
 		return id;

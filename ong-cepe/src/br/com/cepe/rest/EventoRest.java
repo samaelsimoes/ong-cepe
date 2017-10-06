@@ -128,6 +128,27 @@ public class EventoRest extends ObjMapper {
 		}
 	}
 
+	
+	@GET
+	@Path("/modalidade/{id}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response pesquisarModalidadeId(@PathParam("id") int id) throws GlobalException {
+		String resp = null;
+		try {
+			Evento evento = new EventoService(id).pesquisaId();
+			if(evento != null)
+				resp = getJson(evento);
+			else
+				throw new GlobalException("Erro ao buscar evento por Id! ");
+			
+			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+
 	@PUT
 	@Consumes("application/*")
 	public Response alterar(String eventoStr) throws GlobalException { 

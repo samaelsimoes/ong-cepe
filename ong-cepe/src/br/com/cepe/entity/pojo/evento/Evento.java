@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import br.com.cepe.entity.pojo.endereco.Cidade;
+import br.com.cepe.entity.pojo.modalidade.Modalidade;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -28,11 +29,13 @@ public class Evento {
 	protected long cep;
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	protected Cidade cidade;
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	protected Modalidade modalidade;
 	protected String bairro;
 	protected String rua;
 	protected int numero;
 	protected String complemento;
-	protected long custo;
+	protected long custo;	
 	
 	public int getId() {
 		return id;
@@ -81,6 +84,12 @@ public class Evento {
 	}
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}	
+	public Modalidade getModalidade() {
+		return modalidade;
+	}
+	public void setModalidade(Modalidade modalidade) {
+		this.modalidade = modalidade;
 	}
 	public String getBairro() {
 		return bairro;

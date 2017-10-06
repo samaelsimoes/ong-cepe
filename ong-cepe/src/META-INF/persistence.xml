@@ -24,7 +24,7 @@
        		<property name="hibernate.format_sql" value="true"/>
        		<property name="hibernate.show_sql" value="true"/>
        		<!-- automatiza updates do banco e criação de tabelas -->
-       		<property name="hibernate.hbm2ddl.auto" value="create"/>
+       		<property name="hibernate.hbm2ddl.auto" value="update"/>
        		
        		
        		

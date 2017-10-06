@@ -21,4 +21,16 @@ items.addEventListener('change', function(){
 		$('#eventos').load('formulario/eventos/');
 	}
 });*/
+/*
+var items = document.querySelector('#typeevent');
 
+items.addEventListener('change', function(){
+	
+	var valor =	this.value // o valor que procuras é: this.value
+	
+	if(valor != 1){
+		$('#remove').val().removeClass('custom-remove')
+	}else{
+		$('#remove').val().addClass('custom-remove')
+	}
+});*/

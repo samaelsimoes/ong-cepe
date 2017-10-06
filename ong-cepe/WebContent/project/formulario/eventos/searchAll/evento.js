@@ -83,8 +83,8 @@ $(document).ready(function(){
 		msg += validaVazio("Cep: ", $("#cep").val());
 		msg += validaVazio("Data: ", $("#data").val());
 		msg += validaVazio("Hora: ", $("#horario").val());
-		msg += validaVazio("Estado: ", $("#estado").val());
-		msg += validaVazio("Cidade: ", $("#cidade").val());
+		msg += validaVazio("Estado: ", $("#addestado").val());
+		msg += validaVazio("Cidade: ", $("#addcidade").val());
 		msg += validaVazio("Bairro: ", $("#bairro").val());			
 		msg += validaVazio("Rua: ", $("#rua").val());
 		msg += validaVazio("Complemento: ", $("#complemento").val());
@@ -96,26 +96,27 @@ $(document).ready(function(){
 			
 			var date = $("#data").val();
 			var d = new Date(date.split("/").reverse().join("-"));
-			
+			var b= 1;
             if(exp==""){
             	
             	var dadosPJ = {
             			
 	            	nome: $("#nome").val(),
 					tipo: $("#typeevent").val(),
-					//status: 1,
+	            	descricao: $("#descricao").val(),
 					data: d.getTime(),
 					hora: $("#hora").val(),					
-					cidade:{ 
-						id: parseInt($("#cidade").val())
+	            	cep: $("#cep").val(),
+	            	cidade:{ 
+						id: parseInt($("#addcidade").val())
 					},
 	            	bairro: $("#bairro").val(),
-					rua: $("#rua").val(),
-	            	complemento: $("#complemento").val(),
 	            	numero: $("#numero").val(),
-	            	cep: $("#cep").val(),
-	            	descricao: $("#descricao").val(),
-	            	modalidade: 1
+	            	complemento: $("#complemento").val(),				
+					rua: $("#rua").val(),
+	            	modalidade: {
+	            		id: parseInt(b)
+	            	},
 	            };
             	var cfg = {
         			url: ONG.contextPath +"/rest/evento/",
@@ -323,7 +324,8 @@ $(document).ready(function(){
     buscaEstado = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
-			success: function(listEstado){													
+			success: function(listEstado){		
+				console.log(listEstado);
 				montaSelectEstado(listEstado);
 			},
 			error: function(err) {							
@@ -335,7 +337,8 @@ $(document).ready(function(){
     buscaCidade = function(id) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
-			success: function(listaCidade) {		
+			success: function(listaCidade) {
+				console.log(listaCidade)
 				montaSelectCidade(listaCidade);
 			},
 			error: function(err) {							
@@ -348,11 +351,11 @@ $(document).ready(function(){
     montaSelectEstado = function(listEstado) {
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estado'));
+				var option = $( "<option></option>" ).appendTo($('#addestado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
-			var items = document.querySelector('#estado');
+			var items = document.querySelector('#addestado');
 			items.addEventListener('change', function(){
 				var valor =	this.value // o valo
 				buscaCidade( valor );
@@ -363,7 +366,7 @@ $(document).ready(function(){
     montaSelectCidade = function( listaCidade ) {
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
+				var option = $( "<option></option>" ).appendTo( $( '#addcidade' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
@@ -384,7 +387,6 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
     buscaCidadeedit = function(id) {
-    	console.log(cidade);
     	console.log(id);
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,

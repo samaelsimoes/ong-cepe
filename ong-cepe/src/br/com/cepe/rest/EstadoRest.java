@@ -22,7 +22,8 @@ public class EstadoRest extends ObjMapper {
 		try {
 			
 			List<Estado> estados = new EstadoService().pesquisaEstado();
-			
+			System.out.println(estados);
+			System.out.println("teste estados");
 			String resp = getJson(estados);
 			
 			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();

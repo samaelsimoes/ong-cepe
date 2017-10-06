@@ -138,6 +138,7 @@ public class EventoRest extends ObjMapper {
 			Evento evento = new EventoService(id).pesquisaId();
 			if(evento != null)
 				resp = getJson(evento);
+
 			else
 				throw new GlobalException("Erro ao buscar evento por Id! ");
 			

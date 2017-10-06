@@ -46,6 +46,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		return list;
 	}
 	
+	
 	public List<T> findGenericInt(String campo, HOperator operacao, int valor) throws GlobalException{
 		HqlFactory hqlFactory = new HqlFactory();		
 		String select = hqlFactory.getSelect(getEntityName(), campo);

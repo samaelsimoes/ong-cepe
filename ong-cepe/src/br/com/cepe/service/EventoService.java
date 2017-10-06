@@ -63,6 +63,7 @@ public class EventoService  implements Service<Evento>{
 		Integer id = this.num;
 		return (List<Evento>) new EventoDAO().findGenericInt("modalidade_id", HOperator.EQUALS, id);
 	}
+	
 
 	public List<Evento> pesquisaNomeContem() throws GlobalException {
 		return (List<Evento>) new EventoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);

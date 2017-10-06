@@ -1,5 +1,6 @@
 package br.com.cepe.entity.pojo.centroCusto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,10 +20,19 @@ public class CentroCusto {
 	private int id;
 	private String nome;
 	private String descricao;
-	//@ManyToOne(cascade=CascadeType.ALL)
-	//private Modalidade modalidade;
+
 	@OneToMany(mappedBy = "centroCusto", targetEntity=Modalidade.class, cascade=CascadeType.ALL)
 	private List<Modalidade> modalidades;
+	
+	public void addModalidade(Modalidade modalidade){
+		if(modalidades == null){
+			modalidades = new ArrayList<Modalidade>();
+			setModalidades(modalidades);
+		}
+	
+		if(modalidade != null)
+			this.modalidades.add(modalidade);
+	}
 	
 	public int getId() {
 		return id;
@@ -44,19 +54,17 @@ public class CentroCusto {
 		this.descricao = descricao;
 	}
 
-	
 	public List<Modalidade> getModalidades() {
 		return modalidades;
 	}
 	
 	public void setModalidades(List<Modalidade> modalidades) {
+		if(this.modalidades == null)
+			this.modalidades = new ArrayList<Modalidade>();
+		
 		for(Modalidade modalidade : modalidades){
 			this.modalidades.add(modalidade);
 		}
 	}
-		
-	
-	
-	
 
 }

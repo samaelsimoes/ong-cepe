@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cepe.daoconnect.CentroCustoDAO;
+import br.com.cepe.daoconnect.ModalidadeDAO;
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 import br.com.cepe.entity.pojo.modalidade.Modalidade;
@@ -16,9 +17,12 @@ import br.com.cepe.interfaces.Service;
 public class CentroCustoService  implements Service<CentroCusto>{	
 
 
+	
 	protected CentroCusto centroCusto;
+	protected List<CentroCusto> centrosCusto = null;
 	protected String valorStr;
 	protected int num;
+	protected List<Modalidade> modalidades;
 	
 	
 	public CentroCustoService() {
@@ -35,15 +39,33 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	public CentroCustoService(int num) {
 		this.num = num;
 	}
-
-	public void adicionar()  throws GlobalException {
-		List<Modalidade> listaModalidades = new ArrayList<Modalidade>();
-		for(Modalidade modalidade: this.centroCusto.getModalidades()){
-			modalidade = new ModalidadeService(modalidade).pesquisaId();			
-			if(modalidade != null)	
-				listaModalidades.add(modalidade);
+	
+	private void buscaModalidades() throws GlobalException{
+		 this.modalidades = new ModalidadeDAO().findGenericInt("centroCusto_id", HOperator.EQUALS, this.centroCusto.getId());
+		 if(this.modalidades != null && !this.modalidades.isEmpty())
+			this.centroCusto.setModalidades(this.modalidades);
+	}
+	
+	private void buscaCentroCustoLista() throws GlobalException{
+		if(this.centrosCusto!= null && !this.centrosCusto.isEmpty()){
+			for(CentroCusto centroCusto : this.centrosCusto){
+				this.centroCusto = centroCusto;
+				buscaModalidades();
+				this.centroCusto = null;
+			}
 		}
-		this.centroCusto.setModalidades(listaModalidades);
+	}
+	
+	public void adicionar()  throws GlobalException {
+		if(this.centroCusto.getModalidades() != null && !this.centroCusto.getModalidades().isEmpty()){
+			List<Modalidade> listaModalidades = new ArrayList<Modalidade>();
+			for(Modalidade modalidade: this.centroCusto.getModalidades()){
+				modalidade = new ModalidadeService(modalidade).pesquisaId();			
+				if(modalidade != null)	
+					listaModalidades.add(modalidade);
+			}		
+			this.centroCusto.setModalidades(listaModalidades);
+		}
 		new CentroCustoDAO(this.centroCusto).persist();
 	}
 
@@ -55,20 +77,30 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	}
 
 	public CentroCusto pesquisaId()  throws GlobalException {
-		return new CentroCustoDAO(this.num).findId();
+		this.centroCusto = new CentroCustoDAO(this.num).findId(); 
+		if(this.centroCusto != null ){
+			buscaModalidades();
+		}
+		return this.centroCusto;
 	}
 	
 	public List<CentroCusto> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {
-		return (List<CentroCusto>) new CentroCustoDAO().findGeneric(campo, operacao, valor);
+		this.centrosCusto = new CentroCustoDAO().findGeneric(campo, operacao, valor);		
+		buscaCentroCustoLista();
+		return this.centrosCusto;
 	}
 
 	public List<CentroCusto> pesquisaTipoIgual() throws GlobalException {
 		String tipo = Integer.toString(this.num);
-		return (List<CentroCusto>) new CentroCustoDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
+		this.centrosCusto = new CentroCustoDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
+		buscaCentroCustoLista();
+		return this.centrosCusto;
 	}
 
 	public List<CentroCusto> pesquisaNomeContem() throws GlobalException {
-		return (List<CentroCusto>) new CentroCustoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
+		this.centrosCusto = new CentroCustoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
+		buscaCentroCustoLista();
+		return this.centrosCusto;
 	}
 
 	public void excluir()  throws GlobalException {
@@ -78,5 +110,7 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	public void alterar()  throws GlobalException{
 		new CentroCustoDAO(this.num).update();
 	}
+	
+	
 
 }

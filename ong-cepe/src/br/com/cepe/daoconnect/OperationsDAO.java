@@ -1,7 +1,9 @@
 package br.com.cepe.daoconnect;
 
 import java.util.List;
+
 import javax.persistence.Query;
+
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.hql.HqlFactory;

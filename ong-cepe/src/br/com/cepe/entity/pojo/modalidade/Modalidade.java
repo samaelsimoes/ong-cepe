@@ -22,8 +22,8 @@ public class Modalidade {
 	private String descricao;
 	private String restricoes;
 	private String observacoes;
-	@OneToOne
-	private CentroCusto centroCusto; 
+	@OneToOne(mappedBy="modalidade")
+	private CentroCusto centroCusto;
 	
 	public int getId() {
 		return id;

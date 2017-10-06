@@ -115,4 +115,9 @@ public class Evento {
 	public void setCusto(long custo) {
 		this.custo = custo;
 	}
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> 4164b1e81867468e487164fb0ac319d2c383b0dd
 }

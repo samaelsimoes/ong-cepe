@@ -1,10 +1,10 @@
-ONG.pessoasRest = new Object();
+ONG.pessoaRest = new Object();
 
 $(document).ready(function(){
 	
-	ONG.pessoasRest.inserir = function(config){
+	ONG.pessoaRest.inserir = function(config){
 		ONG.ajax.post({
-			url : "rest/pessoas/inserir",
+			url : ONG.contextPath+"/rest/pessoa/",
 			data : config.data,
 			success : config.success,
 			error : config.error
@@ -12,33 +12,41 @@ $(document).ready(function(){
 	};
 	
 	
-	ONG.pessoasRest.pesquisarNome = function(config){
+	ONG.pessoaRest.pesquisarNome = function(config){
+//		url : "rest/pessoas/pesquisarNome?nome="+config.data.valor1 + "&tipo=" + config.data.valor2 ,
 		ONG.ajax.get({
-			url : "rest/pessoas/pesquisarNome?nome="+config.data.valor1 + "&tipo=" + config.data.valor2 ,
+			url : ONG.contextPath+"/rest/pessoa/nome/"+config.data,
+			success : config.success,
+			error : config.error
+		});
+	};
+	ONG.pessoaRest.pesquisarTipo = function(config){
+		ONG.ajax.get({
+			url: ONG.contextPath + "/rest/pessoa/tipo/" + config.data,
 			success : config.success,
 			error : config.error
 		});
 	};
 	
-	ONG.pessoasRest.pesquisarId = function(config){
+	ONG.pessoaRest.pesquisarId = function(config){
 		ONG.ajax.get({
-			url : "rest/pessoas/pesquisarId?id="+config.data.valor1 + "&tipo=" + config.data.valor2,
+			url : ONG.contextPath+"/rest/pessoa/id/"+config.data,
 			success : config.success,
 			error : config.error
 		});
 	};
 	
-	ONG.pessoasRest.excluir = function(config){
+	ONG.pessoaRest.excluir = function(config){
 		ONG.ajax.delet({
-			url : "rest/pessoas/excluir/"+config.data ,
+			url : ONG.contextPath+"/rest/pessoa/"+config.data ,
 			success : config.success,
 			error : config.error
 		});
 	};
 	
-	ONG.pessoasRest.editar = function(config){
+	ONG.pessoaRest.editar = function(config){
 		ONG.ajax.put({
-			url : "rest/pessoas/editar",
+			url : ONG.contextPath+"/rest/pessoa",
 			data : config.data,
 			success : config.success,
 			error : config.error

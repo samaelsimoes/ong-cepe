@@ -1,6 +1,8 @@
 package br.com.cepe.entity.pojo.centroCusto;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -10,10 +12,11 @@ import br.com.cepe.entity.pojo.modalidade.Modalidade;
 public class CentroCusto {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nome;
 	private String descricao;
-	@OneToOne(mappedBy="centroCusto")
+	@OneToOne
 	private Modalidade modalidade;
 	//@OneToMany(mappedBy = "centroCusto", targetEntity=Modalidade.class, cascade=CascadeType.ALL)
 	//private List<Modalidade> modalidades;
@@ -24,6 +27,7 @@ public class CentroCusto {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}

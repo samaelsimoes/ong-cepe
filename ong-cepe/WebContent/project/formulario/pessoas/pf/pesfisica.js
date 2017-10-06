@@ -67,18 +67,15 @@ $(document).ready(function(){
 					}
 
 					var tipo = 1;
-					var cfg = {
-							
-						url: ONG.contextPath + "/rest/pessoa/tipo/" + tipo,
-						
+					ONG.pessoaRest.pesquisarTipo({
+						data : tipo,
 						success: function(listPesF,busca){													
 							buscapefisica(listPesF,busca);
 						},
 						error: function(err){							
 							bootbox.alert("Erro ao Buscar Pessoa Fisica, entrar em contato com o Administrador se o problema persistir!");
 						}
-					};					
-					ONG.ajax.get(cfg);
+					});
 				}else{					
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
@@ -134,10 +131,8 @@ $(document).ready(function(){
 	            	numero: $("#numero").val(),
 	            	cep: $("#cep").val() 
 	            };
-
-            	var cfg = {
-        			url: ONG.contextPath +"/rest/pessoa/",
-        			data: dadosPF,
+				ONG.pessoaRest.inserir({
+					data : dadosPJ,
         			success: function(msg){		
         				bootbox.alert("Realizado cadastro com sucesso ");
         				setTimeout(function(){
@@ -147,8 +142,7 @@ $(document).ready(function(){
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
         			}
-        		};					
-        		ONG.ajax.post(cfg);
+				});
             }else{
                 bootbox.alert(exp);
             }
@@ -222,9 +216,9 @@ $(document).ready(function(){
     // ------------------------
 
     buscID = function( id ){
-    	$.ajax({
-			  
-			url: ONG.contextPath + "/rest/pessoa/id/" + id,				  
+    	
+		ONG.pessoaRest.pesquisarId({
+			data : id,
 			success:function(dados){
 
 				if(dados != ""){
@@ -294,14 +288,8 @@ $(document).ready(function(){
 						id: $("#cidadeedit").val() 
 					}	
 		    	}
-		    	$.ajax({
-				
-					type: 'PUT',
-					url:ONG.contextPath + "/rest/pessoa/",
-					data: JSON.stringify(dadosPF),					
-					dataType:'text',
-					contentType:'application/json',
-					
+				ONG.pessoaRest.editar({
+					data : dadosPF,
 					success:function(data){	
 						
 						bootbox.alert(data);
@@ -340,22 +328,19 @@ $(document).ready(function(){
 		    },		    
 		    callback: function (result) {		        
 		        if(result == true){
-		        	
-		           var cfg={
-			
-					url:  ONG.contextPath + "/rest/pessoa/idexcluir/" + id,
-					success: function (data){
-						
-						bootbox.alert(data);	
-						setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 1000);           	
-					},
-					error: function (err){				
-						bootbox.alert("Erro ao deletar o contato: " + err.responseText);
-					}
-				};
-				ONG.ajax.delet(cfg);
+					ONG.pessoaRest.excluir({
+						data : id,
+						success: function (data){
+							
+							bootbox.alert(data);	
+							setTimeout(function(){
+		    	    	         location.reload();
+		    	    	    }, 1000);           	
+						},
+						error: function (err){				
+							bootbox.alert("Erro ao deletar o contato: " + err.responseText);
+						}
+					});
 		        }
 		    }
 		});		

@@ -12,6 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import br.com.cepe.entity.pojo.endereco.Cidade;
+import br.com.cepe.entity.pojo.modalidade.Modalidade;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -33,6 +34,7 @@ public class Evento {
 	protected int numero;
 	protected String complemento;
 	protected long custo;
+	protected Modalidade modalidade;
 	
 	public int getId() {
 		return id;
@@ -40,6 +42,7 @@ public class Evento {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public Integer getTipo() {
 		return tipo;
 	}
@@ -112,7 +115,4 @@ public class Evento {
 	public void setCusto(long custo) {
 		this.custo = custo;
 	}
-	
-	
-
 }

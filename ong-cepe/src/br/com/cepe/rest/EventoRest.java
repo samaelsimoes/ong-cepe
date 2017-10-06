@@ -28,6 +28,8 @@ public class EventoRest extends ObjMapper {
 	@POST
 	@Consumes("application/*")
 	public Response adicionar(String eventoStr) throws GlobalException {
+		System.out.println("teste");
+		System.err.println(eventoStr);
 		try {
 			Evento evento = new EventoFactory(eventoStr).getEvento();
 					

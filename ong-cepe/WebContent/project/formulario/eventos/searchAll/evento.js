@@ -1,16 +1,13 @@
 $(document).ready(function(){
-	searchAllEvent=function(){
-		
+	searchAllEvent=function(){ 		
 	    var busca=$("#conspj").val();	  	
 	    searchEvent(undefined,busca);
-	}		
-	
+	}		 	
 	searchEvent = function(listEvent, busca){
-				
+
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
-
 			"<thead class='table table-striped '>" +
 				"<tr>" +
 					
@@ -38,6 +35,7 @@ $(document).ready(function(){
 						html += "<td>" + listEvent[i].nome + "</td>";
 						html += "<td>" + listEvent[i].descricao + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
+						html += "<td>" + listEvent[i].hora + "</td>";
 						html += "<td>" + listEvent[i].estado + "</td>";
 						html += "<td>" + listEvent[i].cidade + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
@@ -76,45 +74,51 @@ $(document).ready(function(){
 	}
 	
 	searchEvent(undefined, "");
-/*
-	addEvent = function(){
+
+	addevent = function(){
 
 		var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
-		msg += validaVazio("Cnpj: ", $("#cnpj").val());
-		msg += validaVazio("Email: ", $("#email").val());
-		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
+		msg += validaVazio("Nome: ", $("#nome").val());
+		msg += validaVazio("Tipo evento: ", $("#typeevent").val());		
+		msg += validaVazio("Cep: ", $("#cep").val());
+		msg += validaVazio("Data: ", $("#data").val());
+		msg += validaVazio("Hora: ", $("#horario").val());
 		msg += validaVazio("Estado: ", $("#estado").val());
 		msg += validaVazio("Cidade: ", $("#cidade").val());
-		msg += validaVazio("Bairro: ", $("#bairro").val());
+		msg += validaVazio("Bairro: ", $("#bairro").val());			
 		msg += validaVazio("Rua: ", $("#rua").val());
 		msg += validaVazio("Complemento: ", $("#complemento").val());
-		msg += validaVazio("Numero: ", $("#numero").val());
+		msg += validaVazio("Descrição: ", $("#descricao").val());
+		//msg += validaVazio("Modalidade: ", $("#modalidade").val());
 
 		if(msg == ""){
 			var exp = validaCampos();
+			
+			var date = $("#data").val();
+			var d = new Date(date.split("/").reverse().join("-"));
+			
             if(exp==""){
-
-            	var dadosPJ = {
             	
-	            	nome: $("#razaosocial").val(),
-					tipo: 2,
-					status: 1,
-					cnpj: $("#cnpj").val(),
-					email: $("#email").val(),
-	            	dt_nasc: $("#datanascimento").val(),
-	            	foneFixo: $("#telfixo").val(),
-	            	foneMovel: $("#telmovel").val(),
+            	var dadosPJ = {
+            			
+	            	nome: $("#nome").val(),
+					tipo: $("#typeevent").val(),
+					//status: 1,
+					data: d.getTime(),
+					hora: $("#hora").val(),					
 					cidade:{ 
 						id: parseInt($("#cidade").val())
 					},
+	            	bairro: $("#bairro").val(),
 					rua: $("#rua").val(),
 	            	complemento: $("#complemento").val(),
 	            	numero: $("#numero").val(),
-	            	cep: $("#cep").val() 
+	            	cep: $("#cep").val(),
+	            	descricao: $("#descricao").val(),
+	            	modalidade: 1
 	            };
             	var cfg = {
-        			url: ONG.contextPath +"/rest/pessoa/",
+        			url: ONG.contextPath +"/rest/evento/",
         			data: dadosPJ,
         			success: function(msg){		
         				bootbox.alert(msg);
@@ -150,27 +154,13 @@ $(document).ready(function(){
 
     	var exp = "";
 
-    	if($("#email").val().indexOf("@") == -1 || //valida se existe o @
-            $("#email").val().indexOf(".") == -1 || //valida se existe o .
-            $("#email").val().indexOf("@") == 0 || //valida se tem texto antes do @
-            $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
-            ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
-                
-            exp+="E-mail invalido" +"</br>"
-            + "ex: teste_@teste.com.br"
-            document.getElementById("email").focus();
-        }
-        if(!$("#cnpj").val().match(/^\d{14,15}$/)){
-        	exp+="CNPJ invalido ! </br> " + "</br>";
-        }
         if(!$("#cep").val().match(/^\d{8,9}$/)){
         	exp+="Cep invalido ! </br> " + "</br>";
         }
-        if(!$("#telfixo").val().match(/^\d{10,13}$/)){    
-            exp+="Telefone Fixo invalido ! </br> " + "</br>";
-        }
+
     	return exp;
     };
+    /*
     validaCamposedit = function(){
 
     	var exp = "";
@@ -329,7 +319,7 @@ $(document).ready(function(){
 		    }
 		});		
     }
-
+*/
     buscaEstado = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
@@ -394,9 +384,12 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
     buscaCidadeedit = function(id) {
+    	console.log(cidade);
+    	console.log(id);
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
-			success: function(listaCidade) {		
+			success: function(listaCidade) {	
+				console.log(listaCidade);
 				montaSelectCidadeedit(listaCidade);
 			},
 			error: function(err) {							
@@ -429,6 +422,6 @@ $(document).ready(function(){
 				option.html( listaCidade[i].nome );
 			}
 		}
-    }*/
+    }
 });
 

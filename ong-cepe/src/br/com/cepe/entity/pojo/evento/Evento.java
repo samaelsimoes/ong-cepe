@@ -113,6 +113,5 @@ public class Evento {
 		this.custo = custo;
 	}
 	
-	
 
 }

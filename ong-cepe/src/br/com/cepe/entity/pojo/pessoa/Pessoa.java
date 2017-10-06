@@ -17,8 +17,7 @@ import br.com.cepe.entity.pojo.endereco.Cidade;
 public class Pessoa {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private int id;
 	private Integer tipo;
 	private int status;

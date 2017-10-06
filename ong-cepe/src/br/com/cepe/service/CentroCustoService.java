@@ -35,7 +35,7 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		this.centroCusto.setModalidade(new ModalidadeService(this.centroCusto.getModalidade().getId()).pesquisaId());
+		//this.centroCusto.setModalidade(new ModalidadeService(this.centroCusto.getModalidade()).pesquisaId());
 		new CentroCustoDAO(this.centroCusto).persist();
 	}
 

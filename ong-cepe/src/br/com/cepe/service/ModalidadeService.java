@@ -5,8 +5,10 @@ package br.com.cepe.service;
 
 import java.util.List;
 
+import br.com.cepe.daoconnect.CentroCustoDAO;
 import br.com.cepe.daoconnect.ModalidadeDAO;
 import br.com.cepe.datatype.HOperator;
+import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 import br.com.cepe.entity.pojo.modalidade.Modalidade;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.interfaces.Service;
@@ -35,7 +37,16 @@ public class ModalidadeService  implements Service<Modalidade>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		new ModalidadeDAO(this.modalidade).persist();
+		List<CentroCusto> centrosCusto = null;
+		if(this.modalidade.getCentroCusto() != null && this.modalidade.getCentroCusto().getId() != 0)
+		 centrosCusto = new CentroCustoDAO().findGenericInt("id", HOperator.EQUALS, this.modalidade.getCentroCusto().getId());
+
+		if(centrosCusto != null && !centrosCusto.isEmpty()){	
+			this.modalidade.setCentroCusto(centrosCusto.get(0));
+			new ModalidadeDAO(this.modalidade).persist();
+		}else{
+			throw new GlobalException("A modalidade deve estar vinculada a um centro de custo");
+		}
 	}
 
 	public void adicionarLista (List<Modalidade> modalidades) throws GlobalException {

@@ -23,7 +23,7 @@ public class Modalidade {
 	private String restricoes;
 	private String observacoes;
 	@ManyToOne
-	private CentroCusto centroCusto;
+	private CentroCusto centroCusto; 
 
 	
 	public int getId() {

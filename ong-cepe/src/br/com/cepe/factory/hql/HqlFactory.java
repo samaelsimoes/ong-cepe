@@ -42,8 +42,10 @@ private String entity;
 		this.select = select;
 		this.operacao = operacao;
 		String query = null;
+		if(num != 0)
+			this.valor = Integer.toString(num);
 		
-		if (!select.equals(null) && operacao != null && num != 0)
+		if (!select.equals(null) && operacao != null && valor != null)
 			query=setQuery();		
 		else
 			throw new GlobalException(" Não é possível montar a query com campos vazios!");
@@ -54,7 +56,8 @@ private String entity;
 	
 	private String setQuery() throws GlobalException{
 		String iniPercent = "'%";
-		String fimPercent = "%'";		
+		String fimPercent = "%'";
+		
 		if(this.operacao.equals(HOperator.EQUALS))
 			return this.select+" = "+this.valor;		
 		else if(this.operacao.equals(HOperator.DIFFERENT))

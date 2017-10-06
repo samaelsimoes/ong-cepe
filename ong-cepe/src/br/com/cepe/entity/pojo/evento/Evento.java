@@ -35,12 +35,7 @@ public class Evento {
 	protected String rua;
 	protected int numero;
 	protected String complemento;
-<<<<<<< HEAD
 	protected long custo;	
-=======
-	protected long custo;
-	protected Modalidade modalidade;
->>>>>>> 4b1c72520d713e15afe881b73e3d90c7e33f18d4
 	
 	public int getId() {
 		return id;
@@ -127,9 +122,5 @@ public class Evento {
 	public void setCusto(long custo) {
 		this.custo = custo;
 	}
-<<<<<<< HEAD
-=======
 	
-
->>>>>>> 4164b1e81867468e487164fb0ac319d2c383b0dd
 }

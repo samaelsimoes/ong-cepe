@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
-    
-	<title>Centro esportivo para pessoas especiais - Joinville</title>
-	
+    <meta name="Guilherme Goulart" content="">
+    	
 	<link href="../lib/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../lib/node_modules/bootstrap/dist/css/bootstrap.css">    
@@ -19,32 +17,46 @@
 
 	<section id="header" class="custom-padding-header"></section>
 	
-	<section id="conteudo" class="padding-vertical-small">
+	<section id="conteudo" class="padding-vertical-small custom-class">
 		<div class="container">
 			<div id="top" class="row">
-				<div class="col-md-3">
-					<h2>Usuários</h2>
-				</div>
-				
-				<div class="col-md-5">
-						<input name="search" class="form-control h2" id="valorPesquisa" type="text" placeholder="Nome">
-				</div>
-				<div class="col-md-4">
-					<a href="#" onClick="return ONG.usuario.pesquisar()" class="btn btn-primary btn-md h2 "><span class="glyphicon glyphicon-search"></span> Buscar</a>
-					<a href="#" onClick="return ONG.usuario.btnCadastrar()" class="btn btn-primary btn-success btn-md pull-right h2"><span class="glyphicon glyphicon-ok"></span> Cadastrar</a>			
-				</div>
-			</div> <!-- /#top -->
-		</div>
-	</section>
-	<section id="conteudo">
-					<div class="container">
-						<div class="form-group row"> 
-						    <div class="col-12 col-md-12 pull-md-7 bd-content">
-						        <div id = "exibiList" class = "divResultado"></div>
-						    </div>
+				<div class="col-xs-12 custom-fontes">
+					<div class="form-group row">
+						<div class="col-6.col-md-4">
+							<h2>Gerenciamento de Usuários</h2>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<input name="search" class="form-control h2" id="valorPesquisa" type="text" placeholder="Nome">
+						</div>
+						<div class="col-md-4">
+							<!--<a href="#" onClick="return ONG.usuario.pesquisar()" class="btn btn-primary btn-md h2 "><span class="glyphicon glyphicon-search"></span> Buscar</a>-->
+							<div class="row">
+								<div class="col-sm-4 col-sm-offset-2 col-md-6 col-md-offset-0">
+									<button type="button" class="btn btn-primary btn-md h2" onclick="ONG.usuario.pesquisar()">	                    
+						                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+						            </button>
+						        </div>
+								<div class="col-sm-4 col-sm-offset-2 col-md-6 col-md-offset-0">
+									<button type="button" class="btn btn-primary btn-success btn-md pull-right h2" onclick="ONG.usuario.btnCadastrar()">	                    
+						                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Cadastrar
+						            </button>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div> <!-- /#top -->
+			<div class="row "  id="conteudo">
+				<div class="col-xs-12">
+					<!-- CHAMADA DO MEU RELATÓRIO PESSOA FISICA -->
+			        <div id = "exibiList" class = "divResultado"></div>
+				</div>
+			</div>
+		</div>
 	</section>
+	
 	<section id="footer" class="custom-footer"></section>
 	
 	<div class="modal fade" id="modaledit" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

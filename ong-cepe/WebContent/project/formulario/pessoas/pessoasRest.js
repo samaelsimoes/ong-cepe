@@ -38,7 +38,7 @@ $(document).ready(function(){
 	
 	ONG.pessoaRest.excluir = function(config){
 		ONG.ajax.delet({
-			url : ONG.contextPath+"/rest/pessoa/"+config.data ,
+			url : ONG.contextPath+"/rest/pessoa/idexcluir/"+config.data ,
 			success : config.success,
 			error : config.error
 		});

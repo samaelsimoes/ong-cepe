@@ -1,29 +1,27 @@
 <meta charset="utf-8">
+
 <div class="form-group row">
-    <div class="col-xs-6 col-md-7">        
+    <div class="col-md-8">
         <label for="buscar" class="col-2 col-form-label">Buscar:</label>
 
         <input class="form-control" type="text" id="conspj" placeholder="Buscar">
     </div>
-    <div class="col-xs-6 col-md-3">
-        <label class="col-2 col-form-label"> </label>
-        <div class="col-10">
-            <button type="button" class="btn btn-primary" onclick="buscapessojuridica()">
+    <div class="col-md-1">
+        <div class="row btn-md h2">
+            <button type="button" class="btn btn-primary" onclick="ONG.pessoaJuridica.buscapessojuridica()">
                     
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
             </button>
         </div>
     </div>
-</div>  
-
-<div class="form-group row">
-    <div class="col-xs-9 col-md-12 bd-content align-left">
-        <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="buscaEstado()">
+    <div class="col-md-2">
+        <div class= "btn-md h2">
+            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="ONG.pessoaJuridica.buscaEstado()">
             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
         </button>
+        </div>
     </div>
-</div>
-
+</div>  
 <!-- GRID -->
 <div class="form-group row"> 
     <div class="col-12 col-md-12 pull-md-12 bd-content">
@@ -128,7 +126,7 @@
                 
                     <button type="button" class="btn" data-dismiss="modal">Sair</button>          
                 
-                    <button type="button" class="btn btn-primary btn-success" onclick="cadspesjuridica()">
+                    <button type="button" class="btn btn-primary btn-success" onclick="ONG.pessoaJuridica.cadspesjuridica()">
 
                         <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
                     </button>
@@ -233,7 +231,7 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn" data-dismiss="modal">Sair</button>
-                <button type="button" class="btn btn-primary btn-success" onclick="editarPJ()">
+                <button type="button" class="btn btn-primary btn-success" onclick="ONG.pessoaJuridica.editarPJ()">
 
                     <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
                 </button>                
@@ -247,6 +245,6 @@
 
 <script type = "text/javascript"> 
     window.onload = function(){        
-        buscapessojuridica();
+    	ONG.pessoaJuridica.buscapessojuridica();
     }
 </script>

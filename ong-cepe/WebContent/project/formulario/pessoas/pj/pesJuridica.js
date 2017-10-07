@@ -1,11 +1,13 @@
+ONG.pessoaJuridica = new Object();
+
 $(document).ready(function(){
 	buscapessojuridica=function(){
 		
 	    var busca=$("#conspj").val();	  	
-	    buscapesJuridica(undefined,busca);
+	    ONG.pessoaJuridica.buscapesJuridica(undefined,busca);
 	}		
 	
-	buscapesJuridica = function(listPesj, busca){
+	ONG.pessoaJuridica.buscapesJuridica = function(listPesj, busca){
 				
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
@@ -59,8 +61,8 @@ $(document).ready(function(){
 					html += "<td>" + listPesj[i].numero + "</td>";
 
 					html += "<td>"+
-								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
-								"<button type='button'class='btn btn-trash' onclick='confExcluir("+listPesj[i].id+")'>Excluir</button>"+
+								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaJuridica.buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
+								"<button type='button'class='btn btn-trash' onclick='ONG.pessoaJuridica.confExcluir("+listPesj[i].id+")'>Excluir</button>"+
 							"</td>";						
 					html += "</tr>";  
 			    }
@@ -74,7 +76,7 @@ $(document).ready(function(){
 					ONG.pessoaRest.pesquisarTipo({
 						data : tipo,
 						success: function(listPesj,busca){													
-							buscapesJuridica(listPesj,busca);
+							ONG.pessoaJuridica.buscapesJuridica(listPesj,busca);
 						},
 						error: function(err){							
 							bootbox.alert("Erro ao Buscar Pessoa Juridica, entrar em contato com o Administrador se o problema persistir!");
@@ -88,24 +90,24 @@ $(document).ready(function(){
 		$("#resupesjuridica").html(html);
 	}
 	
-	buscapesJuridica(undefined, "");
+	ONG.pessoaJuridica.buscapesJuridica(undefined, "");
 
-	cadspesjuridica = function(){
+	ONG.pessoaJuridica.cadspesjuridica = function(){
 
 		var msg  = "";
-		msg += validaVazio("Razao Social: ", $("#razaosocial").val());
-		msg += validaVazio("Cnpj: ", $("#cnpj").val());
-		msg += validaVazio("Email: ", $("#email").val());
-		msg += validaVazio("Telefone Fixo: ", $("#telfixo").val());
-		msg += validaVazio("Estado: ", $("#estado").val());
-		msg += validaVazio("Cidade: ", $("#cidade").val());
-		msg += validaVazio("Bairro: ", $("#bairro").val());
-		msg += validaVazio("Rua: ", $("#rua").val());
-		msg += validaVazio("Complemento: ", $("#complemento").val());
-		msg += validaVazio("Numero: ", $("#numero").val());
+		msg += ONG.pessoaJuridica.validaVazio("Razao Social: ", $("#razaosocial").val());
+		msg += ONG.pessoaJuridica.validaVazio("Cnpj: ", $("#cnpj").val());
+		msg += ONG.pessoaJuridica.validaVazio("Email: ", $("#email").val());
+		msg += ONG.pessoaJuridica.validaVazio("Telefone Fixo: ", $("#telfixo").val());
+		msg += ONG.pessoaJuridica.validaVazio("Estado: ", $("#estado").val());
+		msg += ONG.pessoaJuridica.validaVazio("Cidade: ", $("#cidade").val());
+		msg += ONG.pessoaJuridica.validaVazio("Bairro: ", $("#bairro").val());
+		msg += ONG.pessoaJuridica.validaVazio("Rua: ", $("#rua").val());
+		msg += ONG.pessoaJuridica.validaVazio("Complemento: ", $("#complemento").val());
+		msg += ONG.pessoaJuridica.validaVazio("Numero: ", $("#numero").val());
 
 		if(msg == ""){
-			var exp = validaCampos();
+			var exp = ONG.pessoaJuridica.validaCampos();
             if(exp==""){
 
             	var dadosPJ = {
@@ -149,7 +151,7 @@ $(document).ready(function(){
 	
 	//  ====----------------- VALIDAÇÕES
 	
-	validaVazio = function ( campo, valor ) {
+	ONG.pessoaJuridica.validaVazio = function ( campo, valor ) {
 		
         var msg = "";
 
@@ -158,7 +160,7 @@ $(document).ready(function(){
         }
         return msg;
     };
-    validaCampos = function(){
+    ONG.pessoaJuridica.validaCampos = function(){
 
     	var exp = "";
 
@@ -183,7 +185,7 @@ $(document).ready(function(){
         }
     	return exp;
     };
-    validaCamposedit = function(){
+    ONG.pessoaJuridica.validaCamposedit = function(){
 
     	var exp = "";
 
@@ -210,7 +212,7 @@ $(document).ready(function(){
     };
     // ------------------------
 
-    buscID = function( id ){
+    ONG.pessoaJuridica.buscID = function( id ){
 		ONG.pessoaRest.pesquisarId({
 			data : id,
 			success:function(dados){
@@ -227,7 +229,7 @@ $(document).ready(function(){
 					$("#complementoedit").val(dados.complemento);
 					$("#numeroedit").val(dados.numero);
 					$("#cepedit").val(dados.cep);
-					buscaEstadoedit();
+					ONG.pessoaJuridica.buscaEstadoedit();
 		    	}			
 			},			
 			error: function(err){				
@@ -237,7 +239,7 @@ $(document).ready(function(){
 
     };
 
-    editarPJ = function(){
+    ONG.pessoaJuridica.editarPJ = function(){
 
     	var msg  = "";
     	
@@ -245,19 +247,19 @@ $(document).ready(function(){
     		msg += " Impossivel editar pessoa Juridica, gentileza entrar em contato com o administrador, motivo sem campo id";
     	}
     	
-		msg += validaVazio("Razao Social: ", $("#razaosocialedit").val());
-		msg += validaVazio("Cnpj: ", $("#cnpjedit").val());
-		msg += validaVazio("Email: ", $("#emailedit").val());
-		msg += validaVazio("Telefone Fixo: ", $("#telfixoedit").val());
-		msg += validaVazio("Estado: ", $("#estadoedit").val());
-		msg += validaVazio("Cidade: ", $("#cidadeedit").val());
-		msg += validaVazio("Bairro: ", $("#bairroedit").val());
-		msg += validaVazio("Rua: ", $("#ruaedit").val());
-		msg += validaVazio("Complemento: ", $("#complementoedit").val());
-		msg += validaVazio("Numero: ", $("#numeroedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Razao Social: ", $("#razaosocialedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Cnpj: ", $("#cnpjedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Email: ", $("#emailedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Telefone Fixo: ", $("#telfixoedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Estado: ", $("#estadoedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Cidade: ", $("#cidadeedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Bairro: ", $("#bairroedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Rua: ", $("#ruaedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Complemento: ", $("#complementoedit").val());
+		msg += ONG.pessoaJuridica.validaVazio("Numero: ", $("#numeroedit").val());
 
     	if(msg == ""){
-    		var exp = validaCamposedit();
+    		var exp = ONG.pessoaJuridica.validaCamposedit();
     		
     		if(exp == ""){
 		    	var dadosPJ= {
@@ -301,7 +303,7 @@ $(document).ready(function(){
 	    }
     };
 
-    confExcluir = function(id) {
+    ONG.pessoaJuridica.confExcluir = function(id) {
     	bootbox.confirm({
 		    message: "Você Desejea excluir?",
 		    buttons: {
@@ -333,11 +335,11 @@ $(document).ready(function(){
 		});		
     }
 
-    buscaEstado = function(){
+    ONG.pessoaJuridica.buscaEstado = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
 			success: function(listEstado){													
-				montaSelectEstado(listEstado);
+				ONG.pessoaJuridica.montaSelectEstado(listEstado);
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -345,11 +347,11 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-    buscaCidade = function(id) {
+    ONG.pessoaJuridica.buscaCidade = function(id) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade) {		
-				montaSelectCidade(listaCidade);
+				ONG.pessoaJuridica.montaSelectCidade(listaCidade);
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -358,7 +360,7 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
 
-    montaSelectEstado = function(listEstado) {
+    ONG.pessoaJuridica.montaSelectEstado = function(listEstado) {
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
 				var option = $( "<option></option>" ).appendTo($('#estado'));
@@ -368,12 +370,12 @@ $(document).ready(function(){
 			var items = document.querySelector('#estado');
 			items.addEventListener('change', function(){
 				var valor =	this.value // o valo
-				buscaCidade( valor );
+				ONG.pessoaJuridica.buscaCidade( valor );
 			});
 		}
     }
 
-    montaSelectCidade = function( listaCidade ) {
+    ONG.pessoaJuridica.montaSelectCidade = function( listaCidade ) {
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
 				var option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
@@ -384,11 +386,11 @@ $(document).ready(function(){
     }
 
     // EDITAR CIDADE E ESTADO
-    buscaEstadoedit = function(){
+    ONG.pessoaJuridica.buscaEstadoedit = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
 			success: function(listEstado){													
-				montaSelectEstadoedit(listEstado);
+				ONG.pessoaJuridica.montaSelectEstadoedit(listEstado);
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -396,11 +398,11 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-    buscaCidadeedit = function(id) {
+    ONG.pessoaJuridica.buscaCidadeedit = function(id) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade) {		
-				montaSelectCidadeedit(listaCidade);
+				ONG.pessoaJuridica.montaSelectCidadeedit(listaCidade);
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -409,7 +411,7 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
 
-    montaSelectEstadoedit = function(listEstado) {
+    ONG.pessoaJuridica.montaSelectEstadoedit = function(listEstado) {
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
 				var option = $( "<option></option>" ).appendTo($('#estadoedit'));
@@ -419,12 +421,12 @@ $(document).ready(function(){
 			var items = document.querySelector('#estadoedit');
 			items.addEventListener('change', function() {
 				var valor =	this.value // o valo
-				buscaCidadeedit( valor );
+				ONG.pessoaJuridica.buscaCidadeedit( valor );
 			});
 		}
     }
 
-    montaSelectCidadeedit = function( listaCidade ) {
+    ONG.pessoaJuridica.montaSelectCidadeedit = function( listaCidade ) {
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
 				var option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );

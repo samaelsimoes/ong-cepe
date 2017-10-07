@@ -62,5 +62,15 @@
     <script src="js/pessoas/chamadas.js"></script>
 	<script src="js/bootbox.min.js"></script>
 	<script src="js/ajax.js"></script>
-	
+
+	<script src="formulario/pessoas/pessoasRest.js"></script>
+	<script src="formulario/pessoas/pf/pesfisica.js"></script>
+
+	<script type = "text/javascript"> 
+			$('#pesstipo').load('formulario/pessoas/pf/gridpf.html');
+
+	    window.onload = function(){        
+	    	ONG.pessoaFisica.consultapesf();
+	    }
+	</script>
 </html>

@@ -1,28 +1,27 @@
 <meta charset="utf-8">
-<div class="form-group row">
-    <div class="col-xs-6 col-md-7">        
-        <label for="buscar" class="col-2 col-form-label">Buscar:</label>
 
-        <input class="form-control" type="text" id="conspj" placeholder="Buscar">
+<div class="form-group row">
+    <div class="col-md-8">
+        <label for="consuev" class="col-2 col-form-label">Buscar:</label>
+
+        <input class="form-control" type="text" id="consuev" placeholder="Buscar">
     </div>
-    <div class="col-xs-6 col-md-3">
-        <label class="col-2 col-form-label"> </label>
-        <div class="col-10">
-            <button type="button" class="btn btn-primary" onclick="buscapessojuridica()">
+    <div class="col-md-1">
+        <div class="row btn-md h2">
+            <button type="button" class="btn btn-primary" onclick="ONG.evento.buscaEvento()">
                     
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
             </button>
         </div>
     </div>
-</div>  
-
-<div class="form-group row">
-    <div class="col-xs-9 col-md-12 bd-content align-left">
-        <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="buscaEstado()">
-            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
-        </button>
+    <div class="col-md-2">
+        <div class= "btn-md h2">
+            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="ONG.evento.buscaEstado()">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
+            </button>
+        </div>
     </div>
-</div>
+</div>  
 
 <!-- GRID -->
 <div class="form-group row"> 
@@ -149,7 +148,7 @@
                 
 	             <button type="button" class="btn" data-dismiss="modal">Sair</button>          
 	         
-	             <button type="button" class="btn btn-primary btn-success" onclick="addevent()">
+	             <button type="button" class="btn btn-primary btn-success" onclick="ONG.evento.addevent()">
 	
 	                 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
 	             </button>
@@ -259,7 +258,7 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn" data-dismiss="modal">Sair</button>
-                <button type="button" class="btn btn-primary btn-success" onclick="editarPJ()">
+                <button type="button" class="btn btn-primary btn-success" onclick="ONG.evento.editarPJ()">
 
                     <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
                 </button>                

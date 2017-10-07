@@ -15,8 +15,6 @@ import br.com.cepe.exception.GlobalException;
 import br.com.cepe.interfaces.Service;
 
 public class CentroCustoService  implements Service<CentroCusto>{	
-
-
 	
 	protected CentroCusto centroCusto;
 	protected List<CentroCusto> centrosCusto = null;
@@ -39,7 +37,7 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	public CentroCustoService(int num) {
 		this.num = num;
 	}
-	
+/*	
 	private void buscaModalidades() throws GlobalException{
 		 this.modalidades = new ModalidadeDAO().findGenericInt("centroCusto_id", HOperator.EQUALS, this.centroCusto.getId());
 		 if(this.modalidades != null && !this.modalidades.isEmpty())
@@ -54,7 +52,7 @@ public class CentroCustoService  implements Service<CentroCusto>{
 				this.centroCusto = null;
 			}
 		}
-	}
+	}*/
 	
 	public void adicionar()  throws GlobalException {
 		if(this.centroCusto.getModalidades() != null && !this.centroCusto.getModalidades().isEmpty()){
@@ -78,28 +76,17 @@ public class CentroCustoService  implements Service<CentroCusto>{
 
 	public CentroCusto pesquisaId()  throws GlobalException {
 		this.centroCusto = new CentroCustoDAO(this.num).findId(); 
-		if(this.centroCusto != null ){
-			buscaModalidades();
-		}
 		return this.centroCusto;
 	}
 	
 	public List<CentroCusto> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {
 		this.centrosCusto = new CentroCustoDAO().findGeneric(campo, operacao, valor);		
-		buscaCentroCustoLista();
 		return this.centrosCusto;
 	}
 
-	public List<CentroCusto> pesquisaTipoIgual() throws GlobalException {
-		String tipo = Integer.toString(this.num);
-		this.centrosCusto = new CentroCustoDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
-		buscaCentroCustoLista();
-		return this.centrosCusto;
-	}
 
 	public List<CentroCusto> pesquisaNomeContem() throws GlobalException {
 		this.centrosCusto = new CentroCustoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
-		buscaCentroCustoLista();
 		return this.centrosCusto;
 	}
 
@@ -110,7 +97,14 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	public void alterar()  throws GlobalException{
 		new CentroCustoDAO(this.num).update();
 	}
-	
+
+	public List<CentroCusto> pesquisaTipoIgual() throws GlobalException {
+		return null;
+	}
+
+	public List<CentroCusto> pesquisaGeneric(String campo, HOperator operacao,int num) throws GlobalException {
+		return null;
+	}
 	
 
 }

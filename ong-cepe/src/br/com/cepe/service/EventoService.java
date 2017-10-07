@@ -108,6 +108,12 @@ public class EventoService  implements Service<Evento>{
 		new EventoDAO(this.evento).update();		
 	}
 
+	@Override
+	public List<Evento> pesquisaGeneric(String campo, HOperator operacao,
+			int num) throws GlobalException {
+		return null;
+	}
+
 	
 
 

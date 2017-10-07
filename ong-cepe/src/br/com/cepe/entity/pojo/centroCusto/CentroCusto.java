@@ -20,19 +20,8 @@ public class CentroCusto {
 	private int id;
 	private String nome;
 	private String descricao;
-
-	@OneToMany(mappedBy = "centroCusto", targetEntity=Modalidade.class, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "centroCusto", cascade=CascadeType.REMOVE)
 	private List<Modalidade> modalidades;
-	
-	public void addModalidade(Modalidade modalidade){
-		if(modalidades == null){
-			modalidades = new ArrayList<Modalidade>();
-			setModalidades(modalidades);
-		}
-	
-		if(modalidade != null)
-			this.modalidades.add(modalidade);
-	}
 	
 	public int getId() {
 		return id;
@@ -65,6 +54,16 @@ public class CentroCusto {
 		for(Modalidade modalidade : modalidades){
 			this.modalidades.add(modalidade);
 		}
+	}
+	
+	public void addModalidade(Modalidade modalidade){
+		if(modalidades == null){
+			modalidades = new ArrayList<Modalidade>();
+			setModalidades(modalidades);
+		}
+	
+		if(modalidade != null)
+			this.modalidades.add(modalidade);
 	}
 
 }

@@ -66,6 +66,12 @@ public class UsuarioService implements Service<Usuario>{
 		new UsuarioDAO(this.usuario).update();
 	}
 
+	@Override
+	public List<Usuario> pesquisaGeneric(String campo, HOperator operacao,
+			int num) throws GlobalException {
+		return null;
+	}
+
 
 	
 }

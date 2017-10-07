@@ -68,6 +68,12 @@ public class PessoaService  implements Service<Pessoa>{
 		new PessoaDAO(this.pessoa).update();		
 	}
 
+	@Override
+	public List<Pessoa> pesquisaGeneric(String campo, HOperator operacao,
+			int num) throws GlobalException {
+		return null;
+	}
+
 
 
 }

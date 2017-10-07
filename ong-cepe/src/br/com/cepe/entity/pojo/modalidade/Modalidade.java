@@ -8,6 +8,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 
 @Entity
@@ -23,6 +25,7 @@ public class Modalidade {
 	private String restricoes;
 	private String observacoes;
 	@ManyToOne
+	@JsonIgnore
 	private CentroCusto centroCusto; 
 
 	

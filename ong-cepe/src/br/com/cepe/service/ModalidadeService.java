@@ -81,6 +81,11 @@ public class ModalidadeService  implements Service<Modalidade>{
 		new ModalidadeDAO(this.modalidade).update();
 	}
 
+	public List<Modalidade> pesquisaGeneric(String campo, HOperator operacao,
+			int num) throws GlobalException {
+		return null;
+	}
+
 
 
 }

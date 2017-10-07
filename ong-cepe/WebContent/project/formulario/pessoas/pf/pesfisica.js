@@ -132,7 +132,7 @@ $(document).ready(function(){
 	            	cep: $("#cep").val() 
 	            };
 				ONG.pessoaRest.inserir({
-					data : dadosPJ,
+					data : dadosPF,
         			success: function(msg){		
         				bootbox.alert("Realizado cadastro com sucesso ");
         				setTimeout(function(){

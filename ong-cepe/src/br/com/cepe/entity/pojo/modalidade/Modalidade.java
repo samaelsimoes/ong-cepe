@@ -8,7 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 
@@ -25,7 +25,7 @@ public class Modalidade {
 	private String restricoes;
 	private String observacoes;
 	@ManyToOne
-	@JsonIgnore
+	@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 	private CentroCusto centroCusto; 
 
 	

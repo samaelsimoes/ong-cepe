@@ -3,7 +3,7 @@ ONG.evento = new Object();
 $(document).ready(function(){
 	ONG.evento.searchAllEvent=function(){ 	
 		
-	    var busca=$("#conspj").val();	  	
+	    var busca=$("#consuev").val();	  	
 	    ONG.evento.searchEvent(undefined,busca);
 	}		 	
 	ONG.evento.searchEvent = function(listEvent, busca){
@@ -14,11 +14,11 @@ $(document).ready(function(){
 			"<thead class='table table-striped '>" +
 				"<tr>" +
 					
-					"<th> Custo </th>" + 
 					"<th> Nome </th> " +
 					"<th> Descrição </th>" +
-					"<th> Data </th>" +
+					"<th> Tipo </th>" +
 					"<th> Cep </th>" +
+					"<th> Data </th>" +
 					"<th> Estado </th>" +
 					"<th> Cidade </th>" +
 					"<th> Bairro </th>" +
@@ -34,9 +34,23 @@ $(document).ready(function(){
 			  	for(var i = 0; i < listEvent.length; i++){
 			  		
 					html += "<tr>";					
-						html += "<td>" + listEvent[i].custo + "</td>";
 						html += "<td>" + listEvent[i].nome + "</td>";
 						html += "<td>" + listEvent[i].descricao + "</td>";
+						
+						if(listEvent[i].tipo = 1){
+							html += "<td>"+	 
+											"Beneficiente" +
+									"</td>";
+						}else if(listEvent[i].tipo = 2){
+							html += "<td>"
+										+"Sessao"+
+									"</td>"
+						}else if( listEvent[i].tipo = 3){
+							html += "<td>"
+										+"Viagem"+
+									"</td>"
+						}
+						
 						html += "<td>" + listEvent[i].cep + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
 						html += "<td>" + listEvent[i].cidade.estado + "</td>";
@@ -54,10 +68,16 @@ $(document).ready(function(){
 			    }
 		    }else{
 			    if(listEvent == undefined || (listEvent != undefined && listEvent.length > 0)){
+			    	var buscaEvento;
+			    	if(busca != ""){
+			    		buscaEvento = busca;
+			    	}else{
+			    		buscaEvento = "*"
+			    	}
 			    	
 					var cfg = {
 							
-						url: ONG.contextPath + "/rest/evento/nome/*",
+						url: ONG.contextPath + "/rest/evento/nome/" + buscaEvento,
 						
 						success: function(listEvent,busca){													
 							ONG.evento.searchEvent(listEvent,busca);

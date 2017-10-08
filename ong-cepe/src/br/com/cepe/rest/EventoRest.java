@@ -28,15 +28,14 @@ public class EventoRest extends ObjMapper {
 	@POST
 	@Consumes("application/*")
 	public Response adicionar(String eventoStr) throws GlobalException {
-		System.out.println("teste");
-		System.err.println(eventoStr);
 		try {
 			Evento evento = new EventoFactory(eventoStr).getEvento();
 					
 			if(evento != null)
 				new EventoService(evento).adicionar();
 			else
-				throw new GlobalException("Revisar os seguintes campo! ");
+				throw new GlobalException("Falha ao adicionar evento! ");
+			
 			return this.buildResponse("Cadastro concluido com sucesso.");
 			
 		} catch (Throwable e) {
@@ -50,7 +49,6 @@ public class EventoRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarNome(@PathParam("nome") String nome) throws GlobalException {
 		try {
-			
 			List<Evento> eventos = new EventoService(nome).pesquisaNomeContem();
 			String resp = getJson(eventos);
 			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
@@ -66,11 +64,9 @@ public class EventoRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarData(@PathParam("data") String data) throws GlobalException {
 		try {
-			
 			List<Evento> eventos = new EventoService(data).pesquisaDataContem();
 			String resp = getJson(eventos);
 			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
-			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return this.buildErrorResponse("Erro ao fazer a consulta por data! ");
@@ -82,7 +78,6 @@ public class EventoRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarCidade(@PathParam("cidade") String cidade) throws GlobalException {
 		try {
-			
 			List<Evento> eventos = new EventoService(cidade).pesquisaCidadeContem();
 			String resp = getJson(eventos);
 			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
@@ -98,8 +93,6 @@ public class EventoRest extends ObjMapper {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarTipo(@PathParam("tipo") int tipo) throws GlobalException {
 		try {
-			System.out.println( "teste ");
-			System.out.println(tipo);
 			List<Evento> eventos = new EventoService(tipo).pesquisaTipoIgual();
 			String resp = getJson(eventos);
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
@@ -140,7 +133,6 @@ public class EventoRest extends ObjMapper {
 			Evento evento = new EventoService(id).pesquisaId();
 			if(evento != null)
 				resp = getJson(evento);
-
 			else
 				throw new GlobalException("Erro ao buscar evento por Id! ");
 			
@@ -161,7 +153,6 @@ public class EventoRest extends ObjMapper {
 				new EventoService(evento).alterar();
 			else
 				throw new GlobalException("Valor nulo enviado ao servidor! ");
-			
 			return this.buildResponse("Evento editada com sucesso.");
 			
 		} catch (Throwable e) {
@@ -171,7 +162,7 @@ public class EventoRest extends ObjMapper {
 	}
 
 	@DELETE
-	@Path("/idexcluir/{id}")
+	@Path("/id/{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 			new EventoService(id).excluir();

@@ -73,16 +73,16 @@ public class EventoService  implements Service<Evento>{
 	public List<Evento> pesquisaCidadeContem() throws GlobalException {
 		List<Evento> eventosBusca = null;
 		List<Evento> eventos = null;
-		List<Cidade> cidades = new CidadeDAO().findGeneric("nome",
-				HOperator.CONTAINS, this.valorStr);
+		List<Cidade> cidades = new CidadeDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
 
 		for (Cidade cidade : cidades) {
-			String cidadeId = Integer.toString(cidade.getId());
-			eventosBusca = new EventoDAO().findGeneric("cidade",
-					HOperator.CONTAINS, cidadeId);
+			if (cidade != null && cidade.getId() !=0)
+			 eventosBusca = new EventoDAO().findGenericInt("cidade_id", HOperator.CONTAINS, cidade.getId());
 
 			if (!eventosBusca.isEmpty() || eventosBusca != null) {
-				eventos = new ArrayList<Evento>();
+				if(eventos == null)
+				 eventos = new ArrayList<Evento>();
+				
 				for (Evento evento : eventosBusca) {
 					if (evento != null)
 						eventos.add(evento);
@@ -114,9 +114,5 @@ public class EventoService  implements Service<Evento>{
 			int num) throws GlobalException {
 		return null;
 	}
-
-	
-
-
 
 }

@@ -34,7 +34,8 @@ public class EventoService  implements Service<Evento>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		evento.setCidade(new CidadeService(this.evento.getCidade()).pesquisaId());
+		evento.setCidade(new CidadeService(this.evento.getCidade().getId()).pesquisaId());
+		evento.setModalidade(new ModalidadeService(this.evento.getModalidade().getId()).pesquisaId());
 		new EventoDAO(this.evento).persist();
 	}
 

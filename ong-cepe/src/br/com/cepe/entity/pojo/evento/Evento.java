@@ -34,7 +34,8 @@ public class Evento {
 	protected String rua;
 	protected int numero;
 	protected String complemento;
-	protected long custo;	
+	protected long custo;
+	
 	
 	public int getId() {
 		return id;

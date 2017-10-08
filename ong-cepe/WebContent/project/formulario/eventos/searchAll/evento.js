@@ -32,15 +32,15 @@ $(document).ready(function(){
 		    if(listEvent != undefined && listEvent.length > 0 && listEvent[0].id != undefined){
 			  
 			  	for(var i = 0; i < listEvent.length; i++){
-
+			  		
 					html += "<tr>";					
 						html += "<td>" + listEvent[i].custo + "</td>";
 						html += "<td>" + listEvent[i].nome + "</td>";
 						html += "<td>" + listEvent[i].descricao + "</td>";
+						html += "<td>" + listEvent[i].cep + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
-						html += "<td>" + listEvent[i].hora + "</td>";
-						html += "<td>" + listEvent[i].estado + "</td>";
-						html += "<td>" + listEvent[i].cidade + "</td>";
+						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
+						html += "<td>" + listEvent[i].cidade.nome + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
 						html += "<td>" + listEvent[i].rua + "</td>";
 						html += "<td>" + listEvent[i].numero + "</td>";
@@ -55,10 +55,9 @@ $(document).ready(function(){
 		    }else{
 			    if(listEvent == undefined || (listEvent != undefined && listEvent.length > 0)){
 			    	
-			    	var tipo = 0;
 					var cfg = {
 							
-						url: ONG.contextPath + "/rest/evento/tipo/" + tipo,
+						url: ONG.contextPath + "/rest/evento/nome/*",
 						
 						success: function(listEvent,busca){													
 							ONG.evento.searchEvent(listEvent,busca);
@@ -81,6 +80,7 @@ $(document).ready(function(){
 	ONG.evento.addevent = function(){
 
 		var msg  = "";
+		
 		msg += ONG.evento.validaVazio("Nome: ", $("#nome").val());
 		msg += ONG.evento.validaVazio("Tipo evento: ", $("#typeevent").val());		
 		msg += ONG.evento.validaVazio("Cep: ", $("#cep").val());
@@ -99,10 +99,11 @@ $(document).ready(function(){
 			
 			var date = $("#data").val();
 			var d = new Date(date.split("/").reverse().join("-"));
-			var b= 2;
+			var modalidade = $("#modalidade").val();
+			
             if(exp==""){
             	
-            	var dadosPJ = {
+            	var dadosEvent = {
             			
 	            	nome: $("#nome").val(),
 					tipo: $("#typeevent").val(),
@@ -118,12 +119,12 @@ $(document).ready(function(){
 	            	complemento: $("#complemento").val(),				
 					rua: $("#rua").val(),
 	            	modalidade: {
-	            		id: parseInt(b)
+	            		id: parseInt(modalidade)
 	            	},
 	            };
             	var cfg = {
         			url: ONG.contextPath +"/rest/evento/",
-        			data: dadosPJ,
+        			data: dadosEvent,
         			success: function(msg){		
         				bootbox.alert(msg);
         				setTimeout(function(){
@@ -373,9 +374,35 @@ $(document).ready(function(){
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
+			ONG.evento.buscamodalidade();
 		}
     }
-
+    
+    ONG.evento.buscamodalidade = function(){
+    	
+    	var cfg = {							 
+    			url: ONG.contextPath +  "/rest/modalidade/nome/*",
+    			success: function(modalidade) {
+    				console.log(modalidade)
+    				ONG.evento.montaModalidade(modalidade);
+    			},
+    			error: function(err) {							
+    				bootbox.alert("Erro ao Buscar Modalidade, entrar em contato com o Administrador se o problema persistir! " + err);
+    			}
+    		};					
+    		ONG.ajax.get(cfg);
+    }
+    ONG.evento.montaModalidade = function(listModalidade){
+    	console.log(listModalidade);
+    	
+    	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listModalidade.length; i++){
+				var option = $( "<option></option>" ).appendTo( $( '#modalidade' ) );
+				option.attr( "value", listModalidade[i].id );
+				option.html( listModalidade[i].nome );
+			}
+		}    	
+    }
     // EDITAR CIDADE E ESTADO
     ONG.evento.buscaEstadoedit = function(){
     	var cfg = {							

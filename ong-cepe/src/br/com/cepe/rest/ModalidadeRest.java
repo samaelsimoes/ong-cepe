@@ -29,6 +29,7 @@ public class ModalidadeRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response adicionar(String modalidadeStr) throws GlobalException {
 		try {
+			
 			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade();
 					
 			if(modalidade != null)

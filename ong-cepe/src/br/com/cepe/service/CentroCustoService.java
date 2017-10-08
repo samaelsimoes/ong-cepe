@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cepe.daoconnect.CentroCustoDAO;
-import br.com.cepe.daoconnect.ModalidadeDAO;
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 import br.com.cepe.entity.pojo.modalidade.Modalidade;

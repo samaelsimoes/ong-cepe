@@ -148,6 +148,7 @@ public class EventoRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String eventoStr) throws GlobalException { 
 		try {
+			
 			Evento evento = new EventoFactory(eventoStr).getEvento();
 			if(evento != null)
 				new EventoService(evento).alterar();

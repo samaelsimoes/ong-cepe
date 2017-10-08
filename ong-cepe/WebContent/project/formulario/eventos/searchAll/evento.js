@@ -39,7 +39,7 @@ $(document).ready(function(){
 						html += "<td>" + listEvent[i].descricao + "</td>";
 						html += "<td>" + listEvent[i].cep + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
-						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
+						html += "<td>" + listEvent[i].cidade.estado + "</td>";
 						html += "<td>" + listEvent[i].cidade.nome + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
 						html += "<td>" + listEvent[i].rua + "</td>";
@@ -165,52 +165,30 @@ $(document).ready(function(){
 
     	return exp;
     };
-    /*
-    ONG.evento.validaCamposedit = function(){
-
-    	var exp = "";
-
-    	if($("#emailedit").val().indexOf("@") == -1 || //valida se existe o @
-            $("#emailedit").val().indexOf(".") == -1 || //valida se existe o .
-            $("#emailedit").val().indexOf("@") == 0 || //valida se tem texto antes do @
-            $("#emailedit").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
-            ($("#emailedit").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
-                
-            exp+="E-mail invalido" +"</br>"
-            + "ex: teste_@teste.com.br"
-            document.getElementById("emailedit").focus();
-        }
-        if(!$("#cnpjedit").val().match(/^\d{14,15}$/)){
-        	exp+="CNPJ invalido ! </br> " + "</br>";
-        }
-        if(!$("#cepedit").val().match(/^\d{8,9}$/)){
-        	exp+="Cep invalido ! </br> " + "</br>";
-        }
-        if(!$("#telfixoedit").val().match(/^\d{10,13}$/)){    
-            exp+="Telefone Fixo invalido ! </br> " + "</br>";
-        }
-    	return exp;
-    };
+    
     // ------------------------
 
     ONG.evento.buscID = function( id ){
     	$.ajax({
 			  
-			url: ONG.contextPath + "/rest/pessoa/id/" + id,				  
+			url: ONG.contextPath + "/rest/evento/id/" + id,				  
 			success:function(dados){
 
 				if(dados != ""){
 					$("#id").val(dados.id);
-		    		$("#razaosocialedit").val(dados.nome);
-		    		$("#cnpjedit").val(dados.cnpj);
-		    		$("#emailedit").val(dados.email);
-		    		$("#telfixoedit").val(dados.foneFixo);
-		    		$("#telmoveledit").val(dados.foneMovel);
-		    		$("#bairroedit").val(dados.bairro);
-		    		$("#ruaedit").val(dados.rua);
-					$("#complementoedit").val(dados.complemento);
+		    		$("#nomeedit").val(dados.nome);
+		    		$("#typeeventedit").val(dados.tipo);
+		    		$("#cepedit").val(dados.cep);
+		    		$("#modalidadeedit").val(dados.modalidade);
+		    		$("#horarioedit").val(dados.hora);
+		    		$("#estadoedit").val(dados.cidade.estado.nome);
+		    		$("#cidadeedit").val(dados.cidade.nome);
+					$("#bairroedit").val(dados.bairro);
+					$("#ruaedit").val(dados.rua);
 					$("#numeroedit").val(dados.numero);
-					$("#cepedit").val(dados.cep);
+					$("#complementoedit").val(dados.complemento);
+					$("#descricaoedit").val(dados.descricao);
+
 					ONG.evento.buscaEstadoedit();
 		    	}			
 			},			
@@ -220,77 +198,79 @@ $(document).ready(function(){
 		});
     };
 
-    ONG.evento.editarPJ = function(){
+    ONG.evento.editarEvent = function(){
 
     	var msg  = "";
     	
     	if($("#id").val() == ""){
-    		msg += " Impossivel editar pessoa Juridica, gentileza entrar em contato com o administrador, motivo sem campo id";
+    		msg += " Impossivel editar Evento, gentileza entrar em contato com o administrador, motivo sem campo id";
     	}
     	
-		msg += ONG.evento.validaVazio("Razao Social: ", $("#razaosocialedit").val());
-		msg += ONG.evento.validaVazio("Cnpj: ", $("#cnpjedit").val());
-		msg += ONG.evento.validaVazio("Email: ", $("#emailedit").val());
-		msg += ONG.evento.validaVazio("Telefone Fixo: ", $("#telfixoedit").val());
+		msg += ONG.evento.validaVazio("Nome: ", $("#nomeedit").val());
+		msg += ONG.evento.validaVazio("Tipo de evento: ", $("#typeeventedit").val());
+		msg += ONG.evento.validaVazio("Cep: ", $("#cepedit").val());
+		msg += ONG.evento.validaVazio("Bairro: ", $("#bairroedit").val());
+		msg += ONG.evento.validaVazio("Data: ", $("#dataedit").val());
+		msg += ONG.evento.validaVazio("Horario: ", $("#horarioedit").val());
 		msg += ONG.evento.validaVazio("Estado: ", $("#estadoedit").val());
 		msg += ONG.evento.validaVazio("Cidade: ", $("#cidadeedit").val());
-		msg += ONG.evento.validaVazio("Bairro: ", $("#bairroedit").val());
+		msg += ONG.evento.validaVazio("Modalidade: ", $("#modalidadeedit").val());
 		msg += ONG.evento.validaVazio("Rua: ", $("#ruaedit").val());
-		msg += ONG.evento.validaVazio("Complemento: ", $("#complementoedit").val());
 		msg += ONG.evento.validaVazio("Numero: ", $("#numeroedit").val());
+		msg += ONG.evento.validaVazio("Complemento: ", $("#complementoedit").val());
+		msg += ONG.evento.validaVazio("Descrição: ", $("#descricaoedit").val());
 
+		
+		var dateedit = $("#dataedit").val();
+		var d = new Date(dateedit.split("/").reverse().join("-"));
+		var editmodalidade = $("#modalidade").val();
+		
     	if(msg == ""){
-    		var exp = ONG.evento.validaCamposedit();
     		
-    		if(exp == ""){
-		    	var dadosPJ= {
-		            
-		    		id: $("#id").val(),
-		    		nome: $("#razaosocialedit").val(),
-		    		tipo: 2,
-		    		status: 1,
-		    		cnpj: $("#cnpjedit").val(),
-		    		email: $("#emailedit").val(),
-		    		nascimento: $("#datanascimentoedit").val(),
-		    		foneFixo: $("#telfixoedit").val(),
-		    		foneMovel: $("#telmoveledit").val(),
-		    		rua: $("#ruaedit").val(),
-		    		complemento: $("#complementoedit").val(),
-		    		numero: $("#numeroedit").val(),
-		    		cep: $("#cepedit").val(),
-		    		
-					cidade : { 
-						id: parseInt($("#cidadeedit").val())
-					}					
-		    	}
-		    	$.ajax({
+	    	var dadosEvEdit= {		 
+    			nome: $("#nomeedit").val(),
+				tipo: $("#typeeventedit").val(),
+				descricao: $("#descricaoedit").val(),
+				data: d.getTime,
+				hora: $("#horarioedit").val(),					
+            	cep: $("cepedit").val(),
+            	cidade:{ 
+					id: parseInt($("#cidadeedit").val())
+				},
+            	bairro: $("#bairroedit").val(),
+            	numero: $("#numeroedit").val(),
+            	complemento: $("#complementoedit").val(),				
+				rua: $("#ruaedit").val(),
+            	modalidade: {
+            		id: parseInt(editmodalidade)
+	            	},				
+	    	}
+	    	$.ajax({
+			
+				type: 'PUT',
+				url:ONG.contextPath + "/rest/evento/",
+				data: JSON.stringify(dadosEvEdit),
 				
-					type: 'PUT',
-					url:ONG.contextPath + "/rest/pessoa/",
-					data: JSON.stringify(dadosPJ),
-					
-					dataType:'text',
-					contentType:'application/json',
-					
-					success:function(data) {	
-						bootbox.alert(data);	
-						setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 1000);
-					},
-					error: function(err) {	
-						bootbox.alert( err.responseText); 
-					}
-				});
-		    }else{
-		    	bootbox.laert(exp);
-		    }
+				dataType:'text',
+				contentType:'application/json',
+				
+				success:function(data) {	
+					bootbox.alert(data);	
+					setTimeout(function(){
+    	    	         location.reload();
+    	    	    }, 1000);
+				},
+				error: function(err) {	
+					bootbox.alert( err.responseText); 
+				}
+			});
+		   
 	    }else{
 	    	bootbox.alert(msg);
 	    }
     };
 
-    confExcluir = function(id) {
+    ONG.evento.confExcluir = function(id) {
     	bootbox.confirm({
 		    message: "Você Desejea excluir?",
 		    buttons: {
@@ -308,7 +288,7 @@ $(document).ready(function(){
 		        	
 		           var cfg = {
 			
-					url: ONG.contextPath + "/rest/pessoa/idexcluir/" + id,
+					url: ONG.contextPath + "/rest/evento/id/" + id,
 					success: function (data) {						
 						bootbox.alert(data);	
 						setTimeout(function(){
@@ -324,7 +304,7 @@ $(document).ready(function(){
 		    }
 		});		
     }
-*/
+
     ONG.evento.buscaEstado = function(){
     	var cfg = {							
 			url: ONG.contextPath + "/rest/estado/estado/" + 1,
@@ -392,9 +372,7 @@ $(document).ready(function(){
     		};					
     		ONG.ajax.get(cfg);
     }
-    ONG.evento.montaModalidade = function(listModalidade){
-    	console.log(listModalidade);
-    	
+    ONG.evento.montaModalidade = function(listModalidade){    	
     	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listModalidade.length; i++){
 				var option = $( "<option></option>" ).appendTo( $( '#modalidade' ) );
@@ -453,7 +431,31 @@ $(document).ready(function(){
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
+			ONG.evento.buscamodalidadeedit();
 		}
+    }
+    ONG.evento.buscamodalidadeedit = function(){
+    	
+    	var cfg = {							 
+    			url: ONG.contextPath +  "/rest/modalidade/nome/*",
+    			success: function(modalidade) {
+    				console.log(modalidade)
+    				ONG.evento.montaModalidadeEdit(modalidade);
+    			},
+    			error: function(err) {							
+    				bootbox.alert("Erro ao Buscar Modalidade, entrar em contato com o Administrador se o problema persistir! " + err);
+    			}
+    		};					
+    		ONG.ajax.get(cfg);
+    }
+    ONG.evento.montaModalidadeEdit = function(listModalidade){    	
+    	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listModalidade.length; i++){
+				var option = $( "<option></option>" ).appendTo( $( '#modalidadeedit' ) );
+				option.attr( "value", listModalidade[i].id );
+				option.html( listModalidade[i].nome );
+			}
+		}    	
     }
 });
 

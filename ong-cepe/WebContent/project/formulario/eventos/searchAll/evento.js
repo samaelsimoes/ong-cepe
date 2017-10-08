@@ -99,7 +99,7 @@ $(document).ready(function(){
 			
 			var date = $("#data").val();
 			var d = new Date(date.split("/").reverse().join("-"));
-			var b= 12;
+			var b= 2;
             if(exp==""){
             	
             	var dadosPJ = {

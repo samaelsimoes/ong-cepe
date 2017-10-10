@@ -1,0 +1,36 @@
+<meta charset="utf-8">
+
+<div class="form-group row">
+    <div class="col-md-8">
+        <label for="conspf" class="col-2 col-form-label">Buscar:</label>
+
+        <input class="form-control" type="text" id="consutodos" placeholder="Buscar">
+    </div>
+    <div class="col-md-1">
+        <div class="row btn-md h2">
+            <button type="button" class="btn btn-primary" onclick="ONG.pessoa.gridbusca()">
+                    
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+            </button>
+        </div>
+    </div>
+</div>  
+
+
+
+
+<!-- GRID -->
+<div class="form-group row"> 
+    <div class="col-12 col-md-12 pull-md-12 bd-content">
+
+        <div id="resupsall" class="divResultado"></div>
+    </div>
+</div>
+
+<script src="formulario/pessoas/gridbusca/gridbusca.js"></script>
+
+<script type = "text/javascript"> 
+    window.onload = function(){        
+    	ONG.pessoa.gridbusca();
+    }
+</script>

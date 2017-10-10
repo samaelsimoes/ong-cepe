@@ -122,7 +122,6 @@ public class EventoRest extends ObjMapper {
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-
 	
 	@GET
 	@Path("/modalidade/{id}")
@@ -173,5 +172,4 @@ public class EventoRest extends ObjMapper {
 			return this.buildErrorResponse("Erro ao deletar usuário");
 		}
 	}
-
 }

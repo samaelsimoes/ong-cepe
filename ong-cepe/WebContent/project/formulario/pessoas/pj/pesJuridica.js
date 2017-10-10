@@ -1,7 +1,8 @@
 ONG.pessoaJuridica = new Object();
 
 $(document).ready(function(){
-	buscapessojuridica=function(){
+	
+	ONG.pessoaJuridica.busca = function(){
 		
 	    var busca=$("#conspj").val();	  	
 	    ONG.pessoaJuridica.buscapesJuridica(undefined,busca);

@@ -69,9 +69,10 @@ $(document).ready(function(){
 		    }else{
 			    if(listEvent == undefined || (listEvent != undefined && listEvent.length > 0)){
 			    	var buscaEvento;
-			    	if(busca != ""){
+			    	console.log(busca);
+			    	if ( busca != "" ) {
 			    		buscaEvento = busca;
-			    	}else{
+			    	}else if (busca == "") {
 			    		buscaEvento = "*"
 			    	}
 			    	

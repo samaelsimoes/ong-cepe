@@ -19,6 +19,9 @@ items.addEventListener('change', function(){
 	}else if(valor == 2) {
 		
 		$('#pesstipo').load('formulario/pessoas/beneass/gridbeneass.html');
+	}else if(valor == 3) {
+		
+		$('#pesstipo').load('formulario/pessoas/gridbusca/gridbusca.html');
 	}
 });
 

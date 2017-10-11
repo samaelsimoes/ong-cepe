@@ -53,7 +53,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		HqlFactory hqlFactory = new HqlFactory();		
 		String select = hqlFactory.getSelect(getEntityName(), campo);
 		String queryStr = hqlFactory.getQuery(select, operacao, valor);
-		Query query = super.getQuery(queryStr);
+		Query query = super.getQuery(queryStr);		
 		@SuppressWarnings("unchecked")
 		List<T> list = query.getResultList();
 		//disconnect();

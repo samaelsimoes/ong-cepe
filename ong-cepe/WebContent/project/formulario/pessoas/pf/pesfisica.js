@@ -21,7 +21,7 @@ $(document).ready(function(){
 					"<th> Telefone contato </th>" +
 					"<th> Rua </th>" +
 					"<th> Número </th>" +
-					"<th> Ações</th>" +
+					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";							
 		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){			  

@@ -124,6 +124,7 @@ $(document).ready(function(){
 					cidade:{ 
 						id: parseInt($("#cidade").val())
 					},
+					bairro: $("#bairro").val(),
 					rua: $("#rua").val(),
 	            	complemento: $("#complemento").val(),
 	            	numero: $("#numero").val(),
@@ -193,8 +194,8 @@ $(document).ready(function(){
     	if($("#emailedit").val().indexOf("@") == -1 || //valida se existe o @
             $("#emailedit").val().indexOf(".") == -1 || //valida se existe o .
             $("#emailedit").val().indexOf("@") == 0 || //valida se tem texto antes do @
-            $("#emailedit").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
-            ($("#emailedit").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
+            $("#emailedit").val().lastIndexOf(".") + 1 == emailedit.length || //valida se tem texto depois do ponto
+            ($("#emailedit").val().indexOf("@") + 1 == $("#emailedit").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
                 
             exp+="E-mail invalido" +"</br>"
             + "ex: teste_@teste.com.br"
@@ -274,6 +275,7 @@ $(document).ready(function(){
 		    		nascimento: $("#datanascimentoedit").val(),
 		    		foneFixo: $("#telfixoedit").val(),
 		    		foneMovel: $("#telmoveledit").val(),
+		    		bairro: $("#bairroedit").val(),
 		    		rua: $("#ruaedit").val(),
 		    		complemento: $("#complementoedit").val(),
 		    		numero: $("#numeroedit").val(),

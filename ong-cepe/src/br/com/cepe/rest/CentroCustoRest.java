@@ -98,11 +98,12 @@ public class CentroCustoRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String centroCustoStr) throws GlobalException { 
 		try {
+			System.out.println(centroCustoStr);
 			CentroCusto centroCusto = new CentroCustoFactory(centroCustoStr).getCentroCusto(); 
 			new CentroCustoService(centroCusto).alterar();
 			
-			return Response.ok(centroCusto, "Centro de custo atualizado com sucesso!").build();
-			
+//			return Response.ok(centroCusto, "Centro de custo atualizado com sucesso!").build();
+			return this.buildResponse("Centro de custo atualizado com sucesso!");
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new GlobalException("Erro ao fazer a alteração do centro de custo");

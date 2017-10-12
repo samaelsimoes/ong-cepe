@@ -94,7 +94,7 @@ public class CentroCustoService  implements Service<CentroCusto>{
 	}
 
 	public void alterar()  throws GlobalException{
-		new CentroCustoDAO(this.num).update();
+		new CentroCustoDAO(this.centroCusto).update();
 	}
 
 	public List<CentroCusto> pesquisaTipoIgual() throws GlobalException {

@@ -3,19 +3,19 @@ $(document).ready(function(){
 	$('#header').load('header.html');
 	$('#footer').load('footer.html');
 	
-	ONG.usuario.btnCadastrar = function() {
-		$("#conteudo").load("formulario/usuarios/cad.html",function(){
+	/*ONG.usuario.btnCadastrar = function() {
+		$("#conteudo").load("formulario/usuarios/gridUsua.html",function(){
 			$( "#exibiList" ).hide();		
 		});
 		return false;
-	};
+	};*/
 	ONG.usuario.btnCancelar = function() {
 		$(location).attr('href', ONG.contextPath+'/project/usuarios.html');
 		return false;
 	};
 	$('#valorPesquisa').keypress(function(e) {
 	    if(e.which == 13) 
-	        	ONG.usuario.pesquisar();
+	        ONG.usuario.pesquisar();
 	});
 
 	ONG.usuario.pesquisar = function() {
@@ -126,19 +126,19 @@ $(document).ready(function(){
 	};
 	
 	ONG.usuario.carregarUsuario = function(id){
-				ONG.usuarioRest.pesquisarId({
-					data : id,
-					success : function(usuarioEdit) {
-						$("#idEdit").val(usuarioEdit.id);
-						$("#nomeEdit").val(usuarioEdit.nome);
-						$("#emailEdit").val(usuarioEdit.email);
-						$("#tipoEdit").val(usuarioEdit.tipo);
-						$("#loginEdit").val(usuarioEdit.usuario);
-					},
-					error : function(err) {
-						bootbox.alert("Erro ao exibir a edição: " + err.responseText);
-					} 
-				});
+		ONG.usuarioRest.pesquisarId({
+			data : id,
+			success : function(usuarioEdit) {
+				$("#idEdit").val(usuarioEdit.id);
+				$("#nomeEdit").val(usuarioEdit.nome);
+				$("#emailEdit").val(usuarioEdit.email);
+				$("#tipoEdit").val(usuarioEdit.tipo);
+				$("#loginEdit").val(usuarioEdit.usuario);
+			},
+			error : function(err) {
+				bootbox.alert("Erro ao exibir a edição: " + err.responseText);
+			} 
+		});
 	};
 	
 	ONG.usuario.editar = function(){
@@ -153,12 +153,11 @@ $(document).ready(function(){
 				senha:senha,
 		};
 		console.log('editar cadastro',EditCad);
-		if (ONG.usuario.validar(EditCad)) {
+		if (ONG.usuario.validarEdit(EditCad)) {
 			ONG.usuarioRest.editar({
 				data : EditCad,
 				success : function(msg) {
 					bootbox.alert(msg, function(){ 
-						debugger;
 						ONG.usuario.exibirLista(undefined, "");
 						$('input').val('');
 						$('#modaledit').modal('toggle');
@@ -173,11 +172,10 @@ $(document).ready(function(){
 	};
 
 	ONG.usuario.validar = function(usuario) {
-		debugger;
+
 		var senhaConf = btoa($("#senhaConf").val());
 		
 		var aux = "";
-
 
 		if (usuario.nome == "") {
 			aux += "Nome é Obrigatório <br/>";
@@ -202,5 +200,33 @@ $(document).ready(function(){
 		}
 		return true;
 	};
+	ONG.usuario.validarEdit = function(usuario) {
 
+		var senhaConf = btoa($("#senhaEdit").val());
+		
+		var aux = "";
+
+		if (usuario.nome == "") {
+			aux += "Nome é Obrigatório <br/>";
+		}if (usuario.email == "") {
+			aux += "Email é Obrigatório <br/>";
+		}if (usuario.tipo == "" ) {
+			aux += "Tipo é Obrigatório <br/>";
+		}if (usuario.usuario == "" ) {
+			aux += "Login é Obrigatório <br/>";
+		}if (usuario.senha ==""){
+			aux += "Senha é Obrigatório <br/>";
+		}if (usuario.senha != senhaConf ) {
+				aux += "Senhas inválidas <br/>";
+				$("#senha").val("");
+				$("#senhaConf").val("");
+		}
+		
+		
+		if (aux != "") {
+			bootbox.alert(aux)
+			return false;
+		}
+		return true;
+	};
 });

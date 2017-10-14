@@ -99,7 +99,7 @@ public class ModalidadeRest extends ObjMapper {
 	@Consumes("application/*")
 	public Response alterar(String modalidadeStr) throws GlobalException { 
 		try {
-			System.out.println(modalidadeStr);
+
 			Modalidade modalidade = new ModalidadeFactory(modalidadeStr).getModalidade(); 
 			new ModalidadeService(modalidade).alterar();
 			
@@ -108,7 +108,7 @@ public class ModalidadeRest extends ObjMapper {
 
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro ao fazer a alteraÃ§Ã£o da modalidade");
+			throw new GlobalException("Erro ao fazer a alteração da modalidade");
 		}
 	}
 

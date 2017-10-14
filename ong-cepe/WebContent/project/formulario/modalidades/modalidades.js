@@ -1,18 +1,13 @@
 ONG.modalidade = new Object();
 $(document).ready(function(){
-	$('#header').load('header.html');
-	$('#footer').load('footer.html');
-	
-	ONG.modalidade.btnCadastrar = function() {
+
+	/*ONG.modalidade.btnCadastrar = function() {
 		$("#conteudo").load("formulario/modalidades/cad.html",function(){
 			$( "#exibiList" ).hide();		
 		});
 		return false;
-	};
-	ONG.modalidade.btnCancelar = function() {
-		$(location).attr('href', ONG.contextPath+'/project/modalidades.html');
-		return false;
-	};
+	};*/
+	
 	$('#valorPesquisa').keypress(function(e) {
 	    if(e.which == 13) 
 	        	ONG.modalidade.pesquisar();
@@ -87,6 +82,9 @@ $(document).ready(function(){
 				restricoes:$("#restricoes").val(),
 				tipo:$("#tipo").val(),
 				observacoes:$("#observacoes").val(),
+				centroCusto:{
+					id: $("#costcenteradd").val()
+				},
 		};
 		console.log('novo cadastro',newCad);
 		if (ONG.modalidade.validar(newCad)) {
@@ -127,41 +125,44 @@ $(document).ready(function(){
 	};
 	
 	ONG.modalidade.carregarModalidade = function(id){
-				ONG.modalidadeRest.pesquisarId({
-					data : id,
-					success : function(modalidadeEdit) {
-						$("#idEdit").val(modalidadeEdit.id);
-						$("#nomeEdit").val(modalidadeEdit.nome);
-						$("#descricaoEdit").val(modalidadeEdit.descricao);
-						$("#restricoesEdit").val(modalidadeEdit.restricoes);
-						$("#tipoEdit").val(modalidadeEdit.tipo);
-						$("#observacoesEdit").val(modalidadeEdit.observacoes);
-					},
-					error : function(err) {
-						bootbox.alert("Erro ao exibir a edição: " + err.responseText);
-					} 
-				});
+		ONG.modalidadeRest.pesquisarId({
+			data : id,
+			success : function(modalidadeEdit) {
+				$("#idEdit").val(modalidadeEdit.id);
+				$("#nomeEdit").val(modalidadeEdit.nome);
+				$("#descricaoEdit").val(modalidadeEdit.descricao);
+				$("#restricoesEdit").val(modalidadeEdit.restricoes);
+				$("#tipoEdit").val(modalidadeEdit.tipo);
+				$("#observacoesEdit").val(modalidadeEdit.observacoes);
+			},
+			error : function(err) {
+				bootbox.alert("Erro ao exibir a edição: " + err.responseText);
+			} 
+		});
+		ONG.modalidade.loadCostCenterEdit();
 	};
 	
 	ONG.modalidade.editar = function(){
-		var senha = btoa($("#senhaEdit").val());
+		debugger
 		
 		var EditCad = {
-				id: $("#idEdit").val(),
-				nome: $("#nomeEdit").val(),
-				descricao:$("#descricaoEdit").val(),
-				restricoes:$("#restricoesEdit").val(),
-				tipo:$("#tipoEdit").val(),
-				observacoes:$("#observacoesEdit").val(),
+			id: parseInt($("#idEdit").val()),
+			nome: $("#nomeEdit").val(),
+			descricao:$("#descricaoEdit").val(),
+			restricoes:$("#restricoesEdit").val(),
+			tipo:parseInt($("#tipoEdit").val()),
+			observacoes:$("#observacoesEdit").val(),
+			centroCusto:{
+				id: parseInt($("#costcenteredit").val())
+			},
 		};
 		console.log('editar cadastro',EditCad);
 		if (ONG.modalidade.validar(EditCad)) {
 			ONG.modalidadeRest.editar({
 				data : EditCad,
 				success : function(msg) {
-					bootbox.alert(msg, function(){ 
-						debugger;
-						ONG.modalidade.exibirLista(undefined, "");
+					bootbox.alert("Modalidade editado com sucesso!", function(){ 
+						
 						$('input').val('');
 						$('#modaledit').modal('toggle');
 					});				
@@ -176,8 +177,7 @@ $(document).ready(function(){
 
 	ONG.modalidade.validar = function(modalidade) {
 		var aux = "";
-
-
+		debugger
 		if (modalidade.nome == "") {
 			aux += "Nome é Obrigatório <br/>";
 		}if (modalidade.descricao == "") {
@@ -188,8 +188,9 @@ $(document).ready(function(){
 			aux += "Restrições é Obrigatório <br/>";
 		}if (modalidade.observacoes ==""){
 			aux += "Observações é Obrigatório <br/>";
+		}if(modalidade.centroCusto == "" && modalidade.centroCusto != null){
+			aux += "Centro de custo é Obrigatório <br/>";
 		}
-		
 		
 		if (aux != "") {
 			bootbox.alert(aux)
@@ -197,5 +198,58 @@ $(document).ready(function(){
 		}
 		return true;
 	};
-
+	ONG.modalidade.loadCostCenter = function() {
+		
+		var cfg = {							
+			url: ONG.contextPath + "/rest/centroCusto/nome/*",
+			success: function(listcostCenter){		
+				console.log(listcostCenter);
+				ONG.modalidade.mounts(listcostCenter);
+			},
+			error: function(err) {							
+				bootbox.alert("Erro ao Buscar Centro de custo, entrar em contato com o Administrador se o problema persistir! " + err);
+			}
+		};					
+		ONG.ajax.get(cfg);
+	}
+	ONG.modalidade.mounts = function(listcostCenter) {
+		if(listcostCenter != undefined && listcostCenter.length > 0 && listcostCenter[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listcostCenter.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#costcenteradd'));
+				option.attr( "value", listcostCenter[i].id );
+				option.html( listcostCenter[i].nome );
+			}
+			var items = document.querySelector('#costcenteradd');
+			items.addEventListener('change', function(){
+				var valor =	this.value 
+			});
+		}
+	}
+	ONG.modalidade.loadCostCenterEdit = function() {
+		var cfg = {							
+			url: ONG.contextPath + "/rest/centroCusto/nome/*",
+			success: function(listcostCenteredit){		
+				console.log(listcostCenteredit);
+				ONG.modalidade.mountsEdit(listcostCenteredit);
+			},
+			error: function(err) {							
+				bootbox.alert("Erro ao Buscar Centro de custo, entrar em contato com o Administrador se o problema persistir! " + err);
+			}
+		};					
+		ONG.ajax.get(cfg);
+	}
+	ONG.modalidade.mountsEdit = function(listcostCenteredit) {
+		if(listcostCenteredit != undefined && listcostCenteredit.length > 0 && listcostCenteredit[0].id != undefined) { // montando meus estados
+			debugger
+			for(var i = 0; i < listcostCenteredit.length; i++) {
+				var optionedit = $( "<option></option>" ).appendTo($('#costcenteredit'));
+				optionedit.attr( "value", listcostCenteredit[i].id );
+				optionedit.html( listcostCenteredit[i].nome );
+			}
+			var itemsedit = document.querySelector('#costcenteredit');
+			itemsedit .addEventListener('change', function(){
+				var valoredit =	this.value 
+			});
+		}
+	}
 });

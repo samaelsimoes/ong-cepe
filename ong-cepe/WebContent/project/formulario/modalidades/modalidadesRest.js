@@ -11,7 +11,6 @@ $(document).ready(function(){
 		});
 	};
 	
-	
 	ONG.modalidadeRest.pesquisarNome = function(config){
 		ONG.ajax.get({
 			url : ONG.contextPath+"/rest/modalidade/nome/"+config.data,
@@ -37,12 +36,14 @@ $(document).ready(function(){
 	};
 	
 	ONG.modalidadeRest.editar = function(config){
+		debugger
 		ONG.ajax.put({
+			
+		
 			url : ONG.contextPath+"/rest/modalidade",
 			data : config.data,
 			success : config.success,
 			error : config.error
 		});
 	};
-	
 });

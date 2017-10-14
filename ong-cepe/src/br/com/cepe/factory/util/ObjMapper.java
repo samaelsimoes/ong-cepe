@@ -36,7 +36,7 @@ private DateFactory dateFactory;
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new Exception("Falha ao fazer a conversÃ£o do objeto para Json");
+			throw new Exception("Falha ao fazer a converção do objeto para Json");
 		}
 		
 	}

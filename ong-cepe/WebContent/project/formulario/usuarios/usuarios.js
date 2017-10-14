@@ -1,8 +1,6 @@
 ONG.usuario = new Object();
 $(document).ready(function(){
-	$('#header').load('header.html');
-	$('#footer').load('footer.html');
-	
+
 	/*ONG.usuario.btnCadastrar = function() {
 		$("#conteudo").load("formulario/usuarios/gridUsua.html",function(){
 			$( "#exibiList" ).hide();		

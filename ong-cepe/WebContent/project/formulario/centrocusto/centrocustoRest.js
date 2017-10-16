@@ -31,7 +31,7 @@ $(document).ready(function(){
 	
 	ONG.centroCustoRest.excluir = function(config){
 		ONG.ajax.delet({
-			url : ONG.contextPath+"/rest/centroCusto/"+config.data ,
+			url : ONG.contextPath+"/rest/centroCusto/id/"+config.data ,
 			success : config.success,
 			error : config.error
 		});

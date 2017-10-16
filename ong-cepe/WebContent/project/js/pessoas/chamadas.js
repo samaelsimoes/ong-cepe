@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	
 	$('#header').load('header.html');
+	$('#pesstipo').load('formulario/pessoas/gridbusca/gridbusca.html');
 	$('#footer').load('footer.html');
 });
 

@@ -53,8 +53,8 @@ $(document).ready(function(){
 						
 						html += "<td>" + listEvent[i].cep + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
-						html += "<td>" + listEvent[i].cidade.estado + "</td>";
-						html += "<td>" + listEvent[i].cidade.nome + "</td>";
+						html += "<td>" + listEvent[i].cidade + "</td>";
+						html += "<td>" + listEvent[i].cidade + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
 						html += "<td>" + listEvent[i].rua + "</td>";
 						html += "<td>" + listEvent[i].numero + "</td>";

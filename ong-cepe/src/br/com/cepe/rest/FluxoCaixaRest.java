@@ -44,6 +44,22 @@ public class FluxoCaixaRest extends ObjMapper {
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
+	
+	@GET
+	@Path("/{nome}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response pesquisarClassificacao(@PathParam("nome") String nome) throws GlobalException {
+		try {
+			
+			List<Operacao> operacoes = new FluxoCaixaService(nome).pesquisaClassificacaoContem();
+			String resp = getJson(operacoes);
+			return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome! ");
+		}
+	}
 
 	@GET
 	@Path("/pessoa/{nome}")
@@ -80,8 +96,8 @@ public class FluxoCaixaRest extends ObjMapper {
 	
 	
 	@GET
-	@Path("/periodo")
-	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/periodo/{dataInicio}/{dataFim}/{centroCusto}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response pesquisarPeriodo(@PathParam("dataInicio") Date dataInicio, 
 			@PathParam("dataFim") Date dataFim, @PathParam("centroCusto") int centroCusto ) throws GlobalException {
 		try {

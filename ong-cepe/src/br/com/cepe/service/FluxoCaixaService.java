@@ -73,6 +73,10 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	public List<Operacao> pesquisaNomeContem() throws GlobalException {
 		return (List<Operacao>) new FluxoCaixaDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
 	}
+	
+	public List<Operacao> pesquisaClassificacaoContem() throws GlobalException {
+		return (List<Operacao>) new FluxoCaixaDAO().findGeneric("classificacao", HOperator.CONTAINS, this.valorStr);
+	}
 		
 	public List<Operacao> pesquisaPessoaContem() throws GlobalException {
 		List<Operacao> operacoes = null;

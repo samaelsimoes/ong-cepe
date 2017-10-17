@@ -27,36 +27,27 @@ $(document).ready(function(){
 			"</thead>";					
 		
 		    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
-			  
 			  	for(var i = 0; i < listFluxo.length; i++){
 			  		
 					html += "<tr>";					
-						html += "<td>" + listFluxo[i].nome + "</td>";
-						html += "<td>" + listFluxo[i].descricao + "</td>";
-						
-						if(listFluxo[i].tipo = 1){
-							html += "<td>"+	 
-											"Beneficiente" +
+						html += "<td>" + listFluxo[i].centrocusto + "</td>";						
+						if(listFluxo[i].tipo = 1){ // ?? ainda nao sei vou ver
+							html += "<td>" +	 
+											"??" +
 									"</td>";
 						}else if(listFluxo[i].tipo = 2){
-							html += "<td>"
-										+"Sessao"+
+							html += "<td>" +
+										"???" +
 									"</td>"
 						}else if( listFluxo[i].tipo = 3){
-							html += "<td>"
-										+"Viagem"+
+							html += "<td>" + 
+										"????"+
 									"</td>"
 						}
-						
-						html += "<td>" + listFluxo[i].cep + "</td>";
 						html += "<td>" + listFluxo[i].data + "</td>";
-						html += "<td>" + listFluxo[i].cidade + "</td>";
-						html += "<td>" + listFluxo[i].cidade + "</td>";
-						html += "<td>" + listFluxo[i].bairro + "</td>";
-						html += "<td>" + listFluxo[i].rua + "</td>";
-						html += "<td>" + listFluxo[i].numero + "</td>";
-						html += "<td>" + listFluxo[i].complemento + "</td>";
-
+						html += "<td>" + listFluxo[i].pessoa + "</td>";
+						html += "<td>" + listFluxo[i].evento + "</td>";
+						html += "<td>" + listFluxo[i].valor + "</td>";
 						html += "<td>"+
 									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.evento.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
 									"<button type='button'class='btn btn-trash' onclick='ONG.evento.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
@@ -69,14 +60,14 @@ $(document).ready(function(){
 			    	var buscaEvento;
 			    	
 			    	if ( busca != "" ) {
-			    		buscaEvento = busca;
+			    		buscaFluxo = busca;
 			    	}else if (busca == "") {
-			    		buscaEvento = "*"
+			    		buscaFluxo = "*"
 			    	}
 			    	
 					var cfg = {
 							
-						url: ONG.contextPath + "/rest/fluxocaixa/nome/" + buscaEvento,
+						url: ONG.contextPath + "/rest/operacao/" + buscaFluxo,
 						
 						success: function(listFluxo,busca){													
 							ONG.fluxocaixa.buscaeFluxo(listFluxo,busca);

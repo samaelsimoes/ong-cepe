@@ -31,7 +31,9 @@
 						<input name="search" class="form-control h2" id="valorPesquisa" type="text" placeholder="Nome">
 				</div>
 				<div class="col-md-4">
-					<a href="#" onClick="return ONG.centrocusto.pesquisar()" class="btn btn-primary btn-md h2 "><span class="glyphicon glyphicon-search"></span> Buscar</a>
+					<a href="#" onClick="return ONG.centroCusto.pesquisar()" class="btn btn-primary btn-md h2 ">
+						<span class="glyphicon glyphicon-search"></span> Buscar
+					</a>
 					<button type="button" class="btn btn-primary btn-success pull-right h2" data-toggle="modal" data-target="#modaladd">
             			<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
         			</button>			
@@ -43,7 +45,7 @@
 					<div class="container">
 						<div class="form-group row"> 
 						    <div class="col-12 col-md-12 pull-md-7 bd-content">
-						        <div id = "exibiList" class = "divResultado"></div>
+						        <div id="exibiList" class="divResultado"></div>
 						    </div>
 						</div>
 					</div>
@@ -92,13 +94,11 @@
 	    </div>
 	</div>
 	
-	
-	
 	<div class="modal fade" id="modaledit" tabindex="2" role="dialog" aria-labelledby="modaledit" aria-hidden="true">
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
-	<!--                 <h3 class="modal-title" id="exampleModalLabel">Editar Usuário:</h3> -->
+					<!-- <h3 class="modal-title" id="exampleModalLabel">Editar Usuário:</h3> -->
 	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	                    <span aria-hidden="true">&times;</span>
 	                </button>

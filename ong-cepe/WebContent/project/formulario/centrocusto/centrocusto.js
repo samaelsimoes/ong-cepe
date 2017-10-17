@@ -15,7 +15,7 @@ $(document).ready(function(){
 	};
 	$('#valorPesquisa').keypress(function(e) {
 	    if(e.which == 13) 
-	        	ONG.centroCusto.pesquisar();
+	        ONG.centroCusto.pesquisar();
 	});
 
 	ONG.centroCusto.pesquisar = function() {

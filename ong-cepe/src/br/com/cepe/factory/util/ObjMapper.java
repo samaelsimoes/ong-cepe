@@ -36,7 +36,7 @@ private DateFactory dateFactory;
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new Exception("Falha ao fazer a converÁ„o do objeto para Json");
+			throw new Exception("Falha ao fazer a conver√ß√£o do objeto para Json");
 		}
 		
 	}
@@ -47,9 +47,7 @@ private DateFactory dateFactory;
 	
 	try {
 		ObjectMapper objectMapper = new ObjectMapper();
-//		objectMapper.setDateFormat(DateFormat.getDateTimeInstance()); //Utilizado para exibir as datas no padr√£o BR quando retorna do banco
 		objectMapper.writeValue(fw, objeto);
-//		System.out.println("fw: "+ fw.toString());
 		return Response.ok(fw.toString()).build();
 	} catch (Exception e) {
 		e.printStackTrace();

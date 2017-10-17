@@ -27,6 +27,7 @@ public class DateFactory {
 	}
 	
 	
+	
 	public String getFmt(DataFmt dthrBr) {
 		String[] fmts = { "dd/MM/yyyy", "yyyy-MM-dd", "dd/MM/yyyy HH:mm:ss", 
 						"yyyy-MM-dd HH:mm:ss","HH:mm","HH:mm:ss" };

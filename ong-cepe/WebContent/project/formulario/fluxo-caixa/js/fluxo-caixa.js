@@ -14,17 +14,14 @@ $(document).ready(function(){
 			"<thead class='table table-striped '>" +
 				"<tr>" +
 					
-					"<th> Nome </th> " +
-					"<th> Descrição </th>" +
+					"<th> Centro de Custo </th> " +
 					"<th> Tipo </th>" +
-					"<th> Cep </th>" +
 					"<th> Data </th>" +
-					"<th> Estado </th>" +
-					"<th> Cidade </th>" +
-					"<th> Bairro </th>" +
-					"<th> Rua </th>" +
-					"<th> Número </th>" +
-					"<th> Complemento </th>" +
+					"<th> Classificação </th>" +
+					"<th> Data </th>" +
+					"<th> Pessoa </th>" +
+					"<th> Evento </th>" +
+					"<th> Valor </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";					

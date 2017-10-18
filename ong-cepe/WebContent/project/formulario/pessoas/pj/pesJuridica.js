@@ -10,7 +10,7 @@ $(document).ready(function(){
 	
 	ONG.pessoaJuridica.buscapesJuridica = function(listPesj, busca){
 				
-		var html = "<table class='table table-responsive custom-table-margin-b'>";
+		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
 		
 		html += 
 
@@ -30,7 +30,7 @@ $(document).ready(function(){
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
-		
+		html += "<tbody>";
 		    if(listPesj != undefined && listPesj.length > 0 && listPesj[0].id != undefined){
 			  
 			  	for(var i = 0; i < listPesj.length; i++){
@@ -87,8 +87,16 @@ $(document).ready(function(){
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
 		    }
+		html += "</tbody>";				    		    
 		html +="</table>";
 		$("#resupesjuridica").html(html);
+		$('#tabela').tablesorter({
+			headers: { 			// (começa do zero)
+				8: {			// Desativa a ordenação para essa coluna 
+					sorter: false 
+				},
+			},
+		});
 	}
 	
 	ONG.pessoaJuridica.buscapesJuridica(undefined, "");

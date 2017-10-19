@@ -11,6 +11,7 @@ protected  String select;
 protected HOperator operacao;
 protected String valor;
 protected String entity;
+protected String query= null;
 
 
 	public HqlFactory()	throws GlobalException {
@@ -30,7 +31,7 @@ protected String entity;
 		String query = null;
 		
 		if (!select.equals(null) && operacao != null && !valor.equals(null) && !valor.equals("*"))
-			query=this.select+setQuery();		
+			query=this.select+getOperation();		
 		else if (valor.equals("*"))
 			query= "SELECT e FROM "+entity+" e ";
 		else
@@ -45,7 +46,7 @@ protected String entity;
 		String query = null;
 		
 		if (!select.equals(null) && operacao != null && !valor.equals(null) && !valor.equals("*"))
-			query=this.select+setQuery();		
+			query=this.select+getOperation();		
 		else if (valor.equals("*"))
 			query= "SELECT e FROM "+entity+" e ";
 		else
@@ -54,16 +55,29 @@ protected String entity;
 		return query;
 	}
 	
+	public String getAnd(String campo, HOperator hOperator, Integer val) throws GlobalException{
+		if(!campo.equals(null) && !campo.equals("") && hOperator != null &&  !val.equals(null))
+			return " AND "+valor;		
+		else return null;
+	};
 	
-	public String getRawQuery(HOperator operacao, int num) throws GlobalException{
+	public String getAnd(String campo, HOperator hOperator, String val) throws GlobalException{
+		
+		if(!campo.equals(null) && !campo.equals("") && hOperator != null &&  !val.equals(null)){
+			this.operacao= hOperator;
+			return " AND "+campo+" "+getOperation()+" "+valor;		
+		}
+		else return null;
+	};
+	
+	public String getRawOperationQuery(HOperator operacao, int num) throws GlobalException{
 		this.operacao = operacao;
 		String query = null;
 		if(num != 0)
-			this.valor = Integer.toString(num);
+			this.valor = Integer.toString(num);		
 		
-		
-		if (!select.equals(null) && operacao != null && !valor.equals(null) && !valor.equals("*"))
-			query=setQuery();		
+		if (operacao != null && !valor.equals(null) && !valor.equals("*"))
+			query=getOperation();		
 		else if (valor.equals("*"))
 			query= "SELECT e FROM "+entity+" e ";
 		else
@@ -80,7 +94,7 @@ protected String entity;
 		this.valor = valor;
 		
 		if (!select.equals(null) && operacao != null && !valor.equals(null) && !valor.equals("*"))
-			query=setQuery();		
+			query=getOperation();		
 		else if (valor.equals("*"))
 			query= "SELECT e FROM "+entity+" e ";
 		else
@@ -89,12 +103,8 @@ protected String entity;
 		return query;
 	}
 	
-	public String getAnd(String query1, String query2 ){
-		if(!query1.equals(null) && !query2.equals(null))
-			return this.select+query1+"AND"+query2;
-		else return null;
-		
-	};
+
+	
 	
 	public String getQuery(String select, HOperator operacao, int num) throws GlobalException{
 		this.select = select;
@@ -104,7 +114,7 @@ protected String entity;
 			this.valor = Integer.toString(num);
 		
 		if (!select.equals(null) && operacao != null && valor != null)
-			query=select+setQuery();		
+			query=select+getOperation();		
 		else
 			throw new GlobalException(" Não é possível montar a query com campos vazios!");
 		
@@ -112,7 +122,7 @@ protected String entity;
 	}
 	
 	
-	private String setQuery() throws GlobalException{
+	private String getOperation() throws GlobalException{
 		String iniPercent = "'%";
 		String fimPercent = "%'";
 		

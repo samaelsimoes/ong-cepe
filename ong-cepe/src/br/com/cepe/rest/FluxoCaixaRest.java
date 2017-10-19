@@ -1,7 +1,8 @@
 package br.com.cepe.rest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -15,8 +16,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.cepe.datatype.DataFmt;
 import br.com.cepe.entity.pojo.caixa.Operacao;
 import br.com.cepe.exception.GlobalException;
+import br.com.cepe.factory.date.DateFactory;
 import br.com.cepe.factory.entity.fluxoCaixa.OperacaoFactory;
 import br.com.cepe.factory.util.ObjMapper;
 import br.com.cepe.service.FluxoCaixaService;
@@ -97,19 +100,21 @@ public class FluxoCaixaRest extends ObjMapper {
 	
 	@GET
 	@Path("/periodo/{dataInicio}/{dataFim}/{centroCusto}")
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response pesquisarPeriodo(@PathParam("dataInicio") Date dataInicio, 
-			@PathParam("dataFim") Date dataFim, @PathParam("centroCusto") int centroCusto ) throws GlobalException {
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response pesquisarPeriodo(@PathParam("dataInicio") long dataInicioParam, 
+			@PathParam("dataFim") long dataFimParam, @PathParam("centroCusto") int centroCusto ) throws GlobalException {
+		
 		try {
-			if(dataInicio!=null && dataFim != null){
-				List<Operacao> operacoes = new ArrayList<Operacao>();
-				Operacao opIni = new Operacao();
-				Operacao opFim = new Operacao();
-				opIni.setData(dataInicio);
-				opFim.setData(dataFim);
-				operacoes.add(opIni);
-				operacoes.add(opFim);
-				List<Operacao> result = new FluxoCaixaService().pesquisaGenericList(operacoes, centroCusto);
+			if(dataInicioParam!= 0 && dataFimParam != 0){
+				DateFactory dateFactory = new DateFactory();
+							
+				DateFormat formata = new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_EUA));
+				String dataInicio = formata.format(dataInicioParam);
+				String dataFim= formata.format(dataFimParam);
+				List<String> operacoes = new ArrayList<String>();
+				operacoes.add(dataInicio);
+				operacoes.add(dataFim);
+				List<Operacao> result = new FluxoCaixaService().pesquisaPeriodo(operacoes, centroCusto);
 				String resp = getJson(result);
 				return Response.ok(resp ,MediaType.APPLICATION_JSON).build();
 			}

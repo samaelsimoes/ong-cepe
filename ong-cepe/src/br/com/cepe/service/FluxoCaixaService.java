@@ -11,6 +11,7 @@ import br.com.cepe.entity.pojo.caixa.Operacao;
 import br.com.cepe.entity.pojo.evento.Evento;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
 import br.com.cepe.exception.GlobalException;
+import br.com.cepe.factory.hql.HqlFactoryList;
 import br.com.cepe.interfaces.Service;
 
 public class FluxoCaixaService  implements Service<Operacao>{	
@@ -35,6 +36,7 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	}
 
 	public void adicionar()  throws GlobalException {
+				
 		new FluxoCaixaDAO(this.operacao).persist();
 	}
 
@@ -57,11 +59,14 @@ public class FluxoCaixaService  implements Service<Operacao>{
 		return (List<Operacao>) new FluxoCaixaDAO().findGenericInt(campo, operacao, num);
 	}
 	
-	public List<Operacao> pesquisaGenericList(List<Operacao> operacoes, int num) throws GlobalException {
-		FluxoCaixaDAO fluxoCaixaDAO = new FluxoCaixaDAO();
-		fluxoCaixaDAO.setFindParams("tipo", HOperator.EQUALS, num);
-		fluxoCaixaDAO.setFindParams("data", HOperator.BETWEEN, operacoes);
-		List<Operacao> result = fluxoCaixaDAO.findGeneric();
+	public List<Operacao> pesquisaPeriodo(List<String> periodos, int num) throws GlobalException {
+		HqlFactoryList<Operacao> hqlFactoryList = new HqlFactoryList<Operacao>();
+		FluxoCaixaDAO fluxoCaixaDAO = new FluxoCaixaDAO(hqlFactoryList);
+		
+		fluxoCaixaDAO.setFindParams("centroCusto_id", HOperator.EQUALS, num);
+		fluxoCaixaDAO.setFindParams("data", HOperator.BETWEEN, periodos);
+		fluxoCaixaDAO.setAnd();
+		List<Operacao> result = fluxoCaixaDAO.findGenericBetween();
 		return result;
 	}
 	

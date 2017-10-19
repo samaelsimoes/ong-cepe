@@ -4,6 +4,7 @@
 package br.com.cepe.daoconnect;
 
 import br.com.cepe.entity.pojo.caixa.Operacao;
+import br.com.cepe.factory.hql.HqlFactoryList;
 
 public class FluxoCaixaDAO extends OperationsDAO<Operacao>{
 
@@ -17,6 +18,10 @@ public class FluxoCaixaDAO extends OperationsDAO<Operacao>{
 	
 	public FluxoCaixaDAO(Operacao operacao){
 		this.entity = operacao;
+	}
+
+	public FluxoCaixaDAO(HqlFactoryList<Operacao> hqlFactoryList) {
+		this.hqlFactoryList = hqlFactoryList;
 	}
 	
 }

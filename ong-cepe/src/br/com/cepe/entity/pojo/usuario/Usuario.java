@@ -15,6 +15,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int tipo;
+	private int status;
 	private String nome;
 	private String email;
 	private String senha;
@@ -32,6 +33,13 @@ public class Usuario {
 	}
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public String getNome() {
 		return nome;

@@ -1,25 +1,29 @@
 <meta charset="utf-8">
 
 <div class="form-group row">
-    <div class="col-md-8">
+    <div class="col-xs-6 col-md-7">
         <label for="conspf" class="col-2 col-form-label">Buscar:</label>
 
         <input class="form-control" type="text" id="conspf" placeholder="Buscar">
     </div>
-    <div class="col-md-1">
-        <div class="row btn-md h2">
-            <button type="button" class="btn btn-primary" onclick="ONG.pessoaFisica.consultapesf()">
-                    
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
-            </button>
+    <div class="col-xs-3 col-md-1 custom-class-botADDSearch" style="padding-left: 1px;">
+        <div class="row">
+        	<div class="col-xs-3 col-md-1">
+	            <button type="button" class="btn btn-primary" onclick="ONG.pessoaFisica.consultapesf()">
+	                    
+	                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+	            </button>
+	        </div>
         </div>
     </div>
-    <div class="col-md-2">
-        <div class= "btn-md h2">
-            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addmodal" onclick="ONG.pessoaFisica.buscaEstado()">
-
-                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
-            </button>
+    <div class="col-xs-3 col-md-1 custom-class-botADDSearch">
+    	<div class="row">
+    		<div class="col-xs-3 col-md-1">
+	            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addmodal" onclick="ONG.pessoaFisica.buscaEstado()">
+	
+	                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
+	            </button>
+	         </div>
         </div>
     </div>
 </div>  

@@ -20,7 +20,7 @@ $(document).ready(function(){
 					"<th> Classificação </th>" +
 					"<th> Data </th>" +
 					"<th> Pessoa </th>" +
-					"<th> Evento </th>" +
+					"<th> fluxocaixa </th>" +
 					"<th> Valor </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
@@ -46,18 +46,18 @@ $(document).ready(function(){
 						}
 						html += "<td>" + listFluxo[i].data + "</td>";
 						html += "<td>" + listFluxo[i].pessoa + "</td>";
-						html += "<td>" + listFluxo[i].evento + "</td>";
+						html += "<td>" + listFluxo[i].fluxocaixa + "</td>";
 						html += "<td>" + listFluxo[i].valor + "</td>";
 						html += "<td>"+
-									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.evento.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
-									"<button type='button'class='btn btn-trash' onclick='ONG.evento.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
+									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
+									"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
 								"</td>";						
 					html += "</tr>";  
 			    }
 		    }else{
 			    if(listFluxo == undefined || (listFluxo != undefined && listFluxo.length > 0)){
 			    	
-			    	var buscaEvento;
+			    	var buscafluxocaixa;
 			    	
 			    	if ( busca != "" ) {
 			    		buscaFluxo = busca;
@@ -86,4 +86,45 @@ $(document).ready(function(){
 	}
 	
 	ONG.fluxocaixa.buscaeFluxo(undefined, "");
+	
+	ONG.fluxocaixa.add = function () {
+		
+		var msg = "";
+		
+		msg += ONG.fluxocaixa.validaVazio("Nome: ", $("#nome").val());
+		msg += ONG.fluxocaixa.validaVazio("Tipo fluxocaixa: ", $("#typeevent").val());		
+		msg += ONG.fluxocaixa.validaVazio("Cep: ", $("#cep").val());
+		msg += ONG.fluxocaixa.validaVazio("Data: ", $("#data").val());
+		msg += ONG.fluxocaixa.validaVazio("Hora: ", $("#horario").val());
+		msg += ONG.fluxocaixa.validaVazio("Estado: ", $("#addestado").val());
+		msg += ONG.fluxocaixa.validaVazio("Cidade: ", $("#addcidade").val());
+		msg += ONG.fluxocaixa.validaVazio("Bairro: ", $("#bairro").val());			
+		msg += ONG.fluxocaixa.validaVazio("Rua: ", $("#rua").val());
+		msg += ONG.fluxocaixa.validaVazio("Complemento: ", $("#complemento").val());
+		msg += ONG.fluxocaixa.validaVazio("Descrição: ", $("#descricao").val());
+		
+		if ( msg == "") {
+			
+		}
+	}
+	
+	ONG.fluxocaixa.validaVazio = function ( campo, valor ) {
+		
+        var msg = "";
+
+        if(valor == null || valor.trim() == ""){
+            msg += "- " + campo + " Está Vazio. </br>";
+        }
+        return msg;
+    };
+    ONG.fluxocaixa.validaCampos = function(){
+
+    	var exp = "";
+
+        if(!$("#cep").val().match(/^\d{8,9}$/)){
+        	exp+="Cep invalido ! </br> " + "</br>";
+        }
+
+    	return exp;
+    };
 });

@@ -51,7 +51,7 @@ $(document).ready(function(){
 										+"Viagem"+
 									"</td>"
 						}
-						debugger;
+						
 						html += "<td>" + listEvent[i].cep + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
 						html += "<td>" + listEvent[i].cidade + "</td>";

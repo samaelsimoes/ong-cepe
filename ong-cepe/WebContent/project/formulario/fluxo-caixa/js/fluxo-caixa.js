@@ -18,9 +18,8 @@ $(document).ready(function(){
 					"<th> Tipo </th>" +
 					"<th> Data </th>" +
 					"<th> Classificação </th>" +
-					"<th> Data </th>" +
-					"<th> Pessoa </th>" +
-					"<th> fluxocaixa </th>" +
+					"<th> pessoa </th>" +
+					"<th> evento </th>" +
 					"<th> Valor </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
@@ -127,4 +126,12 @@ $(document).ready(function(){
 
     	return exp;
     };
+    
+    
+    // BUSCA CENTRO DE CUSTO  --- -- - -- - - 
+    
+    
+    ONG.fluxcaixa.buscaCentroCusto = function() {
+    	
+    }
 });

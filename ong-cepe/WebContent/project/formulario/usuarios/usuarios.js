@@ -21,7 +21,7 @@ $(document).ready(function(){
 		ONG.usuario.exibirLista(undefined, valorPesquisa);
 	};
 	ONG.usuario.exibirLista = function(lista, valorPesquisa){
-		var html = "<table id='tabela'  class='table table-responsive custom-table-margin-b' >";
+		var html = "<table id='tabela'  class='tablesorter table table-responsive custom-table-margin-b' >";
 		html +=
 					"<thead table table-striped>" +
 						"<tr>" +
@@ -64,13 +64,13 @@ $(document).ready(function(){
 		html += "</tbody>";
 		html +="</table>";
 		$("#exibiList").html(html);
-//		$('#tabela').tablesorter({
-//			headers: { 			// (começa do zero)
-//				4: {			// Desativa a ordenação para essa coluna 
-//					sorter: false 
-//				},
-//			},
-//		});
+		$('#tabela').tablesorter({
+			headers: { 			// (começa do zero)
+				4: {			// Desativa a ordenação para essa coluna 
+					sorter: false 
+				},
+			},
+		});
 		//$('#tabela').tablesorter();
 	};
 	ONG.usuario.exibirLista(undefined, "");

@@ -3,12 +3,12 @@ $(document).ready(function(){
 	$('#header').load('header.html');
 	$('#footer').load('footer.html');
 	
-	ONG.centroCusto.btnCadastrar = function() {
+/*	ONG.centroCusto.btnCadastrar = function() {
 		$("#conteudo").load("formulario/centrocusto/cad.html",function(){
 			$( "#exibiList" ).hide();		
 		});
 		return false;
-	};
+	};*/
 	ONG.centroCusto.btnCancelar = function() {
 		$(location).attr('href', ONG.contextPath+'/project/centrocusto.html');
 		return false;

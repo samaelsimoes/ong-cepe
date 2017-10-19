@@ -8,7 +8,7 @@ $(document).ready(function(){
 	}		 	
 	ONG.evento.searchEvent = function(listEvent, busca){
 
-		var html = "<table class='table table-responsive custom-table-margin-b'>";
+		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
 		
 		html += 
 			"<thead class='table table-striped '>" +
@@ -27,7 +27,8 @@ $(document).ready(function(){
 					"<th> Complemento </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
-			"</thead>";					
+			"</thead>" +
+			"<tbody>";					
 		
 		    if(listEvent != undefined && listEvent.length > 0 && listEvent[0].id != undefined){
 			  
@@ -50,11 +51,11 @@ $(document).ready(function(){
 										+"Viagem"+
 									"</td>"
 						}
-						
+						debugger;
 						html += "<td>" + listEvent[i].cep + "</td>";
 						html += "<td>" + listEvent[i].data + "</td>";
 						html += "<td>" + listEvent[i].cidade + "</td>";
-						html += "<td>" + listEvent[i].cidade + "</td>";
+						html += "<td>" + listEvent[i].cidade.nome + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
 						html += "<td>" + listEvent[i].rua + "</td>";
 						html += "<td>" + listEvent[i].numero + "</td>";
@@ -92,8 +93,16 @@ $(document).ready(function(){
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
 		    }
+		html +="</tbody>";
 		html +="</table>";
 		$("#resuAllEvents").html(html);
+		$('#tabela').tablesorter({
+			headers: { 			// (começa do zero)
+				11: {			// Desativa a ordenação para essa coluna 
+					sorter: false 
+				},
+			},
+		});
 	}
 	
 	ONG.evento.searchEvent(undefined, "");

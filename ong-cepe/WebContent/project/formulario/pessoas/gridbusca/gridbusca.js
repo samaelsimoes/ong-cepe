@@ -9,7 +9,7 @@ $(document).ready(function(){
 	
 	ONG.pessoa.buscaTodos = function(listallpes, busca){
 				
-		var html = "<table class='table table-responsive custom-table-margin-b'>";
+		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
 		
 		html += 
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
 					"<th> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
-		
+		html += "<tbody>";
 		    if(listallpes != undefined && listallpes.length > 0 && listallpes[0].id != undefined){
 			  
 			  	for(var i = 0; i < listallpes.length; i++){
@@ -100,8 +100,16 @@ $(document).ready(function(){
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
 		    }
+		html += "</tbody>";		
 		html +="</table>";
 		$("#resupsall").html(html);
+		$('#tabela').tablesorter({
+			headers: { 			// (começa do zero)
+				5: {			// Desativa a ordenação para essa coluna 
+					sorter: false 
+				},
+			},
+		});
 	}
 	
 	ONG.pessoa.buscaTodos (undefined, "");

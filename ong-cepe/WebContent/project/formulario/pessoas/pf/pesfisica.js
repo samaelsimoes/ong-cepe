@@ -9,11 +9,13 @@ $(document).ready(function(){
 	
 	ONG.pessoaFisica.buscapefisica = function(listPesF, busca){
 
-		var html = "<table class='table table-responsive custom-table-margin-b'>";
+		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
 		
 		html += 
+			
 			"<thead class='table table-striped'>" +
 				"<tr>" +	
+				
 					"<th> CPF </th>" + 
 					"<th> Nome </th> " +
 					"<th> RG </th>" + 
@@ -23,7 +25,8 @@ $(document).ready(function(){
 					"<th> Número </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
-			"</thead>";							
+			"</thead>";	
+		html += "<tbody>";
 		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){			  
 			  	for(var i = 0; i < listPesF.length; i++){
 					html += "<tr>";		
@@ -82,8 +85,16 @@ $(document).ready(function(){
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
 		    }
+		html += "</tbody>";				    
 		html +="</table>";
 		$("#resupsfisica").html(html);
+		$('#tabela').tablesorter({
+			headers: { 			// (começa do zero)
+				7: {			// Desativa a ordenação para essa coluna 
+					sorter: false 
+				},
+			},
+		});
 	}
 	
 	ONG.pessoaFisica.buscapefisica(undefined, "");

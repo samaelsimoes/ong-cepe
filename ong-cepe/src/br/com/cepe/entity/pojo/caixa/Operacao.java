@@ -2,7 +2,6 @@ package br.com.cepe.entity.pojo.caixa;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,7 @@ import javax.persistence.ManyToOne;
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 import br.com.cepe.entity.pojo.evento.Evento;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
+import br.com.cepe.entity.pojo.usuario.Usuario;
 
 @Entity
 public class Operacao {
@@ -20,6 +20,7 @@ public class Operacao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private Date data;
+	private Usuario usuario;
 	private int tipo;
 	private int classificacao;
 	private float valor;	
@@ -39,6 +40,12 @@ public class Operacao {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	public Date getData() {
 		return data;

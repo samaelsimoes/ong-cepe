@@ -123,15 +123,69 @@ $(document).ready(function(){
         if(!$("#cep").val().match(/^\d{8,9}$/)){
         	exp+="Cep invalido ! </br> " + "</br>";
         }
-
     	return exp;
     };
     
-    
     // BUSCA CENTRO DE CUSTO  --- -- - -- - - 
     
-    
-    ONG.fluxcaixa.buscaCentroCusto = function() {
-    	
+    ONG.fluxocaixa.buscacusto = function() {
+    	var cfg ={
+				
+			url: ONG.contextPath + "/rest/centroCusto/nome/*",
+		
+			success: function(lcenter){							
+				ONG.fluxocaixa.montaSelect(lcenter);
+			},
+			error: function(err){	
+				bootbox.alert("Erro ao realizar busca do centro de custo:"+err.responseText);
+			}
+		};
+			
+			ONG.ajax.get(cfg);
+    }
+    ONG.fluxocaixa.montaSelect = function(listaCentroCusto) {
+    	if(listaCentroCusto != undefined && listaCentroCusto.length > 0 && listaCentroCusto[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listaCentroCusto.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#tipofluxo'));
+				option.attr( "value", listaCentroCusto[i].id );
+				option.html( listaCentroCusto[i].nome );
+			}
+
+			var itemsedit2 = document.querySelector('#tipofluxo');
+			itemsedit2.addEventListener('change', function(){
+				var valor2 =	this.value // o valo
+			});
+		}
+    }
+
+	// MODAL CADASTRAR, busca todos dados do campos html-selected
+
+    ONG.fluxocaixa.buscomponenteAdd = function() {
+    	var cfg ={
+				
+			url: ONG.contextPath + "/rest/centroCusto/nome/*",
+		
+			success: function(lcenter2){							
+				ONG.fluxocaixa.montaSelectcentrocust(lcenter2);
+			},
+			error: function(err){	
+				bootbox.alert("Erro ao realizar busca do centro de custo:"+err.responseText);
+			}
+		};
+		ONG.ajax.get(cfg);
+    }
+    ONG.fluxocaixa.montaSelectcentrocust = function(listaCentroCusto){
+    	if(listaCentroCusto != undefined && listaCentroCusto.length > 0 && listaCentroCusto[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listaCentroCusto.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#centrocusto2'));
+				option.attr( "value", listaCentroCusto[i].id );
+				option.html( listaCentroCusto[i].nome );
+			}
+
+			var itemsedit2 = document.querySelector('#centrocusto2');
+			itemsedit2.addEventListener('change', function(){
+				var valor2 =	this.value // o valo
+			});
+		}
     }
 });

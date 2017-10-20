@@ -11,7 +11,6 @@ $(document).ready(function(){
 		});
 	};
 	
-	
 	ONG.centroCustoRest.pesquisarNome = function(config){
 //		url : "rest/pessoas/pesquisarNome?nome="+config.data.valor1 + "&tipo=" + config.data.valor2 ,
 		ONG.ajax.get({
@@ -45,5 +44,4 @@ $(document).ready(function(){
 			error : config.error
 		});
 	};
-	
 });

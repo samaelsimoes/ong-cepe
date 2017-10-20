@@ -2,7 +2,6 @@ package br.com.cepe.entity.pojo.caixa;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,7 @@ import javax.persistence.ManyToOne;
 import br.com.cepe.entity.pojo.centroCusto.CentroCusto;
 import br.com.cepe.entity.pojo.evento.Evento;
 import br.com.cepe.entity.pojo.pessoa.Pessoa;
+import br.com.cepe.entity.pojo.usuario.Usuario;
 
 @Entity
 public class Operacao {
@@ -20,10 +20,16 @@ public class Operacao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private Date data;
-	private float valor;	
+	private Usuario usuario;
+	private int tipo;
 	private int classificacao;
+	private float valor;	
+	private String descricao;
+	
 	@ManyToOne
 	private CentroCusto centroCusto;
+	@ManyToOne
+	private CentroCusto centroCustoDestino;
 	@ManyToOne
 	private Pessoa pessoa;
 	@ManyToOne
@@ -35,17 +41,23 @@ public class Operacao {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public Date getData() {
 		return data;
 	}
 	public void setData(Date data) {
 		this.data = data;
 	}
-	public float getValor() {
-		return valor;
+	public int getTipo() {
+		return tipo;
 	}
-	public void setValor(float valor) {
-		this.valor = valor;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 	public int getClassificacao() {
 		return classificacao;
@@ -53,11 +65,29 @@ public class Operacao {
 	public void setClassificacao(int classificacao) {
 		this.classificacao = classificacao;
 	}
+	public float getValor() {
+		return valor;
+	}
+	public void setValor(float valor) {
+		this.valor = valor;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 	public CentroCusto getCentroCusto() {
 		return centroCusto;
 	}
 	public void setCentroCusto(CentroCusto centroCusto) {
 		this.centroCusto = centroCusto;
+	}
+	public CentroCusto getCentroCustoDestino() {
+		return centroCustoDestino;
+	}
+	public void setCentroCustoDestino(CentroCusto centroCustoDestino) {
+		this.centroCustoDestino = centroCustoDestino;
 	}
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -70,8 +100,6 @@ public class Operacao {
 	}
 	public void setEvento(Evento evento) {
 		this.evento = evento;
-	}
-	
-	
+	}	
 
 }

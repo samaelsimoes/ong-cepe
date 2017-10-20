@@ -20,6 +20,7 @@ public class Operacao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private Date data;
+	@ManyToOne
 	private Usuario usuario;
 	private int tipo;
 	private int classificacao;

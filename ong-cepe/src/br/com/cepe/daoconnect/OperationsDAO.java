@@ -43,7 +43,21 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	public OperationsDAO(int num){
 		this.num = num;
 	}
+	
+	
+	public OperationsDAO(String campo, HOperator operacao, String valor){
+		this.campo = campo;
+		this.operacao = operacao;
+		this.valor = valor;
+	}
+	
+	public OperationsDAO(String campo, HOperator operacao, int num){
+		this.campo = campo;
+		this.operacao = operacao;
+		this.num = num;
+	}
 
+	
 	public void persist(){
 		em.getTransaction().begin();
 		em.persist(this.entity);
@@ -96,8 +110,8 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	
 	public List<T> findGeneric(String campo, HOperator operacao, String valor) throws GlobalException{
 		HqlFactory hqlFactory = new HqlFactory();		
-		this.select = hqlFactory.getSelect(getEntityName(), this.campo);
-		this.queryStr = hqlFactory.getQuery(this.select, this.operacao, this.valor);
+		this.select = hqlFactory.getSelect(getEntityName(), campo);
+		this.queryStr = hqlFactory.getQuery(select, operacao, valor);
 		this.query = super.getQuery(queryStr);
 		@SuppressWarnings("unchecked")
 		List<T> list = this.query.getResultList();

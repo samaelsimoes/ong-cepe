@@ -52,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Eventos</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Fluxo de caixa</h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -140,127 +140,89 @@
 <!-- stats edit modal -->
 <div class="modal fade" id="modaledit" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-       <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Evento</h5>
+
+                <h5 class="modal-title" id="exampleModalLabel">Editar Fluxo de caixa</h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
-            <input name="id" id="id" type="hidden">
-
             <div class="modal-body">
                 <div class="col">
                     <div class="form-group row">
                         <div class="col-xs-6 col-md-6">
-                            <label for="nomeedit" class="col-2 col-form-label">Nome do evento:</label>
-                            <input class="form-control" type="text" id="nomeedit" placeholder="nomeedit">
-                        </div>
-                        
-                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="tipofluxo">Tipo:</label>
                             
-                            <label class="col-2 col-form-label" for="typeeventedit">Tipo de evento:</label>
+                            <select class="form-control" name="tipofluxo" id="tipofluxo">
                             
-                            <select class="form-control" name="typeevent" id="typeeventedit">
-                            
-                                <option selected>Selecione uma das opções</option>
-                                <option value="1">Beneficiente</option>
-                                <option value="2">Sessao</option>
-                                <option value="3">Viagem</option>                            
-                            </select>    
-                        </div>  
-                    </div>
-
-                    <div class="form-group row">                      
-                        <div class="col-xs-6 col-md-6 ">
-                            <label for="cepedit" class="col-2 col-form-label">Cep:</label>
-                            <input class="form-control" type="text" id="cepedit" placeholder="cepedit" maxlength="9">
-                        </div>  
-                        <div class="col-xs-6 col-md-6">
-                            <label for="bairroedit" class="col-2 col-form-label">Bairro:</label>
-                            <input class="form-control" type="text"  id="bairroedit" placeholder="bairroedit">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">                        
-                    
-                        <div class="col-xs-6 col-md-6">
-                            <label for="dataedit" class="col-2 col-form-label">Data</label>
-                            <input class="form-control" type="date" id="dataedit">
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <label for="horarioedit" class="col-2 col-form-label">Horario</label>
-                            <input class="form-control" type="time" id="horarioedit">
-                        </div>  
-                    </div>
-
-                     <div class="form-group row">
-                        <div class="col-xs-6 col-md-6">
-                            <label class="col-2 col-form-label" for="addestado">Estado:</label>
-                            
-                            <select class="form-control" name="addestado" id="estadoedit">
-                            
-                                <option >Selecione o estado:</option>
+                                <option >Selecione o tipo de fluxo:</option>
                             </select>       
                         </div>
                         <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="centrocusto2">Centro De Custo:</label>
                             
-                            <label class="col-2 col-form-label" for="cidadeedit">Cidade:</label>
+                            <select class="form-control" name="centrocusto" id="centrocusto2">
                             
-                            <select class="form-control" name="addcidade" id="cidadeedit">
-                            
-                                <option selected>Selecione a cidade:</option>
-                            </select>    
+                                <option>Selecione o centro de custo:</option>
+                            </select>     
+                        </div>  
+                    </div>
+
+                    <div class="form-group row">                    	
+                    
+                        <div class="col-xs-6 col-md-6">
+                            <label for="data" class="col-2 col-form-label">Data</label>
+    						<input class="form-control" type="date" id="data">
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <label for="classifica" class="col-2 col-form-label">Classificação</label>
+							<input class="form-control" type="text" id="classifica">
                         </div>  
                     </div>
 
                      <div class="form-group row">
-                        <div class="col-xs-6 col-md-6 ">
-                            <label class="col-2 col-form-label" for="modalidadeedit">Modalidade:</label>
+                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="evento">Evento:</label>
                             
-                            <select class="form-control" name="modalidadeedit" id="modalidadeedit">
-                                                        
-                            </select> 
-                        </div>
-                        
-                        <div class="col-xs-6 col-md-6">                    
-                            <label for="ruaedit" class="col-2 col-form-label">Rua:</label>
-                            <input class="form-control" type="text" id="ruaedit" placeholder="ruaedit">
-                        </div>  
+                            <select class="form-control" name="evento" id="evento">
+                            
+                                <option>Selecione o evento:</option>
+                            </select>   
+                        </div>          
+                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="pessoa">Pessoa:</label>
+                            
+                            <select class="form-control" name="pessoa" id="pessoa">
+                            
+                                <option>Selecione o responsavel:</option>
+                            </select>  
+                        </div>            
                     </div>
 
-                    <div class="form-group row">
+                     <div class="form-group row">
                         <div class="col-xs-6 col-md-6 ">
-                            
-                            <label for="numeroedit" class="col-2 col-form-label">Número:</label>
-                            <input class="form-control" type="text" id="numeroedit" placeholder="numeroedit">
-                        </div>  
-                                               
-                        <div class="col-xs-6 col-md-6">
-                            <label for="complementoedit" class="col-2 col-form-label">Complemento:</label>
-                            <input class="form-control" type="text"  id="complementoedit" placeholder="complementoedit">
-                        </div>                
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-md-12 ">
-                            <label for="descricaoedit" class="col-2 col-form-label">Descrição:</label>
-                        
-                            <textarea class="form-control" id="descricaoedit" rows="4"></textarea>
+                            <label for="valor" class="col-2 col-form-label">Valor:</label>
+                            <input class="form-control" type="text" id="valor" placeholder="valor">
                         </div>
-                        
-                    </div>
-                    
+                        <div class="col-xs-6 col-md-6 ">
+
+                    	    <label for="destino" class="col-2 col-form-label">Destino:</label>
+                    	
+                            <input class="form-control" type="text" id="destino" placeholder="destino">
+                    	</div>                    	
+                    </div>                    
                 </div>
             </div>
             <div class="modal-footer">
                 
-                 <button type="button" class="btn" data-dismiss="modal">Sair</button>          
-             
-                 <button type="button" class="btn btn-primary btn-success" onclick="ONG.evento.editarEvent()">
-    
-                     <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
-                 </button>
+	             <button type="button" class="btn" data-dismiss="modal">Sair</button>          
+	         
+	             <button type="button" class="btn btn-primary btn-success" onclick="ONG.evento.addevent()">
+	
+	                 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
+	             </button>
             </div>
         </div>
     </div>

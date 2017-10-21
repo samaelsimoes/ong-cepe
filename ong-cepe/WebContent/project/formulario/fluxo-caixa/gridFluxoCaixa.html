@@ -64,17 +64,19 @@
                         <div class="col-xs-6 col-md-6">
                             <label class="col-2 col-form-label" for="tipofluxo">Tipo:</label>
                             
-                            <select class="form-control" name="tipofluxo" id="tipofluxo">
-                            
-                                <option >Selecione o tipo de fluxo:</option>
-                            </select>       
+                            <select class="form-control" id="tipofluxo">		
+								<option selected>Selecione uma da opções</option>
+								<option value="0">Entrada</option>
+								<option value="1">Saida</option>
+								<option value="1">Transferencia</option>							
+						    </select>         
                         </div>
                         <div class="col-xs-6 col-md-6">
                             <label class="col-2 col-form-label" for="centrocusto2">Centro De Custo:</label>
                             
                             <select class="form-control" name="centrocusto" id="centrocusto2">
                             
-                                <option>Selecione o centro de custo:</option>
+                                <option>Selecione uma da opções</option>
                             </select>     
                         </div>  
                     </div>
@@ -86,8 +88,15 @@
     						<input class="form-control" type="date" id="data">
                         </div>
                         <div class="col-xs-6 col-md-6">
-                            <label for="classifica" class="col-2 col-form-label">Classificação</label>
-							<input class="form-control" type="text" id="classifica">
+                            <label class="col-2 col-form-label" for="classificacao">Classificação:</label>
+						   
+						   <select class="form-control" id="classificacao">		
+								<option selected>Selecione uma da opções</option>
+								<option value="0">Compra</option>
+								<option value="1">Venda</option>
+								<option value="2">Doação </option>
+								<option value="3">Custo operacional</option>								
+						    </select>   
                         </div>  
                     </div>
 
@@ -97,15 +106,14 @@
                             
                             <select class="form-control" name="evento" id="evento">
                             
-                                <option>Selecione o evento:</option>
+                                <option>Selecione uma da opções</option>
                             </select>   
                         </div>          
                         <div class="col-xs-6 col-md-6">
                             <label class="col-2 col-form-label" for="pessoa">Pessoa:</label>
                             
                             <select class="form-control" name="pessoa" id="pessoa">
-                            
-                                <option>Selecione o responsavel:</option>
+                            	<option selected>Selecione uma da opções</option>                         
                             </select>  
                         </div>            
                     </div>
@@ -115,20 +123,28 @@
                             <label for="valor" class="col-2 col-form-label">Valor:</label>
                             <input class="form-control" type="text" id="valor" placeholder="valor">
                         </div>
-                        <div class="col-xs-6 col-md-6 ">
+                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="centrocustoe2">Destino - Centro De Custo:</label>
+                            
+                            <select class="form-control" name="centrocustoe2" id="centrocustoe2">
+                            
+                                <option selected>Selecione uma da opções</option>
+                            </select>     
+                        </div>                   	
+                    </div>   
+                    <div class="form-group row">
+                    	<div class="col-xs-6 col-md-6 ">
+                    		<textarea class="form-control" rows="3" id="descricao"></textarea>
 
-                    	    <label for="destino" class="col-2 col-form-label">Destino:</label>
-                    	
-                            <input class="form-control" type="text" id="destino" placeholder="destino">
-                    	</div>                    	
-                    </div>                    
+                    	</div>
+                    </div>                 
                 </div>
             </div>
             <div class="modal-footer">
                 
 	             <button type="button" class="btn" data-dismiss="modal">Sair</button>          
 	         
-	             <button type="button" class="btn btn-primary btn-success" onclick="ONG.evento.addevent()">
+	             <button type="button" class="btn btn-primary btn-success" onclick="ONG.fluxocaixa.addFluxo()">
 	
 	                 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
 	             </button>
@@ -153,17 +169,17 @@
                 <div class="col">
                     <div class="form-group row">
                         <div class="col-xs-6 col-md-6">
-                            <label class="col-2 col-form-label" for="tipofluxo">Tipo:</label>
+                            <label class="col-2 col-form-label" for="tipofluxoedit">Tipo:</label>
                             
-                            <select class="form-control" name="tipofluxo" id="tipofluxo">
+                            <select class="form-control" name="tipofluxoedit" id="tipofluxoedit">
                             
                                 <option >Selecione o tipo de fluxo:</option>
                             </select>       
                         </div>
                         <div class="col-xs-6 col-md-6">
-                            <label class="col-2 col-form-label" for="centrocusto2">Centro De Custo:</label>
+                            <label class="col-2 col-form-label" for="centrocustoedit">Centro De Custo:</label>
                             
-                            <select class="form-control" name="centrocusto" id="centrocusto2">
+                            <select class="form-control" name="centrocustoedit" id="centrocustoedit">
                             
                                 <option>Selecione o centro de custo:</option>
                             </select>     
@@ -173,28 +189,28 @@
                     <div class="form-group row">                    	
                     
                         <div class="col-xs-6 col-md-6">
-                            <label for="data" class="col-2 col-form-label">Data</label>
-    						<input class="form-control" type="date" id="data">
+                            <label for="dataedit" class="col-2 col-form-label">Data</label>
+    						<input class="form-control" type="date" id="dataedit">
                         </div>
                         <div class="col-xs-6 col-md-6">
-                            <label for="classifica" class="col-2 col-form-label">Classificação</label>
-							<input class="form-control" type="text" id="classifica">
+                            <label for="classificaedit" class="col-2 col-form-label">Classificação</label>
+							<input class="form-control" type="text" id="classificaedit">
                         </div>  
                     </div>
 
                      <div class="form-group row">
                         <div class="col-xs-6 col-md-6">
-                            <label class="col-2 col-form-label" for="evento">Evento:</label>
+                            <label class="col-2 col-form-label" for="eventoedit">Evento:</label>
                             
-                            <select class="form-control" name="evento" id="evento">
+                            <select class="form-control" name="eventoedit" id="eventoedit">
                             
                                 <option>Selecione o evento:</option>
                             </select>   
                         </div>          
                         <div class="col-xs-6 col-md-6">
-                            <label class="col-2 col-form-label" for="pessoa">Pessoa:</label>
+                            <label class="col-2 col-form-label" for="pessoaedit">Pessoa:</label>
                             
-                            <select class="form-control" name="pessoa" id="pessoa">
+                            <select class="form-control" name="pessoaedit" id="pessoaedit">
                             
                                 <option>Selecione o responsavel:</option>
                             </select>  
@@ -203,15 +219,17 @@
 
                      <div class="form-group row">
                         <div class="col-xs-6 col-md-6 ">
-                            <label for="valor" class="col-2 col-form-label">Valor:</label>
-                            <input class="form-control" type="text" id="valor" placeholder="valor">
+                            <label for="valoredit" class="col-2 col-form-label">Valor:</label>
+                            <input class="form-control" type="text" id="valoredit" placeholder="valor">
                         </div>
-                        <div class="col-xs-6 col-md-6 ">
-
-                    	    <label for="destino" class="col-2 col-form-label">Destino:</label>
-                    	
-                            <input class="form-control" type="text" id="destino" placeholder="destino">
-                    	</div>                    	
+                        <div class="col-xs-6 col-md-6">
+                            <label class="col-2 col-form-label" for="centrocustoedit2">Centro De Custo:</label>
+                            
+                            <select class="form-control" name="centrocustoedit2" id="centrocustoedit2">
+                            
+                                <option>Selecione o centro de custo:</option>
+                            </select>     
+                        </div>                     	
                     </div>                    
                 </div>
             </div>
@@ -227,6 +245,3 @@
         </div>
     </div>
 </div>
-
-
-

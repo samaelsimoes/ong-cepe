@@ -86,24 +86,40 @@ $(document).ready(function(){
 	
 	ONG.fluxocaixa.buscaeFluxo(undefined, "");
 	
-	ONG.fluxocaixa.add = function () {
+	ONG.fluxocaixa.addFluxo = function () {
 		
 		var msg = "";
 		
-		msg += ONG.fluxocaixa.validaVazio("Nome: ", $("#nome").val());
-		msg += ONG.fluxocaixa.validaVazio("Tipo fluxocaixa: ", $("#typeevent").val());		
-		msg += ONG.fluxocaixa.validaVazio("Cep: ", $("#cep").val());
+		msg += ONG.fluxocaixa.validaVazio("Tipo: ", $("#tipofluxo").val());
+		msg += ONG.fluxocaixa.validaVazio("Centro Custo: ", $("#centrocusto2").val());		
 		msg += ONG.fluxocaixa.validaVazio("Data: ", $("#data").val());
-		msg += ONG.fluxocaixa.validaVazio("Hora: ", $("#horario").val());
-		msg += ONG.fluxocaixa.validaVazio("Estado: ", $("#addestado").val());
-		msg += ONG.fluxocaixa.validaVazio("Cidade: ", $("#addcidade").val());
-		msg += ONG.fluxocaixa.validaVazio("Bairro: ", $("#bairro").val());			
-		msg += ONG.fluxocaixa.validaVazio("Rua: ", $("#rua").val());
-		msg += ONG.fluxocaixa.validaVazio("Complemento: ", $("#complemento").val());
-		msg += ONG.fluxocaixa.validaVazio("Descrição: ", $("#descricao").val());
-		
+		msg += ONG.fluxocaixa.validaVazio("Evento: ", $("#evento").val());
+		msg += ONG.fluxocaixa.validaVazio("Classificação: ", $("#classificacao").val());
+		msg += ONG.fluxocaixa.validaVazio("Pessoa: ", $("#pessoa").val());
+		msg += ONG.fluxocaixa.validaVazio("Valor: ", $("#valor").val());
+		msg += ONG.fluxocaixa.validaVazio("Centro de Custo: ", $("#centrocustoe2").val());
+		msg += ONG.fluxocaixa.validaVazio("Descricao: ", $("#descricao").val());
+
 		if ( msg == "") {
-			
+			var date = $("#data").val();
+			var d = new Date(date.split("/").reverse().join("-"));
+			var dadosFluxo = {
+				data: d.getTime(),
+	            tipo: $("#tipofluxo").val(),
+	            classificacao: $("#classificacao").val(),
+	            valor: $("#valor").val(),
+	            descricao: $("#descricao").val(),
+	            centroCusto:{
+	            	id: $("#centrocusto2").val(),
+	            },
+	            usuario:{
+	            	id: parseInt(5),
+	            },
+	            pessoa:{
+	            	id: paserInt($("pessoa").val),
+	            },
+	            evento:null,
+	        };
 		}
 	}
 	
@@ -129,20 +145,17 @@ $(document).ready(function(){
     // BUSCA CENTRO DE CUSTO  --- -- - -- - - 
     
     ONG.fluxocaixa.buscacusto = function() {
-    	var cfg ={
-				
-			url: ONG.contextPath + "/rest/centroCusto/nome/*",
-		
+    	ONG.centroCustoRest.pesquisarNome({
+			data : "*",
 			success: function(lcenter){							
 				ONG.fluxocaixa.montaSelect(lcenter);
 			},
 			error: function(err){	
 				bootbox.alert("Erro ao realizar busca do centro de custo:"+err.responseText);
 			}
-		};
-			
-			ONG.ajax.get(cfg);
+		});
     }
+    
     ONG.fluxocaixa.montaSelect = function(listaCentroCusto) {
     	if(listaCentroCusto != undefined && listaCentroCusto.length > 0 && listaCentroCusto[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCentroCusto.length; i++) {
@@ -158,21 +171,18 @@ $(document).ready(function(){
 		}
     }
 
-	// MODAL CADASTRAR, busca todos dados do campos html-selected
+	// MODAL CADASTRAR, busca todos dados do campos html-selected PESSOA EVENTO CENTRO DE CUSTO E SL
 
     ONG.fluxocaixa.buscomponenteAdd = function() {
-    	var cfg ={
-				
-			url: ONG.contextPath + "/rest/centroCusto/nome/*",
-		
-			success: function(lcenter2){							
-				ONG.fluxocaixa.montaSelectcentrocust(lcenter2);
+    	ONG.centroCustoRest.pesquisarNome({
+			data : "*",
+			success: function(lcenter){							
+				ONG.fluxocaixa.montaSelectcentrocust (lcenter);
 			},
 			error: function(err){	
 				bootbox.alert("Erro ao realizar busca do centro de custo:"+err.responseText);
 			}
-		};
-		ONG.ajax.get(cfg);
+		});
     }
     ONG.fluxocaixa.montaSelectcentrocust = function(listaCentroCusto){
     	if(listaCentroCusto != undefined && listaCentroCusto.length > 0 && listaCentroCusto[0].id != undefined) { // montando meus estados
@@ -182,10 +192,81 @@ $(document).ready(function(){
 				option.html( listaCentroCusto[i].nome );
 			}
 
-			var itemsedit2 = document.querySelector('#centrocusto2');
-			itemsedit2.addEventListener('change', function(){
-				var valor2 =	this.value // o valo
+			var item1 = document.querySelector('#centrocusto2');
+			item1.addEventListener('change', function(){
+				var valor1 = this.value // o valo
 			});
+			
+			for(var i = 0; i < listaCentroCusto.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#centrocustoe2'));
+				option.attr( "value", listaCentroCusto[i].id );
+				option.html( listaCentroCusto[i].nome );
+			}
+
+			var item2 = document.querySelector('#centrocustoe2');
+			item2.addEventListener('change', function(){
+				var item2 =	this.value // o valo
+			});
+			ONG.fluxocaixa.buscaEventos();
 		}
+    }
+    ONG.fluxocaixa.buscaEventos = function() {
+    	var cfg = {
+				
+			url: ONG.contextPath + "/rest/evento/nome/*",
+		
+			success: function(bevento){							
+				ONG.fluxocaixa.montaselectevento(bevento);
+			},
+			error: function(err){	
+				bootbox.alert("Erro ao realizar busca de evento:"+err.responseText);
+			}
+		};
+		ONG.ajax.get(cfg);
+    }
+    ONG.fluxocaixa.montaselectevento = function(listevn) {
+    	if(listevn != undefined && listevn.length > 0 && listevn[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listevn.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#evento'));
+				option.attr( "value", listevn[i].id );
+				option.html( listevn[i].nome );
+			}
+
+			var item1 = document.querySelector('#evento');
+			item1.addEventListener('change', function(){
+				var valor1 = this.value // o valo
+			});
+			ONG.fluxocaixa.buscaPes();
+    	}
+    }
+    ONG.fluxocaixa.buscaPes = function() {
+    	
+    	var cfg = {
+				
+			url: ONG.contextPath + "/rest/pessoa/nome/*",
+		
+			success: function(listapessoa){							
+				ONG.fluxocaixa.montaselectpessoas(listapessoa);
+			},
+			error: function(err){	
+				bootbox.alert("Erro ao realizar busca de pessoas:"+err.responseText);
+			}
+		};
+		ONG.ajax.get(cfg);
+    }
+    ONG.fluxocaixa.montaselectpessoas = function(listapessoa) {
+    	if(listapessoa != undefined && listapessoa.length > 0 && listapessoa[0].id != undefined) { // montando meus estados
+			for(var i = 0; i < listapessoa.length; i++) {
+				var option = $( "<option></option>" ).appendTo($('#pessoa'));
+				option.attr( "value", listapessoa[i].id );
+				option.html( listapessoa[i].nome );
+			}
+
+			var item1 = document.querySelector('#pessoa');
+			item1.addEventListener('change', function(){
+				var valor1 = this.value // o valo
+			});
+			
+    	}
     }
 });

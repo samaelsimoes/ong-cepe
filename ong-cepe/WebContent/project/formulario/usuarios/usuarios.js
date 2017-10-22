@@ -37,9 +37,17 @@ $(document).ready(function(){
 			for(var i=0; i<lista.length; i++){
 				html += "<tr>"+
 				"<td>"+lista[i].nome+"</td>"+
-				"<td>"+lista[i].email+"</td>"+				
-				"<td>"+lista[i].tipo+"</td>"+				
-				"<td>"+lista[i].usuario+"</td>"+				
+				"<td>"+lista[i].email+"</td>";
+				if(lista[i].tipo == 1){
+					html += "<td>"+"Administrador"+"</td>";
+				}
+				if(lista[i].tipo == 3){
+					html += "<td>"+"Financeiro"+"</td>";
+				}
+				if(lista[i].tipo == 2){
+					html += "<td>"+"Professor"+"</td>";
+				}
+				html +="<td>"+lista[i].usuario+"</td>"+				
 				"<td class='actions  text-center'>"+
 				"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.usuario.carregarUsuario("+lista[i].id+")'>Editar</button>"+ " " + " " +
 				"<button type='button' class='btn btn-trash' onclick='ONG.usuario.excluir("+ lista[i].id+ ")'>Excluir</button>"+

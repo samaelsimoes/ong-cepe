@@ -22,7 +22,7 @@ public class OperacaoFactory extends ObjMapper {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro de factory na classe OperaÃ§Ã£o");
+			throw new GlobalException("Erro de factory na classe Operção");
 		}
 	}
 	

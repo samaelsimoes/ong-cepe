@@ -393,8 +393,12 @@ $(document).ready(function(){
     	var cfg = {							 
     			url: ONG.contextPath +  "/rest/modalidade/nome/*",
     			success: function(modalidade) {
-    				console.log(modalidade)
-    				ONG.evento.montaModalidade(modalidade);
+    				console.log(modalidade);
+    				if(modalidade == ""){
+    					bootbox.alert("Não foi possivel buscar modalidade" + "<br>"+ "Motivo não temos nenhuma modalidade cadastrada!"+ "<br>"+  "Gentileza cadastre alguma modalidade.")
+    				}else{
+        				ONG.evento.montaModalidade(modalidade);
+    				}
     			},
     			error: function(err) {							
     				bootbox.alert("Erro ao Buscar Modalidade, entrar em contato com o Administrador se o problema persistir! " + err);

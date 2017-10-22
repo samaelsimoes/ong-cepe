@@ -203,8 +203,11 @@ $(document).ready(function(){
 		var cfg = {							
 			url: ONG.contextPath + "/rest/centroCusto/nome/*",
 			success: function(listcostCenter){		
-				console.log(listcostCenter);
-				ONG.modalidade.mounts(listcostCenter);
+				if(listcostCenter == ""){
+					bootbox.alert("Não foi possível encontrar centro de custo"+ "<br>" + "Motivo: Não existe nenhum registro no banco de dados" + "<br>"+ "Gentileza cadastre um centro de custo");
+				}else{
+					ONG.modalidade.mounts(listcostCenter);
+				}
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Centro de custo, entrar em contato com o Administrador se o problema persistir! " + err);

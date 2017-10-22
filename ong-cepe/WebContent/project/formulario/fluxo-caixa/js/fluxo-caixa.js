@@ -75,7 +75,7 @@ $(document).ready(function(){
 							html += "<td>" + listFluxo[i].evento + "</td>";
 						}
 
-						html += "<td>" + listFluxo[i].valor + "</td>";
+						html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
 						html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
 						html += "<td>" + listFluxo[i].descricao + "</td>";
 
@@ -527,5 +527,106 @@ $(document).ready(function(){
 		}else{
 			bootbox.alert(msg);
 		}
+    }
+ 	//BUSCA TIPO FLUXO CAIXA 
+    var itens = document.querySelector("#tipofluxo");
+    itens.addEventListener('change', function(){    	
+    	var valor =	this.value // o valor que procuras é: this.value
+    	ONG.fluxocaixa.buscatipo(valor);    	
+    });
+    ONG.fluxocaixa.buscatipo = function(valor){
+    	if(valor != null){
+    		var cfg = {
+				
+				url: ONG.contextPath + "/rest/operacao/tipo/"+valor,
+				
+				success: function(listFluxo){													
+			    	var html = "<table class='table table-responsive custom-table-margin-b'>";
+					
+			    	html += 
+					"<thead class='table table-striped '>" +
+						"<tr>" +					
+							"<th> Centro de Custo </th> " +
+							"<th> Tipo </th>" +
+							"<th> Data </th>" +
+							"<th> Classificação </th>" +
+							"<th> pessoa </th>" +
+							"<th> evento </th>" +
+							"<th> Valor </th>" +
+							"<th> Destino </th>" +
+							"<th> Descrição </th>" +
+					
+							"<th style='width: 15%;'> Ações</th>" +
+						"</tr>" +
+					"</thead>";					
+			
+				    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
+					  	for(var i = 0; i < listFluxo.length; i++){
+					  		
+							html += "<tr>";					
+							html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
+								if(listFluxo[i].tipo = 0){ // ?? ainda nao sei vou ver
+									html += "<td>" +	 
+													"Entrada" +
+											"</td>";
+								}else if(listFluxo[i].tipo = 1){
+									html += "<td>" +
+												"Saida" +
+											"</td>"
+								}else if( listFluxo[i].tipo = 2){
+									html += "<td>" + 
+												"Transferencia"+
+											"</td>"
+								}
+								
+								html += "<td>" + listFluxo[i].data + "</td>";
+								
+								if(listFluxo[i].classificacao = 0){ // ?? ainda nao sei vou ver
+									html += "<td>" +	 
+												"Compra" +
+											"</td>";
+								}else if(listFluxo[i].classificacao = 1){
+									html += "<td>" +
+												"venda" +
+											"</td>"
+								}else if( listFluxo[i].classificacao = 2){
+									html += "<td>" + 
+												"Doação"+
+											"</td>"
+								}else if( listFluxo[i].classificacao = 3){
+									html += "<td>" + 
+									"Custo operacional"+
+								"</td>"
+								}
+								html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
+								
+								
+								if(listFluxo[i].evento == undefined || listFluxo[i].evento == null){
+									html += "<td>" + "sem evento vinculado"+ "</td>";
+				
+								}else if(listFluxo[i].evento != undefined && listFluxo[i].evento != null){
+									html += "<td>" + listFluxo[i].evento + "</td>";
+								}
+				
+								html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
+								html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+								html += "<td>" + listFluxo[i].descricao + "</td>";
+				
+								html += "<td>"+
+											"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
+											"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
+										"</td>";						
+							html += "</tr>";  
+					    }
+				    }
+				    html +="</table>";
+					$("#resuAllEvents").html(html);
+				},
+				error: function(err){							
+					bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
+				}
+			};					
+			ONG.ajax.get(cfg);   
+	    }
     }
 });

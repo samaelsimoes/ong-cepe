@@ -21,6 +21,8 @@ $(document).ready(function(){
 					"<th> evento </th>" +
 					"<th> Valor </th>" +
 					"<th> Destino </th>" +
+					"<th> Descrição </th>" +
+
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
@@ -75,6 +77,7 @@ $(document).ready(function(){
 
 						html += "<td>" + listFluxo[i].valor + "</td>";
 						html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+						html += "<td>" + listFluxo[i].descricao + "</td>";
 
 						html += "<td>"+
 									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
@@ -342,17 +345,187 @@ $(document).ready(function(){
     // ---------------------------------= = = = = = EDITAR
     
     ONG.fluxocaixa.buscID = function(id){
+    	console.log(id);
     	var cfg = {
 				
-			url: ONG.contextPath + "/rest/operacao/id"+id,
+			url: ONG.contextPath + "/rest/operacao/id/"+id,
 			
-			success: function(inf){													
-				console.log(inf);
+			success: function(inf){									
+				if(inf != ""){
+					$("#id").val(inf.id);
+					$("#tipofluxoedit").val(inf.tipo);
+					$("#centrocustoedit1").val(inf.centroCusto.id);
+					$("#dataedit").val(inf.data);
+					$("#classificacaoedit").val(inf.classificacao);
+					$("#eventoedit").val(inf.evento);
+					$("#pessoaedit").val(inf.pessoa.id);
+					$("#valoredit").val(inf.valor);
+					$("#centrodecustoedit2").val(inf.centroCustoDestino.id);
+					$("#descricaoedit").val(inf.descricao);	
+					ONG.fluxocaixa.buscacomponentesedit();
+				}
 			},
 			error: function(err){							
 				bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
 			}
 		};					
 		ONG.ajax.get(cfg);
+    }
+    
+    ONG.fluxocaixa.buscacomponentesedit = function(){
+    	ONG.centroCustoRest.pesquisarNome({
+    		data : "*",
+    		success: function(lcenter){							
+    			ONG.fluxocaixa.montaselectedcentrocustoedit(lcenter);
+    		},
+    		error: function(err){	
+    			bootbox.alert("Erro ao realizar busca do centro de custo:"+err.responseText);
+    		}
+    	});
+    }
+    ONG.fluxocaixa.montaselectedcentrocustoedit = function(listCentroCusto){
+    	if(listCentroCusto != undefined && listCentroCusto.length > 0 && listCentroCusto[0].id != undefined) { // montando meus estados
+    		for(var i = 0; i < listCentroCusto.length; i++) {
+    			var option = $( "<option></option>" ).appendTo($('#centrocustoedit1'));
+    			option.attr( "value", listCentroCusto[i].id );
+    			option.html( listCentroCusto[i].nome );
+    		}
+    		var item1 = document.querySelector('#centrocustoedit1');
+    		item1.addEventListener('change', function(){
+    			var valor1 = this.value // o valo
+    		});   
+    		
+    		for(var i = 0; i < listCentroCusto.length; i++) {
+    			var option = $( "<option></option>" ).appendTo($('#centrodecustoedit2'));
+    			option.attr( "value", listCentroCusto[i].id );
+    			option.html( listCentroCusto[i].nome );
+    		}
+    		var item2 = document.querySelector('#centrodecustoedit2');
+    		item2.addEventListener('change', function(){
+    			var item2 =	this.value // o valo
+    		});
+    		ONG.fluxocaixa.buscaEventosEdit();
+    	}
+    }
+    ONG.fluxocaixa.buscaEventosEdit = function(){
+    	var cfg = {
+    			
+			url: ONG.contextPath + "/rest/evento/nome/*",
+		
+			success: function(bevento){							
+				ONG.fluxocaixa.montaselecteventoEdit(bevento);
+			},
+			error: function(err){	
+				bootbox.alert("Erro ao realizar busca de evento:"+err.responseText);
+			}
+		};
+		ONG.ajax.get(cfg);
+    }
+    ONG.fluxocaixa.montaselecteventoEdit = function(listevn){
+    	if(listevn != undefined && listevn.length > 0 && listevn[0].id != undefined) { // montando meus estados
+    		for(var i = 0; i < listevn.length; i++) {
+    			var option = $( "<option></option>" ).appendTo($('#eventoedit'));
+    			option.attr( "value", listevn[i].id );
+    			option.html( listevn[i].nome );
+    		}
+
+    		var item1 = document.querySelector('#eventoedit');
+    		item1.addEventListener('change', function(){
+    			var valor1 = this.value // o valo
+    		});
+    		ONG.fluxocaixa.buscaPesEdit();
+    	}
+    }
+    ONG.fluxocaixa.buscaPesEdit = function(){
+    	var cfg = {
+    			
+			url: ONG.contextPath + "/rest/pessoa/nome/*",
+		
+			success: function(listapessoa){							
+				ONG.fluxocaixa.montaselectpessoaEdit(listapessoa);
+			},
+			error: function(err){	
+				bootbox.alert("Erro ao realizar busca de pessoas:"+err.responseText);
+			}
+		};
+		ONG.ajax.get(cfg);
+    }
+    ONG.fluxocaixa.montaselectpessoaEdit = function(listapessoa){
+    	if(listapessoa != undefined && listapessoa.length > 0 && listapessoa[0].id != undefined) { // montando meus estados
+    		for(var i = 0; i < listapessoa.length; i++) {
+    			var option = $( "<option></option>" ).appendTo($('#pessoaedit'));
+    			option.attr( "value", listapessoa[i].id );
+    			option.html( listapessoa[i].nome );
+    		}
+
+    		var item1 = document.querySelector('#pessoaedit');  
+    		item1.addEventListener('change', function(){
+    			var valor1 = this.value // o valo
+    		});    		
+    	}
+    }
+    ONG.fluxocaixa.editarFluxo = function(){
+    	
+    	var msg = "";
+		msg += ONG.fluxocaixa.validaVazio("Tipo: ", $("#tipofluxoedit").val());
+		msg += ONG.fluxocaixa.validaVazio("Centro Custo: ", $("#centrocustoedit1").val());		
+		msg += ONG.fluxocaixa.validaVazio("Data: ", $("#dataedit").val());
+		msg += ONG.fluxocaixa.validaVazio("Evento: ", $("#eventoedit").val());
+		msg += ONG.fluxocaixa.validaVazio("Classificação: ", $("#classificacaoedit").val());
+		msg += ONG.fluxocaixa.validaVazio("Pessoa: ", $("#pessoaedit").val());
+		msg += ONG.fluxocaixa.validaVazio("Valor: ", $("#valoredit").val());
+		msg += ONG.fluxocaixa.validaVazio("Destino Centro de Custo: ", $("#centrodecustoedit2").val());
+		msg += ONG.fluxocaixa.validaVazio("Descricao: ", $("#descricaoedit").val());
+		
+		if(msg == ""){
+			var date = $("#dataedit").val();
+			var d = new Date(date.split("/").reverse().join("-"));
+			var eventoedit;
+
+			if($("#dataedit").val() != ""){
+				eventoedit = $("#evento").val();
+			}else {
+				eventoedit = null;
+			}
+			var dadosFluxo = {
+				id: $("#id").val(),	
+				data: d.getTime(),
+			    tipo: $("#tipofluxoedit").val(),
+			    classificacao: $("#classificacaoedit").val(),
+			    valor: $("#valoredit").val(),
+			    descricao: $("#descricaoedit").val(),
+			    centroCusto:{
+			    	id: parseInt($("#centrocustoedit1").val())
+			    },
+			    centroCustoDestino:{
+			    	id: parseInt($("#centrodecustoedit2").val())
+			    },
+			    usuario:{
+			    	id: 1
+			    },
+			    pessoa:{
+			    	id: parseInt($("#pessoaedit").val())
+			    },
+			    evento: null          
+			};			
+			var cfg = {
+					
+				url:ONG.contextPath + "/rest/operacao/",
+				data: dadosFluxo,
+				
+				success: function(msg){	
+					bootbox.alert(msg);
+					setTimeout(function(){
+	   	    	         location.reload();
+	   	    	    }, 2000);
+				},
+				error: function(err){							
+					bootbox.alert("Erro" + err);
+				}
+			};					
+			ONG.ajax.put(cfg);
+		}else{
+			bootbox.alert(msg);
+		}
     }
 });

@@ -138,18 +138,18 @@ $(document).ready(function(){
 	            valor: $("#valor").val(),
 	            descricao: $("#descricao").val(),
 	            centroCusto:{
-	            	id: parseInt($("#centrocusto2").val()),
+	            	id: parseInt($("#centrocusto2").val())
 	            },
 	            centroCustoDestino:{
-	            	id: parseInt($("#centrodecusto3").val()),
+	            	id: parseInt($("#centrodecusto3").val())
 	            },
 	            usuario:{
-            	id: 1,
+	            	id: 1
 	            },
 	            pessoa:{
-	            	id: parseInt($("#pessoa").val()),
+	            	id: parseInt($("#pessoa").val())
 	            },
-	            evento:eventoadd,	           
+	            evento:null	           
 			};
 			var cfg = {
 						

@@ -49,7 +49,7 @@ public class FluxoCaixaRest extends ObjMapper {
 	}
 	
 	@GET
-	@Path("/{nome}")
+	@Path("/nome/{nome}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response pesquisarClassificacao(@PathParam("nome") String nome) throws GlobalException {
 		try {

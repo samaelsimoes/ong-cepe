@@ -150,6 +150,7 @@ public class FluxoCaixaRest extends ObjMapper {
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
 		String resp = null;
 		try {
+			System.out.println(" verificando id " + id);
 			Operacao operacao = new FluxoCaixaService(id).pesquisaId();
 			if(operacao != null)
 				resp = getJson(operacao);

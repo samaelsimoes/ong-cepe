@@ -124,13 +124,7 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	}
 
 	public void alterar()  throws GlobalException{		
-		new FluxoCaixaDAO(this.operacao).update();		
+		new FluxoCaixaDAO(this.operacao).update();
 	}
-
-
-
-
-
-
 
 }

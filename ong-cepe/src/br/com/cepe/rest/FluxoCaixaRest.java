@@ -178,12 +178,12 @@ public class FluxoCaixaRest extends ObjMapper {
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao fazer a alteração da operação");
+			return this.buildErrorResponse("Erro ao fazer a alteraÃ§Ã£o da operaÃ§Ã£o");
 		}
 	}
 
 	@DELETE
-	@Path("/idexcluir/{id}")
+	@Path("/id/{id}")
 	public Response excluir(@PathParam("id") int id) throws Exception {
 		try{
 			System.out.println("teste");

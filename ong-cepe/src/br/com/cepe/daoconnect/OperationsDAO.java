@@ -12,8 +12,8 @@ import br.com.cepe.factory.hql.HqlFactoryList;
 
 public class OperationsDAO<T> extends ConnectionDAO<T>{
 
-	public T entity;
-	public int num;
+	protected T entity;
+	protected int num;
 	protected List<Integer> nums = new ArrayList<Integer>();
 	protected List<String> campos = new ArrayList<String>();
 	protected List<Integer> valores = new ArrayList<Integer>();
@@ -57,6 +57,9 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		this.num = num;
 	}
 
+	public void setEntity(T entity){
+		this.entity = entity;
+	}
 	
 	public void persist(){
 		em.getTransaction().begin();
@@ -94,6 +97,12 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	public T findId(){
 		Class<T> classe = getEmClass();
 		T obj = em.find(classe, this.num);
+		return obj;
+	}
+	
+	public T find(){
+		Class<T> classe = getEmClass();
+		T obj = em.find(classe, this.entity);
 		return obj;
 	}
 	
@@ -149,7 +158,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	
 		
 	public void update(){
-		em.getTransaction().begin();		
+		em.getTransaction().begin();
 		em.merge(this.entity);
 		em.getTransaction().commit();
 	}

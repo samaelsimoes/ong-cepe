@@ -327,7 +327,7 @@ $(document).ready(function(){
     	console.log(id);
     	var cfg = {
 				
-			url: ONG.contextPath + "/rest/operacao/idexcluir/"+id,
+			url: ONG.contextPath + "/rest/operacao/id/"+id,
 		
 			success: function(msg){							
 				bootbox.alert(msg);

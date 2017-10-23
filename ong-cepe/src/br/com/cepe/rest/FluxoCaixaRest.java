@@ -60,7 +60,7 @@ public class FluxoCaixaRest extends ObjMapper {
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao fazer a consulta por nome! ");
+			return this.buildErrorResponse("Erro ao fazer a consulta por nome!");
 		}
 	}
 
@@ -150,12 +150,11 @@ public class FluxoCaixaRest extends ObjMapper {
 	public Response pesquisarId(@PathParam("id") int id) throws GlobalException {
 		String resp = null;
 		try {
-			System.out.println(" verificando id " + id);
 			Operacao operacao = new FluxoCaixaService(id).pesquisaId();
 			if(operacao != null)
 				resp = getJson(operacao);
 			else
-				throw new GlobalException("Erro ao buscar operacao por Id! ");
+				throw new GlobalException("Erro ao buscar operação por Id! ");
 			
 			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
 			

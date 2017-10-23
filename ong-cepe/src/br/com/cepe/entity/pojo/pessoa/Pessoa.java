@@ -19,7 +19,7 @@ public class Pessoa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private int id;
-	private Integer tipo;
+	private int tipo;
 	private int status;
 
 	private String nome;

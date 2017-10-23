@@ -258,7 +258,7 @@ $(document).ready(function(){
     	if(msg == ""){
     		
 	    	var dadosEvEdit= {		 
-	    		id: $("#id").val();
+	    		id: $("#id").val(),
     			nome: $("#nomeedit").val(),
 				tipo: $("#typeeventedit").val(),
 				descricao: $("#descricaoedit").val(),

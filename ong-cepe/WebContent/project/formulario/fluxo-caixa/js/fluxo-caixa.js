@@ -128,10 +128,16 @@ $(document).ready(function(){
 			var date = $("#data").val();
 			var d = new Date(date.split("/").reverse().join("-"));
 			var eventoadd;
+			var pessoaadd;
 			if($("#evento").val() != ""){
 				eventoadd = $("#evento").val();
 			}else {
 				eventoadd = null;
+			}			
+			if($("#pessoa").val() != ""){
+				pessoaadd = $("#pessoa").val();
+			}else {
+				pessoaadd = null;
 			}
 			var dadosFluxo = {
 					
@@ -150,10 +156,13 @@ $(document).ready(function(){
 	            	id: 1
 	            },
 	            pessoa:{
-	            	id: parseInt($("#pessoa").val())
+	            	id: parseInt(pessoaadd)
 	            },
-	            evento:null	           
+	            evento:{
+	            	id: parseInt(eventoadd)	           
+	            }
 			};
+			console.log(dadosFluxo);
 			var cfg = {
 						
 				url: ONG.contextPath + "/rest/operacao/",
@@ -327,7 +336,7 @@ $(document).ready(function(){
     	console.log(id);
     	var cfg = {
 				
-			url: ONG.contextPath + "/rest/operacao/id/"+id,
+			url: ONG.contextPath + "/rest/operacao/idexcluir/"+id,
 		
 			success: function(msg){							
 				bootbox.alert(msg);

@@ -29,54 +29,61 @@ $(document).ready(function(){
 		
 		    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
 			  	for(var i = 0; i < listFluxo.length; i++){
-			  		
 					html += "<tr>";					
 					html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
-						if(listFluxo[i].tipo = 0){ // ?? ainda nao sei vou ver
+						if(listFluxo[i].tipo == 0){ // ?? ainda nao sei vou ver
 							html += "<td>" +	 
 											"Entrada" +
 									"</td>";
-						}else if(listFluxo[i].tipo = 1){
+						}else if(listFluxo[i].tipo == 1){
 							html += "<td>" +
 										"Saida" +
 									"</td>"
-						}else if( listFluxo[i].tipo = 2){
+						}else if( listFluxo[i].tipo == 2){
 							html += "<td>" + 
-										"Transferencia"+
+										"Transferência"+
 									"</td>"
 						}
 						
 						html += "<td>" + listFluxo[i].data + "</td>";
 						
-						if(listFluxo[i].classificacao = 0){ // ?? ainda nao sei vou ver
+						if(listFluxo[i].classificacao == 0){ // ?? ainda nao sei vou ver
 							html += "<td>" +	 
 										"Compra" +
 									"</td>";
-						}else if(listFluxo[i].classificacao = 1){
+						}else if(listFluxo[i].classificacao == 1){
 							html += "<td>" +
-										"venda" +
+										"Venda" +
 									"</td>"
-						}else if( listFluxo[i].classificacao = 2){
+						}else if( listFluxo[i].classificacao == 2){
 							html += "<td>" + 
 										"Doação"+
 									"</td>"
-						}else if( listFluxo[i].classificacao = 3){
+						}else if( listFluxo[i].classificacao == 3){
 							html += "<td>" + 
 							"Custo operacional"+
 						"</td>"
 						}
-						html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
 						
-						
-						if(listFluxo[i].evento == undefined || listFluxo[i].evento == null){
-							html += "<td>" + "sem evento vinculado"+ "</td>";
-
-						}else if(listFluxo[i].evento != undefined && listFluxo[i].evento != null){
-							html += "<td>" + listFluxo[i].evento + "</td>";
+						if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
+							html += "<td>" + "Não possuí"+ "</td>";
+						}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
+							html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
+						}
+						if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
+							html += "<td>" + "Não possuí"+ "</td>";
+						}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
+							html += "<td>" + listFluxo[i].evento.nome + "</td>";
 						}
 
 						html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
-						html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+						
+						if(listFluxo[i].centroCustoDestino == null || listFluxo[i].centroCustoDestino == undefined){
+							html += "<td>" + "Não possuí"+ "</td>";
+						}else if(listFluxo[i].centroCustoDestino != null && listFluxo[i].centroCustoDestino != undefined){
+							html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+						}
+						
 						html += "<td>" + listFluxo[i].descricao + "</td>";
 
 						html += "<td>"+
@@ -87,19 +94,15 @@ $(document).ready(function(){
 			    }
 		    }else{
 			    if(listFluxo == undefined || (listFluxo != undefined && listFluxo.length > 0)){
-			    							    
-					var cfg = {
-							
-						url: ONG.contextPath + "/rest/operacao/*",
-						
+			    	ONG.fluxoCaixaRest.pesquisarNome({
+						data : "*",
 						success: function(listFluxo,busca){													
 							ONG.fluxocaixa.buscaeFluxo(listFluxo,busca);
 						},
 						error: function(err){							
 							bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
 						}
-					};					
-					ONG.ajax.get(cfg);
+					});						    
 				}else{					
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
@@ -117,30 +120,19 @@ $(document).ready(function(){
 		msg += ONG.fluxocaixa.validaVazio("Tipo: ", $("#tipofluxoadd").val());
 		msg += ONG.fluxocaixa.validaVazio("Centro Custo: ", $("#centrocusto2").val());		
 		msg += ONG.fluxocaixa.validaVazio("Data: ", $("#data").val());
-		msg += ONG.fluxocaixa.validaVazio("Evento: ", $("#evento").val());
+//		msg += ONG.fluxocaixa.validaVazio("Evento: ", $("#evento").val());
 		msg += ONG.fluxocaixa.validaVazio("Classificação: ", $("#classificacao").val());
-		msg += ONG.fluxocaixa.validaVazio("Pessoa: ", $("#pessoa").val());
+//		msg += ONG.fluxocaixa.validaVazio("Pessoa: ", $("#pessoa").val());
 		msg += ONG.fluxocaixa.validaVazio("Valor: ", $("#valor").val());
-		msg += ONG.fluxocaixa.validaVazio("Destino Centro de Custo: ", $("#centrodecusto3").val());
+		if($("#tipofluxoadd").val() == 2)
+			msg += ONG.fluxocaixa.validaVazio("Destino Centro de Custo: ", $("#centrodecusto3").val());
 		msg += ONG.fluxocaixa.validaVazio("Descricao: ", $("#descricao").val());
 
 		if ( msg == "") {
 			var date = $("#data").val();
 			var d = new Date(date.split("/").reverse().join("-"));
-			var eventoadd;
-			var pessoaadd;
-			if($("#evento").val() != ""){
-				eventoadd = $("#evento").val();
-			}else {
-				eventoadd = null;
-			}			
-			if($("#pessoa").val() != ""){
-				pessoaadd = $("#pessoa").val();
-			}else {
-				pessoaadd = null;
-			}
+			debugger;
 			var dadosFluxo = {
-					
 				data: d.getTime(),
 	            tipo: $("#tipofluxoadd").val(),
 	            classificacao: $("#classificacao").val(),
@@ -149,25 +141,29 @@ $(document).ready(function(){
 	            centroCusto:{
 	            	id: parseInt($("#centrocusto2").val())
 	            },
-	            centroCustoDestino:{
-	            	id: parseInt($("#centrodecusto3").val())
-	            },
 	            usuario:{
 	            	id: 1
-	            },
-	            pessoa:{
-	            	id: parseInt(pessoaadd)
-	            },
-	            evento:{
-	            	id: parseInt(eventoadd)	           
 	            }
 			};
-			console.log(dadosFluxo);
-			var cfg = {
-						
-				url: ONG.contextPath + "/rest/operacao/",
-				data: dadosFluxo,
-				
+			if(dadosFluxo.tipo == parseInt(2)){
+				if($("#centrodecusto3").val() != ""){
+					dadosFluxo.centroCustoDestino = {id: parseInt($("#centrodecusto3").val())};
+				}
+			}else {
+				dadosFluxo.centroCustoDestino = null;
+			}
+			if($("#evento").val() != ""){
+				dadosFluxo.evento = {id: parseInt($("#evento").val())};
+			}else {
+				dadosFluxo.evento = null;
+			}			
+			if($("#pessoa").val() != ""){
+				dadosFluxo.pessoa = {id: parseInt($("#pessoa").val())};
+			}else {
+				dadosFluxo.pessoa = null;
+			}
+			ONG.fluxoCaixaRest.inserir({
+				data : dadosFluxo,
 				success: function(msg){	
 					bootbox.alert(msg);
 					setTimeout(function(){
@@ -177,8 +173,7 @@ $(document).ready(function(){
 				error: function(err){							
 					bootbox.alert("Erro" + err);
 				}
-			};					
-			ONG.ajax.post(cfg);
+			});			
 		}else{
 			bootbox.alert(msg);
 		}
@@ -273,9 +268,7 @@ $(document).ready(function(){
     }
     ONG.fluxocaixa.buscaEventos = function() {
     	var cfg = {
-				
 			url: ONG.contextPath + "/rest/evento/nome/*",
-		
 			success: function(bevento){							
 				ONG.fluxocaixa.montaselectevento(bevento);
 			},
@@ -303,9 +296,7 @@ $(document).ready(function(){
     ONG.fluxocaixa.buscaPes = function() {
     	
     	var cfg = {
-				
 			url: ONG.contextPath + "/rest/pessoa/nome/*",
-		
 			success: function(listapessoa){							
 				ONG.fluxocaixa.montaselectpessoas(listapessoa);
 			},
@@ -333,11 +324,8 @@ $(document).ready(function(){
     
     //Excluir    
     ONG.fluxocaixa.confExcluir = function(id){
-    	console.log(id);
-    	var cfg = {
-				
-			url: ONG.contextPath + "/rest/operacao/idexcluir/"+id,
-		
+		ONG.fluxoCaixaRest.excluir({
+			data : id,
 			success: function(msg){							
 				bootbox.alert(msg);
 				setTimeout(function(){
@@ -347,18 +335,15 @@ $(document).ready(function(){
 			error: function(err){	
 				bootbox.alert("Erro ao realizar busca de pessoas:"+err.responseText);
 			}
-		};
-		ONG.ajax.delet(cfg);
+		});
     }
     
     // ---------------------------------= = = = = = EDITAR
     
     ONG.fluxocaixa.buscID = function(id){
     	console.log(id);
-    	var cfg = {
-				
-			url: ONG.contextPath + "/rest/operacao/id/"+id,
-			
+		ONG.fluxoCaixaRest.pesquisarId({
+			data : id,
 			success: function(inf){									
 				if(inf != ""){
 					$("#id").val(inf.id);
@@ -377,8 +362,7 @@ $(document).ready(function(){
 			error: function(err){							
 				bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
 			}
-		};					
-		ONG.ajax.get(cfg);
+		});
     }
     
     ONG.fluxocaixa.buscacomponentesedit = function(){
@@ -516,12 +500,9 @@ $(document).ready(function(){
 			    	id: parseInt($("#pessoaedit").val())
 			    },
 			    evento: null          
-			};			
-			var cfg = {
-					
-				url:ONG.contextPath + "/rest/operacao/",
-				data: dadosFluxo,
-				
+			};
+			ONG.fluxoCaixaRest.editar({
+				data : EditCad,
 				success: function(msg){	
 					bootbox.alert(msg);
 					setTimeout(function(){
@@ -531,8 +512,7 @@ $(document).ready(function(){
 				error: function(err){							
 					bootbox.alert("Erro" + err);
 				}
-			};					
-			ONG.ajax.put(cfg);
+			});
 		}else{
 			bootbox.alert(msg);
 		}
@@ -570,57 +550,64 @@ $(document).ready(function(){
 					"</thead>";					
 			
 				    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
-					  	for(var i = 0; i < listFluxo.length; i++){
-					  		
+				    	for(var i = 0; i < listFluxo.length; i++){
 							html += "<tr>";					
 							html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
-								if(listFluxo[i].tipo = 0){ // ?? ainda nao sei vou ver
+								if(listFluxo[i].tipo == 0){ // ?? ainda nao sei vou ver
 									html += "<td>" +	 
 													"Entrada" +
 											"</td>";
-								}else if(listFluxo[i].tipo = 1){
+								}else if(listFluxo[i].tipo == 1){
 									html += "<td>" +
 												"Saida" +
 											"</td>"
-								}else if( listFluxo[i].tipo = 2){
+								}else if( listFluxo[i].tipo == 2){
 									html += "<td>" + 
-												"Transferencia"+
+												"Transferência"+
 											"</td>"
 								}
 								
 								html += "<td>" + listFluxo[i].data + "</td>";
 								
-								if(listFluxo[i].classificacao = 0){ // ?? ainda nao sei vou ver
+								if(listFluxo[i].classificacao == 0){ // ?? ainda nao sei vou ver
 									html += "<td>" +	 
 												"Compra" +
 											"</td>";
-								}else if(listFluxo[i].classificacao = 1){
+								}else if(listFluxo[i].classificacao == 1){
 									html += "<td>" +
-												"venda" +
+												"Venda" +
 											"</td>"
-								}else if( listFluxo[i].classificacao = 2){
+								}else if( listFluxo[i].classificacao == 2){
 									html += "<td>" + 
 												"Doação"+
 											"</td>"
-								}else if( listFluxo[i].classificacao = 3){
+								}else if( listFluxo[i].classificacao == 3){
 									html += "<td>" + 
 									"Custo operacional"+
 								"</td>"
 								}
-								html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
 								
-								
-								if(listFluxo[i].evento == undefined || listFluxo[i].evento == null){
-									html += "<td>" + "sem evento vinculado"+ "</td>";
-				
-								}else if(listFluxo[i].evento != undefined && listFluxo[i].evento != null){
-									html += "<td>" + listFluxo[i].evento + "</td>";
+								if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
+									html += "<td>" + "Não possuí"+ "</td>";
+								}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
+									html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
 								}
-				
+								if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
+									html += "<td>" + "Não possuí"+ "</td>";
+								}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
+									html += "<td>" + listFluxo[i].evento.nome + "</td>";
+								}
+
 								html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
-								html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+								
+								if(listFluxo[i].centroCustoDestino == null || listFluxo[i].centroCustoDestino == undefined){
+									html += "<td>" + "Não possuí"+ "</td>";
+								}else if(listFluxo[i].centroCustoDestino != null && listFluxo[i].centroCustoDestino != undefined){
+									html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+								}
+								
 								html += "<td>" + listFluxo[i].descricao + "</td>";
-				
+
 								html += "<td>"+
 											"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
 											"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+

@@ -36,8 +36,32 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	}
 
 	public void adicionar()  throws GlobalException {
-				
+		float valor  =0;	
+		if(this.operacao.getTipo() == 1){
+			valor = -(this.operacao.getValor());
+			this.operacao.setValor(valor);
+		
+		}else if(this.operacao.getTipo() == 2){
+			
+			Operacao op = new Operacao();
+			op.setCentroCusto(this.operacao.getCentroCustoDestino());
+			op.setEvento(this.operacao.getEvento());
+			op.setPessoa(this.operacao.getPessoa());
+			op.setUsuario(this.operacao.getUsuario());
+			op.setTipo(0);
+			op.setClassificacao(this.operacao.getClassificacao());
+			op.setData(this.operacao.getData());
+			op.setDescricao(this.operacao.getDescricao());
+			valor = -(this.operacao.getValor());
+			op.setValor(valor);
+			new FluxoCaixaDAO(op).persist();
+			
+		}else if(this.operacao.getTipo()>2){
+			throw new GlobalException("Tipo de operação inválido");
+		}
 		new FluxoCaixaDAO(this.operacao).persist();
+		
+		
 	}
 
 	public void adicionarLista (List<Operacao> operacoes) throws GlobalException {

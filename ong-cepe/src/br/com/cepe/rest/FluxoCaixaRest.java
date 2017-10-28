@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -164,35 +162,6 @@ public class FluxoCaixaRest extends ObjMapper {
 		}
 	}
 
-	@PUT
-	@Consumes("application/*")
-	public Response alterar(String operacaoStr) throws GlobalException { 
-		try {
-			Operacao operacao = new OperacaoFactory(operacaoStr).getOperacao();
-			if(operacao != null)
-				new FluxoCaixaService(operacao).alterar();
-			else
-				throw new GlobalException("Valor nulo enviado ao servidor! ");
-			
-			return this.buildResponse("Operacao editada com sucesso.");
-			
-		} catch (Throwable e) {
-			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao fazer a alteração da operação");
-		}
-	}
+	
 
-	@DELETE
-	@Path("/id/{id}")
-	public Response excluir(@PathParam("id") int id) throws Exception {
-		try{
-			System.out.println("teste");
-			System.out.println(id);
-			new FluxoCaixaService(id).excluir();
-			return this.buildResponse("Excluido com sucesso.");
-		}catch(Throwable e){
-			e.printStackTrace();
-			return this.buildErrorResponse("Erro ao deletar operação");
-		}
-	}
 }

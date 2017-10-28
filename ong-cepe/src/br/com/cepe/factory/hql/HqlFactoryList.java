@@ -19,7 +19,6 @@ private List<T> list;
 	
 
 	public String setQuery(){
-		
 		if(this.operacao.equals(HOperator.BETWEEN))
 			return " BETWEEN "+list.get(0).toString()+" AND "+list.get(1).toString();
 		else return null;

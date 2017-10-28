@@ -57,7 +57,11 @@ public class UsuarioService implements Service<Usuario>{
 	public List<Usuario> pesquisaNomeContem() throws GlobalException {
 		return (List<Usuario>) new UsuarioDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
 	}
-
+	
+	public List<Usuario> pesquisaUsuarioIgual() throws GlobalException {
+		return (List<Usuario>) new UsuarioDAO().findGeneric("usuario", HOperator.EQUALS, this.valorStr);
+	}	
+	
 	public void excluir()  throws GlobalException {
 		new UsuarioDAO(this.num).delete();
 	}

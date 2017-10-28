@@ -86,6 +86,21 @@ protected String query= null;
 		return query;
 	}
 	
+	public String getRawOperationQuery(HOperator operacao, String valor) throws GlobalException{
+		this.operacao = operacao;
+		String query = null;
+		if(!valor.equals(null) && !valor.equals(""))
+			this.valor = valor;		
+		if (operacao != null && !valor.equals(null) && !valor.equals("*"))
+			query=getOperation();		
+		else if (valor.equals("*"))
+			query= "SELECT e FROM "+entity+" e ";
+		else
+			throw new GlobalException(" Não é possível montar a query com campos vazios!");
+		
+		return query;
+	}
+	
 	
 
 	public String getRawQuery(HOperator operacao, String valor) throws GlobalException{
@@ -127,19 +142,19 @@ protected String query= null;
 		String fimPercent = "%'";
 		
 		if(this.operacao.equals(HOperator.EQUALS))
-			return " = "+this.valor;		
+			return " = '"+this.valor+"'";		
 		else if(this.operacao.equals(HOperator.DIFFERENT))
-			return " != "+this.valor;
+			return " != '"+this.valor+"'";
 		else if(this.operacao.equals(HOperator.CONTAINS))
-			return " LIKE "+iniPercent+this.valor+fimPercent;		
+			return " LIKE '"+iniPercent+this.valor+fimPercent+"'";		
 		else if(this.operacao.equals(HOperator.INITS_WITH))
-			return " LIKE "+this.valor+fimPercent;		
+			return " LIKE '"+this.valor+fimPercent+"'";		
 		else if(this.operacao.equals(HOperator.TERMINATES_WITH))
-			return " LIKE "+iniPercent+this.valor;	
+			return " LIKE '"+iniPercent+this.valor+"'";	
 		else if(this.operacao.equals(HOperator.MINOR))
-			return " < "+this.valor;	
+			return " < '"+this.valor+"'";	
 		else if(this.operacao.equals(HOperator.MAJOR))
-			return " > "+this.valor;
+			return " > '"+this.valor+"'";
 		return null;
 	}
 	

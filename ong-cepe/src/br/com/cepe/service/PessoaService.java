@@ -60,12 +60,15 @@ public class PessoaService  implements Service<Pessoa>{
 	}
 
 	public void excluir()  throws GlobalException {
-		new PessoaDAO(this.num).delete();
+		Pessoa pessoa = new PessoaDAO(this.num).findId();
+			if(pessoa != null ){
+			pessoa.setStatus(0);
+			new PessoaDAO(pessoa).update();
+		}
 	}
 
 	public void alterar()  throws GlobalException{		
-		//pessoa.setCidade(new CidadeService(pessoa.getCidade()).pesquisaId());
-		new PessoaDAO(this.pessoa).update();		
+			new PessoaDAO(this.pessoa).update();		
 	}
 
 	@Override

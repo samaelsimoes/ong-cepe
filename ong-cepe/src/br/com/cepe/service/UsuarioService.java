@@ -50,7 +50,6 @@ public class UsuarioService implements Service<Usuario>{
 	}
 
 	public List<Usuario> pesquisaTipoIgual() throws GlobalException {
-//		String tipo = Integer.toString(this.num);
 		return (List<Usuario>) new UsuarioDAO().findGeneric("tipo", HOperator.EQUALS, this.valorStr);
 	}
 
@@ -63,7 +62,11 @@ public class UsuarioService implements Service<Usuario>{
 	}	
 	
 	public void excluir()  throws GlobalException {
-		new UsuarioDAO(this.num).delete();
+		Usuario usuario = new UsuarioDAO(this.num).findId();
+		if(usuario != null ){
+			usuario.setStatus(0);
+			new UsuarioDAO(usuario).update();
+		}
 	}
 
 	public void alterar()  throws GlobalException{

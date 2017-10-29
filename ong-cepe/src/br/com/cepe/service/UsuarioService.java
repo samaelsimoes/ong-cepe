@@ -12,6 +12,7 @@ public class UsuarioService implements Service<Usuario>{
 
 	
 	protected Usuario usuario;
+	protected List<Usuario> usuarios;
 	protected String valorStr;
 	protected int num;
 	
@@ -30,6 +31,22 @@ public class UsuarioService implements Service<Usuario>{
 		this.num = num;
 	}
 
+	public void setSenha(){
+		if(!this.usuario.getSenha().equals(null) && !this.usuario.getSenha().equals(""))
+			 this.usuario.setSenha("*****");
+			else 
+			 this.usuario.setSenha("");
+	} 
+	
+	public void setSenhas(){
+	 for(Usuario usuario: this.usuarios){
+		if(!usuario.getSenha().equals(null) && !usuario.getSenha().equals(""))
+			 usuario.setSenha("*****");
+			else 
+			 usuario.setSenha("");
+		}
+	} 
+	
 	public void adicionar()  throws GlobalException {
 		new UsuarioDAO(this.usuario).persist();
 	}
@@ -42,30 +59,48 @@ public class UsuarioService implements Service<Usuario>{
 	}
 	
 	public Usuario pesquisaId()  throws GlobalException {
-		return new UsuarioDAO(this.num).findId();
+		this.usuario = new UsuarioDAO(this.num).findId();
+		setSenha();
+		return this.usuario;
 	}
 	
 	public List<Usuario> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {
-		return (List<Usuario>) new UsuarioDAO().findGeneric(campo, operacao, valor);
+		this.usuarios = (List<Usuario>) new UsuarioDAO().findGeneric(campo, operacao, valor);
+		setSenhas();
+		return this.usuarios;
+	}
+	
+	public List<Usuario> pesquisaGeneric(String campo, HOperator operacao,
+			int num) throws GlobalException {
+		this.usuarios = (List<Usuario>) new UsuarioDAO().findGenericInt(campo, operacao, num);
+		setSenhas();
+		return this.usuarios;
 	}
 
+
 	public List<Usuario> pesquisaTipoIgual() throws GlobalException {
-		return (List<Usuario>) new UsuarioDAO().findGeneric("tipo", HOperator.EQUALS, this.valorStr);
+		this.usuarios = (List<Usuario>) new UsuarioDAO().findGeneric("tipo", HOperator.EQUALS, this.valorStr);
+		setSenhas();
+		return this.usuarios;
 	}
 
 	public List<Usuario> pesquisaNomeContem() throws GlobalException {
-		return (List<Usuario>) new UsuarioDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
+		this.usuarios = (List<Usuario>) new UsuarioDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
+		setSenhas();
+		return this.usuarios;
 	}
 	
 	public List<Usuario> pesquisaUsuarioIgual() throws GlobalException {
-		return (List<Usuario>) new UsuarioDAO().findGeneric("usuario", HOperator.EQUALS, this.valorStr);
+		this.usuarios = (List<Usuario>) new UsuarioDAO().findGeneric("usuario", HOperator.EQUALS, this.valorStr);
+		setSenhas();
+		return this.usuarios;
 	}	
 	
 	public void excluir()  throws GlobalException {
 		Usuario usuario = new UsuarioDAO(this.num).findId();
 		if(usuario != null ){
 			usuario.setStatus(0);
-			new UsuarioDAO(usuario).update();
+			new UsuarioDAO(usuario).update(); 
 		}
 	}
 
@@ -73,12 +108,7 @@ public class UsuarioService implements Service<Usuario>{
 		new UsuarioDAO(this.usuario).update();
 	}
 
-	@Override
-	public List<Usuario> pesquisaGeneric(String campo, HOperator operacao,
-			int num) throws GlobalException {
-		return null;
-	}
-
+	
 
 	
 }

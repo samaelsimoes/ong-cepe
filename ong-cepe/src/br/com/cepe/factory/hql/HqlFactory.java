@@ -142,19 +142,19 @@ protected String query= null;
 		String fimPercent = "%'";
 		
 		if(this.operacao.equals(HOperator.EQUALS))
-			return " = '"+this.valor+"'";		
+			return " = "+this.valor+"";		
 		else if(this.operacao.equals(HOperator.DIFFERENT))
-			return " != '"+this.valor+"'";
+			return " != "+this.valor;
 		else if(this.operacao.equals(HOperator.CONTAINS))
-			return " LIKE '"+iniPercent+this.valor+fimPercent+"'";		
+			return " LIKE "+iniPercent+this.valor+fimPercent+"";		
 		else if(this.operacao.equals(HOperator.INITS_WITH))
-			return " LIKE '"+this.valor+fimPercent+"'";		
+			return " LIKE "+this.valor+fimPercent+"";		
 		else if(this.operacao.equals(HOperator.TERMINATES_WITH))
-			return " LIKE '"+iniPercent+this.valor+"'";	
+			return " LIKE "+iniPercent+this.valor+"";	
 		else if(this.operacao.equals(HOperator.MINOR))
-			return " < '"+this.valor+"'";	
+			return " < "+this.valor+"";	
 		else if(this.operacao.equals(HOperator.MAJOR))
-			return " > '"+this.valor+"'";
+			return " > "+this.valor+"";
 		return null;
 	}
 	

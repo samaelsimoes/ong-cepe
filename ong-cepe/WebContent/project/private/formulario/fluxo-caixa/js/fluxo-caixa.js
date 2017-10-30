@@ -1,12 +1,38 @@
 ONG.fluxocaixa = new Object();
 
 $(document).ready(function(){
-	ONG.fluxocaixa.buscaTdFluxo=function(){ 	
+//	$('#valorPesquisa').keypress(function(e) {
+//	    if(e.which == 13) 
+//	    	ONG.fluxocaixa.pesquisar();
+//	});
+
+	ONG.fluxocaixa.pesquisar = function(){
+		debugger;
+		var cc = $("#tipoCC").val();
+		var de = $("#datade").val();
+		var ate = $("#dataate").val();
 		
-	    var busca=$("#consuev").val();	  	
-	    ONG.fluxocaixa.buscaeFluxo(undefined,busca);
+		if(cc == "" || de == "" || ate == ""){
+			bootbox.alert("Selecione um Centro de Custo e o Período.");
+			return false;
+		}
+		
+		var d = new Date(de.split("/").reverse().join("-"));
+		de = d.getTime();
+		d = new Date(ate.split("/").reverse().join("-"));
+		ate = d.getTime();
+		
+    	ONG.fluxoCaixaRest.pesquisarPeriodoCC({
+			data : de+"/"+ate+"/"+parseInt(cc),
+			success: function(listPesq){													
+			    ONG.fluxocaixa.buscarFluxo(listPesq);
+			},
+			error: function(err){							
+				bootbox.alert("Erro ao pesquisar, entrar em contato com o Administrador se o problema persistir!");
+			}
+		});			
 	}		 	
-	ONG.fluxocaixa.buscaeFluxo = function(listFluxo, busca){
+	ONG.fluxocaixa.buscarFluxo = function(listFluxo, busca){
 
 		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
@@ -17,13 +43,12 @@ $(document).ready(function(){
 					"<th> Tipo </th>" +
 					"<th> Data </th>" +
 					"<th> Classificação </th>" +
-					"<th> pessoa </th>" +
-					"<th> evento </th>" +
-					"<th> Valor </th>" +
+					"<th> Pessoa </th>" +
+					"<th> Evento </th>" +
 					"<th> Destino </th>" +
 					"<th> Descrição </th>" +
-
-					"<th style='width: 15%;'> Ações</th>" +
+					"<th> Valor </th>" +
+					"<th actions col-md-2> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
 		
@@ -32,63 +57,48 @@ $(document).ready(function(){
 					html += "<tr>";					
 					html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
 						if(listFluxo[i].tipo == 0){ // ?? ainda nao sei vou ver
-							html += "<td>" +	 
-											"Entrada" +
-									"</td>";
+							html += "<td>Entrada</td>";
 						}else if(listFluxo[i].tipo == 1){
-							html += "<td>" +
-										"Saida" +
-									"</td>"
-						}else if( listFluxo[i].tipo == 2){
-							html += "<td>" + 
-										"Transferência"+
-									"</td>"
+							html += "<td>Saída</td>";
+						}else if(listFluxo[i].tipo == 2){
+							html += "<td>Transferência</td>";
 						}
 						
 						html += "<td>" + listFluxo[i].data + "</td>";
 						
 						if(listFluxo[i].classificacao == 0){ // ?? ainda nao sei vou ver
-							html += "<td>" +	 
-										"Compra" +
-									"</td>";
+							html += "<td>Compra</td>";
 						}else if(listFluxo[i].classificacao == 1){
-							html += "<td>" +
-										"Venda" +
-									"</td>"
-						}else if( listFluxo[i].classificacao == 2){
-							html += "<td>" + 
-										"Doação"+
-									"</td>"
-						}else if( listFluxo[i].classificacao == 3){
-							html += "<td>" + 
-							"Custo operacional"+
-						"</td>"
+							html += "<td>Venda</td>";
+						}else if(listFluxo[i].classificacao == 2){
+							html += "<td>Doação</td>";
+						}else if(listFluxo[i].classificacao == 3){
+							html += "<td>Custo operacional</td>";
 						}
 						
 						if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
-							html += "<td>" + "Não possuí"+ "</td>";
+							html += "<td></td>";
 						}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
 							html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
 						}
+						
 						if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
-							html += "<td>" + "Não possuí"+ "</td>";
+							html += "<td></td>";
 						}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
 							html += "<td>" + listFluxo[i].evento.nome + "</td>";
 						}
-
-						html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
 						
 						if(listFluxo[i].centroCustoDestino == null || listFluxo[i].centroCustoDestino == undefined){
-							html += "<td>" + "Não possuí"+ "</td>";
+							html += "<td></td>";
 						}else if(listFluxo[i].centroCustoDestino != null && listFluxo[i].centroCustoDestino != undefined){
 							html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
 						}
 						
 						html += "<td>" + listFluxo[i].descricao + "</td>";
-
+						html += "<td>" + "R$ " + parseFloat(listFluxo[i].valor).toFixed(2).replace('.',',') + "</td>";
 						html += "<td>"+
-									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
-									"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
+									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+
+//									"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
 								"</td>";						
 					html += "</tr>";  
 			    }
@@ -97,7 +107,7 @@ $(document).ready(function(){
 			    	ONG.fluxoCaixaRest.pesquisarNome({
 						data : "*",
 						success: function(listFluxo,busca){													
-							ONG.fluxocaixa.buscaeFluxo(listFluxo,busca);
+							ONG.fluxocaixa.buscarFluxo(listFluxo,busca);
 						},
 						error: function(err){							
 							bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
@@ -111,7 +121,7 @@ $(document).ready(function(){
 		$("#resuAllEvents").html(html);
 	}
 	
-	ONG.fluxocaixa.buscaeFluxo(undefined, "");
+	ONG.fluxocaixa.buscarFluxo(undefined, "");
 	
 	ONG.fluxocaixa.addFluxo = function () {
 		console.log("teste");
@@ -215,12 +225,12 @@ $(document).ready(function(){
     ONG.fluxocaixa.montaSelect = function(listaCentroCusto) {
     	if(listaCentroCusto != undefined && listaCentroCusto.length > 0 && listaCentroCusto[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCentroCusto.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#tipofluxo'));
+				var option = $( "<option></option>" ).appendTo($('#tipoCC'));
 				option.attr( "value", listaCentroCusto[i].id );
 				option.html( listaCentroCusto[i].nome );
 			}
 
-			var itemsedit2 = document.querySelector('#tipofluxo');
+			var itemsedit2 = document.querySelector('#tipoCC');
 			itemsedit2.addEventListener('change', function(){
 				var valor2 =	this.value // o valo
 			});
@@ -351,12 +361,16 @@ $(document).ready(function(){
 					$("#centrocustoedit1").val(inf.centroCusto.id);
 					$("#dataedit").val(inf.data);
 					$("#classificacaoedit").val(inf.classificacao);
-					$("#eventoedit").val(inf.evento);
-					$("#pessoaedit").val(inf.pessoa.id);
 					$("#valoredit").val(inf.valor);
-					$("#centrodecustoedit2").val(inf.centroCustoDestino.id);
 					$("#descricaoedit").val(inf.descricao);	
 					ONG.fluxocaixa.buscacomponentesedit();
+
+					if(inf.evento != null )
+						$("#eventoedit").val(inf.evento.id);
+					if(inf.pessoa != null )
+						$("#pessoaedit").val(inf.pessoa.id);
+					if(inf.centroCustoDestino != null )
+						$("#centrodecustoedit2").val(inf.centroCustoDestino.id);
 				}
 			},
 			error: function(err){							
@@ -518,111 +532,133 @@ $(document).ready(function(){
 		}
     }
  	//BUSCA TIPO FLUXO CAIXA 
-    var itens = document.querySelector("#tipofluxo");
-    itens.addEventListener('change', function(){    	
-    	var valor =	this.value // o valor que procuras é: this.value
-    	ONG.fluxocaixa.buscatipo(valor);    	
-    });
-    ONG.fluxocaixa.buscatipo = function(valor){
-    	if(valor != null){
-    		var cfg = {
-				
-				url: ONG.contextPath + "/rest/operacao/tipo/"+valor,
-				
-				success: function(listFluxo){													
-			    	var html = "<table class='table table-responsive custom-table-margin-b'>";
-					
-			    	html += 
-					"<thead class='table table-striped '>" +
-						"<tr>" +					
-							"<th> Centro de Custo </th> " +
-							"<th> Tipo </th>" +
-							"<th> Data </th>" +
-							"<th> Classificação </th>" +
-							"<th> pessoa </th>" +
-							"<th> evento </th>" +
-							"<th> Valor </th>" +
-							"<th> Destino </th>" +
-							"<th> Descrição </th>" +
-					
-							"<th style='width: 15%;'> Ações</th>" +
-						"</tr>" +
-					"</thead>";					
-			
-				    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
-				    	for(var i = 0; i < listFluxo.length; i++){
-							html += "<tr>";					
-							html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
-								if(listFluxo[i].tipo == 0){ // ?? ainda nao sei vou ver
-									html += "<td>" +	 
-													"Entrada" +
-											"</td>";
-								}else if(listFluxo[i].tipo == 1){
-									html += "<td>" +
-												"Saida" +
-											"</td>"
-								}else if( listFluxo[i].tipo == 2){
-									html += "<td>" + 
-												"Transferência"+
-											"</td>"
-								}
-								
-								html += "<td>" + listFluxo[i].data + "</td>";
-								
-								if(listFluxo[i].classificacao == 0){ // ?? ainda nao sei vou ver
-									html += "<td>" +	 
-												"Compra" +
-											"</td>";
-								}else if(listFluxo[i].classificacao == 1){
-									html += "<td>" +
-												"Venda" +
-											"</td>"
-								}else if( listFluxo[i].classificacao == 2){
-									html += "<td>" + 
-												"Doação"+
-											"</td>"
-								}else if( listFluxo[i].classificacao == 3){
-									html += "<td>" + 
-									"Custo operacional"+
-								"</td>"
-								}
-								
-								if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
-									html += "<td>" + "Não possuí"+ "</td>";
-								}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
-									html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
-								}
-								if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
-									html += "<td>" + "Não possuí"+ "</td>";
-								}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
-									html += "<td>" + listFluxo[i].evento.nome + "</td>";
-								}
-
-								html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
-								
-								if(listFluxo[i].centroCustoDestino == null || listFluxo[i].centroCustoDestino == undefined){
-									html += "<td>" + "Não possuí"+ "</td>";
-								}else if(listFluxo[i].centroCustoDestino != null && listFluxo[i].centroCustoDestino != undefined){
-									html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
-								}
-								
-								html += "<td>" + listFluxo[i].descricao + "</td>";
-
-								html += "<td>"+
-											"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
-											"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
-										"</td>";						
-							html += "</tr>";  
-					    }
-				    }
-				    html +="</table>";
-					$("#resuAllEvents").html(html);
-				},
-				error: function(err){							
-					bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
-				}
-			};					
-			ONG.ajax.get(cfg);   
-	    }
-    }
+//    var itens = document.querySelector("#tipoCC");
+//    itens.addEventListener('change', function(){    	
+//    	var valor =	this.value // o valor que procuras é: this.value
+//    	ONG.fluxocaixa.buscatipo(valor);    	
+//    });
+//    ONG.fluxocaixa.buscatipo = function(valor){
+//    	if(valor != null){
+//    		var cfg = {
+//				
+//				url: ONG.contextPath + "/rest/operacao/tipo/"+valor,
+//				
+//				success: function(listFluxo){			
+//			    	var html = "<table class='table table-responsive custom-table-margin-b'>";
+//					
+//			    	html += 
+//					"<thead class='table table-striped '>" +
+//						"<tr>" +					
+//							"<th> Centro de Custo </th> " +
+//							"<th> Tipo </th>" +
+//							"<th> Data </th>" +
+//							"<th> Classificação </th>" +
+//							"<th> pessoa </th>" +
+//							"<th> evento </th>" +
+//							"<th> Valor </th>" +
+//							"<th> Destino </th>" +
+//							"<th> Descrição </th>" +
+//					
+//							"<th style='width: 15%;'> Ações</th>" +
+//						"</tr>" +
+//					"</thead>";					
+//			
+//				    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
+//				    	for(var i = 0; i < listFluxo.length; i++){
+//							html += "<tr>";					
+//							html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
+//								if(listFluxo[i].tipo == 0){ // ?? ainda nao sei vou ver
+//									html += "<td>" +	 
+//													"Entrada" +
+//											"</td>";
+//								}else if(listFluxo[i].tipo == 1){
+//									html += "<td>" +
+//												"Saida" +
+//											"</td>"
+//								}else if( listFluxo[i].tipo == 2){
+//									html += "<td>" + 
+//												"Transferência"+
+//											"</td>"
+//								}
+//								
+//								html += "<td>" + listFluxo[i].data + "</td>";
+//								
+//								if(listFluxo[i].classificacao == 0){ // ?? ainda nao sei vou ver
+//									html += "<td>" +	 
+//												"Compra" +
+//											"</td>";
+//								}else if(listFluxo[i].classificacao == 1){
+//									html += "<td>" +
+//												"Venda" +
+//											"</td>"
+//								}else if( listFluxo[i].classificacao == 2){
+//									html += "<td>" + 
+//												"Doação"+
+//											"</td>"
+//								}else if( listFluxo[i].classificacao == 3){
+//									html += "<td>" + 
+//									"Custo operacional"+
+//								"</td>"
+//								}
+//								
+//								if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
+//									html += "<td>" + "Não possuí"+ "</td>";
+//								}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
+//									html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
+//								}
+//								if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
+//									html += "<td>" + "Não possuí"+ "</td>";
+//								}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
+//									html += "<td>" + listFluxo[i].evento.nome + "</td>";
+//								}
+//
+//								html += "<td>" + "R$" + listFluxo[i].valor + "</td>";
+//								
+//								if(listFluxo[i].centroCustoDestino == null || listFluxo[i].centroCustoDestino == undefined){
+//									html += "<td>" + "Não possuí"+ "</td>";
+//								}else if(listFluxo[i].centroCustoDestino != null && listFluxo[i].centroCustoDestino != undefined){
+//									html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
+//								}
+//								
+//								html += "<td>" + listFluxo[i].descricao + "</td>";
+//
+//								html += "<td>"+
+//											"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxocaixa.buscID("+listFluxo[i].id+")'>Editar</button>"+ " " + " " +
+//											"<button type='button'class='btn btn-trash' onclick='ONG.fluxocaixa.confExcluir("+listFluxo[i].id+")'>Excluir</button>"+
+//										"</td>";						
+//							html += "</tr>";  
+//					    }
+//				    }
+//				    html +="</table>";
+//					$("#resuAllEvents").html(html);
+//				},
+//				error: function(err){							
+//					bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
+//				}
+//			};					
+//			ONG.ajax.get(cfg);   
+//	    }
+//    }
+    
+    
+    $(document).on('change','#tipofluxoadd',function(){
+		if(parseInt($("#tipofluxoadd").val()) == 2){
+			$('#centrodecusto3').prop("disabled", false);
+		} else {
+			$('#centrodecusto3').prop("disabled", true);
+		}    
+	});
+    $(document).on('change','#valor',function(){
+		var vl = String($('#valor').val());
+		if (vl.indexOf(".") == -1 && vl.indexOf(",") == -1){ // não achou ponto
+			$('#valor').val(vl+".00");
+		} else if (vl.indexOf(",") == -1 && vl.indexOf(".") == -1){ // não achou virgula
+			$('#valor').val(vl+".00");
+		}else if (vl.indexOf(",") >= -1){
+			$('#valor').val().replace(',','.');
+		}
+		
+		
+//		parseFloat($('#valor').val()).toFixed(2); 
+	});    
 });

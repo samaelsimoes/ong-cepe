@@ -239,8 +239,9 @@ $(document).ready(function(){
 					$("#id").val(dados.id);
 		    		$("#nomeedit").val(dados.nome);
 		    		$("#rgedit").val(dados.rg);
-		    		$("#cpfedit").val(dados.cpf);
+		    		$("#cpfedit").val("0"+dados.cpf);
 		    		$("#emailedit").val(dados.email);
+		    		$("#datanascimentoeditar").val(dados.nascimento.substring(0,10).split("/").reverse().join("-"));
 		    		$("#telfixoedit").val(dados.foneFixo);
 		    		$("#telmoveledit").val(dados.foneMovel);
 		    		$("#bairroedit").val(dados.bairro);
@@ -280,6 +281,8 @@ $(document).ready(function(){
     	if(msg == ""){
     		var exp = ONG.pessoaFisica.validaCamposEdit();    		
     		if(exp == ""){
+            	var date = $("#datanascimentoeditar").val();
+				var d = new Date(date.split("/").reverse().join("-"));
 		    	var dadosPF = {
 		            
 		    		id: $("#id").val(),
@@ -290,7 +293,7 @@ $(document).ready(function(){
 		    		rg: $("#rgedit").val(),
 		    		email: $("#emailedit").val(),
 		    		bairro: $("#bairroedit").val(),
-		    		nascimento: $("#datanascimentoedit").val(),
+		    		nascimento: d.getTime(),
 		    		foneFixo: $("#telfixoedit").val(),
 		    		foneMovel: $("#telmoveledit").val(),
 		    		rua: $("#ruaedit").val(),

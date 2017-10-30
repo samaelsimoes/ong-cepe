@@ -12,7 +12,6 @@ $(document).ready(function(){
 	};
 	
 	ONG.fluxoCaixaRest.pesquisarNome = function(config){
-//		url : "rest/pessoas/pesquisarNome?nome="+config.data.valor1 + "&tipo=" + config.data.valor2 ,
 		ONG.ajax.get({
 			url : ONG.contextPath+"/rest/operacao/nome/"+config.data,
 			success : config.success,
@@ -40,6 +39,14 @@ $(document).ready(function(){
 		ONG.ajax.put({
 			url : ONG.contextPath+"/rest/operacao",
 			data : config.data,
+			success : config.success,
+			error : config.error
+		});
+	};
+	
+	ONG.fluxoCaixaRest.pesquisarPeriodoCC = function(config){
+		ONG.ajax.get({
+			url : ONG.contextPath+"/rest/operacao/periodo/"+config.data,
 			success : config.success,
 			error : config.error
 		});

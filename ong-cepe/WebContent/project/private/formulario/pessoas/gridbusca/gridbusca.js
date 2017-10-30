@@ -157,8 +157,9 @@ $(document).ready(function(){
 					$("#id1").val(dados.id);
 		    		$("#nomeedit1").val(dados.nome);
 		    		$("#rgedit1").val(dados.rg);
-		    		$("#cpfedit1").val(dados.cpf);
+		    		$("#cpfedit1").val("0"+dados.cpf);
 		    		$("#emailedit1").val(dados.email);
+		    		$("#datanascimentoeditar1").val(dados.nascimento.substring(0,10).split("/").reverse().join("-"));
 		    		$("#telfixoedit1").val(dados.foneFixo);
 		    		$("#telmoveledit1").val(dados.foneMovel);
 		    		$("#bairroedit1").val(dados.bairro);
@@ -331,6 +332,8 @@ $(document).ready(function(){
     	if(msg == ""){
     		var exp = ONG.pessoa.validaCampos1();    		
     		if(exp == ""){
+            	var date = $("#datanascimentoeditar1").val();
+				var d = new Date(date.split("/").reverse().join("-"));
 		    	var dadosPF = {
 		            
 		    		id: $("#id1").val(),
@@ -341,7 +344,7 @@ $(document).ready(function(){
 		    		rg: $("#rgedit1").val(),
 		    		email: $("#emailedit1").val(),
 		    		bairro: $("#bairroedit1").val(),
-		    		nascimento: $("#datanascimentoedit1").val(),
+		    		nascimento: d.getTime(),
 		    		foneFixo: $("#telfixoedit1").val(),
 		    		foneMovel: $("#telmoveledit1").val(),
 		    		rua: $("#ruaedit1").val(),
@@ -352,15 +355,16 @@ $(document).ready(function(){
 						id: $("#cidadeedit1").val() 
 					}	
 		    	}
+		    	console.log(dadosPF)
 				ONG.pessoaRest.editar({
 					data : dadosPF,
 					success:function(data){	
 						
 						bootbox.alert(data);
 						
-						setTimeout(function(){
-	    	    	        location.reload();
-	    	    	    }, 2000);					
+//						setTimeout(function(){
+//	    	    	        location.reload();
+//	    	    	    }, 2000);					
 					},
 					error: function(err){	
 						bootbox.alert( err.responseText); 

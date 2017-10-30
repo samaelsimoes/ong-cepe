@@ -1,12 +1,6 @@
 ONG.usuario = new Object();
 $(document).ready(function(){
 
-	/*ONG.usuario.btnCadastrar = function() {
-		$("#conteudo").load("formulario/usuarios/gridUsua.html",function(){
-			$( "#exibiList" ).hide();		
-		});
-		return false;
-	};*/
 	ONG.usuario.btnCancelar = function() {
 		$(location).attr('href', ONG.contextPath+'/project/usuarios.html');
 		return false;
@@ -29,6 +23,7 @@ $(document).ready(function(){
 							"<th>Email</th>" +
 							"<th>Tipo</th>" +
 							"<th>Login</th>" +
+							"<th>Status</th>" +
 							"<th class='actions col-md-2'>Ações</th>" +
 						"</tr>" +
 					"</thead>";
@@ -47,8 +42,14 @@ $(document).ready(function(){
 				if(lista[i].tipo == 2){
 					html += "<td>"+"Professor"+"</td>";
 				}
-				html +="<td>"+lista[i].usuario+"</td>"+				
-				"<td class='actions  text-center'>"+
+				html +="<td>"+lista[i].usuario+"</td>";	
+				if(lista[i].status == 0){
+					html += "<td>"+"Inativo"+"</td>";
+				}
+				if(lista[i].status == 1){
+					html += "<td>"+"Ativo"+"</td>";
+				}				
+				html +="<td class='actions  text-center'>"+
 				"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.usuario.carregarUsuario("+lista[i].id+")'>Editar</button>"+ " " + " " +
 				"<button type='button' class='btn btn-trash' onclick='ONG.usuario.excluir("+ lista[i].id+ ")'>Excluir</button>"+
 				"</td>"+
@@ -91,6 +92,7 @@ $(document).ready(function(){
 				email:$("#email").val(),
 				usuario:$("#login").val(),
 				tipo:$("#tipo").val(),
+				status: 1,
 				senha:senha,
 		};
 		console.log('novo cadastro',newCad);

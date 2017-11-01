@@ -27,6 +27,7 @@ public class Operacao {
 	private float valor;	
 	private String descricao;
 	
+	
 	@ManyToOne
 	private CentroCusto centroCusto;
 	@ManyToOne

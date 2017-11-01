@@ -48,7 +48,7 @@ public class FluxoCaixaService  implements Service<Operacao>{
 			op.setEvento(this.operacao.getEvento());
 			op.setPessoa(this.operacao.getPessoa());
 			op.setUsuario(this.operacao.getUsuario());
-			op.setTipo(0);
+			op.setTipo(1);
 			op.setClassificacao(this.operacao.getClassificacao());
 			op.setData(this.operacao.getData());
 			op.setDescricao(this.operacao.getDescricao());

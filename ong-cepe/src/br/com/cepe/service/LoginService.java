@@ -16,8 +16,6 @@ public class LoginService {
 		
 	}
 	
-	
-	
 	public Usuario validaUsuarioSenha() throws GlobalException {
 		HqlFactoryList<Usuario> hqlFactoryList = new HqlFactoryList<Usuario>();
 		UsuarioDAO usuarioDAO = new UsuarioDAO(hqlFactoryList);

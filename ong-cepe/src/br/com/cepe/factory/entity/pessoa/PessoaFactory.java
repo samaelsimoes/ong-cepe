@@ -2,6 +2,7 @@ package br.com.cepe.factory.entity.pessoa;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,20 +65,29 @@ public class PessoaFactory extends ObjMapper {
 	}
 	
 	public PessoaFactory(Object obj){
-		if(obj instanceof PessoaFisica)
+		if(obj instanceof PessoaFisica){
+			PessoaFisica pessoaF = (PessoaFisica)obj;
+			Date nasc = pessoaF.getNascimento();
 			this.pessoas.add((PessoaFisica) obj);
-		else if(obj instanceof PessoaJuridica)
+		}
+		else if(obj instanceof PessoaJuridica){
 			this.pessoas.add((PessoaJuridica) obj);
-		else if(obj instanceof DoadorPf)
+		}
+		else if(obj instanceof DoadorPf){
 			this.pessoas.add((DoadorPf) obj);
-		else if(obj instanceof Patrocinador)
+		}
+		else if(obj instanceof Patrocinador){
 			this.pessoas.add((Patrocinador) obj);
-		else if(obj instanceof Beneficiario)
+		}
+		else if(obj instanceof Beneficiario){
 			this.pessoas.add((Beneficiario) obj);
-		else if(obj instanceof Atleta)
+		}
+		else if(obj instanceof Atleta){
 			this.pessoas.add((Atleta) obj);
-		else
+		}
+		else{
 			this.pessoas.add(null);
+		}
 	}
 	
 	public PessoaFactory(int tipo){

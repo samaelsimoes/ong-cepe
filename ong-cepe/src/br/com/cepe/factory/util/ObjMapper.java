@@ -12,8 +12,8 @@ import br.com.cepe.datatype.DataFmt;
 import br.com.cepe.factory.date.DateFactory;
 
 public class ObjMapper{
-private ObjectMapper objMapper;
-private DateFactory dateFactory;
+protected ObjectMapper objMapper;
+protected DateFactory dateFactory;
 
 	public ObjMapper(){
 		objMapper = new ObjectMapper();

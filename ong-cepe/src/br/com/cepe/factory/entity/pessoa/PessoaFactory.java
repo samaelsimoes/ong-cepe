@@ -2,13 +2,10 @@ package br.com.cepe.factory.entity.pessoa;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.codehaus.jackson.node.ObjectNode;
-
-import br.com.cepe.datatype.DataFmt;
 import br.com.cepe.entity.pojo.pessoa.Atleta;
 import br.com.cepe.entity.pojo.pessoa.Beneficiario;
 import br.com.cepe.entity.pojo.pessoa.DoadorPf;
@@ -65,45 +62,21 @@ public class PessoaFactory extends ObjMapper {
 		}
 	}
 	
-	
 	public PessoaFactory(Object obj){
-		if(obj instanceof PessoaFisica){
-			PessoaFisica pessoa = (PessoaFisica)obj;
-			Date nasc = pessoa.getNascimento();
-			nasc = dateFactory.getData(DataFmt.DT_BR, nasc);
-			pessoa.setNascimento(nasc);
-			this.pessoas.add(pessoa);
-		}
-		else if(obj instanceof PessoaJuridica){
+		if(obj instanceof PessoaFisica)
+			this.pessoas.add((PessoaFisica) obj);
+		else if(obj instanceof PessoaJuridica)
 			this.pessoas.add((PessoaJuridica) obj);
-		}
-		else if(obj instanceof DoadorPf){
-			DoadorPf pessoa = (DoadorPf) obj;
-			Date nasc = pessoa.getNascimento();
-			nasc = dateFactory.getData(DataFmt.DT_BR, nasc);
-			pessoa.setNascimento(nasc);
-			this.pessoas.add(pessoa);
-		}
-		else if(obj instanceof Patrocinador){
+		else if(obj instanceof DoadorPf)
+			this.pessoas.add((DoadorPf) obj);
+		else if(obj instanceof Patrocinador)
 			this.pessoas.add((Patrocinador) obj);
-		}
-		else if(obj instanceof Beneficiario){
-			Beneficiario pessoa = (Beneficiario) obj;
-			Date nasc = pessoa.getNascimento();
-			nasc = dateFactory.getData(DataFmt.DT_BR, nasc);
-			pessoa.setNascimento(nasc);
-			this.pessoas.add(pessoa);
-		}
-		else if(obj instanceof Atleta){
-			Atleta pessoa = (Atleta) obj;
-			Date nasc = pessoa.getNascimento();
-			nasc = dateFactory.getData(DataFmt.DT_BR, nasc);
-			pessoa.setNascimento(nasc);
-			this.pessoas.add(pessoa);
-		}
-		else{
+		else if(obj instanceof Beneficiario)
+			this.pessoas.add((Beneficiario) obj);
+		else if(obj instanceof Atleta)
+			this.pessoas.add((Atleta) obj);
+		else
 			this.pessoas.add(null);
-		}
 	}
 	
 	public PessoaFactory(int tipo){

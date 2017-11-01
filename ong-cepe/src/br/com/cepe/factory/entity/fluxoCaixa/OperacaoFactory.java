@@ -2,8 +2,10 @@ package br.com.cepe.factory.entity.fluxoCaixa;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import br.com.cepe.datatype.DataFmt;
 import br.com.cepe.entity.pojo.caixa.Operacao;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.util.ObjMapper;
@@ -15,14 +17,23 @@ public class OperacaoFactory extends ObjMapper {
 
 		try {
 			Operacao obj = getObject().readValue(operacaoStr, Operacao.class);
-			if(obj != null)
+			if(obj != null){
+				Date data;
+				if(obj.getData() != null)
+					data = obj.getData();
+				else
+					throw new GlobalException("Erro de factory na classe Operação - Data inválida");
+				
+				data = dateFactory.getData(DataFmt.DT_HR_BR, data);
+				obj.setData(data);
 				this.operacoes.add(obj);
-			else
+				
+			}else{
 				throw new GlobalException("Erro de factory na classe Operação");
-
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new GlobalException("Erro de factory na classe Oper��o");
+			throw new GlobalException("Erro de factory na classe Operação");
 		}
 	}
 	

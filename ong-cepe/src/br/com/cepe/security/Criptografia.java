@@ -6,6 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import org.glassfish.jersey.internal.util.Base64;
+
 public class Criptografia {
 
 	public static String criptografar(String pwd) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -22,8 +24,8 @@ public class Criptografia {
 	
 	public String decode64(String senha){
 		
-		  String byteArray = decode64(senha);
-			
+		byte[] byteArray = Base64.decode(senha.getBytes());
+		
 		  Arrays.toString(senha.getBytes());
 		  String decodedString = new String(byteArray);
 		  

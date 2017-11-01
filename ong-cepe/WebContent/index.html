@@ -25,25 +25,35 @@
                         <h1>Login</h1>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-user" style="width: auto"></i>
-                                </span>
-                                <input id="txtUsuario" runat="server" type="text" class="form-control" name="user" placeholder="Usuário" required="" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-lock" style="width: auto"></i>
-                                </span>
-                                <input id="txtSenha" runat="server" type="password" class="form-control" name="password" placeholder="Senha" required="" />
-                            </div>
-                        </div>
-                        <button id="btnLogin" runat="server" class="btn btn-default" style="width: 100%">
-                            <a href="project/private/paginaInicial.html">ENTRAR</a><i class="glyphicon glyphicon-log-in"></i>
-                        </button>
+                    	<form class="form-horizontal" id="formularioLogin">
+							<input type = "hidden" name="acao" value="login"></input>
+							
+	                        <div class="form-group">
+	                            <div class="input-group">
+	                                <span class="input-group-addon">
+	                                    <i class="glyphicon glyphicon-user" style="width: auto"></i>
+	                                </span>
+	                                <input id="login" runat="server" type="text" class="form-control" name="login" placeholder="Login"/>
+	                            </div>
+	                        </div>
+	                        <div class="form-group">
+	                            <div class="input-group">
+	                                <span class="input-group-addon">
+	                                    <i class="glyphicon glyphicon-lock" style="width: auto"></i>
+	                                </span>
+	                                 <input type="hidden" id="passwordhidden" name="passwordhidden">
+	                                <input id="senha" runat="server" type="password" class="form-control" name="senha" placeholder="Senha"/>
+	                            </div>
+	                        </div>
+	                    </form>
+                  
+	                    <div class="modal-footer">          
+			            
+			                <button type="button" class="btn btn-primary btn-success" tyle="width: 100%" onclick="ONG.login.entrada()">
+			
+			                    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Salvar
+			                </button>
+			            </div>
                     </div>
                 </div>
             </div>
@@ -56,5 +66,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="lib/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="resource/js/login.js"></script>
+    <script src="project/resource/js/bootbox.min.js"></script>    
+    <script src="project/resource/js/ajax.js"></script>
+    
+    <script src="project/resource/js/login.js"></script>
 </html>

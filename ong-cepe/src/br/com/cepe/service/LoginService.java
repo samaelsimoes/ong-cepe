@@ -19,7 +19,6 @@ public class LoginService {
 		
 	}
 	
-<<<<<<< HEAD
 	
 	
 	public Usuario validaUsuarioSenha() throws GlobalException, NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -29,9 +28,6 @@ public class LoginService {
 		String desconvertido = bases.decode64(credenciais.get(1));
 		String hashd5 = Criptografia.criptografar(desconvertido);
 		
-=======
-	public Usuario validaUsuarioSenha() throws GlobalException {
->>>>>>> a5910f86b1a687315b83daf43dc793264dba1f2f
 		HqlFactoryList<Usuario> hqlFactoryList = new HqlFactoryList<Usuario>();
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO(hqlFactoryList);

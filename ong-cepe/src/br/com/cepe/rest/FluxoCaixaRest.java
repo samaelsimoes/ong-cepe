@@ -126,6 +126,21 @@ public class FluxoCaixaRest extends ObjMapper {
 	}
 	
 	
+
+	@GET
+	@Path("/centroCusto/{centroCusto}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response pesquisarCentroCusto(@PathParam("centroCusto") int centroCusto) throws GlobalException {
+		try {
+			List<Operacao> operacoes = new FluxoCaixaService(centroCusto).pesquisaCentroCustoIgual();
+			String resp = getJson(operacoes);
+			return Response.ok( resp ,MediaType.APPLICATION_JSON).build();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return this.buildErrorResponse("Erro ao fazer a consulta por tipo");
+		}
+	}
 	
 	@GET
 	@Path("/tipo/{tipo}")

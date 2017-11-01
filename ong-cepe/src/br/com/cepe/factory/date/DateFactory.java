@@ -6,6 +6,7 @@ package br.com.cepe.factory.date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import br.com.cepe.datatype.DataFmt;
 
@@ -16,7 +17,9 @@ public class DateFactory {
 		try {
 			String dataStr = data.toString();
 			SimpleDateFormat formato = new SimpleDateFormat(getFmt(fmt));
+			formato.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
 			Date formatada = formato.parse(dataStr);
+			
 			return formatada;
 			
 		} catch (ParseException e) {			

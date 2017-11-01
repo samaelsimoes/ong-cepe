@@ -98,6 +98,11 @@ public class FluxoCaixaService  implements Service<Operacao>{
 		String tipo = Integer.toString(this.num);
 		return (List<Operacao>) new FluxoCaixaDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
 	}
+	
+	public List<Operacao> pesquisaCentroCustoIgual() throws GlobalException {
+		String tipo = Integer.toString(this.num);
+		return (List<Operacao>) new FluxoCaixaDAO().findGeneric("centroCusto_id", HOperator.EQUALS, tipo);
+	}
 
 	public List<Operacao> pesquisaNomeContem() throws GlobalException {
 		return (List<Operacao>) new FluxoCaixaDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);

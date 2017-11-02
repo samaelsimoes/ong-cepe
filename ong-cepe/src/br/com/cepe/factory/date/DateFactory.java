@@ -19,7 +19,6 @@ public class DateFactory {
 			SimpleDateFormat formato = new SimpleDateFormat(getFmt(fmt));
 			formato.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
 			Date formatada = formato.parse(dataStr);
-			
 			return formatada;
 			
 		} catch (ParseException e) {			

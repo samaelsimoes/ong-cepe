@@ -3,6 +3,7 @@ package br.com.cepe.service;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.TimeZone;
 
 import br.com.cepe.daoconnect.UsuarioDAO;
 import br.com.cepe.datatype.HOperator;
@@ -22,7 +23,7 @@ public class LoginService {
 	
 	
 	public Usuario validaUsuarioSenha() throws GlobalException, NoSuchAlgorithmException, UnsupportedEncodingException {
-		
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
 		Criptografia bases = new Criptografia();
 		
 		String desconvertido = bases.decode64(credenciais.get(1));

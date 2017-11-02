@@ -17,6 +17,7 @@ import br.com.cepe.entity.pojo.usuario.Usuario;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.factory.entity.usuario.UsuarioFactory;
 import br.com.cepe.factory.util.ObjMapper;
+import br.com.cepe.security.Criptografia;
 import br.com.cepe.service.UsuarioService;
 
 @Path("/usuario")
@@ -29,8 +30,18 @@ public class UsuarioRest extends ObjMapper{
 	@Consumes("application/*")
 	public Response adicionar(String usuarioStr) throws GlobalException {
 		try {
+			
 			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
-						
+			
+			Criptografia bases = new Criptografia();
+
+			String base64 = usuario.getSenha();
+			String desconvertido = bases.decode64(base64);
+			String hashd5 = Criptografia.criptografar(desconvertido);
+			
+			usuario.setSenha(hashd5);
+			System.out.println("senha");
+			System.out.println(hashd5);
 			if(usuario != null)
 				new UsuarioService(usuario).adicionar();
 			else

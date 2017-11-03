@@ -142,9 +142,9 @@ protected String query= null;
 		String fimPercent = "%'";
 		
 		if(this.operacao.equals(HOperator.EQUALS))
-			return " = "+this.valor+"";		
+			return " = '"+this.valor+"'";		
 		else if(this.operacao.equals(HOperator.DIFFERENT))
-			return " != "+this.valor;
+			return " != '"+this.valor+"'";
 		else if(this.operacao.equals(HOperator.CONTAINS))
 			return " LIKE "+iniPercent+this.valor+fimPercent+"";		
 		else if(this.operacao.equals(HOperator.INITS_WITH))

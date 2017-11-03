@@ -1,6 +1,5 @@
 package br.com.cepe.filter;
 
-ort java.io.IOException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.wizco.pojo.UserPojo;
 
 /**
 * Servlet Filter implementation class FilterSection
@@ -39,13 +37,13 @@ public class FilterSection implements Filter{
 				user = (UserPojo) session.getAttribute("sectionuser");
 			}
 			/*if ( user != null && context.equals("/control-expenses") ) {
-				 criar uma validação para verificar permissao ?
+				 criar uma validaï¿½ï¿½o para verificar permissao ?
 				((HttpServletResponse) response).sendRedirect(context+"/project/private/home.html#!/");
 			} */
 			/*if ( user == null ) {
 				
 				session.invalidate();// invalid session
-				msg.put("msg", "Voce não está logado no sistema");
+				msg.put("msg", "Voce nï¿½o estï¿½ logado no sistema");
 				((HttpServletResponse) response).setStatus(HttpServletResponse.SC_FORBIDDEN);
 				String json = new ObjectMapper().writeValueAsString(msg);
 				

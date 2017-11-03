@@ -36,7 +36,16 @@
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
 	
-	<!--  Filter 
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>br.com.cepe.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	
 	<filter>
 		<filter-name>FilterSection</filter-name>
 		<filter-class>br.com.cepe.filter.FilterSection</filter-class>
@@ -44,5 +53,7 @@
 	<filter-mapping>
 		<filter-name>FilterSection</filter-name>
 		<url-pattern>/project/private/*</url-pattern>
-	</filter-mapping>-->
+	</filter-mapping>
+	
+
 </web-app>

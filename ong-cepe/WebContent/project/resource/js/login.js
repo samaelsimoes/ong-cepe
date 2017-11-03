@@ -32,11 +32,10 @@ $(document).ready(function(){
         	        });
                 	
                 	var intervalo = window.setInterval(function() {	}, 50);
-
-                	/*window.setTimeout(function() {	
+                	window.setTimeout(function() {	
                 	    clearInterval(intervalo);
-            			$(location).attr('href', '../privado/paginausuario.html');
-                	}, 5000);*/
+            			$(location).attr('href', '..' + msg.acesso );
+                	}, 5000);
                 },
                 
                 error: function(err){

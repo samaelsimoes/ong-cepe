@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import br.com.cepe.entity.pojo.usuario.Usuario;
+
 
 /**
 * Servlet Filter implementation class FilterSection
@@ -30,20 +32,20 @@ public class FilterSection implements Filter{
 		try {
 			
 			HttpSession session = ((HttpServletRequest) request).getSession();
-			/*UserPojo user = null;
+			Usuario user = null;
 			Map<String, String> msg = new HashMap<String, String>();
 
 			if (session != null ) {
-				user = (UserPojo) session.getAttribute("sectionuser");
+				user = (Usuario) session.getAttribute("sectionuser");
 			}
-			/*if ( user != null && context.equals("/control-expenses") ) {
-				 criar uma validaï¿½ï¿½o para verificar permissao ?
-				((HttpServletResponse) response).sendRedirect(context+"/project/private/home.html#!/");
-			} */
-			/*if ( user == null ) {
+			if ( user != null && context.equals("/control-expenses") ) {
+				// criar uma validaï¿½ï¿½o para verificar permissao ?
+				((HttpServletResponse) response).sendRedirect(context+"/project/private/paginaInicial.html/");
+			} 
+			if ( user == null ) {
 				
 				session.invalidate();// invalid session
-				msg.put("msg", "Voce nï¿½o estï¿½ logado no sistema");
+				msg.put("msg", "Voce não está logado no sistema");
 				((HttpServletResponse) response).setStatus(HttpServletResponse.SC_FORBIDDEN);
 				String json = new ObjectMapper().writeValueAsString(msg);
 				
@@ -51,11 +53,11 @@ public class FilterSection implements Filter{
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(json);
 				
-				((HttpServletResponse) response).sendRedirect(context+"/#!/login");
+				((HttpServletResponse) response).sendRedirect(context+"/");
 
 			}else {
 				chain.doFilter(request, response);
-			}*/
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

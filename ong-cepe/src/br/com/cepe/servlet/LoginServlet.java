@@ -52,8 +52,8 @@ public class LoginServlet extends HttpServlet {
 					
 					msg.put("msg", " Login realizado com sucesso ! ");
 					msg.put("tipouser", infuser);
-					msg.put("", usuario.getUsuario());
-					
+					msg.put("usuario", usuario.getUsuario());
+					msg.put("acesso", url+ "/project/private/paginaInicial.html");
 					response.setStatus(HttpServletResponse.SC_OK);
 
 					//SC_OK Status code (200) indicating the request succeeded normally.

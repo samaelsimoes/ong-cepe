@@ -3,12 +3,17 @@ package br.com.cepe.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.cepe.entity.pojo.usuario.Usuario;
 import br.com.cepe.service.LoginService;
@@ -29,7 +34,43 @@ public class LoginServlet extends HttpServlet {
 				
 				Usuario usuario = new LoginService(credUser).validaUsuarioSenha();
 				
-				//terminar
+				Map<String, String> msg = new HashMap<String, String>();
+				HttpSession sectionUser = request.getSession();
+												
+				if( usuario != null ) {	
+					
+					sectionUser.setAttribute("sectionuser", usuario);//setAtribute I'm putting my UserPojo user object in session
+					
+					String infuser = "";
+					if(usuario.getTipo() == 1) {
+						infuser = "Administrador";
+					}else if ( usuario.getTipo() == 2 ) {
+						infuser = "Professor";
+					}else if ( usuario.getTipo() == 3) {
+						infuser = "Financeiro";
+					}
+					
+					msg.put("msg", " Login realizado com sucesso ! ");
+					msg.put("tipouser", infuser);
+					msg.put("", usuario.getUsuario());
+					
+					response.setStatus(HttpServletResponse.SC_OK);
+
+					//SC_OK Status code (200) indicating the request succeeded normally.
+				}else {
+				
+					sectionUser.invalidate();// invalid session
+					msg.put("msg", "Login invalido");
+					response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+					//Status code (403) indicating the server understood the request but refused to fulfill it.
+				}
+				
+				sectionUser.setMaxInactiveInterval(600);
+				String json = new ObjectMapper().writeValueAsString(msg);
+				
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
 			}
 		}catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

@@ -23,6 +23,7 @@ public class LoginService {
 	
 	
 	public Usuario validaUsuarioSenha() throws GlobalException, NoSuchAlgorithmException, UnsupportedEncodingException {
+		
 		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
 		Criptografia bases = new Criptografia();
 		

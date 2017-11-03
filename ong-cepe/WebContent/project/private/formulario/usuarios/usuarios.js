@@ -103,7 +103,7 @@ $(document).ready(function(){
 				success : function(msg) {
 					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/usuarios.html'); 
+						$(location).attr('href', ONG.contextPath+'/project/private/ usuarios.html'); 
 					});
 				},
 				error : function(err) {

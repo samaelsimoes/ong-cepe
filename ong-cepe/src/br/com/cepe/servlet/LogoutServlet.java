@@ -21,13 +21,13 @@ public class LogoutServlet extends HttpServlet{
 			System.out.println("teste saida ok");
 			HttpSession sessao = request.getSession();
 			sessao.invalidate();
-			response.sendRedirect(url+"/");
+			//response.sendRedirect(url+"/");
 		}catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			e.printStackTrace();
 		}
 	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		process(request, response);
 	}
 }

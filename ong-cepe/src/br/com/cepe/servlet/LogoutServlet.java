@@ -18,7 +18,6 @@ public class LogoutServlet extends HttpServlet{
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {	
 			String url = request.getContextPath();
-			System.out.println("teste saida ok");
 			HttpSession sessao = request.getSession();
 			sessao.invalidate();
 			//response.sendRedirect(url+"/");

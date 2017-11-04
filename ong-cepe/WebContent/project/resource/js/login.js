@@ -21,6 +21,9 @@ $(document).ready(function(){
                 data: $("#formularioLogin").serialize(),
                 
                 success: function(msg){
+                	
+                	document.cookie = msg;
+                	
                 	var dialog = bootbox.dialog({
         			    title: 'Verificando Dados',
         			    message: '<p><i class="fa fa-spin fa-spinner"></i> Carregando...</p>'

@@ -28,7 +28,6 @@ public class FilterSection implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		String context = request.getServletContext().getContextPath();
-		System.out.println(context         + " teste contexto");
 		try {
 			
 			HttpSession session = ((HttpServletRequest) request).getSession();

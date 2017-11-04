@@ -15,6 +15,7 @@ $(document).ready(function(){
 		ONG.usuario.exibirLista(undefined, valorPesquisa);
 	};
 	ONG.usuario.exibirLista = function(lista, valorPesquisa){
+		console.log(document.cookie);
 		var html = "<table id='tabela'  class='tablesorter table table-responsive custom-table-margin-b' >";
 		html +=
 					"<thead table table-striped>" +

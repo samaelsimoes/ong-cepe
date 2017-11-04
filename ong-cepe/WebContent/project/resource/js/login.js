@@ -22,8 +22,11 @@ $(document).ready(function(){
                 
                 success: function(msg){
                 	
-                	document.cookie = msg;
-                	
+                	var usuario = msg.usuario;
+ 				    var tipo = msg.tipouser;
+
+                	document.cookie = tipo;					
+					                	
                 	var dialog = bootbox.dialog({
         			    title: 'Verificando Dados',
         			    message: '<p><i class="fa fa-spin fa-spinner"></i> Carregando...</p>'

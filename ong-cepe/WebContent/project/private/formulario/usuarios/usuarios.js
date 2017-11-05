@@ -2,7 +2,7 @@ ONG.usuario = new Object();
 $(document).ready(function(){
 
 	ONG.usuario.btnCancelar = function() {
-		$(location).attr('href', ONG.contextPath+'/project/usuarios.html');
+		$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html');
 		return false;
 	};
 	$('#valorPesquisa').keypress(function(e) {
@@ -104,7 +104,7 @@ $(document).ready(function(){
 				success : function(msg) {
 					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/private/ usuarios.html'); 
+						$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html'); 
 					});
 				},
 				error : function(err) {
@@ -160,6 +160,7 @@ $(document).ready(function(){
 				usuario:$("#loginEdit").val(),
 				tipo:$("#tipoEdit").val(),
 				senha:senha,
+                status:1
 		};
 		console.log('editar cadastro',EditCad);
 		if (ONG.usuario.validarEdit(EditCad)) {

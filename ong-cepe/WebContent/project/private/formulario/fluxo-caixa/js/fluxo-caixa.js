@@ -1,18 +1,16 @@
 ONG.fluxocaixa = new Object();
 
 $(document).ready(function(){
-//	$('#valorPesquisa').keypress(function(e) {
-//	    if(e.which == 13) 
-//	    	ONG.fluxocaixa.pesquisar();
-//	});
 
 	ONG.fluxocaixa.pesquisar = function(){
-		debugger;
 		var cc = $("#tipoCC").val();
 		var de = $("#datade").val();
 		var ate = $("#dataate").val();
 		
-		if(cc == "" || de == "" || ate == ""){
+		if(cc == "" && de == "" && ate == ""){
+			ONG.fluxocaixa.buscarFluxo(undefined, "");
+			return false;
+		} else if(cc == "" || de == "" || ate == ""){
 			bootbox.alert("Selecione um Centro de Custo e o Período.");
 			return false;
 		}
@@ -211,7 +209,7 @@ $(document).ready(function(){
     // BUSCA CENTRO DE CUSTO  --- -- - -- - - 
     
     ONG.fluxocaixa.buscacusto = function() {
-    	ONG.centroCustoRest.pesquisarNome({
+    	ONG.centrocustoRest.pesquisarNome({
 			data : "*",
 			success: function(lcenter){							
 				ONG.fluxocaixa.montaSelect(lcenter);
@@ -240,7 +238,7 @@ $(document).ready(function(){
 	// MODAL CADASTRAR, busca todos dados do campos html-selected PESSOA EVENTO CENTRO DE CUSTO E SL
 
     ONG.fluxocaixa.buscomponenteAdd = function() {
-    	ONG.centroCustoRest.pesquisarNome({
+    	ONG.centrocustoRest.pesquisarNome({
 			data : "*",
 			success: function(lcenter){							
 				ONG.fluxocaixa.montaSelectcentrocust (lcenter);
@@ -380,7 +378,7 @@ $(document).ready(function(){
     }
     
     ONG.fluxocaixa.buscacomponentesedit = function(){
-    	ONG.centroCustoRest.pesquisarNome({
+    	ONG.centrocustoRest.pesquisarNome({
     		data : "*",
     		success: function(lcenter){							
     			ONG.fluxocaixa.montaselectedcentrocustoedit(lcenter);
@@ -649,16 +647,7 @@ $(document).ready(function(){
 		}    
 	});
     $(document).on('change','#valor',function(){
-		var vl = String($('#valor').val());
-		if (vl.indexOf(".") == -1 && vl.indexOf(",") == -1){ // não achou ponto
-			$('#valor').val(vl+".00");
-		} else if (vl.indexOf(",") == -1 && vl.indexOf(".") == -1){ // não achou virgula
-			$('#valor').val(vl+".00");
-		}else if (vl.indexOf(",") >= -1){
-			$('#valor').val().replace(',','.');
-		}
-		
-		
-//		parseFloat($('#valor').val()).toFixed(2); 
+			$('#valor').val(parseFloat($('#valor').val()).toFixed(2));	
+
 	});    
 });

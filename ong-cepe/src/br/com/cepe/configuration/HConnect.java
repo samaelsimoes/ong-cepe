@@ -7,7 +7,11 @@ import javax.persistence.Query;
 
 public class HConnect {
 	private EntityManagerFactory connection;
-	private static EntityManager em = null;
+	private EntityManager em = null;
+	
+	public void setEntityManager(EntityManager em){
+		this.em = em;
+	}
 	
 	public EntityManager getEntityManager(){
 		if (em == null){

@@ -40,12 +40,9 @@ public class UsuarioRest extends ObjMapper{
 			String hashd5 = Criptografia.criptografar(desconvertido);
 			
 			usuario.setSenha(hashd5);
-			System.out.println("senha");
-			System.out.println(hashd5);
 			if(usuario != null)
 				new UsuarioService(usuario).adicionar();
-			else
-				throw new GlobalException("Valor nulo enviado ao REST");
+			
 			
 			return this.buildResponse("Cadastrado com sucesso.");
 		} catch (Throwable e) {
@@ -116,7 +113,6 @@ public class UsuarioRest extends ObjMapper{
 		try {
 			Usuario usuario = new UsuarioFactory(usuarioStr).getUsuario();
 			new UsuarioService(usuario).alterar();
-//			return Response.ok( usuario ,MediaType.APPLICATION_JSON).build();
 
 			return this.buildResponse("Editado com sucesso.");
 		} catch (Throwable e) {

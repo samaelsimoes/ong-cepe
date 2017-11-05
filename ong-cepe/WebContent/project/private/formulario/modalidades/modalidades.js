@@ -1,4 +1,5 @@
 ONG.modalidade = new Object();
+
 $(document).ready(function(){
 
 	/*ONG.modalidade.btnCadastrar = function() {

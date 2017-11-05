@@ -55,7 +55,4 @@
 		<url-pattern>/project/private/*</url-pattern>
 	</filter-mapping>
 	
-	<session-config>
-	  <session-timeout>60</session-timeout> <!-- SESSÃO TEM APENAS 60 MINUTOS de initividade -->
-	</session-config>
 </web-app>

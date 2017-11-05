@@ -1,9 +1,10 @@
 ONG.centroCusto = new Object();
+
 $(document).ready(function(){
 	$('#header').load('header.html');
 	$('#footer').load('footer.html');
 	
-/*	ONG.centroCusto.btnCadastrar = function() {
+   /*ONG.centroCusto.btnCadastrar = function() {
 		$("#conteudo").load("formulario/centrocusto/cad.html",function(){
 			$( "#exibiList" ).hide();		
 		});
@@ -51,7 +52,7 @@ $(document).ready(function(){
 				ONG.centroCustoRest.pesquisarNome({
 					data : valorPesquisa,
 					success : function(lista) {
-						ONG.centroCusto.exibirLista(lista);
+						ONG.centroCusto.exibirLista(lista, undefined);
 					},
 					error : function(err) {	console.log('err lista' ,err); } 
 				});
@@ -139,7 +140,7 @@ $(document).ready(function(){
 				nome: $("#nomeEdit").val(),
 				descricao:$("#descricaoEdit").val()
 		};
-		console.log('editar cadastro',EditCad);
+
 		if (ONG.centroCusto.validar(EditCad)) {
 			ONG.centroCustoRest.editar({
 				data : EditCad,

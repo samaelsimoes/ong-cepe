@@ -1,4 +1,5 @@
 ONG.usuario = new Object();
+
 $(document).ready(function(){
 
 	ONG.usuario.btnCancelar = function() {

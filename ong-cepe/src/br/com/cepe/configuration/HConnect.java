@@ -14,9 +14,8 @@ public class HConnect {
 	}
 	
 	public EntityManager getEntityManager(){
-		if (em == null){
+		if (em == null)
 			em = connect().createEntityManager(); 
-		}
 		return em;
 	}
 	

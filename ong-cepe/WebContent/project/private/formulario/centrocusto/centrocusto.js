@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ONG.centroCusto = new Object();
 
 $(document).ready(function(){
@@ -12,18 +13,27 @@ $(document).ready(function(){
 	};*/
 	ONG.centroCusto.btnCancelar = function() {
 		$(location).attr('href', ONG.contextPath+'/project/centrocusto.html');
+=======
+ONG.centrocusto = new Object();
+$(document).ready(function(){
+	$('#header').load('header.html');
+	$('#footer').load('footer.html');
+
+	ONG.centrocusto.btnCancelar = function() {
+		$(location).attr('href', ONG.contextPath+'/project/private/centrocusto.html');
+>>>>>>> 9c55e61065583432b73e4166b3f41b403c5beb8d
 		return false;
 	};
 	$('#valorPesquisa').keypress(function(e) {
 	    if(e.which == 13) 
-	        ONG.centroCusto.pesquisar();
+	        ONG.centrocusto.pesquisar();
 	});
 
-	ONG.centroCusto.pesquisar = function() {
+	ONG.centrocusto.pesquisar = function() {
 		var valorPesquisa = $("#valorPesquisa").val();
-		ONG.centroCusto.exibirLista(undefined, valorPesquisa);
+		ONG.centrocusto.exibirLista(undefined, valorPesquisa);
 	};
-	ONG.centroCusto.exibirLista = function(lista, valorPesquisa){
+	ONG.centrocusto.exibirLista = function(lista, valorPesquisa){
 		var html = "<table id='tabela'  class='tablesorter table table-responsive custom-table-margin-b' >";
 		html +=
 					"<thead table table-striped>" +
@@ -40,8 +50,8 @@ $(document).ready(function(){
 				"<td>"+lista[i].nome+"</td>"+
 				"<td>"+lista[i].descricao+"</td>"+		
 				"<td class='actions  text-center'>"+
-				"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.centroCusto.carregarCC("+lista[i].id+")'>Editar</button>"+ " " + " " +
-				"<button type='button' class='btn btn-trash' onclick='ONG.centroCusto.excluir("+ lista[i].id+ ")'>Excluir</button>"+
+				"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.centrocusto.carregarCC("+lista[i].id+")'>Editar</button>"+ " " + " " +
+				"<button type='button' class='btn btn-trash' onclick='ONG.centrocusto.excluir("+ lista[i].id+ ")'>Excluir</button>"+
 				"</td>"+
 				"</tr>";
 			}
@@ -49,10 +59,17 @@ $(document).ready(function(){
 			if(lista == undefined || (lista != undefined && lista.length > 0)){
 				if(valorPesquisa == ""){ valorPesquisa = "*"; }
 
+<<<<<<< HEAD
 				ONG.centroCustoRest.pesquisarNome({
 					data: valorPesquisa,
 					success: function(lista) {
 						ONG.centroCusto.exibirLista(lista, undefined);
+=======
+				ONG.centrocustoRest.pesquisarNome({
+					data : valorPesquisa,
+					success : function(listaCC) {
+						ONG.centrocusto.exibirLista(listaCC, "");
+>>>>>>> 9c55e61065583432b73e4166b3f41b403c5beb8d
 					},
 					error: function(err) {	console.log('err lista' ,err); } 
 				});
@@ -72,9 +89,9 @@ $(document).ready(function(){
 		});
 //		$('#tabela').tablesorter();
 	};
-	ONG.centroCusto.exibirLista(undefined, "");
+	ONG.centrocusto.exibirLista(undefined, "");
 
-	ONG.centroCusto.cadastrar = function(){
+	ONG.centrocusto.cadastrar = function(){
 
 		var newCad = {
 				nome: $("#nome").val(),
@@ -82,14 +99,14 @@ $(document).ready(function(){
 				modalidades: []
 		};
 		console.log('novo cadastro',newCad);
-		if (ONG.centroCusto.validar(newCad)) {
+		if (ONG.centrocusto.validar(newCad)) {
 			
-			ONG.centroCustoRest.inserir({
+			ONG.centrocustoRest.inserir({
 				data : newCad,
 				success : function(msg) {
 					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/centrocusto.html'); 
+						$(location).attr('href', ONG.contextPath+'/project/private/centrocusto.html'); 
 					});
 				},
 				error : function(err) {
@@ -100,15 +117,15 @@ $(document).ready(function(){
 		}// IF
 	};// CADASTRAR
 
-	ONG.centroCusto.excluir = function(id){
+	ONG.centrocusto.excluir = function(id){
 		bootbox.confirm("Deseja Excluir?", function(confirmed) {
 			if(confirmed) {
 				
-				ONG.centroCustoRest.excluir({
+				ONG.centrocustoRest.excluir({
 					data : id,
 					success : function(msg) {
 						  console.log(msg);
-						  ONG.centroCusto.pesquisar();
+						  ONG.centrocusto.pesquisar();
 					},
 					error : function(err) {
 						  console.log('err' ,err);
@@ -119,8 +136,8 @@ $(document).ready(function(){
 		}); 
 	};
 	
-	ONG.centroCusto.carregarCC = function(id){
-				ONG.centroCustoRest.pesquisarId({
+	ONG.centrocusto.carregarCC = function(id){
+				ONG.centrocustoRest.pesquisarId({
 					data : id,
 					success : function(ccEdit) {
 						$("#idEdit").val(ccEdit.id);
@@ -133,21 +150,26 @@ $(document).ready(function(){
 				});
 	};
 	
-	ONG.centroCusto.editar = function(){
+	ONG.centrocusto.editar = function(){
 		
 		var EditCad = {
 				id: $("#idEdit").val(),
 				nome: $("#nomeEdit").val(),
 				descricao:$("#descricaoEdit").val()
 		};
+<<<<<<< HEAD
 
 		if (ONG.centroCusto.validar(EditCad)) {
 			ONG.centroCustoRest.editar({
+=======
+		console.log('editar cadastro',EditCad);
+		if (ONG.centrocusto.validar(EditCad)) {
+			ONG.centrocustoRest.editar({
+>>>>>>> 9c55e61065583432b73e4166b3f41b403c5beb8d
 				data : EditCad,
 				success : function(msg) {
 					bootbox.alert(msg, function(){ 
-						debugger;
-						ONG.centroCusto.exibirLista(undefined, "");
+						ONG.centrocusto.exibirLista(undefined, "");
 						$('input').val('');
 						$('#modaledit').modal('toggle');
 					});				
@@ -160,8 +182,7 @@ $(document).ready(function(){
 		}// IF		
 	};
 
-	ONG.centroCusto.validar = function(cc) {
-		debugger;		
+	ONG.centrocusto.validar = function(cc) {
 		var aux = "";
 
 

@@ -1,10 +1,18 @@
-ONG.logout = new Object();
-ONG.saindo = {};
+logout = new Object();
+saindo = {};
 
 $(document).ready(function(){
 	
-	ONG.logout.saindo = function() {
-	
+	logout.sair = function() {
+		$.getScript("../resource/js/ajax.js", function(){
+			   console.log("Script loaded but not necessarily executed.");
+			   logout.saindo();
+			});
+	};
+
+	logout.saindo = function() {
+		debugger;
+		
 		$.ajax({	
             type:"POST",				
             url: ONG.contextPath + "/LogoutServlet",  
@@ -32,5 +40,5 @@ $(document).ready(function(){
             	bootbox.alert("Login Invalido ! " );
             }
     	});	
-	}
+	};
 });

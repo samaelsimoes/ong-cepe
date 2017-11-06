@@ -18,16 +18,7 @@ public class OperacaoFactory extends ObjMapper {
 		try {
 			Operacao obj = getObject().readValue(operacaoStr, Operacao.class);
 			if(obj != null){
-				Date data;
-				if(obj.getData() != null)
-					data = obj.getData();
-				else
-					throw new GlobalException("Erro de factory na classe Operação - Data inválida");
-				
-				data = dateFactory.getData(DataFmt.DT_HR_BR, data);
-				obj.setData(data);
 				this.operacoes.add(obj);
-				
 			}else{
 				throw new GlobalException("Erro de factory na classe Operação");
 			}

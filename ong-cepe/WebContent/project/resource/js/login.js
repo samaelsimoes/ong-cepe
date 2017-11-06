@@ -45,7 +45,6 @@ $(document).ready(function(){
                 },
                 
                 error: function(err){
-            		console.log(err);
                 	bootbox.alert("Login Invalido ! " );
                 }
         	});	

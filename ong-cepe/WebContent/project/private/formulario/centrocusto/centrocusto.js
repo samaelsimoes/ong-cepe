@@ -50,11 +50,11 @@ $(document).ready(function(){
 				if(valorPesquisa == ""){ valorPesquisa = "*"; }
 
 				ONG.centroCustoRest.pesquisarNome({
-					data : valorPesquisa,
-					success : function(lista) {
+					data: valorPesquisa,
+					success: function(lista) {
 						ONG.centroCusto.exibirLista(lista, undefined);
 					},
-					error : function(err) {	console.log('err lista' ,err); } 
+					error: function(err) {	console.log('err lista' ,err); } 
 				});
 			} else {
 				html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";

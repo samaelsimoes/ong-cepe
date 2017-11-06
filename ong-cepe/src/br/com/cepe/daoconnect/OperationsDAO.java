@@ -3,7 +3,6 @@ package br.com.cepe.daoconnect;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.cepe.datatype.HOperator;
@@ -31,7 +30,6 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 	protected String queryOp= null;
 	protected String queryAnd= null;
 	protected Query query = null;
-	protected EntityManager em = null;
 	
 	public OperationsDAO(){
 		

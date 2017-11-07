@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-ONG.centroCusto = new Object();
-
-$(document).ready(function(){
-	$('#header').load('header.html');
-	$('#footer').load('footer.html');
-	
-   /*ONG.centroCusto.btnCadastrar = function() {
-		$("#conteudo").load("formulario/centrocusto/cad.html",function(){
-			$( "#exibiList" ).hide();		
-		});
-		return false;
-	};*/
-	ONG.centroCusto.btnCancelar = function() {
-		$(location).attr('href', ONG.contextPath+'/project/centrocusto.html');
-=======
 ONG.centrocusto = new Object();
 $(document).ready(function(){
 	$('#header').load('header.html');
@@ -21,7 +5,6 @@ $(document).ready(function(){
 
 	ONG.centrocusto.btnCancelar = function() {
 		$(location).attr('href', ONG.contextPath+'/project/private/centrocusto.html');
->>>>>>> 9c55e61065583432b73e4166b3f41b403c5beb8d
 		return false;
 	};
 	$('#valorPesquisa').keypress(function(e) {
@@ -59,19 +42,12 @@ $(document).ready(function(){
 			if(lista == undefined || (lista != undefined && lista.length > 0)){
 				if(valorPesquisa == ""){ valorPesquisa = "*"; }
 
-<<<<<<< HEAD
-				ONG.centroCustoRest.pesquisarNome({
-					data: valorPesquisa,
-					success: function(lista) {
-						ONG.centroCusto.exibirLista(lista, undefined);
-=======
 				ONG.centrocustoRest.pesquisarNome({
 					data : valorPesquisa,
 					success : function(listaCC) {
 						ONG.centrocusto.exibirLista(listaCC, "");
->>>>>>> 9c55e61065583432b73e4166b3f41b403c5beb8d
 					},
-					error: function(err) {	console.log('err lista' ,err); } 
+					error : function(err) {	console.log('err lista' ,err); } 
 				});
 			} else {
 				html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
@@ -157,15 +133,9 @@ $(document).ready(function(){
 				nome: $("#nomeEdit").val(),
 				descricao:$("#descricaoEdit").val()
 		};
-<<<<<<< HEAD
-
-		if (ONG.centroCusto.validar(EditCad)) {
-			ONG.centroCustoRest.editar({
-=======
 		console.log('editar cadastro',EditCad);
 		if (ONG.centrocusto.validar(EditCad)) {
 			ONG.centrocustoRest.editar({
->>>>>>> 9c55e61065583432b73e4166b3f41b403c5beb8d
 				data : EditCad,
 				success : function(msg) {
 					bootbox.alert(msg, function(){ 

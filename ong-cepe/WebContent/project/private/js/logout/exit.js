@@ -5,13 +5,11 @@ $(document).ready(function(){
 	
 	logout.sair = function() {
 		$.getScript("../resource/js/ajax.js", function(){
-			   console.log("Script loaded but not necessarily executed.");
 			   logout.saindo();
 			});
 	};
 
 	logout.saindo = function() {
-		debugger;
 		
 		$.ajax({	
             type:"POST",				

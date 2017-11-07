@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class CentroCusto {
 	private int id;
 	private String nome;
 	private String descricao;
-	@OneToMany(mappedBy = "centroCusto", cascade=CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "centroCusto", cascade=CascadeType.REMOVE)
 	private List<Modalidade> modalidades;
 	
 	public int getId() {

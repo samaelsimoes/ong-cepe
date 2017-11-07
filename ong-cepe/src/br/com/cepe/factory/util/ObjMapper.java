@@ -2,6 +2,7 @@ package br.com.cepe.factory.util;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,6 +16,9 @@ public class ObjMapper{
 protected ObjectMapper objMapper;
 protected DateFactory dateFactory;
 
+static{
+	TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
+}
 	public ObjMapper(){
 		objMapper = new ObjectMapper();
 		dateFactory = new DateFactory();

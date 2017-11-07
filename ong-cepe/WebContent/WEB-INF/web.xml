@@ -13,23 +13,19 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>br.com.cepe.rest</param-value>
         </init-param>
+        
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
-    
-    <context-param>
-	    <param-name>timezone</param-name>
-	    <param-value>GMT-3</param-value>
-   </context-param>
+    </servlet-mapping> 
     
     <!--SECTION time -->
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
-	
+
 	<!--SERVLET LoginServlet-->
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
@@ -45,12 +41,15 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>br.com.cepe.servlet.LogoutServlet</servlet-class>
 	</servlet>
+        <context-param>
+  			<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+  			<param-value>true</param-value>
+		</context-param>
 	
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/LogoutServlet</url-pattern>
 	</servlet-mapping>
-	
 	<filter>
 		<filter-name>FilterSection</filter-name>
 		<filter-class>br.com.cepe.filter.FilterSection</filter-class>

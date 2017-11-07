@@ -4,12 +4,14 @@ import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+
 import br.com.cepe.entity.pojo.endereco.Cidade;
 import br.com.cepe.entity.pojo.modalidade.Modalidade;
 
@@ -26,9 +28,9 @@ public class Evento {
 	protected Date data;
 	protected String hora;
 	protected long cep;
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	protected Cidade cidade;
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	protected Modalidade modalidade;
 	protected String bairro;
 	protected String rua;

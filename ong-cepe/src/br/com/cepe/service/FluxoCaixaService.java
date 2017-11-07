@@ -35,7 +35,7 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	public FluxoCaixaService(int num) {
 		this.num = num;
 	}
-	
+	/*
 	public void montaOperacao()throws GlobalException{
 		if(this.operacao != null){
 		
@@ -58,11 +58,11 @@ public class FluxoCaixaService  implements Service<Operacao>{
 		int count = 0;
 		for(Operacao operacao: this.operacoes){
 			this.operacao = operacao;
-			montaOperacao();
+			//montaOperacao();
 			this.operacoes.set(count, this.operacao);
 			count++;
 		}
-	}
+	}*/
 
 	public void adicionar()  throws GlobalException {
 		float valor  =0;	
@@ -102,19 +102,19 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	
 	public Operacao pesquisaId()  throws GlobalException {
 		this.operacao = new FluxoCaixaDAO(this.num).findId();
-		montaOperacao();
-		return operacao;
+		//montaOperacao();
+		return this.operacao;
 	}
 	
 	public List<Operacao> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {
 		this.operacoes =  new FluxoCaixaDAO().findGeneric(campo, operacao, valor);
-		montaOperacoes();
+	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaGeneric(String campo, HOperator operacao,	int num) throws GlobalException {
 		this.operacoes = new FluxoCaixaDAO().findGenericInt(campo, operacao, num);
-		montaOperacoes();
+	//montaOperacoes();
 		return this.operacoes;
 	}
 	
@@ -125,34 +125,33 @@ public class FluxoCaixaService  implements Service<Operacao>{
 		fluxoCaixaDAO.setFindParams("data", HOperator.BETWEEN, periodos);
 		fluxoCaixaDAO.setAnd();
 		this.operacoes = fluxoCaixaDAO.findGenericBetween();
-		montaOperacoes();
-
+	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaTipoIgual() throws GlobalException {
 		String tipo = Integer.toString(this.num);
 		this.operacoes = new FluxoCaixaDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
-		montaOperacoes();
+	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaCentroCustoIgual() throws GlobalException {
 		String tipo = Integer.toString(this.num);
 		this.operacoes = new FluxoCaixaDAO().findGeneric("centroCusto_id", HOperator.EQUALS, tipo);
-		montaOperacoes();
+	//montaOperacoes();
 		return this.operacoes;
 	}
 
 	public List<Operacao> pesquisaNomeContem() throws GlobalException {
 		this.operacoes = new FluxoCaixaDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
-		montaOperacoes();
+	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaClassificacaoContem() throws GlobalException {
 		this.operacoes = new FluxoCaixaDAO().findGeneric("classificacao", HOperator.CONTAINS, this.valorStr);
-		montaOperacoes();
+	//montaOperacoes();
 		return this.operacoes;
 	}
 		
@@ -165,7 +164,7 @@ public class FluxoCaixaService  implements Service<Operacao>{
 				if(operacoesGen != null && !operacoesGen.isEmpty()){					
 					for(Operacao operacao: operacoesGen){
 						this.operacao = operacao;
-						montaOperacao();
+						//montaOperacao();
 						this.operacoes.add(this.operacao);						
 					}
 				}

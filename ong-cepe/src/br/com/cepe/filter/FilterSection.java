@@ -44,7 +44,7 @@ public class FilterSection implements Filter{
 			if ( user == null ) {
 				
 				session.invalidate();// invalid session
-				msg.put("msg", "Voce não está logado no sistema");
+				msg.put("msg", "Voce nï¿½o estï¿½ logado no sistema");
 				((HttpServletResponse) response).setStatus(HttpServletResponse.SC_FORBIDDEN);
 				String json = new ObjectMapper().writeValueAsString(msg);
 				

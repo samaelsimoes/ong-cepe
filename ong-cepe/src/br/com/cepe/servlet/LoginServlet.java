@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try{		
-			TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
 			String url = request.getContextPath();
 			if(request.getParameter("acao").equals("login")){
 				List<String> credUser = new ArrayList<String>();

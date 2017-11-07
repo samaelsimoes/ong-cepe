@@ -3,6 +3,7 @@ package br.com.cepe.entity.pojo.caixa;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,13 +29,13 @@ public class Operacao {
 	private String descricao;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private CentroCusto centroCusto;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private CentroCusto centroCustoDestino;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Pessoa pessoa;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Evento evento;
 	
 	public int getId() {

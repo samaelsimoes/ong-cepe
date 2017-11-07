@@ -35,7 +35,6 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		
 	}
 
-	
 	public OperationsDAO(T entity){
 		this.entity = entity;
 	}
@@ -121,8 +120,6 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		if((this.nums.isEmpty() || this.nums == null) && (!this.valores.isEmpty() || this.valores != null))
 			this.queryStr += hqlFactoryList.getAnd(this.campos.get(count),this.operacoes.get(count), this.valores.get(count));
 	}
-	
-	
 		
 	public List<T> findGeneric() throws GlobalException{
 		@SuppressWarnings("unchecked")
@@ -134,7 +131,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		HqlFactory hqlFactory = new HqlFactory();		
 		this.select = hqlFactory.getSelect(getEntityName(), campo);
 		this.queryStr = hqlFactory.getQuery(select, operacao, valor);
-		this.query = super.getQuery(queryStr);
+		this.query = super.getQuery(queryStr);		
 		@SuppressWarnings("unchecked")
 		List<T> list = this.query.getResultList();
 		return list;
@@ -162,7 +159,6 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 				this.queryStr+=" AND ";
 			this.queryStr+=this.campos.get(contIt)+" = '"+this.valores.get(contIt)+"'";
 			contIt++;
-			
 						
 		}		
 		Query query = super.getQuery(queryStr);
@@ -197,7 +193,6 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 		List<T> list = query.getResultList();
 		return list;
 	}
-	
 		
 	public void update(){
 		em.getTransaction().begin();

@@ -1,7 +1,11 @@
 ONG.pessoaJuridica = new Object();
 
 $(document).ready(function(){
-	
+	$(document).keypress(function(e) {
+	    if(e.which == 13) {
+	    	ONG.pessoaJuridica.busca();
+	    }
+	});
 	ONG.pessoaJuridica.busca = function(){
 		
 	    var busca=$("#conspj").val();	  	

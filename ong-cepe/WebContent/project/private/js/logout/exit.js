@@ -3,11 +3,20 @@ saindo = {};
 $(document).ready(function(){
 	logout.sair = function() {
 		$.getScript("../resource/js/ajax.js", function(){
+<<<<<<< HEAD
 		   console.log("Script loaded but not necessarily executed.");
 		   logout.saindo();
 		});
 	};
 	logout.saindo = function() {		
+=======
+			   logout.saindo();
+			});
+	};
+
+	logout.saindo = function() {
+		
+>>>>>>> 0ab12062131dd016b9a85a8625af647b85b68084
 		$.ajax({	
             type:"POST",				
             url: ONG.contextPath + "/LogoutServlet",              

@@ -1,6 +1,13 @@
 ONG.pessoa = new Object();
-
 $(document).ready(function(){
+	
+	
+	mask = function() {
+	    $(".maskFone").text(function(i, text) {
+	        text = text.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1)$2-$3");
+	        return text;
+	    });
+	};
 	ONG.pessoa.gridbusca = function(){
 		
 	    var busca = $("#consutodos").val();	  	
@@ -48,17 +55,17 @@ $(document).ready(function(){
 				  		}
 						
 						if(listallpes[i].foneFixo != null && listallpes[i].foneMovel != null){
-							html += "<td>"+	 
-							listallpes[i].foneFixo + " - " + listallpes[i].foneMovel +										
-									"</td>";
+							html += "<td><p class='small maskFone'>"+	 
+							listallpes[i].foneFixo + "</p><p class='small maskFone'>" + listallpes[i].foneMovel +										
+									"</p></td>";
 						}else if(listallpes[i].foneFixo != null && listallpes[i].foneMovel == null){
-							html += "<td>"+
+							html += "<td><p class='small maskFone'>"+
 										listPesj[i].foneFixo+
-									"</td>"
+									"</p></td>"
 						}else if( listallpes[i].foneMovel != null && listallpes[i].foneFixo == null){
-							html += "<td>"+
+							html += "<td><p class='small maskFone'>"+
 							listallpes[i].foneMovel+
-									"</td>"
+									"</p></td>"
 						}
 						html += "<td>" + listallpes[i].email + "</td>";
 							if ( listallpes[i].tipo == 1) { // pessoa JURIDICA
@@ -110,6 +117,7 @@ $(document).ready(function(){
 				},
 			},
 		});
+		mask();
 	}
 	
 	ONG.pessoa.buscaTodos (undefined, "");

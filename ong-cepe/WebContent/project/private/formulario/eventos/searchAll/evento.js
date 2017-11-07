@@ -1,6 +1,11 @@
 ONG.evento = new Object();
 
 $(document).ready(function(){
+	$(document).keypress(function(e) {
+	    if(e.which == 13) {
+	    	ONG.evento.searchAllEvent();
+	    }
+	});
 	ONG.evento.searchAllEvent=function(){ 	
 		
 	    var busca=$("#consuev").val();	  	

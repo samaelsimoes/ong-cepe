@@ -98,7 +98,13 @@ footer {
         text-align: left !important;
         float: left !important;
     }
-        .phone-padding-left {
+    .custom-logo-login2 img{
+        padding-left: 0px!important;
+    }
+    .custom-padding-login-logo{
+        padding-top: 49px;
+    }
+    .phone-padding-left {
         padding:30px;
     }
     .phone-align-center {
@@ -171,5 +177,18 @@ canvas{
 }
 .custom-efect-login {
     background-color: rgba(10, 207, 243, 0.32);
-    height: 870px;
+    height: 3000px;
+}
+.custom-logo-login{
+    padding-top: 38px;
+}
+.custom-logo-login1 img{
+    height: 99px;
+    margin-top: -40px;
+}
+.custom-logo-login2 img{
+    height: 80px;
+    margin-top: -40px;
+    padding-top: 23px;
+    padding-left: 11px;
 }

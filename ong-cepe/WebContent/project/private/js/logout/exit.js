@@ -1,22 +1,16 @@
 logout = new Object();
 saindo = {};
-
 $(document).ready(function(){
-	
 	logout.sair = function() {
 		$.getScript("../resource/js/ajax.js", function(){
-			   console.log("Script loaded but not necessarily executed.");
-			   logout.saindo();
-			});
+		   console.log("Script loaded but not necessarily executed.");
+		   logout.saindo();
+		});
 	};
-
-	logout.saindo = function() {
-		debugger;
-		
+	logout.saindo = function() {		
 		$.ajax({	
             type:"POST",				
-            url: ONG.contextPath + "/LogoutServlet",  
-            
+            url: ONG.contextPath + "/LogoutServlet",              
             success: function(msg){
             	var dialog = bootbox.dialog({
     			    title: 'Saindo do sistema',
@@ -33,8 +27,7 @@ $(document).ready(function(){
             	    clearInterval(intervalo);
         			$(location).attr('href', '../../' );
             	}, 5000);
-            },
-            
+            },       
             error: function(err){
         		console.log(err);
             	bootbox.alert("Login Invalido ! " );

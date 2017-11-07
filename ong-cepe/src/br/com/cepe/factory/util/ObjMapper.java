@@ -1,6 +1,7 @@
 package br.com.cepe.factory.util;
 
 import java.io.StringWriter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
@@ -17,7 +18,7 @@ protected ObjectMapper objMapper;
 protected DateFactory dateFactory;
 
 static{
-	TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
+	
 }
 	public ObjMapper(){
 		objMapper = new ObjectMapper();
@@ -35,7 +36,9 @@ static{
 		StringWriter jsonObj = new StringWriter();
 		try{
 			
-			objMapper.setDateFormat(new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_BR)));
+			DateFormat fmt = new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_BR));
+			fmt.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+			objMapper.setDateFormat(fmt);
 			objMapper.writeValue(jsonObj, obj);
 			return jsonObj.toString();
 			

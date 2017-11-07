@@ -83,7 +83,6 @@ public class CentroCustoService  implements Service<CentroCusto>{
 		return this.centrosCusto;
 	}
 
-
 	public List<CentroCusto> pesquisaNomeContem() throws GlobalException {
 		this.centrosCusto = new CentroCustoDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
 		return this.centrosCusto;

@@ -3,7 +3,6 @@ ONG.entrada = {};
 
 $(document).ready(function(){
 	$(document).keypress(function(e) {
-		debugger
 		if(e.which == 13) {
 			ONG.login.entrada();
 		}
@@ -23,7 +22,7 @@ $(document).ready(function(){
 			var criptbase64=btoa($("#senha").val());
 			$("#passwordhidden").val(criptbase64);
 			
-			//msg += ONG.login.valida("Campo Senha ", $("#passwordhidden").val()); //verificando a senha que esta sendo salva em um ID HIDDEN no index.html
+			msg += ONG.login.valida("Campo Senha ", $("#passwordhidden").val());
 			
 			if(msg == "") {
 				$.ajax({	

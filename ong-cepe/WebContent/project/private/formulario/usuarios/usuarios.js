@@ -16,7 +16,6 @@ $(document).ready(function(){
 		ONG.usuario.exibirLista(undefined, valorPesquisa);
 	};
 	ONG.usuario.exibirLista = function(lista, valorPesquisa){
-		console.log(document.cookie);
 		var html = "<table id='tabela'  class='tablesorter table table-responsive custom-table-margin-b' >";
 		html +=
 					"<thead table table-striped>" +
@@ -46,7 +45,7 @@ $(document).ready(function(){
 				}
 				html +="<td>"+lista[i].usuario+"</td>";	
 				if(lista[i].status == 0){
-					html += "<td>"+"Inativo"+"</td>";
+					html += "<td><p>"+"<strong>Inativo</strong>"+"</p></td>";
 				}
 				if(lista[i].status == 1){
 					html += "<td>"+"Ativo"+"</td>";
@@ -97,13 +96,11 @@ $(document).ready(function(){
 				status: 1,
 				senha:senha,
 		};
-		console.log('novo cadastro',newCad);
 		if (ONG.usuario.validar(newCad)) {
 			
 			ONG.usuarioRest.inserir({
 				data : newCad,
 				success : function(msg) {
-					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
 						$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html'); 
 					});

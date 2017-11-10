@@ -7,7 +7,6 @@ $(document).ready(function(){
 	    }
 	});
 	ONG.evento.searchAllEvent=function(){ 	
-		
 	    var busca=$("#consuev").val();	  	
 	    ONG.evento.searchEvent(undefined,busca);
 	}		 	
@@ -18,7 +17,6 @@ $(document).ready(function(){
 		html += 
 			"<thead class='table table-striped '>" +
 				"<tr>" +
-					
 					"<th> Nome </th> " +
 					"<th> Descrição </th>" +
 					"<th> Tipo </th>" +
@@ -27,9 +25,9 @@ $(document).ready(function(){
 					"<th> Estado </th>" +
 					"<th> Cidade </th>" +
 					"<th> Bairro </th>" +
-					"<th> Rua </th>" +
-					"<th> Número </th>" +
-					"<th> Complemento </th>" +
+//					"<th> Rua </th>" +
+//					"<th> Número </th>" +
+//					"<th> Complemento </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>" +
@@ -62,9 +60,9 @@ $(document).ready(function(){
 						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
 						html += "<td>" + listEvent[i].cidade.nome + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
-						html += "<td>" + listEvent[i].rua + "</td>";
-						html += "<td>" + listEvent[i].numero + "</td>";
-						html += "<td>" + listEvent[i].complemento + "</td>";
+//						html += "<td>" + listEvent[i].rua + "</td>";
+//						html += "<td>" + listEvent[i].numero + "</td>";
+//						html += "<td>" + listEvent[i].complemento + "</td>";
 
 						html += "<td>"+
 									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.evento.buscID("+listEvent[i].id+")'>Editar</button>"+ " " + " " +
@@ -238,7 +236,7 @@ $(document).ready(function(){
     	var msg  = "";
     	
     	if($("#id").val() == ""){
-    		msg += " Impossivel editar Evento, gentileza entrar em contato com o administrador, motivo sem campo id";
+    		msg += "Não é possível editar o Evento, gentileza entrar em contato com o administrador";
     	}
     	
 		msg += ONG.evento.validaVazio("Nome: ", $("#nomeedit").val());
@@ -343,9 +341,8 @@ $(document).ready(function(){
 
     ONG.evento.buscaEstado = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){		
-				console.log(listEstado);
 				ONG.evento.montaSelectEstado(listEstado);
 			},
 			error: function(err) {							
@@ -367,11 +364,14 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-
+    
     ONG.evento.montaSelectEstado = function(listEstado) {
+    	var option = '';
+    	$('#addestado').find('option').remove();
+		option = $( "<option value='' selected>Selecione</option>" ).appendTo($('#addestado'));
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#addestado'));
+				option = $( "<option></option>" ).appendTo($('#addestado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
@@ -384,9 +384,12 @@ $(document).ready(function(){
     }
 
     ONG.evento.montaSelectCidade = function( listaCidade ) {
+    	var option = '';
+    	$('#addcidade').find('option').remove();
+		option = $( "<option value='' selected>Selecione</option>" ).appendTo($('#addestado'));
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#addcidade' ) );
+				option = $( "<option></option>" ).appendTo( $( '#addcidade' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
@@ -424,7 +427,7 @@ $(document).ready(function(){
     // EDITAR CIDADE E ESTADO
     ONG.evento.buscaEstadoedit = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+    		url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){													
 				ONG.evento.montaSelectEstadoedit(listEstado);
 			},

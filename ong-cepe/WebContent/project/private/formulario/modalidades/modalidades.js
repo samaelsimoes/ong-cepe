@@ -144,7 +144,6 @@ $(document).ready(function(){
 	};
 	
 	ONG.modalidade.editar = function(){
-		debugger
 		
 		var EditCad = {
 			id: parseInt($("#idEdit").val()),
@@ -178,7 +177,6 @@ $(document).ready(function(){
 
 	ONG.modalidade.validar = function(modalidade) {
 		var aux = "";
-		debugger
 		if (modalidade.nome == "") {
 			aux += "Nome é Obrigatório <br/>";
 		}if (modalidade.descricao == "") {
@@ -217,6 +215,7 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
 	}
 	ONG.modalidade.mounts = function(listcostCenter) {
+		$('#costcenteradd').find('option').remove();
 		if(listcostCenter != undefined && listcostCenter.length > 0 && listcostCenter[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listcostCenter.length; i++) {
 				var option = $( "<option></option>" ).appendTo($('#costcenteradd'));
@@ -243,8 +242,9 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
 	}
 	ONG.modalidade.mountsEdit = function(listcostCenteredit) {
+		$('#costcenteredit').find('option').remove();
+
 		if(listcostCenteredit != undefined && listcostCenteredit.length > 0 && listcostCenteredit[0].id != undefined) { // montando meus estados
-			debugger
 			for(var i = 0; i < listcostCenteredit.length; i++) {
 				var optionedit = $( "<option></option>" ).appendTo($('#costcenteredit'));
 				optionedit.attr( "value", listcostCenteredit[i].id );

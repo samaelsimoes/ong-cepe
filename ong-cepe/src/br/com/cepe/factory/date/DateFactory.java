@@ -14,11 +14,17 @@ public class DateFactory {
 
 
 	public Date getData(DataFmt fmt, Date data){
+		String dataStr = null;
+		SimpleDateFormat formato = null;
+		Date formatada = null;
 		try {
-			String dataStr = data.toString();
-			SimpleDateFormat formato = new SimpleDateFormat(getFmt(fmt));
-			formato.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
-			Date formatada = formato.parse(dataStr);
+			if(fmt != null && data != null){
+				dataStr = data.toString();
+				formato = new SimpleDateFormat(getFmt(fmt));
+				//formato.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+				formatada = formato.parse(dataStr);
+			}
+			
 			return formatada;
 			
 		} catch (ParseException e) {			
@@ -31,6 +37,7 @@ public class DateFactory {
 	public String getFmt(DataFmt dthrBr) {
 		String[] fmts = { "dd/MM/yyyy", "yyyy-MM-dd", "dd/MM/yyyy HH:mm:ss", 
 						"yyyy-MM-dd HH:mm:ss","HH:mm","HH:mm:ss" };
+		String teste = fmts[dthrBr.getIndex()];
 		return fmts[dthrBr.getIndex()];
 	}
 	

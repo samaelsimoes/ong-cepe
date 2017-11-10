@@ -35,62 +35,14 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	public FluxoCaixaService(int num) {
 		this.num = num;
 	}
-	/*
-	public void montaOperacao()throws GlobalException{
-		if(this.operacao != null){
-		
-		if(this.operacao.getCentroCusto() != null)
-			this.operacao.setCentroCusto(new CentroCustoService(this.operacao.getCentroCusto().getId()).pesquisaId());
-		
-		if(this.operacao.getCentroCustoDestino() != null)
-			this.operacao.setCentroCusto(new CentroCustoService(this.operacao.getCentroCusto().getId()).pesquisaId());
-		
-		if(this.operacao.getPessoa() != null)
-			this.operacao.setPessoa(new PessoaService(this.operacao.getPessoa().getId()).pesquisaId());
-		
-		if(this.operacao.getEvento() != null)
-			this.operacao.setEvento(new EventoService(this.operacao.getEvento().getId()).pesquisaId());
-		}
-			
-	}
-	
-	public void montaOperacoes()throws GlobalException{
-		int count = 0;
-		for(Operacao operacao: this.operacoes){
-			this.operacao = operacao;
-			//montaOperacao();
-			this.operacoes.set(count, this.operacao);
-			count++;
-		}
-	}*/
 
 	public void adicionar()  throws GlobalException {
-		float valor  =0;	
-		if(this.operacao.getTipo() == 1){
-			valor = -(this.operacao.getValor());
-			this.operacao.setValor(valor);
-		
-		}else if(this.operacao.getTipo() == 2){
-			
-			Operacao op = new Operacao();
-			op.setCentroCusto(this.operacao.getCentroCustoDestino());
-			op.setEvento(this.operacao.getEvento());
-			op.setPessoa(this.operacao.getPessoa());
-			op.setUsuario(this.operacao.getUsuario());
-			op.setTipo(1);
-			op.setClassificacao(this.operacao.getClassificacao());
-			op.setData(this.operacao.getData());
-			op.setDescricao(this.operacao.getDescricao());
-			valor = -(this.operacao.getValor());
-			op.setValor(valor);
-			new FluxoCaixaDAO(op).persist();
-			
+
+		if(this.operacao != null){
+			new FluxoCaixaDAO(this.operacao).persist();		
 		}else if(this.operacao.getTipo()>2){
-			throw new GlobalException("Tipo de operação inválido");
+			throw new GlobalException("Operação nula, entre em contato com o administrador");
 		}
-		new FluxoCaixaDAO(this.operacao).persist();
-		
-		
 	}
 
 	public void adicionarLista (List<Operacao> operacoes) throws GlobalException {
@@ -102,19 +54,16 @@ public class FluxoCaixaService  implements Service<Operacao>{
 	
 	public Operacao pesquisaId()  throws GlobalException {
 		this.operacao = new FluxoCaixaDAO(this.num).findId();
-		//montaOperacao();
 		return this.operacao;
 	}
 	
 	public List<Operacao> pesquisaGeneric (String campo, HOperator operacao, String valor) throws GlobalException {
 		this.operacoes =  new FluxoCaixaDAO().findGeneric(campo, operacao, valor);
-	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaGeneric(String campo, HOperator operacao,	int num) throws GlobalException {
 		this.operacoes = new FluxoCaixaDAO().findGenericInt(campo, operacao, num);
-	//montaOperacoes();
 		return this.operacoes;
 	}
 	
@@ -125,33 +74,28 @@ public class FluxoCaixaService  implements Service<Operacao>{
 		fluxoCaixaDAO.setFindParams("data", HOperator.BETWEEN, periodos);
 		fluxoCaixaDAO.setAnd();
 		this.operacoes = fluxoCaixaDAO.findGenericBetween();
-	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaTipoIgual() throws GlobalException {
 		String tipo = Integer.toString(this.num);
 		this.operacoes = new FluxoCaixaDAO().findGeneric("tipo", HOperator.EQUALS, tipo);
-	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaCentroCustoIgual() throws GlobalException {
 		String tipo = Integer.toString(this.num);
 		this.operacoes = new FluxoCaixaDAO().findGeneric("centroCusto_id", HOperator.EQUALS, tipo);
-	//montaOperacoes();
 		return this.operacoes;
 	}
 
 	public List<Operacao> pesquisaNomeContem() throws GlobalException {
 		this.operacoes = new FluxoCaixaDAO().findGeneric("nome", HOperator.CONTAINS, this.valorStr);
-	//montaOperacoes();
 		return this.operacoes;
 	}
 	
 	public List<Operacao> pesquisaClassificacaoContem() throws GlobalException {
 		this.operacoes = new FluxoCaixaDAO().findGeneric("classificacao", HOperator.CONTAINS, this.valorStr);
-	//montaOperacoes();
 		return this.operacoes;
 	}
 		

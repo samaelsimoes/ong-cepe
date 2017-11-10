@@ -27,17 +27,18 @@ static{
 	
 		
 	public ObjectMapper getObject(){		
-		objMapper.setDateFormat(new SimpleDateFormat());				
+		DateFormat fmt = new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_BR));
+		fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
+		objMapper.setDateFormat(fmt);
 		return objMapper;				
 	}
-	
 	
 	public String getJson(Object obj) throws Exception{
 		StringWriter jsonObj = new StringWriter();
 		try{
 			
 			DateFormat fmt = new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_BR));
-			fmt.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+			/*fmt.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));*/
 			objMapper.setDateFormat(fmt);
 			objMapper.writeValue(jsonObj, obj);
 			return jsonObj.toString();

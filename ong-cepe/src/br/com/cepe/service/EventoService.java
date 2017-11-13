@@ -5,9 +5,11 @@ import java.util.List;
 
 import br.com.cepe.daoconnect.CidadeDAO;
 import br.com.cepe.daoconnect.EventoDAO;
+import br.com.cepe.daoconnect.ModalidadeDAO;
 import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.endereco.Cidade;
 import br.com.cepe.entity.pojo.evento.Evento;
+import br.com.cepe.entity.pojo.modalidade.Modalidade;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.interfaces.Service;
 
@@ -34,8 +36,23 @@ public class EventoService  implements Service<Evento>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		evento.setCidade(new CidadeService(this.evento.getCidade().getId()).pesquisaId());
-		evento.setModalidade(new ModalidadeService(this.evento.getModalidade().getId()).pesquisaId());
+		
+		if(this.evento != null & this.evento.getCidade().getId() != 0){
+			List<Cidade> cidades = new CidadeDAO().findGenericInt("id", HOperator.EQUALS, this.evento.getCidade().getId());
+			if(cidades != null & cidades.get(0) != null)
+				this.evento.setCidade(cidades.get(0));
+		}else{
+			throw new GlobalException("Erro ao adicionar evento, nenhum endereço vínculado");
+		}		
+		
+		if(this.evento != null & this.evento.getModalidade().getId() != 0){
+			List<Modalidade> modalidades = new ModalidadeDAO().findGenericInt("id", HOperator.EQUALS, this.evento.getModalidade().getId());
+			if(modalidades != null & modalidades.get(0) != null)
+				this.evento.setModalidade(modalidades.get(0));
+		}else{
+			throw new GlobalException("Erro ao adicionar evento, nenhuma modalidade vínculada");
+		}		
+		
 		new EventoDAO(this.evento).persist();
 	}
 

@@ -28,9 +28,9 @@ public class Evento {
 	protected Date data;
 	protected String hora;
 	protected long cep;
-	@ManyToOne(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER)
 	protected Cidade cidade;
-	@ManyToOne(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER)
 	protected Modalidade modalidade;
 	protected String bairro;
 	protected String rua;

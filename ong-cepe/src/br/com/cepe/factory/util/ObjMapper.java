@@ -3,7 +3,6 @@ package br.com.cepe.factory.util;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,10 +26,9 @@ static{
 	
 		
 	public ObjectMapper getObject(){		
-		DateFormat fmt = new SimpleDateFormat(dateFactory.getFmt(DataFmt.DT_HR_BR));
-		fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
-		objMapper.setDateFormat(fmt);
-		return objMapper;				
+		DateFormat fmt = dateFactory.getPattern(DataFmt.DT_HR_BR);
+		this.objMapper.setDateFormat(fmt);
+		return this.objMapper;				
 	}
 	
 	public String getJson(Object obj) throws Exception{

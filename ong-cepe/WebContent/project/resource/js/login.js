@@ -3,17 +3,14 @@ ONG.entrada = {};
 
 $(document).ready(function(){
 	$(document).keypress(function(e) {
-		debugger
 		if(e.which == 13) {
 			ONG.login.entrada();
 		}
 	});
 		
-				
-		
-		
-			
 		ONG.login.entrada = function() {
+
+			// do something in the background			
 	
 			var msg= "";
 			
@@ -26,37 +23,44 @@ $(document).ready(function(){
 			//msg += ONG.login.valida("Campo Senha ", $("#passwordhidden").val()); //verificando a senha que esta sendo salva em um ID HIDDEN no index.html
 			
 			if(msg == "") {
+				window.setTimeout(function() {	
+	        		var dialog = bootbox.dialog({
+	        		    title: 'Veriricando',
+	        		    message: '<p><i class="fa fa-spin fa-spinner"></i> Carregando...</p>'
+	        		});
+	        	}, 2000);
 				$.ajax({	
 	                type:"POST",				
 	                url: ONG.contextPath + "/LoginServlet",  
 	                data: $("#formularioLogin").serialize(),
 	                
 	                success: function(msg){
-	                	
+	                	window.setTimeout(function() {	
+
+		                	dialog.init(function(){
+		                	    setTimeout(function(){
+		                	        dialog.find('.bootbox-body').html('Acesso permitido!');
+		                	    }, 2000);
+		                	});
+	                	}, 2000);
 	                	var usuario = msg.usuario;
 	 				    var tipo = msg.tipouser;
 	
 	                	document.cookie = tipo;					
-						                	
-	                	var dialog = bootbox.dialog({
-	        			    title: 'Verificando Dados',
-	        			    message: '<p><i class="fa fa-spin fa-spinner"></i> Carregando...</p>'
-	        			});
-	                	dialog.init(function(){
-	        	            setTimeout(function(){
-	        	            	dialog.find('.bootbox-body').html("Acesso Permitido!");  
-	        	            }, 3000);
-	        	        });
-	                	
+
 	                	var intervalo = window.setInterval(function() {	}, 50);
+
 	                	window.setTimeout(function() {	
 	                	    clearInterval(intervalo);
 	            			$(location).attr('href', '..' + msg.acesso );
-	                	}, 5000);
+	                	}, 6000);
 	                },
 	                
 	                error: function(err){
-	                	bootbox.alert("Login Invalido ! " );
+	                	bootbox.alert({
+	                	    message: "Login invalido! ",
+	                	    size: 'small'
+	                	});
 	                }
 	        	});	
 			}else{

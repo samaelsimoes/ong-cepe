@@ -188,4 +188,16 @@ canvas {
 .modal-dialog, .modal-content, .modal {
   z-index: 1999 !important; }
 
+.custom-pdf {
+  color: #605B5B;
+  background-color: white;
+  padding: 50px;
+  margin: 10px; }
+
+.custom-table th {
+  font-size: 14px; }
+
+.custom-table td {
+  font-size: 12px; }
+
 /*# sourceMappingURL=custom.css.map */

@@ -2,7 +2,6 @@ package br.com.cepe.entity.pojo.evento;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;

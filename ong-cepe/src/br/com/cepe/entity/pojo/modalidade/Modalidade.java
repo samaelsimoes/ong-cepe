@@ -1,6 +1,7 @@
 package br.com.cepe.entity.pojo.modalidade;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Modalidade {
 	private String descricao;
 	private String restricoes;
 	private String observacoes;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonBackReference
 	private CentroCusto centroCusto; 
 

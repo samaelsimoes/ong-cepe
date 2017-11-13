@@ -101,9 +101,13 @@ $(document).ready(function(){
 			ONG.usuarioRest.inserir({
 				data : newCad,
 				success : function(msg) {
-					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html'); 
-					});
+//					bootbox.alert(msg, function(){ 
+						bootbox.alert(msg);
+						ONG.usuario.pesquisar();
+						$('input').val('');
+						$('#modaladd').modal('toggle');
+//						$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html'); 
+//					});
 				},
 				error : function(err) {
 					console.log('err' ,err);
@@ -166,7 +170,7 @@ $(document).ready(function(){
 				data : EditCad,
 				success : function(msg) {
 					bootbox.alert(msg, function(){ 
-						ONG.usuario.exibirLista(undefined, "");
+						ONG.usuario.pesquisar();
 						$('input').val('');
 						$('#modaledit').modal('toggle');
 					});				
@@ -210,8 +214,8 @@ $(document).ready(function(){
 	};
 	ONG.usuario.validarEdit = function(usuario) {
 
-		var senhaConf = btoa($("#senhaEdit").val());
-		
+		var senhaConf = btoa($("#senhaConfEdit").val());
+		debugger;
 		var aux = "";
 
 		if (usuario.nome == "") {
@@ -226,8 +230,8 @@ $(document).ready(function(){
 			aux += "Senha é Obrigatório <br/>";
 		}if (usuario.senha != senhaConf ) {
 				aux += "Senhas inválidas <br/>";
-				$("#senha").val("");
-				$("#senhaConf").val("");
+				$("#senhaEdit").val("");
+				$("#senhaConfEdit").val("");
 		}
 		
 		

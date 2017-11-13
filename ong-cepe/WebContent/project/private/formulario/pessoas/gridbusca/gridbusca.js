@@ -213,7 +213,7 @@ $(document).ready(function(){
     
     ONG.pessoa.buscaEstadoEdit2 = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado2){													
 				ONG.pessoa.montaSelectEstadoEdit2(listEstado2);
 			},
@@ -265,7 +265,7 @@ $(document).ready(function(){
     
     ONG.pessoa.buscaEstadoEdit1 = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado1){													
 				ONG.pessoa.montaSelectEstadoEdit1(listEstado1);
 			},

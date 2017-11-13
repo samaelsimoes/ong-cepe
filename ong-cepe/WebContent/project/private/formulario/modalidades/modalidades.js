@@ -95,7 +95,7 @@ $(document).ready(function(){
 				success : function(msg) {
 					console.log('success', msg);
 					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/modalidades.html'); });
+						$(location).attr('href', ONG.contextPath+'/project/private/modalidades.html'); });
 					
 				},
 				error : function(err) {

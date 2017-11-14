@@ -35,7 +35,7 @@ $(document).ready(function(){
 		var ate = $("#dataate").val();
 		
 		if(cc == "" && de == "" && ate == ""){
-			ONG.fluxocaixa.buscarFluxo(undefined, "");
+			ONG.relFlox.buscarFluxo(undefined, "");
 			return false;
 		} else if(cc == "" || de == "" || ate == ""){
 			bootbox.alert("Selecione um Centro de Custo e o Período.");
@@ -47,7 +47,7 @@ $(document).ready(function(){
 		d = new Date(ate.split("/").reverse().join("-"));
 		ate = d.getTime();
 		
-    	ONG.relFlox.pesquisarPeriodoCC({
+    	ONG.fluxoCaixaRest.pesquisarPeriodoCC({
 			data : de+"/"+ate+"/"+parseInt(cc),
 			success: function(listPesq){													
 				ONG.relFlox.buscarFluxo(listPesq);
@@ -55,8 +55,8 @@ $(document).ready(function(){
 			error: function(err){							
 				bootbox.alert("Erro ao pesquisar, entrar em contato com o Administrador se o problema persistir!");
 			}
-    	});			
-	}	
+		});			
+	}		
 	
 	
 	ONG.relFlox.buscarFluxo = function(listFluxo, busca){

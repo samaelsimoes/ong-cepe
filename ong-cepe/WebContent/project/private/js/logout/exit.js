@@ -14,6 +14,11 @@ $(document).ready(function(){
 
 	logout.saindo = function() {
 		
+	   logout.saindo();
+	};
+
+	logout.saindo = function() {
+		
 		$.ajax({	
             type:"POST",				
             url: ONG.contextPath + "/LogoutServlet",              

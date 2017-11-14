@@ -37,7 +37,7 @@ public class FluxoCaixaRest extends ObjMapper {
 			if(operacao != null)
 				new FluxoCaixaService(operacao).adicionar();
 			else
-				throw new GlobalException("Revisar os seguintes campo! ");
+				throw new GlobalException("Revisar os seguintes campos! ");
 			return this.buildResponse("Cadastro concluido com sucesso.");
 			
 		} catch (Throwable e) {

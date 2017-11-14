@@ -7,7 +7,6 @@ $(document).ready(function(){
 	    }
 	});
 	ONG.evento.searchAllEvent=function(){ 	
-		
 	    var busca=$("#consuev").val();	  	
 	    ONG.evento.searchEvent(undefined,busca);
 	}		 	
@@ -18,7 +17,6 @@ $(document).ready(function(){
 		html += 
 			"<thead class='table table-striped '>" +
 				"<tr>" +
-					
 					"<th> Nome </th> " +
 					"<th> Descrição </th>" +
 					"<th> Tipo </th>" +
@@ -27,9 +25,9 @@ $(document).ready(function(){
 					"<th> Estado </th>" +
 					"<th> Cidade </th>" +
 					"<th> Bairro </th>" +
-					"<th> Rua </th>" +
-					"<th> Número </th>" +
-					"<th> Complemento </th>" +
+//					"<th> Rua </th>" +
+//					"<th> Número </th>" +
+//					"<th> Complemento </th>" +
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>" +
@@ -62,12 +60,12 @@ $(document).ready(function(){
 						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
 						html += "<td>" + listEvent[i].cidade.nome + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
-						html += "<td>" + listEvent[i].rua + "</td>";
-						html += "<td>" + listEvent[i].numero + "</td>";
-						html += "<td>" + listEvent[i].complemento + "</td>";
+//						html += "<td>" + listEvent[i].rua + "</td>";
+//						html += "<td>" + listEvent[i].numero + "</td>";
+//						html += "<td>" + listEvent[i].complemento + "</td>";
 
 						html += "<td>"+
-									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.evento.buscID("+listEvent[i].id+")'>Editar</button>"+ " " + " " +
+									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.evento.modaledit("+listEvent[i].id+")'>Editar</button>"+ " " + " " +
 									"<button type='button'class='btn btn-trash' onclick='ONG.evento.confExcluir("+listEvent[i].id+")'>Excluir</button>"+
 								"</td>";						
 					html += "</tr>";  
@@ -120,12 +118,12 @@ $(document).ready(function(){
 		msg += ONG.evento.validaVazio("Tipo evento: ", $("#typeevent").val());		
 		msg += ONG.evento.validaVazio("Cep: ", $("#cep").val());
 		msg += ONG.evento.validaVazio("Data: ", $("#data").val());
-		msg += ONG.evento.validaVazio("Hora: ", $("#horario").val());
+//		msg += ONG.evento.validaVazio("Hora: ", $("#horario").val());
 		msg += ONG.evento.validaVazio("Estado: ", $("#addestado").val());
 		msg += ONG.evento.validaVazio("Cidade: ", $("#addcidade").val());
-		msg += ONG.evento.validaVazio("Bairro: ", $("#bairro").val());			
-		msg += ONG.evento.validaVazio("Rua: ", $("#rua").val());
-		msg += ONG.evento.validaVazio("Complemento: ", $("#complemento").val());
+//		msg += ONG.evento.validaVazio("Bairro: ", $("#bairro").val());			
+//		msg += ONG.evento.validaVazio("Rua: ", $("#rua").val());
+//		msg += ONG.evento.validaVazio("Complemento: ", $("#complemento").val());
 		msg += ONG.evento.validaVazio("Descrição: ", $("#descricao").val());
 		//msg += validaVazio("Modalidade: ", $("#modalidade").val());
 
@@ -203,42 +201,12 @@ $(document).ready(function(){
     
     // ------------------------
 
-    ONG.evento.buscID = function( id ){
-    	$.ajax({
-			  
-			url: ONG.contextPath + "/rest/evento/id/" + id,				  
-			success:function(dados){
-
-				if(dados != ""){
-					$("#id").val(dados.id);
-		    		$("#nomeedit").val(dados.nome);
-		    		$("#typeeventedit").val(dados.tipo);
-		    		$("#cepedit").val(dados.cep);
-		    		$("#modalidadeedit").val(dados.modalidade);
-		    		$("#horarioedit").val(dados.hora);
-		    		$("#estadoedit").val(dados.cidade.estado.nome);
-		    		$("#cidadeedit").val(dados.cidade.nome);
-					$("#bairroedit").val(dados.bairro);
-					$("#ruaedit").val(dados.rua);
-					$("#numeroedit").val(dados.numero);
-					$("#complementoedit").val(dados.complemento);
-					$("#descricaoedit").val(dados.descricao);
-
-					ONG.evento.buscaEstadoedit();
-		    	}			
-			},			
-			error: function(err){				
-				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
-			}
-		});
-    };
-
     ONG.evento.editarEvent = function(){
 
     	var msg  = "";
     	
     	if($("#id").val() == ""){
-    		msg += " Impossivel editar Evento, gentileza entrar em contato com o administrador, motivo sem campo id";
+    		msg += "Não é possível editar o Evento, gentileza entrar em contato com o administrador";
     	}
     	
 		msg += ONG.evento.validaVazio("Nome: ", $("#nomeedit").val());
@@ -343,9 +311,8 @@ $(document).ready(function(){
 
     ONG.evento.buscaEstado = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){		
-				console.log(listEstado);
 				ONG.evento.montaSelectEstado(listEstado);
 			},
 			error: function(err) {							
@@ -367,11 +334,14 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-
+    
     ONG.evento.montaSelectEstado = function(listEstado) {
+    	var option = '';
+    	$('#addestado').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#addestado'));
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#addestado'));
+				option = $( "<option></option>" ).appendTo($('#addestado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
@@ -384,13 +354,15 @@ $(document).ready(function(){
     }
 
     ONG.evento.montaSelectCidade = function( listaCidade ) {
+    	var option = '';
+    	$('#addcidade').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#addcidade'));
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#addcidade' ) );
+				option = $( "<option></option>" ).appendTo( $( '#addcidade' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
-			ONG.evento.buscamodalidade();
 		}
     }
     
@@ -412,10 +384,12 @@ $(document).ready(function(){
     		};					
     		ONG.ajax.get(cfg);
     }
-    ONG.evento.montaModalidade = function(listModalidade){    	
-    	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) { // montando meus estados
+    ONG.evento.montaModalidade = function(listModalidade){
+    	var option = '';
+    	$('#modalidade').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#modalidade'));    	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listModalidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#modalidade' ) );
+				option = $( "<option></option>" ).appendTo( $( '#modalidade' ) );
 				option.attr( "value", listModalidade[i].id );
 				option.html( listModalidade[i].nome );
 			}
@@ -424,7 +398,7 @@ $(document).ready(function(){
     // EDITAR CIDADE E ESTADO
     ONG.evento.buscaEstadoedit = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+    		url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){													
 				ONG.evento.montaSelectEstadoedit(listEstado);
 			},
@@ -434,13 +408,14 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-    ONG.evento.buscaCidadeedit = function(id) {
-    	console.log(id);
+    ONG.evento.buscaCidadeedit = function(id, callback) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade) {	
 				console.log(listaCidade);
 				ONG.evento.montaSelectCidadeedit(listaCidade);
+				if(callback != undefined)
+					callback();
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -450,28 +425,33 @@ $(document).ready(function(){
     }
 
     ONG.evento.montaSelectEstadoedit = function(listEstado) {
+    	var option = '';
+    	$('#estadoedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#estadoedit'));
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estadoedit'));
+				option = $( "<option></option>" ).appendTo($('#estadoedit'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
 			var items = document.querySelector('#estadoedit');
 			items.addEventListener('change', function() {
 				var valor =	this.value // o valo
-				ONG.evento.buscaCidadeedit( valor );
+				ONG.evento.buscaCidadeedit(valor,undefined);
 			});
 		}
     }
 
     ONG.evento.montaSelectCidadeedit = function( listaCidade ) {
+    	var option = '';
+    	$('#cidadeedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#cidadeedit'));    	
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
 				var option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
-			ONG.evento.buscamodalidadeedit();
 		}
     }
     ONG.evento.buscamodalidadeedit = function(){
@@ -489,13 +469,57 @@ $(document).ready(function(){
     		ONG.ajax.get(cfg);
     }
     ONG.evento.montaModalidadeEdit = function(listModalidade){    	
-    	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) { // montando meus estados
+    	var option = '';
+    	$('#modalidadeedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#modalidadeedit'));       	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) {
 			for(var i = 0; i < listModalidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#modalidadeedit' ) );
+				option = $( "<option></option>" ).appendTo( $( '#modalidadeedit' ) );
 				option.attr( "value", listModalidade[i].id );
 				option.html( listModalidade[i].nome );
 			}
 		}    	
+    };
+    
+    ONG.evento.buscID = function( id ){
+    	$.ajax({
+			  
+			url: ONG.contextPath + "/rest/evento/id/" + id,				  
+			success:function(dados){
+		    	ONG.evento.buscaCidadeedit(dados.cidade.estado.id, function(){
+		    		ONG.evento.preencheedit(dados);
+		    	});			
+			},			
+			error: function(err){				
+				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
+			}
+		});
+    };
+    
+    ONG.evento.modaladd = function(){    	
+    	ONG.evento.buscaEstado();
+		ONG.evento.buscamodalidade();
+    };
+    
+    ONG.evento.modaledit = function(idEvento){
+    	ONG.evento.buscaEstadoedit();
+		ONG.evento.buscamodalidadeedit();
+    	ONG.evento.buscID(idEvento);
+    };
+    ONG.evento.preencheedit = function (dados){
+		$("#id").val(dados.id);
+		$("#nomeedit").val(dados.nome);
+		$("#typeeventedit").val(dados.tipo);
+		$("#cepedit").val(dados.cep);
+		$("#dataedit").val(dados.data);
+		$("#modalidadeedit").val(dados.modalidade.id);
+		$("#horarioedit").val(dados.hora);
+		$("#estadoedit").val(dados.cidade.estado.id);
+		$("#cidadeedit").val(dados.cidade.id);
+		$("#bairroedit").val(dados.bairro);
+		$("#ruaedit").val(dados.rua);
+		$("#numeroedit").val(dados.numero);
+		$("#complementoedit").val(dados.complemento);
+		$("#descricaoedit").val(dados.descricao);
     }
 });
 

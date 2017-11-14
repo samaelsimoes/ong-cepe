@@ -36,7 +36,7 @@ $(document).ready(function(){
 		html += 
 			"<thead class='table table-striped striped custom-table'>" +
 				"<tr>" +					
-					"<th> Centro de Custo </th> " +
+					"<th style='width:250px'> Centro de Custo </th> " +
 					"<th> Tipo </th>" +
 					"<th> Data </th>" +
 					"<th> Classificação </th>" +
@@ -112,6 +112,7 @@ $(document).ready(function(){
 				}
 		    }
 		html +="</table>";
+		console.log(html);
 		$("#rextratocentrocusto").html(html);
 	}
 	

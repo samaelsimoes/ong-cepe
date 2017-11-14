@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-2">
         <div class= "btn-md h2">
-            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="ONG.evento.buscaEstado()">
+            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd" onclick="ONG.evento.modaladd()">
                 <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
             </button>
         </div>
@@ -59,9 +59,9 @@
                             
                             <select class="form-control" name="typeevent" id="typeevent">
                             
-                                <option selected>Selecione uma das opções</option>
+                                <option value="">Selecione</option>
                                 <option value="1">Beneficiente</option>
-                                <option value="2">Sessao</option>
+                                <option value="2">Sessão</option>
                                 <option value="3">Viagem</option>                            
                             </select>    
                         </div> 
@@ -69,12 +69,14 @@
 
                     <div class="form-group row">                      
                         <div class="col-xs-6 col-md-6 ">
+                        
+                            <label class="col-2 col-form-label" for="cidade">Modalidade:</label>
+                            <select class="form-control" name="modalidade" id="modalidade"></select> 
+                            
+                        </div>  
+                        <div class="col-xs-6 col-md-6 ">
                             <label for="cep" class="col-2 col-form-label">Cep:</label>
                             <input class="form-control" type="text" id="cep" placeholder="Cep" maxlength="9">
-                        </div>  
-                        <div class="col-xs-6 col-md-6">
-                            <label for="bairro" class="col-2 col-form-label">Bairro:</label>
-                            <input class="form-control" type="text"  id="bairro" placeholder="Bairro">
                         </div>  
                     </div>
 
@@ -92,33 +94,25 @@
 
                      <div class="form-group row">
                         <div class="col-xs-6 col-md-6">
+                        
                             <label class="col-2 col-form-label" for="addestado">Estado:</label>
-                            
                             <select class="form-control" name="addestado" id="addestado">
                             
-                                <option >Selecione o estado:</option>
                             </select>       
                         </div>
                         <div class="col-xs-6 col-md-6">
                             
                             <label class="col-2 col-form-label" for="addcidade">Cidade:</label>
+                            <select class="form-control" name="addcidade" id="addcidade"></select>    
                             
-                            <select class="form-control" name="addcidade" id="addcidade">
-                            
-                                <option selected>Selecione a cidade:</option>
-                            </select>    
                         </div>  
                     </div>
 
                      <div class="form-group row">
-                        <div class="col-xs-6 col-md-6 ">
-                            <label class="col-2 col-form-label" for="cidade">Modalidade:</label>
-                            
-                            <select class="form-control" name="modalidade" id="modalidade">
-                                                        
-                            </select> 
-                        </div>
-                        
+                        <div class="col-xs-6 col-md-6">
+                            <label for="bairro" class="col-2 col-form-label">Bairro:</label>
+                            <input class="form-control" type="text"  id="bairro" placeholder="Bairro">
+                        </div>                                    
                         <div class="col-xs-6 col-md-6">                    
                             <label for="rua" class="col-2 col-form-label">Rua:</label>
                             <input class="form-control" type="text" id="rua" placeholder="rua">
@@ -190,7 +184,7 @@
                             
                                 <option selected>Selecione uma das opções</option>
                                 <option value="1">Beneficiente</option>
-                                <option value="2">Sessao</option>
+                                <option value="2">Sessão</option>
                                 <option value="3">Viagem</option>                            
                             </select>    
                         </div>  
@@ -201,9 +195,11 @@
                             <label for="cepedit" class="col-2 col-form-label">Cep:</label>
                             <input class="form-control" type="text" id="cepedit" placeholder="cepedit" maxlength="9">
                         </div>  
-                        <div class="col-xs-6 col-md-6">
-                            <label for="bairroedit" class="col-2 col-form-label">Bairro:</label>
-                            <input class="form-control" type="text"  id="bairroedit" placeholder="bairroedit">
+                        <div class="col-xs-6 col-md-6 ">
+                        
+                            <label class="col-2 col-form-label" for="modalidadeedit">Modalidade:</label>
+                            <select class="form-control" name="modalidadeedit" id="modalidadeedit"></select> 
+                        
                         </div>
                     </div>
 
@@ -240,14 +236,10 @@
                     </div>
 
                      <div class="form-group row">
-                        <div class="col-xs-6 col-md-6 ">
-                            <label class="col-2 col-form-label" for="modalidadeedit">Modalidade:</label>
-                            
-                            <select class="form-control" name="modalidadeedit" id="modalidadeedit">
-                                                        
-                            </select> 
-                        </div>
-                        
+                        <div class="col-xs-6 col-md-6">
+                            <label for="bairroedit" class="col-2 col-form-label">Bairro:</label>
+                            <input class="form-control" type="text"  id="bairroedit" placeholder="bairroedit">
+                        </div>                     
                         <div class="col-xs-6 col-md-6">                    
                             <label for="ruaedit" class="col-2 col-form-label">Rua:</label>
                             <input class="form-control" type="text" id="ruaedit" placeholder="ruaedit">

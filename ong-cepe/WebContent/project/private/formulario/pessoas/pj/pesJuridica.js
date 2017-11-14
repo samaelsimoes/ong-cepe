@@ -352,7 +352,7 @@ $(document).ready(function(){
 
     ONG.pessoaJuridica.buscaEstado = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){													
 				ONG.pessoaJuridica.montaSelectEstado(listEstado);
 			},
@@ -403,7 +403,7 @@ $(document).ready(function(){
     // EDITAR CIDADE E ESTADO
     ONG.pessoaJuridica.buscaEstadoedit = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*" + 1,
 			success: function(listEstado){													
 				ONG.pessoaJuridica.montaSelectEstadoedit(listEstado);
 			},

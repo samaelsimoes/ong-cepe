@@ -3,6 +3,7 @@
  **/
 package br.com.cepe.factory.date;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,11 +15,17 @@ public class DateFactory {
 
 
 	public Date getData(DataFmt fmt, Date data){
+		String dataStr = null;
+		SimpleDateFormat formato = null;
+		Date formatada = null;
 		try {
-			String dataStr = data.toString();
-			SimpleDateFormat formato = new SimpleDateFormat(getFmt(fmt));
-			formato.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
-			Date formatada = formato.parse(dataStr);
+			if(fmt != null && data != null){
+				dataStr = data.toString();
+				formato = new SimpleDateFormat(getFmt(fmt));
+				formato.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+				formatada = formato.parse(dataStr);
+			}
+			
 			return formatada;
 			
 		} catch (ParseException e) {			
@@ -26,6 +33,15 @@ public class DateFactory {
 		}
 		return null;
 		
+	}
+	
+	public DateFormat getPattern(DataFmt fmt){
+			if(fmt != null){
+				DateFormat formatada = new SimpleDateFormat(getFmt(fmt));
+				formatada.setTimeZone(TimeZone.getTimeZone("UTC"));
+				return formatada;
+			}
+			return null;
 	}
 	
 	public String getFmt(DataFmt dthrBr) {

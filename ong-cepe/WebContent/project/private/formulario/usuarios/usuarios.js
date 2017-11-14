@@ -16,7 +16,6 @@ $(document).ready(function(){
 		ONG.usuario.exibirLista(undefined, valorPesquisa);
 	};
 	ONG.usuario.exibirLista = function(lista, valorPesquisa){
-		console.log(document.cookie);
 		var html = "<table id='tabela'  class='tablesorter table table-responsive custom-table-margin-b' >";
 		html +=
 					"<thead table table-striped>" +
@@ -46,7 +45,7 @@ $(document).ready(function(){
 				}
 				html +="<td>"+lista[i].usuario+"</td>";	
 				if(lista[i].status == 0){
-					html += "<td>"+"Inativo"+"</td>";
+					html += "<td><p>"+"<strong>Inativo</strong>"+"</p></td>";
 				}
 				if(lista[i].status == 1){
 					html += "<td>"+"Ativo"+"</td>";
@@ -97,16 +96,18 @@ $(document).ready(function(){
 				status: 1,
 				senha:senha,
 		};
-		console.log('novo cadastro',newCad);
 		if (ONG.usuario.validar(newCad)) {
 			
 			ONG.usuarioRest.inserir({
 				data : newCad,
 				success : function(msg) {
-					console.log('success', msg);
-					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html'); 
-					});
+//					bootbox.alert(msg, function(){ 
+						bootbox.alert(msg);
+						ONG.usuario.pesquisar();
+						$('input').val('');
+						$('#modaladd').modal('toggle');
+//						$(location).attr('href', ONG.contextPath+'/project/private/usuarios.html'); 
+//					});
 				},
 				error : function(err) {
 					console.log('err' ,err);
@@ -169,7 +170,7 @@ $(document).ready(function(){
 				data : EditCad,
 				success : function(msg) {
 					bootbox.alert(msg, function(){ 
-						ONG.usuario.exibirLista(undefined, "");
+						ONG.usuario.pesquisar();
 						$('input').val('');
 						$('#modaledit').modal('toggle');
 					});				
@@ -213,8 +214,8 @@ $(document).ready(function(){
 	};
 	ONG.usuario.validarEdit = function(usuario) {
 
-		var senhaConf = btoa($("#senhaEdit").val());
-		
+		var senhaConf = btoa($("#senhaConfEdit").val());
+		debugger;
 		var aux = "";
 
 		if (usuario.nome == "") {
@@ -229,8 +230,8 @@ $(document).ready(function(){
 			aux += "Senha é Obrigatório <br/>";
 		}if (usuario.senha != senhaConf ) {
 				aux += "Senhas inválidas <br/>";
-				$("#senha").val("");
-				$("#senhaConf").val("");
+				$("#senhaEdit").val("");
+				$("#senhaConfEdit").val("");
 		}
 		
 		

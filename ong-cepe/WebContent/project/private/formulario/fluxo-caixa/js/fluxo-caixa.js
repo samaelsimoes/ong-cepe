@@ -122,7 +122,6 @@ $(document).ready(function(){
 	ONG.fluxocaixa.buscarFluxo(undefined, "");
 	
 	ONG.fluxocaixa.addFluxo = function () {
-		console.log("teste");
 		var msg = "";
 		
 		msg += ONG.fluxocaixa.validaVazio("Tipo: ", $("#tipofluxoadd").val());
@@ -475,11 +474,12 @@ $(document).ready(function(){
 		msg += ONG.fluxocaixa.validaVazio("Tipo: ", $("#tipofluxoedit").val());
 		msg += ONG.fluxocaixa.validaVazio("Centro Custo: ", $("#centrocustoedit1").val());		
 		msg += ONG.fluxocaixa.validaVazio("Data: ", $("#dataedit").val());
-		msg += ONG.fluxocaixa.validaVazio("Evento: ", $("#eventoedit").val());
+//		msg += ONG.fluxocaixa.validaVazio("Evento: ", $("#eventoedit").val());
 		msg += ONG.fluxocaixa.validaVazio("Classificação: ", $("#classificacaoedit").val());
-		msg += ONG.fluxocaixa.validaVazio("Pessoa: ", $("#pessoaedit").val());
+//		msg += ONG.fluxocaixa.validaVazio("Pessoa: ", $("#pessoaedit").val());
 		msg += ONG.fluxocaixa.validaVazio("Valor: ", $("#valoredit").val());
-		msg += ONG.fluxocaixa.validaVazio("Destino Centro de Custo: ", $("#centrodecustoedit2").val());
+		if($("#tipofluxoadd").val() == 2)
+			msg += ONG.fluxocaixa.validaVazio("Destino Centro de Custo: ", $("#centrodecustoedit2").val());
 		msg += ONG.fluxocaixa.validaVazio("Descricao: ", $("#descricaoedit").val());
 		
 		if(msg == ""){

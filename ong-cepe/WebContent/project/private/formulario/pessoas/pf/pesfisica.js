@@ -364,7 +364,7 @@ $(document).ready(function(){
 
     ONG.pessoaFisica.buscaEstado = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){													
 				ONG.pessoaFisica.montaSelectEstado(listEstado);
 			},
@@ -415,7 +415,7 @@ $(document).ready(function(){
 
     ONG.pessoaFisica.buscaEstadoEdit = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/estado/" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){													
 				ONG.pessoaFisica.montaSelectEstadoEdit(listEstado);
 			},

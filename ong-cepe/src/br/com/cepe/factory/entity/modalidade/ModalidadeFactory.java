@@ -98,7 +98,6 @@ public class ModalidadeFactory extends ObjMapper {
 		return modalidades.get(0);
 	}
 	
-	
 	public Class<?> getClasse(){
 		return this.modalidadeClasse;
 	}

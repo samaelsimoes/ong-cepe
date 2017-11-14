@@ -2,7 +2,6 @@ package br.com.cepe.entity.pojo.evento;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,9 +27,9 @@ public class Evento {
 	protected Date data;
 	protected String hora;
 	protected long cep;
-	@ManyToOne(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER)
 	protected Cidade cidade;
-	@ManyToOne(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER)
 	protected Modalidade modalidade;
 	protected String bairro;
 	protected String rua;

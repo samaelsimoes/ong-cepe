@@ -29,72 +29,80 @@ $(document).ready(function(){
 		}
 	} // FIM BUSCA PARA ALIMENTAR SELECTED
 	
+	ONG.relFlox.pesquisar = function(){
+		var cc = $("#tipoCC").val();
+		var de = $("#datade").val();
+		var ate = $("#dataate").val();
+		
+		if(cc == "" && de == "" && ate == ""){
+			ONG.fluxocaixa.buscarFluxo(undefined, "");
+			return false;
+		} else if(cc == "" || de == "" || ate == ""){
+			bootbox.alert("Selecione um Centro de Custo e o Período.");
+			return false;
+		}
+		
+		var d = new Date(de.split("/").reverse().join("-"));
+		de = d.getTime();
+		d = new Date(ate.split("/").reverse().join("-"));
+		ate = d.getTime();
+		
+    	ONG.relFlox.pesquisarPeriodoCC({
+			data : de+"/"+ate+"/"+parseInt(cc),
+			success: function(listPesq){													
+				ONG.relFlox.buscarFluxo(listPesq);
+			},
+			error: function(err){							
+				bootbox.alert("Erro ao pesquisar, entrar em contato com o Administrador se o problema persistir!");
+			}
+    	});			
+	}	
+	
+	
 	ONG.relFlox.buscarFluxo = function(listFluxo, busca){
 
-		var html = "<table class='table table-responsive custom-table-margin-b '>";
+		var html = "<table class='table table-responsive custom-table-margin-b'>";
 		
 		html += 
-			"<thead class='table table-striped striped custom-table'>" +
+			"<thead class='table table-striped '>" +
 				"<tr>" +					
-					"<th style='width:250px'> Centro de Custo </th> " +
-					"<th> Tipo </th>" +
+					"<th> Centro de Custo </th> " +
 					"<th> Data </th>" +
-					"<th> Classificação </th>" +
-					"<th> Pessoa </th>" +
-					"<th> Evento </th>" +
-					"<th> Destino </th>" +
+					"<th> Tipo </th>" +
 					"<th> Descrição </th>" +
+					"<th> Usuario </th>" +
+					"<th> Evento </th>" +
 					"<th> Valor </th>" +
 				"</tr>" +
 			"</thead>";					
 		
 		    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
 			  	for(var i = 0; i < listFluxo.length; i++){
-					html += "<tr class='custom-table'>";					
-					html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
-						if(listFluxo[i].tipo == 0){ // ?? ainda nao sei vou ver
-							html += "<td>Entrada</td>";
-						}else if(listFluxo[i].tipo == 1){
-							html += "<td>Saída</td>";
-						}else if(listFluxo[i].tipo == 2){
-							html += "<td>Transferência</td>";
-						}
-						
-						html += "<td>" + listFluxo[i].data + "</td>";
-						
-						if(listFluxo[i].classificacao == 0){ // ?? ainda nao sei vou ver
-							html += "<td>Compra</td>";
-						}else if(listFluxo[i].classificacao == 1){
-							html += "<td>Venda</td>";
-						}else if(listFluxo[i].classificacao == 2){
-							html += "<td>Doação</td>";
-						}else if(listFluxo[i].classificacao == 3){
-							html += "<td>Custo operacional</td>";
-						}
-						
-						if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
-							html += "<td></td>";
-						}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
-							html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
-						}
-						
-						if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
-							html += "<td></td>";
-						}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
-							html += "<td>" + listFluxo[i].evento.nome + "</td>";
-						}
-						
-						if(listFluxo[i].centroCustoDestino == null || listFluxo[i].centroCustoDestino == undefined){
-							html += "<td></td>";
-						}else if(listFluxo[i].centroCustoDestino != null && listFluxo[i].centroCustoDestino != undefined){
-							html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
-						}
-						
-						html += "<td>" + listFluxo[i].descricao + "</td>";
-						html += "<td>" + "R$ " + parseFloat(listFluxo[i].valor).toFixed(2).replace('.',',') + "</td>";
-											
-					html += "</tr>";  
-					
+			  		html += "<tr>";					
+			  		html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
+
+			  			html += "<td>" + listFluxo[i].data + "</td>";
+
+			  			if(listFluxo[i].tipo == 0){ 
+			  				html += "<td>Entrada</td>";
+			  			}else if(listFluxo[i].tipo == 1){
+			  				html += "<td>Saída</td>";
+			  			}else if(listFluxo[i].tipo == 2){
+			  				html += "<td>Transferência</td>";
+			  			}
+			  			html += "<td>" + listFluxo[i].descricao + "</td>";
+			  			if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){
+			  				html += "<td></td>";
+			  			}else if(listFluxo[i].pessoa != null && listFluxo[i].pessoa != undefined){
+			  				html += "<td>" + listFluxo[i].pessoa.nome + "</td>";
+			  			}
+			  			if(listFluxo[i].evento == null || listFluxo[i].evento == undefined){
+			  				html += "<td></td>";
+			  			}else if(listFluxo[i].evento != null && listFluxo[i].evento != undefined){
+			  				html += "<td>" + listFluxo[i].evento.nome + "</td>";
+			  			}
+			  			html += "<td>" + "R$ " + parseFloat(listFluxo[i].valor).toFixed(2).replace('.',',') + "</td>";	
+			  		html += "</tr>";  
 			    }
 		    }else{
 			    if(listFluxo == undefined || (listFluxo != undefined && listFluxo.length > 0)){
@@ -112,14 +120,8 @@ $(document).ready(function(){
 				}
 		    }
 		html +="</table>";
-		console.log(html);
 		$("#rextratocentrocusto").html(html);
 	}
 	
-	ONG.relFlox.buscarFluxo(undefined, "");
-	
-	ONG.relFlox.geradorpdf = function () {
-		
-	
-	}
+	ONG.relFlox.buscarFluxo(undefined, "");	 	
 })

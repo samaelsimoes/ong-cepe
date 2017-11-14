@@ -19,8 +19,6 @@
 	
 	<section class="padding-vertical-small custom-class">
 		<div class="container">
-			
-			
 			<div class="form-group row">
 				<div class="col-xs-6 col-md-6">
 
@@ -34,7 +32,6 @@
 				   
 				   <select class="form-control" id="tipoCC">		
 						<option value="">Selecione</option>	
-						<option value="*1">Todos</option>							
 				    </select>                   
 				</div>  
 			</div>		
@@ -48,11 +45,12 @@
 			        <label for="data" class="col-2 col-form-label">Até</label>
 					<input class="form-control" type="date" id="dataate">
 			    </div>
-			    
-			     <div class="col-md-3">
-			    	<br>
-			    	<a href="javascript:demoFromHTML()" class="button btn btn-info" style="border-radius: 6px;">Gerar Relatório</a>			    	
-			    </div>
+			    <div class="col-xs-3 col-md-1 custom-class-botADDSearch" style="padding-left: 1px;">
+	        	<div class="col-xs-3 col-md-1">
+		            <a type="button" class="btn btn-primary" onclick="ONG.relFlox.pesquisar">                    
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+		            </a>
+		        </div>
 			</div>
 			
 			<div class="row" class="container">
@@ -71,10 +69,7 @@
 		</div>
 	</section>
 	<section id="footer" class="custom-footer"></section>
-	
 </body>
-
-
 <script src="../../lib/node_modules/jquery/dist/jquery.js"></script>
 
 

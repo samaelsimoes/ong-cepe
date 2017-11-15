@@ -45,14 +45,25 @@
 			        <label for="data" class="col-2 col-form-label">Até</label>
 					<input class="form-control" type="date" id="dataate">
 			    </div>
-			    <div class="col-xs-3 col-md-1 custom-class-botADDSearch" style="padding-left: 1px;">
-	        	<div class="col-xs-3 col-md-1">
-		            <a type="button" class="btn btn-primary" onclick="ONG.relFlox.pesquisar">                    
-		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
-		            </a>
-		        </div>
+			    <div class="col-xs-2 custom-class-botADDSearch" style="padding-left: 1px;">
+			    	<div class="row">
+				        <div class="col col-md-2">
+				            <button  type="button" class="btn btn-primary" onclick="ONG.relFlox.pesquisar()">                    
+				                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+				            </button>			        
+				    	</div>
+				    </div>
+				</div>
+				<div class="col-xs-2 custom-class-botADDSearch" style="padding-left: 1px;">
+					<div class="row">
+				        <div class="col col-md-2">
+				            <button  type="button" class="btn btn-info" onclick="ONG.relFlox.generattorPDF()">                    
+				                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Gerador PDF
+				            </button >	
+				         </div>
+				     </div>		        
+				</div>
 			</div>
-			
 			<div class="row" class="container">
 				<div class="col-xs-12 custom-fontes panel panel-default">
 				    <div class="row form-group" >
@@ -70,8 +81,10 @@
 	</section>
 	<section id="footer" class="custom-footer"></section>
 </body>
-<script src="../../lib/node_modules/jquery/dist/jquery.js"></script>
 
+<script src="../../lib/node_modules/jquery/dist/jquery.js"></script>
+<script src="../../lib/node_modules/pdfmake/build/pdfmake.min.js"></script>
+<script src="../../lib/node_modules/pdfmake/build/vfs_fonts.js"></script>
 
 
 <script src="../../lib/node_modules/bootstrap/dist/js/bootstrap.js"></script>

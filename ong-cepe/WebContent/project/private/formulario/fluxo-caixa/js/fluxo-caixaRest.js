@@ -51,4 +51,11 @@ $(document).ready(function(){
 			error : config.error
 		});
 	};
+	ONG.fluxoCaixaRest.pesquisarCC = function(config){
+		ONG.ajax.get({
+			url : ONG.contextPath+"/rest/operacao/centroCusto/"+config.data,
+			success : config.success,
+			error : config.error
+		});
+	};
 });

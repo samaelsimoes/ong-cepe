@@ -468,10 +468,11 @@ $(document).ready(function(){
     		};					
     		ONG.ajax.get(cfg);
     }
-    ONG.evento.montaModalidadeEdit = function(listModalidade){    	
+    ONG.evento.montaModalidadeEdit = function(listModalidade){
     	var option = '';
     	$('#modalidadeedit').find('option').remove();
-		option = $( "<option value=''>Selecione</option>" ).appendTo($('#modalidadeedit'));       	if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) {
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#modalidadeedit'));       	
+		if(listModalidade != undefined && listModalidade.length > 0 && listModalidade[0].id != undefined) {
 			for(var i = 0; i < listModalidade.length; i++){
 				option = $( "<option></option>" ).appendTo( $( '#modalidadeedit' ) );
 				option.attr( "value", listModalidade[i].id );
@@ -495,16 +496,6 @@ $(document).ready(function(){
 		});
     };
     
-    ONG.evento.modaladd = function(){    	
-    	ONG.evento.buscaEstado();
-		ONG.evento.buscamodalidade();
-    };
-    
-    ONG.evento.modaledit = function(idEvento){
-    	ONG.evento.buscaEstadoedit();
-		ONG.evento.buscamodalidadeedit();
-    	ONG.evento.buscID(idEvento);
-    };
     ONG.evento.preencheedit = function (dados){
 		$("#id").val(dados.id);
 		$("#nomeedit").val(dados.nome);
@@ -520,6 +511,19 @@ $(document).ready(function(){
 		$("#numeroedit").val(dados.numero);
 		$("#complementoedit").val(dados.complemento);
 		$("#descricaoedit").val(dados.descricao);
-    }
+    };
+    
+    
+    
+    ONG.evento.modaladd = function(){    	
+    	ONG.evento.buscaEstado();
+		ONG.evento.buscamodalidade();
+    };
+    
+    ONG.evento.modaledit = function(idEvento){
+    	ONG.evento.buscaEstadoedit();
+		ONG.evento.buscamodalidadeedit();
+    	ONG.evento.buscID(idEvento);
+    };
 });
 

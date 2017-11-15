@@ -27,7 +27,41 @@ $(document).ready(function(){
 			
 			ONG.relFlox.buscarFluxo();
 		}
+<<<<<<< HEAD
 	} // FIM BUSCA PARA ALIMENTAR SELECTED	
+=======
+	} // FIM BUSCA PARA ALIMENTAR SELECTED
+	
+	ONG.relFlox.pesquisar = function(){
+		var cc = $("#tipoCC").val();
+		var de = $("#datade").val();
+		var ate = $("#dataate").val();
+		
+		if(cc == "" && de == "" && ate == ""){
+			ONG.relFlox.buscarFluxo(undefined, "");
+			return false;
+		} else if(cc == "" || de == "" || ate == ""){
+			bootbox.alert("Selecione um Centro de Custo e o Período.");
+			return false;
+		}
+		
+		var d = new Date(de.split("/").reverse().join("-"));
+		de = d.getTime();
+		d = new Date(ate.split("/").reverse().join("-"));
+		ate = d.getTime();
+		
+    	ONG.fluxoCaixaRest.pesquisarPeriodoCC({
+			data : de+"/"+ate+"/"+parseInt(cc),
+			success: function(listPesq){													
+				ONG.relFlox.buscarFluxo(listPesq);
+			},
+			error: function(err){							
+				bootbox.alert("Erro ao pesquisar, entrar em contato com o Administrador se o problema persistir!");
+			}
+		});			
+	}		
+	
+>>>>>>> 69636412973a430868055945ed4eef8f74308cad
 	
 	ONG.relFlox.buscarFluxo = function(listFluxo, busca){
 

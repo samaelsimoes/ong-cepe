@@ -7,7 +7,7 @@ $(document).ready(function(){
 	
 	$('#footer').load('footer.html');
 });
-var items = document.querySelector('#tipoCC');
+//var items = document.querySelector('#tipoCC');
 
 //items.addEventListener('change', function(){
 //	

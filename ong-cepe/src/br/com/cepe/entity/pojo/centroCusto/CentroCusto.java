@@ -21,7 +21,7 @@ public class CentroCusto {
 	private int id;
 	private String nome;
 	private String descricao;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "centroCusto", cascade=CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "centroCusto", cascade = CascadeType.REMOVE)
 	private List<Modalidade> modalidades;
 	
 	public int getId() {

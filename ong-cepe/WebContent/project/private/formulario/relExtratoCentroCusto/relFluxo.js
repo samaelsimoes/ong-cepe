@@ -81,7 +81,9 @@ $(document).ready(function(){
 			  		html += "<td>" + listFluxo[i].centroCusto.nome + "</td>";
 
 			  			html += "<td>" + listFluxo[i].data.substring(0,10) + "</td>";
-
+			  			
+			  			console.log(listFluxo[i].tipo);
+			  			
 			  			if(listFluxo[i].tipo == 0){ 
 			  				html += "<td>Entrada</td>";
 			  			}else if(listFluxo[i].tipo == 1){
@@ -321,17 +323,23 @@ $(document).ready(function(){
         	],       	
         ];
 		var valoresSoma = [];
+		var valoresSub = [];
 		
-		for (var i = 0; i < listPesq.length; i ++) {	
+		for (var i = 0; i < listPesq.length; i ++) {
 			
-			valoresSoma.push( listPesq[i].valor );
+			if ( listPesq[i].tipo == 1 ){
+				valoresSub.push( listPesq[i].valor );
+			} else if ( listPesq[i].tipo != 1 && listPesq[i].tipo != 3) {
+				valoresSoma.push( listPesq[i].valor );
+			}
 			
 			var tipomsg = "";
-			if (listPesq[i].tipo = 0){
+			
+			if (listPesq[i].tipo == 0){
 				tipomsg = "Entrada";
-			} else if ( listPesq[i].tipo = 1 ){
+			} else if ( listPesq[i].tipo == 1 ){
 				tipomsg = "Saída";
-			} else if ( listPesq[i].tipo = 2) {
+			} else if ( listPesq[i].tipo == 2) {
 				tipomsg = "Transferência";
 			} 
 			table_body.push(
@@ -347,11 +355,21 @@ $(document).ready(function(){
 		}
 		
 		var soma = 0;
-		for(i = 0; i < valoresSoma.length; i++) {
+		var subtracao = 0;
+		
+		for (i = 0; i < valoresSoma.length; i++) {
 			soma += valoresSoma[i];
 		}
-		console.log(soma);
-				
+		
+		for (var i = 0; i < valoresSub.length; i ++) {
+			subtracao += valoresSub[i];
+		}
+		
+		var total = (soma - subtracao);
+		
+		console.log(" soma " + soma );
+		console.log(" Sub " + subtracao);
+
 		table_body.push(
 			[
 				{
@@ -366,7 +384,7 @@ $(document).ready(function(){
 				{
 					
 					colSpan: 2,
-					text: "R$ " +parseFloat(soma).toFixed(2).replace('.',','), 
+					text: "R$ " + parseFloat(total).toFixed(2).replace('.',','), 
 					style: 'tableConteudos', 
 					alignment: 'right',
 				},		

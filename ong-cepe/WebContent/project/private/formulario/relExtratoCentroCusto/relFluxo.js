@@ -381,8 +381,7 @@ $(document).ready(function(){
 				{},
 				{},
 				{},		
-				{
-					
+				{					
 					colSpan: 2,
 					text: "R$ " + parseFloat(total).toFixed(2).replace('.',','), 
 					style: 'tableConteudos', 

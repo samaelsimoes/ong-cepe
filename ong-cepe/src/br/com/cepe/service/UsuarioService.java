@@ -1,5 +1,7 @@
 package br.com.cepe.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import br.com.cepe.daoconnect.UsuarioDAO;
@@ -7,6 +9,7 @@ import br.com.cepe.datatype.HOperator;
 import br.com.cepe.entity.pojo.usuario.Usuario;
 import br.com.cepe.exception.GlobalException;
 import br.com.cepe.interfaces.Service;
+import br.com.cepe.security.Criptografia;
 
 public class UsuarioService implements Service<Usuario>{
 
@@ -105,6 +108,26 @@ public class UsuarioService implements Service<Usuario>{
 	}
 
 	public void alterar()  throws GlobalException{
+		Criptografia bases = new Criptografia();
+		String base64 = null;
+		String desconvertido = null;
+		String hashd5 = null;
+		try {
+			if(!this.usuario.getSenha().equals(null) && this.usuario.getSenha().equals("")){
+				base64=usuario.getSenha();
+				if(base64.equals(null) && !base64.equals(""));
+					desconvertido = bases.decode64(base64);		
+				if(desconvertido.equals(null) && !desconvertido.equals(""));
+					hashd5 = Criptografia.criptografar(desconvertido);
+				usuario.setSenha(hashd5);
+			}else{
+				throw new GlobalException("Erro ao alterar usuário");
+			}
+			
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
 		new UsuarioDAO(this.usuario).update();
 	}
 

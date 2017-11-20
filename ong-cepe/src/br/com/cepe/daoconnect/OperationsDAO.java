@@ -119,6 +119,7 @@ public class OperationsDAO<T> extends ConnectionDAO<T>{
 			this.queryStr += hqlFactoryList.getAnd(this.campos.get(count),this.operacoes.get(count), this.nums.get(count));
 		if((this.nums.isEmpty() || this.nums == null) && (!this.valores.isEmpty() || this.valores != null))
 			this.queryStr += hqlFactoryList.getAnd(this.campos.get(count),this.operacoes.get(count), this.valores.get(count));
+	
 	}
 		
 	public List<T> findGeneric() throws GlobalException{

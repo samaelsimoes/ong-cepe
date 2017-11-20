@@ -554,7 +554,7 @@ $(document).ready(function(){
 					bootbox.alert(msg);
 					ONG.fluxoCaixa.pesquisar();
 					$('input').val('');
-					$('#modaladd').modal('toggle');
+					$('#modaledit').modal('toggle');
 				},
 				error: function(err){							
 					bootbox.alert("Erro" + err);

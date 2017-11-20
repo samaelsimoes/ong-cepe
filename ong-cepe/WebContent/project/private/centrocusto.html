@@ -20,37 +20,61 @@
 
 	<section id="header" class="custom-padding-header"></section>
 	
-	<section id="conteudo" class="padding-vertical-small custom-class"> <!-- AJUSTAR ESSA SECTION todo o conteudo parte superior da grid e agrid tem q ser dentro dessa section para poder utilizar a class   custom-class-->
+	<section class="padding-vertical-small custom-class">
 		<div class="container">
-			<div id="top" class="row">
-				<div class="form-group row">
-					<div class="col-xs-6 col-md-6">
-						<h2>Centro de Custo</h2>
+		    <div class="row">
+		        <div class="col-xs-12 custom-fontes">
+		        	<div class="form-group row">
+						<div class="col-6.col-md-4">
+		
+							<h1>Gerenciamento de Centro de Custo:</h1>
+						</div>
+		        	</div>			
+				</div>	
+			</div>
+			<div class="row ">
+				<div class="col-xs-12">
+					<div class="section form-group">
+						<div class="form-group row">
+							<div class="col-md-8">
+						        <label for="valorPesquisa" class="col-2 col-form-label">Buscar:</label>
+						
+						        <input class="form-control" type="text" id="valorPesquisa" placeholder="Nome">
+						    </div>
+						     <div class="col-xs-3 col-md-1 custom-class-botADDSearch" style=" padding-left: 1px;">
+						        <div class="row">
+						        	<div class="col-xs-3 col-md-1">
+							            <button type="button" class="btn btn-primary" onclick="return ONG.centrocusto.pesquisar()">
+							                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar
+							            </button>
+							        </div>
+						        </div>
+						    </div>
+						   <div class="col-xs-3 col-md-1 custom-class-botADDSearch">
+						        <div class="row">
+						        	<div class="col-xs-3 col-md-1">
+							            <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#modaladd">
+							                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
+							            </button>
+							        </div>
+						        </div>
+						    </div>
+						</div>
+						<div class="table-responsive">
+							<div class="table-responsive">    	
+								<div class="form-group row"> 
+								    <div class="col-12 col-md-12 pull-md-12 bd-content">
+								        <div id = "exibiList" class = "exibiList"></div>
+								    </div>
+								</div>
+							</div>
+						</div>
 					</div>
-	        	</div>
-				<div class="form-group row">
-					<div class="col-md-5">
-						<input name="search" class="form-control h2" id="valorPesquisa" type="text" placeholder="Nome">
-					</div>
-					<div class="col-md-1">
-						<a href="#" onClick="return ONG.centrocusto.pesquisar()" class="btn btn-primary btn-md h2 ">
-							<span class="glyphicon glyphicon-search"></span> Buscar
-						</a>							
-					</div>
-					<div class="col-md-2">
-						<button type="button" class="btn btn-primary btn-success pull-right h2" data-toggle="modal" data-target="#modaladd">
-	            			<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cadastrar
-	        			</button>		
-					</div>
-				</div>		
-			</div> <!-- /#top -->
-			<div class="form-group row"> 
-			    <div class="col-12 col-md-12 pull-md-7 bd-content">
-			        <div id="exibiList" class="divResultado"></div>
-			    </div>
+				</div>
 			</div>
 		</div>
 	</section>
+	
 	<section id="footer" class="custom-footer"></section>
 	
 	<div class="modal fade" id="modaladd" tabindex="2" role="dialog" aria-labelledby="modaladd" aria-hidden="true">

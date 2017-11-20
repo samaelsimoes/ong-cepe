@@ -1,5 +1,4 @@
 ONG.usuario = new Object();
-
 $(document).ready(function(){
 
 	ONG.usuario.btnCancelar = function() {
@@ -76,7 +75,7 @@ $(document).ready(function(){
 		$("#exibiList").html(html);
 		$('#tabela').tablesorter({
 			headers: { 			// (começa do zero)
-				4: {			// Desativa a ordenação para essa coluna 
+				5: {			// Desativa a ordenação para essa coluna 
 					sorter: false 
 				},
 			},

@@ -1,1 +1,0 @@
-$(function(){$.tablesorter.addParser({id:'datetime',is:function(s){return false;},format:function(s,table){s=s.replace(/\-/g,"/");s=s.replace(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,"$3/$2/$1");return $.tablesorter.formatFloat(new Date(s).getTime());},type:'numeric'});$('.tablesorter').tablesorter({headers:{1:{sorter:false},4:{sorter:'datetime'}},dateFormat:'dd/mm/yyyy'});});

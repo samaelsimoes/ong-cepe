@@ -9,7 +9,7 @@ $(document).ready(function(){
 	ONG.evento.searchAllEvent=function(){ 	
 	    var busca=$("#consuev").val();	  	
 	    ONG.evento.searchEvent(undefined,busca);
-	}		 	
+	}; 	
 	ONG.evento.searchEvent = function(listEvent, busca){
 
 		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
@@ -18,10 +18,10 @@ $(document).ready(function(){
 			"<thead class='table table-striped '>" +
 				"<tr>" +
 					"<th> Nome </th> " +
-					"<th> Descrição </th>" +
+					"<th> Modalidade </th>" +
 					"<th> Tipo </th>" +
-					"<th> Cep </th>" +
 					"<th> Data </th>" +
+					"<th class='col-md-2'> Descrição </th>" +
 					"<th> Estado </th>" +
 					"<th> Cidade </th>" +
 					"<th> Bairro </th>" +
@@ -39,31 +39,30 @@ $(document).ready(function(){
 			  		
 					html += "<tr>";					
 						html += "<td>" + listEvent[i].nome + "</td>";
-						html += "<td>" + listEvent[i].descricao + "</td>";
+						html += "<td>" + listEvent[i].modalidade.nome + "</td>";
 						
-						if(listEvent[i].tipo = 1){
+						if(listEvent[i].tipo == 1){
 							html += "<td>"+	 
 											"Beneficiente" +
 									"</td>";
-						}else if(listEvent[i].tipo = 2){
+						}else if(listEvent[i].tipo == 2){
 							html += "<td>"
 										+"Sessao"+
 									"</td>"
-						}else if( listEvent[i].tipo = 3){
+						}else if( listEvent[i].tipo == 3){
 							html += "<td>"
 										+"Viagem"+
 									"</td>"
 						}
 						
-						html += "<td>" + listEvent[i].cep + "</td>";
-						html += "<td>" + listEvent[i].data + "</td>";
+						html += "<td>" + listEvent[i].data.split("-").reverse().join("/") + "</td>";
+						html += "<td><p class='small'>" + listEvent[i].descricao + "</p></td>";
 						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
 						html += "<td>" + listEvent[i].cidade.nome + "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
 //						html += "<td>" + listEvent[i].rua + "</td>";
 //						html += "<td>" + listEvent[i].numero + "</td>";
 //						html += "<td>" + listEvent[i].complemento + "</td>";
-
 						html += "<td>"+
 									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.evento.modaledit("+listEvent[i].id+")'>Editar</button>"+ " " + " " +
 									"<button type='button'class='btn btn-trash' onclick='ONG.evento.confExcluir("+listEvent[i].id+")'>Excluir</button>"+
@@ -81,9 +80,7 @@ $(document).ready(function(){
 			    	}
 			    	
 					var cfg = {
-							
 						url: ONG.contextPath + "/rest/evento/nome/" + buscaEvento,
-						
 						success: function(listEvent,busca){													
 							ONG.evento.searchEvent(listEvent,busca);
 						},
@@ -99,12 +96,15 @@ $(document).ready(function(){
 		html +="</tbody>";
 		html +="</table>";
 		$("#resuAllEvents").html(html);
-		$('#tabela').tablesorter({
-			headers: { 			// (começa do zero)
-				11: {			// Desativa a ordenação para essa coluna 
-					sorter: false 
+		$(function(){$.tablesorter.addParser({id:'datetime',is:function(s){return false;},format:function(s,table){s=s.replace(/\-/g,"/");s=s.replace(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,"$3/$2/$1");return $.tablesorter.formatFloat(new Date(s).getTime());},type:'numeric'});
+			$('#tabela').tablesorter({
+				headers:{
+					4:{sorter:false},
+					1:{sorter:'datetime'},
+					8:{sorter: false}
 				},
-			},
+				dateFormat:'dd/mm/yyyy'
+			});
 		});
 	}
 	
@@ -131,13 +131,11 @@ $(document).ready(function(){
 			var exp = ONG.evento.validaCampos();
 			
 			var date = $("#data").val();
-			var d = new Date(date.split("/").reverse().join("-"));
-			var modalidade = $("#modalidade").val();
+			var d = new Date(date.split("-").join("/"));
 			
             if(exp==""){
             	
             	var dadosEvent = {
-            			
 	            	nome: $("#nome").val(),
 					tipo: $("#typeevent").val(),
 	            	descricao: $("#descricao").val(),
@@ -152,7 +150,7 @@ $(document).ready(function(){
 	            	complemento: $("#complemento").val(),				
 					rua: $("#rua").val(),
 	            	modalidade: {
-	            		id: parseInt(modalidade)
+	            		id: parseInt($("#modalidade").val())
 	            	},
 	            };
             	var cfg = {
@@ -160,9 +158,9 @@ $(document).ready(function(){
         			data: dadosEvent,
         			success: function(msg){		
         				bootbox.alert(msg);
-        				setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 2000);            	
+        				ONG.evento.searchAllEvent();
+    					$('input').val('');
+    					$('#modaladd').modal('toggle');
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -214,7 +212,7 @@ $(document).ready(function(){
 		msg += ONG.evento.validaVazio("Cep: ", $("#cepedit").val());
 		msg += ONG.evento.validaVazio("Bairro: ", $("#bairroedit").val());
 		msg += ONG.evento.validaVazio("Data: ", $("#dataedit").val());
-		msg += ONG.evento.validaVazio("Horario: ", $("#horarioedit").val());
+//		msg += ONG.evento.validaVazio("Horario: ", $("#horarioedit").val());
 		msg += ONG.evento.validaVazio("Estado: ", $("#estadoedit").val());
 		msg += ONG.evento.validaVazio("Cidade: ", $("#cidadeedit").val());
 		msg += ONG.evento.validaVazio("Modalidade: ", $("#modalidadeedit").val());
@@ -224,20 +222,19 @@ $(document).ready(function(){
 		msg += ONG.evento.validaVazio("Descrição: ", $("#descricaoedit").val());
 
 		
-		var dateedit = $("#dataedit").val();
-		var d = new Date(dateedit.split("/").reverse().join("-"));
-		var editmodalidade = $("#modalidade").val();
+		var date = $("#dataedit").val();
+		var d = new Date(date.split("-").join("/"));
 		
     	if(msg == ""){
-    		
+
 	    	var dadosEvEdit= {		 
 	    		id: $("#id").val(),
     			nome: $("#nomeedit").val(),
 				tipo: $("#typeeventedit").val(),
 				descricao: $("#descricaoedit").val(),
-				data: d.getTime,
+				data: d.getTime(),
 				hora: $("#horarioedit").val(),					
-            	cep: $("cepedit").val(),
+            	cep: $("#cepedit").val(),
             	cidade:{ 
 					id: parseInt($("#cidadeedit").val())
 				},
@@ -246,7 +243,7 @@ $(document).ready(function(){
             	complemento: $("#complementoedit").val(),				
 				rua: $("#ruaedit").val(),
             	modalidade: {
-            		id: parseInt(editmodalidade)
+            		id: parseInt($("#modalidadeedit").val())
 	            	},				
 	    	}
 	    	$.ajax({
@@ -258,11 +255,11 @@ $(document).ready(function(){
 				dataType:'text',
 				contentType:'application/json',
 				
-				success:function(data) {	
-					bootbox.alert(data);	
-					setTimeout(function(){
-    	    	         location.reload();
-    	    	    }, 1000);
+				success:function(msg) {	
+					bootbox.alert(msg);	
+					ONG.evento.searchAllEvent();
+					$('input').val('');
+					$('#modaledit').modal('toggle');
 				},
 				error: function(err) {	
 					bootbox.alert( err.responseText); 

@@ -40,12 +40,7 @@ $(document).ready(function(){
                 	    setTimeout(function(){
                 	        dialog.find('.bootbox-body').html('Login Realizado com sucesso!');
                 	    }, 3000);
-                	});       
-                	
-                	var usuario = msg.usuario;
- 				    var tipo = msg.tipouser;
-
-                	document.cookie = tipo;					
+                	});       			
 
                 	var intervalo = window.setInterval(function() {	}, 50);
 

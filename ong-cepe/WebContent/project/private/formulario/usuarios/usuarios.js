@@ -214,7 +214,6 @@ $(document).ready(function(){
 	ONG.usuario.validarEdit = function(usuario) {
 
 		var senhaConf = btoa($("#senhaConfEdit").val());
-		debugger;
 		var aux = "";
 
 		if (usuario.nome == "") {

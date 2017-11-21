@@ -2,7 +2,7 @@ ONG.fluxoCaixa = new Object();
 $(document).ready(function(){
 	
 	ONG.fluxoCaixa.buscarFluxo = function(listFluxo){
-		var html = "<table class='table table-responsive custom-table-margin-b'>";
+		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
 		html += "<thead class='table table-striped '>" +
 					"<tr>" +					
 						"<th> Centro de Custo </th> " +
@@ -12,11 +12,12 @@ $(document).ready(function(){
 						"<th> Pessoa </th>" +
 						"<th> Evento </th>" +
 						"<th> Destino </th>" +
-						"<th> Descrição </th>" +
+						"<th class='col-md-2'> Descrição </th>" +
 						"<th> Valor </th>" +
 						"<th actions col-md-2> Ações</th>" +
 					"</tr>" +
-				"</thead>";					
+				"</thead>"+
+				"<tbody>";
 		    if ( listFluxo != undefined && listFluxo.length > 0 && listFluxo[0].id != undefined ) {
 			  	for(var i = 0; i < listFluxo.length; i++){
 					html += "<tr>";					
@@ -60,7 +61,7 @@ $(document).ready(function(){
 							html += "<td>" + listFluxo[i].centroCustoDestino.nome + "</td>";
 						}
 						
-						html += "<td>" + listFluxo[i].descricao + "</td>";
+						html += "<td><p class='small'>" + listFluxo[i].descricao + "</p></td>";
 						html += "<td>" + "R$ " + parseFloat(listFluxo[i].valor).toFixed(2).replace('.',',') + "</td>";
 						html += "<td>"+
 									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.fluxoCaixa.modaledit("+listFluxo[i].id+")'>Editar</button>"+
@@ -83,8 +84,19 @@ $(document).ready(function(){
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
 		    }
+		html +="</tbody>";		    
 		html +="</table>";
 		$("#resuAllEvents").html(html);
+		$(function(){$.tablesorter.addParser({id:'datetime',is:function(s){return false;},format:function(s,table){s=s.replace(/\-/g,"/");s=s.replace(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,"$3/$2/$1");return $.tablesorter.formatFloat(new Date(s).getTime());},type:'numeric'});
+		$('#tabela').tablesorter({
+			headers:{
+				7:{sorter:false},
+				2:{sorter:'datetime'},
+				9:{sorter: false}
+			},
+			dateFormat:'dd/mm/yyyy'
+		});
+	});
 	};
 	ONG.fluxoCaixa.buscarFluxo(undefined);
 
@@ -184,9 +196,10 @@ $(document).ready(function(){
 	            	id: parseInt($("#centrocusto2").val())
 	            },
 	            usuario:{
-	            	id: 1
+	            	id: parseInt(getCookie("id"))
 	            }
 			};
+			debugger;
 			if(dadosFluxo.tipo == parseInt(2)){
 				if($("#centrodecusto3").val() != ""){
 					dadosFluxo.centroCustoDestino = {id: parseInt($("#centrodecusto3").val())};
@@ -509,47 +522,58 @@ $(document).ready(function(){
 		msg += ONG.fluxoCaixa.validaVazio("Tipo: ", $("#tipofluxoedit").val());
 		msg += ONG.fluxoCaixa.validaVazio("Centro Custo: ", $("#centrocustoedit1").val());		
 		msg += ONG.fluxoCaixa.validaVazio("Data: ", $("#dataedit").val());
-//		msg += ONG.fluxoCaixa.validaVazio("Evento: ", $("#eventoedit").val());
 		msg += ONG.fluxoCaixa.validaVazio("Classificação: ", $("#classificacaoedit").val());
-//		msg += ONG.fluxoCaixa.validaVazio("Pessoa: ", $("#pessoaedit").val());
 		msg += ONG.fluxoCaixa.validaVazio("Valor: ", $("#valoredit").val());
+		msg += ONG.fluxoCaixa.validaVazio("Descricao: ", $("#descricaoedit").val());
 		if($("#tipofluxoadd").val() == 2)
 			msg += ONG.fluxoCaixa.validaVazio("Destino Centro de Custo: ", $("#centrodecustoedit2").val());
-		msg += ONG.fluxoCaixa.validaVazio("Descricao: ", $("#descricaoedit").val());
 		
 		if(msg == ""){
+			if($("#centrocustoedit1").val() == $("#centrodecustoedit2").val()){
+				bootbox.alert("Centro de Custo Destino é igual ao Origem");
+				return false;
+			}
 			var date = $("#dataedit").val();
-			var d = new Date(date.split("/").reverse().join("-"));
-			var eventoedit;
+			var d = new Date(date.split("-").join("/"));
 
 			if($("#dataedit").val() != ""){
 				eventoedit = $("#evento").val();
 			}else {
 				eventoedit = null;
 			}
-			var dadosFluxo = {
-				id: $("#id").val(),	
+			var editFluxo = {
+				id: $("#id").val(),					
 				data: d.getTime(),
-			    tipo: $("#tipofluxoedit").val(),
-			    classificacao: $("#classificacaoedit").val(),
-			    valor: $("#valoredit").val(),
-			    descricao: $("#descricaoedit").val(),
-			    centroCusto:{
-			    	id: parseInt($("#centrocustoedit1").val())
-			    },
-			    centroCustoDestino:{
-			    	id: parseInt($("#centrodecustoedit2").val())
-			    },
-			    usuario:{
-			    	id: 1
-			    },
-			    pessoa:{
-			    	id: parseInt($("#pessoaedit").val())
-			    },
-			    evento: null          
+	            tipo: $("#tipofluxoedit").val(),
+	            classificacao: $("#classificacaoedit").val(),
+	            valor: $("#valoredit").val(),
+	            descricao: $("#descricaoedit").val(),
+	            centroCusto:{
+	            	id: parseInt($("#centrocustoedit1").val())
+	            },
+	            usuario:{
+	            	id: parseInt(getCookie("id"))
+	            }
 			};
+			if(editFluxo.tipo == parseInt(2)){
+				if($("#centrodecustoedit2").val() != ""){
+					editFluxo.centroCustoDestino = {id: parseInt($("#centrodecustoedit2").val())};
+				}
+			}else {
+				editFluxo.centroCustoDestino = null;
+			}
+			if($("#eventoedit").val() != ""){
+				editFluxo.evento = {id: parseInt($("#eventoedit").val())};
+			}else {
+				editFluxo.evento = null;
+			}			
+			if($("#pessoaedit").val() != ""){
+				editFluxo.pessoa = {id: parseInt($("#pessoaedit").val())};
+			}else {
+				editFluxo.pessoa = null;
+			}
 			ONG.fluxoCaixaRest.editar({
-				data : EditCad,
+				data : editFluxo,
 				success: function(msg){	
 					bootbox.alert(msg);
 					ONG.fluxoCaixa.pesquisar();
@@ -557,7 +581,8 @@ $(document).ready(function(){
 					$('#modaledit').modal('toggle');
 				},
 				error: function(err){							
-					bootbox.alert("Erro" + err);
+					bootbox.alert("Erro ao editar o Fluxo de Caixa");
+					console.log(err);
 				}
 			});
 		}else{
@@ -611,11 +636,11 @@ $(document).ready(function(){
 		}    
 	});
     $(document).on('change','#valor',function(){
-        if(!$("#valor").val().match(/^\d{1,8}$/)){
-        	$('#valor').val('');   		
-    	} else {   
-			$('#valor').val(parseFloat($('#valor').val()).toFixed(2));	
+    	var s = String($('#valor').val());
+    	if(s.indexOf(",") != -1){
+    		$('#valor').val(s.replace(",","."));
     	}
+    	$('#valor').val(parseFloat($('#valor').val()).toFixed(2));	
 	});
     //CHANGE MODAL EDITAR
     $(document).on('change','#tipofluxoedit',function(){
@@ -626,13 +651,29 @@ $(document).ready(function(){
 		}    
 	});
     $(document).on('change','#valoredit',function(){
-    	if(!$("#valoredit").val().match(/^\d{1,8}$/)){
-    		$('#valoredit').val('');
-    	} else {    		
-    		$('#valoredit').val(parseFloat($('#valoredit').val()).toFixed(2));	
+    	var s = String($('#valoredit').val());
+    	if(s.indexOf(",") != -1){
+    		$('#valoredit').val(s.replace(",","."));
     	}
-    	
-
+    	$('#valoredit').val(parseFloat($('#valoredit').val()).toFixed(2));	
 	});
+    
+	function getCookie(c_name) {
+		//função para pegar o id do usuário logado. O cookie é criado na classe LoginServlet.java
+	    if (document.cookie.length > 0) {
+	        c_start = document.cookie.indexOf(c_name + "=");
+	        if (c_start != -1) {
+	            c_start = c_start + c_name.length + 1;
+	            c_end = document.cookie.indexOf(";", c_start);
+	            if (c_end == -1) {
+	                c_end = document.cookie.length;
+	            }
+	            console.log(document.cookie.substring(c_start, c_end));
+	            return unescape(document.cookie.substring(c_start, c_end));
+	        }
+	    }
+	    bootbox.alert("Erro ao carregar o id do usuário");
+	    return false;
+	}
     
 });

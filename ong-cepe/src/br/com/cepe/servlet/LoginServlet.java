@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,18 +41,26 @@ public class LoginServlet extends HttpServlet {
 					
 					sectionUser.setAttribute("sectionuser", usuario);//setAtribute I'm putting my UserPojo user object in session
 					
-					String infuser = "";
-					if(usuario.getTipo() == 1) {
-						infuser = "Administrador";
-					}else if ( usuario.getTipo() == 2 ) {
-						infuser = "Professor";
-					}else if ( usuario.getTipo() == 3) {
-						infuser = "Financeiro";
-					}
+					Cookie cookiettipo = new Cookie("ong-cepe-tipo", String.valueOf(usuario.getTipo()));
+					Cookie cookieid = new Cookie("ong-cepe-id", String.valueOf(usuario.getId()));
+					cookiettipo.setMaxAge(3600);
+					cookieid.setMaxAge(3600);
+					response.addCookie(cookiettipo);
+					response.addCookie(cookieid);
 					
+//					String infuser = "";
+//					if(usuario.getTipo() == 1) {
+//						infuser = "Administrador";
+//					}else if ( usuario.getTipo() == 2 ) {
+//						infuser = "Professor";
+//					}else if ( usuario.getTipo() == 3) {
+//						infuser = "Financeiro";
+//					}
+					
+//					msg.put("tipouser", infuser);
+//					msg.put("login", usuario.getUsuario());
+//					msg.put("id", String.valueOf(usuario.getId()));
 					msg.put("msg", " Login realizado com sucesso ! ");
-					msg.put("tipouser", infuser);
-					msg.put("usuario", usuario.getUsuario());
 					msg.put("acesso", url+ "/project/private/paginaInicial.html");
 					response.setStatus(HttpServletResponse.SC_OK);
 

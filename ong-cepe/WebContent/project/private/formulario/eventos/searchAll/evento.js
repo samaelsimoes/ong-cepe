@@ -72,7 +72,6 @@ $(document).ready(function(){
 		    }else{
 			    if(listEvent == undefined || (listEvent != undefined && listEvent.length > 0)){
 			    	var buscaEvento;
-			    	console.log(busca);
 			    	if ( busca != "" ) {
 			    		buscaEvento = busca;
 			    	}else if (busca == "") {
@@ -132,7 +131,6 @@ $(document).ready(function(){
 			
 			var date = $("#data").val();
 			var d = new Date(date.split("-").join("/"));
-			
             if(exp==""){
             	
             	var dadosEvent = {
@@ -140,7 +138,7 @@ $(document).ready(function(){
 					tipo: $("#typeevent").val(),
 	            	descricao: $("#descricao").val(),
 					data: d.getTime(),
-					hora: $("#hora").val(),					
+					hora: $("#horario").val(),					
 	            	cep: $("#cep").val(),
 	            	cidade:{ 
 						id: parseInt($("#addcidade").val())
@@ -153,6 +151,7 @@ $(document).ready(function(){
 	            		id: parseInt($("#modalidade").val())
 	            	},
 	            };
+            	debugger;
             	var cfg = {
         			url: ONG.contextPath +"/rest/evento/",
         			data: dadosEvent,
@@ -322,7 +321,6 @@ $(document).ready(function(){
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade) {
-				console.log(listaCidade)
 				ONG.evento.montaSelectCidade(listaCidade);
 			},
 			error: function(err) {							
@@ -368,7 +366,6 @@ $(document).ready(function(){
     	var cfg = {							 
     			url: ONG.contextPath +  "/rest/modalidade/nome/*",
     			success: function(modalidade) {
-    				console.log(modalidade);
     				if(modalidade == ""){
     					bootbox.alert("Não foi possivel buscar modalidade" + "<br>"+ "Motivo não temos nenhuma modalidade cadastrada!"+ "<br>"+  "Gentileza cadastre alguma modalidade.")
     				}else{
@@ -409,7 +406,6 @@ $(document).ready(function(){
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade) {	
-				console.log(listaCidade);
 				ONG.evento.montaSelectCidadeedit(listaCidade);
 				if(callback != undefined)
 					callback();
@@ -456,7 +452,6 @@ $(document).ready(function(){
     	var cfg = {							 
     			url: ONG.contextPath +  "/rest/modalidade/nome/*",
     			success: function(modalidade) {
-    				console.log(modalidade)
     				ONG.evento.montaModalidadeEdit(modalidade);
     			},
     			error: function(err) {							

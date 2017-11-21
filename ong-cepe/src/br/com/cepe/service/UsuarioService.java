@@ -113,7 +113,7 @@ public class UsuarioService implements Service<Usuario>{
 		String desconvertido = null;
 		String hashd5 = null;
 		try {
-			if(!this.usuario.getSenha().equals(null) && this.usuario.getSenha().equals("")){
+			if(!this.usuario.getSenha().equals(null) && !this.usuario.getSenha().equals("")){
 				base64=usuario.getSenha();
 				if(base64.equals(null) && !base64.equals(""));
 					desconvertido = bases.decode64(base64);		

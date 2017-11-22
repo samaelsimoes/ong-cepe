@@ -1,5 +1,4 @@
 ONG.evento = new Object();
-
 $(document).ready(function(){
 	$(document).keypress(function(e) {
 	    if(e.which == 13) {
@@ -269,41 +268,25 @@ $(document).ready(function(){
 	    	bootbox.alert(msg);
 	    }
     };
-
-    ONG.evento.confExcluir = function(id) {
-    	bootbox.confirm({
-		    message: "Você Desejea excluir?",
-		    buttons: {
-		        confirm: {
-		            label: 'Sim',
-		            className: 'btn-success',
-		        },
-		        cancel: {
-		            label: 'Não',
-		            className: 'btn-danger'
-		        }
-		    },		    
-		    callback: function (result) {		        
-		        if(result == true){
-		        	
+    
+    ONG.evento.confExcluir = function(id){
+		bootbox.confirm("Deseja Excluir?", function(confirmed) {
+			if(confirmed) {
 		           var cfg = {
-			
-					url: ONG.contextPath + "/rest/evento/id/" + id,
-					success: function (data) {						
-						bootbox.alert(data);	
-						setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 1000);	            	
-					},
-					error: function (err) {				
-						bootbox.alert("Erro ao deletar: " + err.responseText);
-					}
-				};
-				ONG.ajax.delet(cfg);
-		        }
-		    }
-		});		
-    }
+							url: ONG.contextPath + "/rest/evento/id/" + id,
+							success : function(msg) {
+								  console.log(msg);
+								  ONG.evento.searchAllEvent();
+							},
+							error : function(err) {
+								  console.log('err' ,err);
+								  bootbox.alert(err.responseText);
+							} 
+						};
+						ONG.ajax.delet(cfg);
+			}
+		}); 
+	};
 
     ONG.evento.buscaEstado = function(){
     	var cfg = {							
@@ -479,7 +462,20 @@ $(document).ready(function(){
 			url: ONG.contextPath + "/rest/evento/id/" + id,				  
 			success:function(dados){
 		    	ONG.evento.buscaCidadeedit(dados.cidade.estado.id, function(){
-		    		ONG.evento.preencheedit(dados);
+		    		$("#id").val(dados.id);
+		    		$("#nomeedit").val(dados.nome);
+		    		$("#typeeventedit").val(dados.tipo);
+		    		$("#cepedit").val(dados.cep);
+		    		$("#dataedit").val(dados.data);
+		    		$("#modalidadeedit").val(dados.modalidade.id);
+		    		$("#horarioedit").val(dados.hora);
+		    		$("#estadoedit").val(dados.cidade.estado.id);
+		    		$("#cidadeedit").val(dados.cidade.id);
+		    		$("#bairroedit").val(dados.bairro);
+		    		$("#ruaedit").val(dados.rua);
+		    		$("#numeroedit").val(dados.numero);
+		    		$("#complementoedit").val(dados.complemento);
+		    		$("#descricaoedit").val(dados.descricao);
 		    	});			
 			},			
 			error: function(err){				
@@ -487,25 +483,6 @@ $(document).ready(function(){
 			}
 		});
     };
-    
-    ONG.evento.preencheedit = function (dados){
-		$("#id").val(dados.id);
-		$("#nomeedit").val(dados.nome);
-		$("#typeeventedit").val(dados.tipo);
-		$("#cepedit").val(dados.cep);
-		$("#dataedit").val(dados.data);
-		$("#modalidadeedit").val(dados.modalidade.id);
-		$("#horarioedit").val(dados.hora);
-		$("#estadoedit").val(dados.cidade.estado.id);
-		$("#cidadeedit").val(dados.cidade.id);
-		$("#bairroedit").val(dados.bairro);
-		$("#ruaedit").val(dados.rua);
-		$("#numeroedit").val(dados.numero);
-		$("#complementoedit").val(dados.complemento);
-		$("#descricaoedit").val(dados.descricao);
-    };
-    
-    
     
     ONG.evento.modaladd = function(){    	
     	ONG.evento.buscaEstado();

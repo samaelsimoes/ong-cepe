@@ -11,17 +11,13 @@ items.addEventListener('change', function(){
 	
 	var valor =	this.value // o valor que procuras é: this.value
 
-	if(valor == 0) {	
-		
+	if(valor == 0) {
 		$('#pesstipo').load('formulario/pessoas/pf/gridpf.html');
 	}else if(valor == 1 ) {
-		
 		$('#pesstipo').load('formulario/pessoas/pj/gridpj.html');
 	}else if(valor == 2) {
-		
 		$('#pesstipo').load('formulario/pessoas/beneass/gridbeneass.html');
 	}else if(valor == 3) {
-		
 		$('#pesstipo').load('formulario/pessoas/gridbusca/gridbusca.html');
 	}
 });

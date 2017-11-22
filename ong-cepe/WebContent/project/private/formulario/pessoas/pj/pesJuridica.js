@@ -142,14 +142,11 @@ $(document).ready(function(){
 	            	numero: $("#numero").val(),
 	            	cep: $("#cep").val() 
 	            };
-            	
+            	console.log(dadosPJ);
 				ONG.pessoaRest.inserir({
 					data : dadosPJ,
         			success: function(msg){		
-        				bootbox.alert(msg);
-        				setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 2000);            	
+        				bootbox.alert(msg);          	
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");

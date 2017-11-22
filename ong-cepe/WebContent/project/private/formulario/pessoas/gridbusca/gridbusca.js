@@ -1,43 +1,35 @@
 ONG.pessoa = new Object();
 $(document).ready(function(){
 	
-	
 	mask = function() {
 	    $(".maskFone").text(function(i, text) {
-	        text = text.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1)$2-$3");
+	        text = text.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
 	        return text;
 	    });
 	};
+	
 	ONG.pessoa.gridbusca = function(){
-		
 	    var busca = $("#consutodos").val();	  	
 	    ONG.pessoa.buscaTodos(undefined,busca);
-	}		
-	
+	};
 	ONG.pessoa.buscaTodos = function(listallpes, busca){
-				
-		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
-		
+		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";		
 		html += 
-
 			"<thead class='table table-striped '>" +
-				"<tr>" +
-					
+				"<tr>" +	
 					"<th> Nome / Razão social </th>" + 
 					"<th> Tipo </th> " +
 					"<th> Cpf / CNPJ </th>" +
 					"<th> Telefone contato </th>" +
 					"<th> Email </th>" +
-					/*"<th> Estado </th>" +
-					"<th> Cidade </th>" +*/
+					"<th> Status </th>" +
+//					"<th> Cidade </th>" +
 					"<th> Ações</th>" +
 				"</tr>" +
-			"</thead>";					
-		html += "<tbody>";
+			"</thead>" +					
+			"<tbody>";
 		    if(listallpes != undefined && listallpes.length > 0 && listallpes[0].id != undefined){
-			  
 			  	for(var i = 0; i < listallpes.length; i++){
-
 					html += "<tr>";					
 						html += "<td>" + listallpes[i].nome + "</td>";
 				
@@ -56,53 +48,53 @@ $(document).ready(function(){
 						
 						if(listallpes[i].foneFixo != null && listallpes[i].foneMovel != null){
 							html += "<td><p class='small maskFone'>"+	 
-							listallpes[i].foneFixo + "</p><p class='small maskFone'>" + listallpes[i].foneMovel +										
+										listallpes[i].foneFixo + "</p><p class='small maskFone'>" + 
+										listallpes[i].foneMovel +										
 									"</p></td>";
 						}else if(listallpes[i].foneFixo != null && listallpes[i].foneMovel == null){
-							html += "<td><p class='small maskFone'>"+
-										listPesj[i].foneFixo+
+							html += "<td><p class='maskFone'>"+
+										listallpes[i].foneFixo+
 									"</p></td>"
 						}else if( listallpes[i].foneMovel != null && listallpes[i].foneFixo == null){
-							html += "<td><p class='small maskFone'>"+
-							listallpes[i].foneMovel+
+							html += "<td><p class='maskFone'>"+
+										listallpes[i].foneMovel+
 									"</p></td>"
 						}
 						html += "<td>" + listallpes[i].email + "</td>";
-							if ( listallpes[i].tipo == 1) { // pessoa JURIDICA
-								html += "<td>"+
-									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaleditPF' data-whatever='@getbootstrap' onclick='ONG.pessoa.buscIDPF("+listallpes[i].id+")'>Editar</button>"+ " " + " " +
-									"<button type='button'class='btn btn-trash' onclick='ONG.pessoa.confExcluir("+listallpes[i].id+")'>Excluir</button>"+
+						
+						if (listallpes[i].status == 1) {
+							html += "<td>" + "Ativo" + "</td>";
+						}else if (listallpes[i].status == 2) {
+							html += "<td>" + "Inativo" + "</td>";
+						}
+						if ( listallpes[i].tipo == 1) {
+							html += "<td>"+
+								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaleditPF' data-whatever='@getbootstrap' onclick='ONG.pessoa.modaleditPF("+listallpes[i].id+")'>Editar</button>"+ " " + " " +
+								"<button type='button'class='btn btn-trash' onclick='ONG.pessoa.confExcluir("+listallpes[i].id+")'>Excluir</button>"+
 								"</td>";
-							}else if (listallpes[i].tipo == 2){
-								html += "<td>"+
-									"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaleditPJ' data-whatever='@getbootstrap' onclick='ONG.pessoa.buscIDPJ("+listallpes[i].id+")'>Editar</button>"+ " " + " " +
-									"<button type='button'class='btn btn-trash' onclick='ONG.pessoa.confExcluir("+listallpes[i].id+")'>Excluir</button>"+
-								"</td>";
-							}
-							
+						}else if (listallpes[i].tipo == 2){
+							html += "<td>"+
+								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaleditPJ' data-whatever='@getbootstrap' onclick='ONG.pessoa.modaleditPJ("+listallpes[i].id+")'>Editar</button>"+ " " + " " +
+								"<button type='button'class='btn btn-trash' onclick='ONG.pessoa.confExcluir("+listallpes[i].id+")'>Excluir</button>"+
+							"</td>";
+						}						
 					html += "</tr>";  
 			    }
 		    }else{
 			    if(listallpes == undefined || (listallpes != undefined && listallpes.length > 0)){
 
-					if(busca == ""){						
+					if(busca == "" || busca == undefined){						
 						busca = "*";
 					}
-					
-					var cfg = {
-							
-							url: ONG.contextPath + "/rest/pessoa/nome/" + busca,
-							
-							success: function(listallpes,busca){													
-								ONG.pessoa.buscaTodos(listallpes,busca);
-							},
-							error: function(err){							
-								bootbox.alert("Erro ao Buscar Eventos, entrar em contato com o Administrador se o problema persistir!");
-							}
-						};					
-						ONG.ajax.get(cfg);
-					
-					
+					ONG.pessoaRest.pesquisarNome({
+						data : busca,
+						success: function(listallpes,busca){													
+							ONG.pessoa.buscaTodos(listallpes,busca);
+						},
+						error: function(err){							
+							bootbox.alert(err.responseText);
+						} 
+					});
 				}else{					
 					html += "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
 				}
@@ -119,49 +111,32 @@ $(document).ready(function(){
 		});
 		mask();
 	}
-	
 	ONG.pessoa.buscaTodos (undefined, "");
 	
-	ONG.pessoa.confExcluir = function(id) {
-    	bootbox.confirm({
-		    message: "Você Desejea excluir?",
-		    buttons: {
-		        confirm: {
-		            label: 'Sim',
-		            className: 'btn-success',
-		        },
-		        cancel: {
-		            label: 'Não',
-		            className: 'btn-danger'
-		        }
-		    },		    
-		    callback: function (result) {		        
-		        if(result == true){
-					ONG.pessoaRest.excluir({
-						data : id,
-						success: function (data) {						
-							bootbox.alert(data);	
-							setTimeout(function(){
-		    	    	         location.reload();
-		    	    	    }, 1000);	            	
-						},
-						error: function (err) {				
-							bootbox.alert("Erro ao deletar: " + err.responseText);
-						}
-					});
-		        }
-		    }
-		});		
-    }
+	ONG.pessoa.confExcluir = function(id){
+		bootbox.confirm("Deseja Excluir?", function(confirmed) {
+			if(confirmed) {
+				ONG.pessoaRest.excluir({
+					data : id,
+					success : function(msg) {
+						  console.log(msg);
+						  ONG.pessoa.gridbusca();
+					},
+					error : function(err) {
+						  console.log('err' ,err);
+						  bootbox.alert(err.responseText);
+					} 
+				});
+			}
+		}); 
+	};
 
 
 	ONG.pessoa.buscIDPF = function( id ){
 		ONG.pessoaRest.pesquisarId({
 			data : id,
 			success:function(dados){
-
-				if(dados != ""){
-					
+				ONG.pessoa.buscaCidadeEdit1(dados.cidade.estado.id, function(){					
 					$("#id1").val(dados.id);
 		    		$("#nomeedit1").val(dados.nome);
 		    		$("#rgedit1").val(dados.rg);
@@ -175,8 +150,9 @@ $(document).ready(function(){
 					$("#complementoedit1").val(dados.complemento);
 					$("#numeroedit1").val(dados.numero);
 					$("#cepedit1").val(dados.cep);
-					ONG.pessoa.buscaEstadoEdit1();
-		    	}			
+					$("#estadoedit1").val(dados.cidade.estado.id);
+					$("#cidadeedit1").val(dados.cidade.id);
+				});	
 			},			
 			error: function(err){				
 				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
@@ -188,9 +164,7 @@ $(document).ready(function(){
 		ONG.pessoaRest.pesquisarId({
 			data : id,
 			success:function(dados){
-
-				if(dados != ""){
-					
+				ONG.pessoa.buscaCidadeEdit2(dados.cidade.estado.id, function(){					
 					$("#id2").val(dados.id);
 		    		$("#razaosocialedit2").val(dados.nome);
 		    		$("#cnpjedit2").val(dados.cnpj);
@@ -202,8 +176,10 @@ $(document).ready(function(){
 					$("#complementoedit2").val(dados.complemento);
 					$("#numeroedit2").val(dados.numero);
 					$("#cepedit2").val(dados.cep);
-					ONG.pessoa.buscaEstadoEdit2();
-		    	}			
+					$("#estadoedit2").val(dados.cidade.estado.id);
+					$("#cidadeedit2").val(dados.cidade.id);
+				});	
+
 			},			
 			error: function(err){				
 				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
@@ -224,11 +200,13 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
 
-    ONG.pessoa.buscaCidadeEdit2 = function(id2){
+    ONG.pessoa.buscaCidadeEdit2 = function(id2, callback){
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id2,
 			success: function(listaCidade2){		
 				ONG.pessoa.montaSelectCidadeEdit2(listaCidade2);
+				if(callback != undefined)
+					callback();
 			},
 			error: function(err){							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -238,9 +216,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoa.montaSelectEstadoEdit2 = function(listEstado2) {
+    	var option = '';
+    	$('#estadoedit2').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#estadoedit2'));       	    	
     	if(listEstado2 != undefined && listEstado2.length > 0 && listEstado2[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado2.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estadoedit2'));
+				option = $( "<option></option>" ).appendTo($('#estadoedit2'));
 				option.attr( "value", listEstado2[i].id );
 				option.html( listEstado2[i].nome );
 			}
@@ -254,9 +235,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoa.montaSelectCidadeEdit2 = function( listaCidade2 ) {
+    	var option2 = '';
+    	$('#cidadeedit2').find('option').remove();
+		option2 = $( "<option value=''>Selecione</option>" ).appendTo($('#cidadeedit2'));       	    	    	
     	if(listaCidade2 != undefined && listaCidade2.length > 0 && listaCidade2[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade2.length; i++){
-				var option2 = $( "<option></option>" ).appendTo( $( '#cidadeedit2' ) );
+				option2 = $( "<option></option>" ).appendTo( $( '#cidadeedit2' ) );
 				option2.attr( "value", listaCidade2[i].id );
 				option2.html( listaCidade2[i].nome );
 			}
@@ -276,11 +260,13 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
 
-    ONG.pessoa.buscaCidadeEdit1 = function(id1){
+    ONG.pessoa.buscaCidadeEdit1 = function(id1, callback){
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id1,
 			success: function(listaCidade1){		
 				ONG.pessoa.montaSelectCidadeEdit1(listaCidade1);
+				if(callback != undefined)
+					callback();
 			},
 			error: function(err){							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -290,9 +276,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoa.montaSelectEstadoEdit1 = function(listEstado1) {
+    	var option1 = '';
+    	$('#estadoedit1').find('option').remove();
+		option1 = $( "<option value=''>Selecione</option>" ).appendTo($('#estadoedit1'));       	    	    	
     	if(listEstado1 != undefined && listEstado1.length > 0 && listEstado1[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado1.length; i++) {
-				var option1 = $( "<option></option>" ).appendTo($('#estadoedit1'));
+				option1 = $( "<option></option>" ).appendTo($('#estadoedit1'));
 				option1.attr( "value", listEstado1[i].id );
 				option1.html( listEstado1[i].nome );
 			}
@@ -300,15 +289,18 @@ $(document).ready(function(){
 			var itemsedit1 = document.querySelector('#estadoedit1');
 			itemsedit1.addEventListener('change', function(){
 				var valor1 =	this.value // o valo
-				ONG.pessoa.buscaCidadeEdit1( valor1 );
+				ONG.pessoa.buscaCidadeEdit1(valor1);
 			});
 		}
     }
 
     ONG.pessoa.montaSelectCidadeEdit1 = function( listaCidade1 ) {
+    	var option1 = '';
+    	$('#cidadeedit1').find('option').remove();
+		option1 = $( "<option value=''>Selecione</option>" ).appendTo($('#cidadeedit1'));
     	if(listaCidade1 != undefined && listaCidade1.length > 0 && listaCidade1[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade1.length; i++){
-				var option1 = $( "<option></option>" ).appendTo( $( '#cidadeedit1' ) );
+				option1 = $( "<option></option>" ).appendTo( $( '#cidadeedit1' ) );
 				option1.attr( "value", listaCidade1[i].id );
 				option1.html( listaCidade1[i].nome );
 			}
@@ -318,12 +310,7 @@ $(document).ready(function(){
     /*edita pf*/
     
     ONG.pessoa.editarPF = function() {
-
     	var msg  = "";
-    	
-    	if($("#id1").val() == ""){
-    		msg += " Entrar em contato com o administrador, falha ao editar pessoas, campo id vindo vazio";
-    	}
     	
 		msg += ONG.pessoa.validaVazio("Nome ", $("#nomeedit1").val());
 		msg += ONG.pessoa.validaVazio("CPF: ", $("#cpfedit1").val());
@@ -340,8 +327,9 @@ $(document).ready(function(){
     	if(msg == ""){
     		var exp = ONG.pessoa.validaCampos1();    		
     		if(exp == ""){
-            	var date = $("#datanascimentoeditar1").val();
-				var d = new Date(date.split("/").reverse().join("-"));
+    			var date = $("#datanascimentoeditar1").val();
+    			var d = new Date(date.split("-").join("/"));
+    			
 		    	var dadosPF = {
 		            
 		    		id: $("#id1").val(),
@@ -360,19 +348,17 @@ $(document).ready(function(){
 		    		numero: $("#numeroedit1").val(),
 		    		cep: $("#cepedit1").val(),		    		
 					cidade: { 
-						id: $("#cidadeedit1").val() 
+						id: parseInt($("#cidadeedit1").val())
 					}	
 		    	}
 		    	console.log(dadosPF)
 				ONG.pessoaRest.editar({
 					data : dadosPF,
-					success:function(data){	
-						
-						bootbox.alert(data);
-						
-//						setTimeout(function(){
-//	    	    	        location.reload();
-//	    	    	    }, 2000);					
+					success:function(msg){	
+        				bootbox.alert(msg);
+        				ONG.pessoa.gridbusca();
+    					$('input').val('');
+    					$('#modaleditPF').modal('toggle');				
 					},
 					error: function(err){	
 						bootbox.alert( err.responseText); 
@@ -410,7 +396,6 @@ $(document).ready(function(){
     		
     		if(exp == ""){
 		    	var dadosPJ= {
-		            
 		    		id: $("#id2").val(),
 		    		nome: $("#razaosocialedit2").val(),
 		    		tipo: 2,
@@ -424,7 +409,6 @@ $(document).ready(function(){
 		    		complemento: $("#complementoedit2").val(),
 		    		numero: $("#numeroedit2").val(),
 		    		cep: $("#cepedit2").val(),
-		    		
 					cidade : { 
 						id: parseInt($("#cidadeedit2").val())
 					}					
@@ -432,11 +416,11 @@ $(document).ready(function(){
 		    	
 				ONG.pessoaRest.editar({
 					data : dadosPJ,
-					success:function(data) {	
-						bootbox.alert(data);	
-						setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 1000);
+					success:function(msg) {	
+        				bootbox.alert(msg);
+        				ONG.pessoa.gridbusca();
+    					$('input').val('');
+    					$('#modaleditPJ').modal('toggle');	
 					},
 					error: function(err) {	
 						bootbox.alert( err.responseText); 
@@ -510,6 +494,16 @@ $(document).ready(function(){
             exp+="Telefone Fixo invalido ! </br> " + "</br>";
         }
     	return exp;
+    };
+    
+    ONG.pessoa.modaleditPF = function(idPf){
+		ONG.pessoa.buscaEstadoEdit1();
+		ONG.pessoa.buscIDPF(idPf);
+    };    
+    
+    ONG.pessoa.modaleditPJ = function(idPj){
+		ONG.pessoa.buscaEstadoEdit2();
+		ONG.pessoa.buscIDPJ(idPj);
     };
 });
 

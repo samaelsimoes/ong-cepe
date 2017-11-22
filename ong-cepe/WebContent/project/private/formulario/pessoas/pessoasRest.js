@@ -11,15 +11,14 @@ $(document).ready(function(){
 		});
 	};
 	
-	
 	ONG.pessoaRest.pesquisarNome = function(config){
-//		url : "rest/pessoas/pesquisarNome?nome="+config.data.valor1 + "&tipo=" + config.data.valor2 ,
 		ONG.ajax.get({
 			url : ONG.contextPath+"/rest/pessoa/nome/"+config.data,
 			success : config.success,
 			error : config.error
 		});
 	};
+	
 	ONG.pessoaRest.pesquisarTipo = function(config){
 		ONG.ajax.get({
 			url: ONG.contextPath + "/rest/pessoa/tipo/" + config.data,

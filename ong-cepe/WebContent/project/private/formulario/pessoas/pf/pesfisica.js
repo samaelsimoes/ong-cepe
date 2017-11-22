@@ -58,7 +58,7 @@ $(document).ready(function(){
 					html += "<td>" + listPesF[i].numero + "</td>";
 
 					html += "<td>"+
-							"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaFisica.buscID("+listPesF[i].id+")'>Editar</button>"+ " " + " " +
+							"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaFisica.modaledit("+listPesF[i].id+")'>Editar</button>"+ " " + " " +
 							"<button type='button'class='btn btn-trash' onclick='ONG.pessoaFisica.confExcluir("+listPesF[i].id+")'>Excluir</button>"+
 						"</td>";						
 					html += "</tr>";  
@@ -119,7 +119,7 @@ $(document).ready(function(){
             if(exp==""){
 
             	var date = $("#datanascimento").val();
-				var d = new Date(date.split("/").reverse().join("-"));
+				var d = new Date(date.split("-").join("/"));
 				
             	var dadosPF = {
             	
@@ -144,13 +144,11 @@ $(document).ready(function(){
 	            	numero: $("#numero").val(),
 	            	cep: $("#cep").val() 
 	            };
+            	console.log(dadosPF);
 				ONG.pessoaRest.inserir({
 					data : dadosPF,
         			success: function(msg){		
-        				bootbox.alert("Realizado cadastro com sucesso ");
-        				setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 2000);
+        				bootbox.alert(msg);
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -229,13 +227,10 @@ $(document).ready(function(){
     // ------------------------
 
     ONG.pessoaFisica.buscID = function( id ){
-    	
 		ONG.pessoaRest.pesquisarId({
 			data : id,
 			success:function(dados){
-
-				if(dados != ""){
-					
+				ONG.pessoaFisica.buscaCidadeEdit(dados.cidade.estado.id, function(){					
 					$("#id").val(dados.id);
 		    		$("#nomeedit").val(dados.nome);
 		    		$("#rgedit").val(dados.rg);
@@ -249,8 +244,9 @@ $(document).ready(function(){
 					$("#complementoedit").val(dados.complemento);
 					$("#numeroedit").val(dados.numero);
 					$("#cepedit").val(dados.cep);
-					ONG.pessoaFisica.buscaEstadoEdit();
-		    	}			
+					$("#estadoedit").val(dados.cidade.estado.id);
+					$("#cidadeedit").val(dados.cidade.id);
+				});	
 			},			
 			error: function(err){				
 				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
@@ -308,11 +304,7 @@ $(document).ready(function(){
 					data : dadosPF,
 					success:function(data){	
 						
-						bootbox.alert(data);
-						
-						setTimeout(function(){
-	    	    	        location.reload();
-	    	    	    }, 2000);					
+						bootbox.alert(data);				
 					},
 					error: function(err){	
 						bootbox.alert( err.responseText); 
@@ -388,9 +380,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoaFisica.montaSelectEstado = function(listEstado) {
+    	var option = '';
+    	$('#estado').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#estado'));    	
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estado'));
+				option = $( "<option></option>" ).appendTo($('#estado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
@@ -402,9 +397,12 @@ $(document).ready(function(){
 		}
     }
     ONG.pessoaFisica.montaSelectCidade = function( listaCidade ) {
+    	var option = '';
+    	$('#cidade').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#cidade'));    	
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
+				option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
@@ -426,11 +424,13 @@ $(document).ready(function(){
 		ONG.ajax.get(cfg);
     }
 
-    ONG.pessoaFisica.buscaCidadeEdit = function(id){
+    ONG.pessoaFisica.buscaCidadeEdit = function(id, callback){
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade){		
 				ONG.pessoaFisica.montaSelectCidadeEdit(listaCidade);
+				if(callback != undefined)
+					callback();
 			},
 			error: function(err){							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -440,9 +440,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoaFisica.montaSelectEstadoEdit = function(listEstado) {
+    	var option = '';
+    	$('#estadoedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#estadoedit'));    	
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estadoedit'));
+				option = $( "<option></option>" ).appendTo($('#estadoedit'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
@@ -453,15 +456,28 @@ $(document).ready(function(){
 				ONG.pessoaFisica.buscaCidadeEdit( valor );
 			});
 		}
-    }
+    };
 
     ONG.pessoaFisica.montaSelectCidadeEdit = function( listaCidade ) {
+    	var option = '';
+    	$('#cidadeedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#cidadeedit'));    	
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );
+				option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
 		}
-    }
+    };
+    
+    
+    ONG.pessoaFisica.modaladd = function(){    	
+    	ONG.pessoaFisica.buscaEstado();
+    };
+    
+    ONG.pessoaFisica.modaledit = function(idPess){
+		ONG.pessoaFisica.buscaEstadoEdit();
+		ONG.pessoaFisica.buscID(idPess);
+    };
 });

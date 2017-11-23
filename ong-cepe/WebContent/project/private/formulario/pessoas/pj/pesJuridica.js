@@ -6,6 +6,12 @@ $(document).ready(function(){
 	    	ONG.pessoaJuridica.busca();
 	    }
 	});
+	mask = function() {
+	    $(".maskFone").text(function(i, text) {
+	        text = text.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
+	        return text;
+	    });
+	};
 	ONG.pessoaJuridica.busca = function(){
 		
 	    var busca=$("#conspj").val();	  	
@@ -13,16 +19,12 @@ $(document).ready(function(){
 	}		
 	
 	ONG.pessoaJuridica.buscapesJuridica = function(listPesj, busca){
-				
 		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
-		
 		html += 
-
 			"<thead class='table table-striped '>" +
 				"<tr>" +
-					
-					"<th> Cnpj </th>" + 
 					"<th> Razão Social </th> " +
+					"<th> Cnpj </th>" + 
 					"<th> E-mail </th>" +
 					"<th> Telefone contato </th>" +
 					"<th> Cep </th>" +
@@ -36,26 +38,25 @@ $(document).ready(function(){
 			"</thead>";					
 		html += "<tbody>";
 		    if(listPesj != undefined && listPesj.length > 0 && listPesj[0].id != undefined){
-			  
 			  	for(var i = 0; i < listPesj.length; i++){
-
 					html += "<tr>";					
-					html += "<td>" + listPesj[i].cnpj + "</td>";
 					html += "<td>" + listPesj[i].nome + "</td>";
+					html += "<td>" + listPesj[i].cnpj + "</td>";
 					html += "<td>" + listPesj[i].email + "</td>";
 					
 					if(listPesj[i].foneFixo != null && listPesj[i].foneMovel != null){
-						html += "<td>"+	 
-									listPesj[i].foneFixo + " - " + listPesj[i].foneMovel +										
-								"</td>";
+						html += "<td><p class='small maskFone'>"+	 
+									listPesj[i].foneFixo + "</p><p class='small maskFone'>" + 
+									listPesj[i].foneMovel +										
+								"</p></td>";
 					}else if(listPesj[i].foneFixo != null && listPesj[i].foneMovel == null){
-						html += "<td>"+
+						html += "<td><p class='maskFone'>"+
 									listPesj[i].foneFixo+
-								"</td>"
+								"</p></td>"
 					}else if( listPesj[i].foneMovel != null && listPesj[i].foneFixo == null){
-						html += "<td>"+
+						html += "<td><p class='maskFone'>"+
 									listPesj[i].foneMovel+
-								"</td>"
+								"</p></td>"
 					}
 					
 					html += "<td>" + listPesj[i].cep + "</td>";
@@ -66,7 +67,7 @@ $(document).ready(function(){
 					html += "<td>" + listPesj[i].numero + "</td>";
 
 					html += "<td>"+
-								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaJuridica.buscID("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
+								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaJuridica.modaledit("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
 								"<button type='button'class='btn btn-trash' onclick='ONG.pessoaJuridica.confExcluir("+listPesj[i].id+")'>Excluir</button>"+
 							"</td>";						
 					html += "</tr>";  
@@ -101,6 +102,7 @@ $(document).ready(function(){
 				},
 			},
 		});
+		mask();
 	}
 	
 	ONG.pessoaJuridica.buscapesJuridica(undefined, "");
@@ -227,8 +229,8 @@ $(document).ready(function(){
 		ONG.pessoaRest.pesquisarId({
 			data : id,
 			success:function(dados){
-
-				if(dados != ""){
+				ONG.pessoaJuridica.buscaCidadeedit(dados.cidade.estado.id, function(){
+					debugger;
 					$("#id").val(dados.id);
 		    		$("#razaosocialedit").val(dados.nome);
 		    		$("#cnpjedit").val(dados.cnpj);
@@ -240,20 +242,18 @@ $(document).ready(function(){
 					$("#complementoedit").val(dados.complemento);
 					$("#numeroedit").val(dados.numero);
 					$("#cepedit").val(dados.cep);
-					ONG.pessoaJuridica.buscaEstadoedit();
-		    	}			
+					$("#estadoedit").val(dados.cidade.estado.id);
+					$("#cidadeedit").val(dados.cidade.id);
+				});	
 			},			
 			error: function(err){				
 				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
 			}
 		});
-
     };
 
     ONG.pessoaJuridica.editarPJ = function(){
-
     	var msg  = "";
-    	
     	if($("#id").val() == ""){
     		msg += " Impossivel editar pessoa Juridica, gentileza entrar em contato com o administrador, motivo sem campo id";
     	}
@@ -271,10 +271,8 @@ $(document).ready(function(){
 
     	if(msg == ""){
     		var exp = ONG.pessoaJuridica.validaCamposedit();
-    		
     		if(exp == ""){
 		    	var dadosPJ= {
-		            
 		    		id: $("#id").val(),
 		    		nome: $("#razaosocialedit").val(),
 		    		tipo: 2,
@@ -289,7 +287,6 @@ $(document).ready(function(){
 		    		complemento: $("#complementoedit").val(),
 		    		numero: $("#numeroedit").val(),
 		    		cep: $("#cepedit").val(),
-		    		
 					cidade : { 
 						id: parseInt($("#cidadeedit").val())
 					}					
@@ -304,7 +301,7 @@ $(document).ready(function(){
 	    	    	    }, 1000);
 					},
 					error: function(err) {	
-						bootbox.alert( err.responseText); 
+						bootbox.alert("Erro ao Editar PJ"+err.responseText); 
 					}
 				});
 		    }else{
@@ -314,38 +311,24 @@ $(document).ready(function(){
 	    	bootbox.alert(msg);
 	    }
     };
-
-    ONG.pessoaJuridica.confExcluir = function(id) {
-    	bootbox.confirm({
-		    message: "Você Desejea excluir?",
-		    buttons: {
-		        confirm: {
-		            label: 'Sim',
-		            className: 'btn-success',
-		        },
-		        cancel: {
-		            label: 'Não',
-		            className: 'btn-danger'
-		        }
-		    },		    
-		    callback: function (result) {		        
-		        if(result == true){
-					ONG.pessoaRest.excluir({
-						data : id,
-						success: function (data) {						
-							bootbox.alert(data);	
-							setTimeout(function(){
-		    	    	         location.reload();
-		    	    	    }, 1000);	            	
-						},
-						error: function (err) {				
-							bootbox.alert("Erro ao deletar: " + err.responseText);
-						}
-					});
-		        }
-		    }
-		});		
-    }
+    
+    ONG.pessoaJuridica.confExcluir = function(id){
+		bootbox.confirm("Deseja Excluir?", function(confirmed) {
+			if(confirmed) {
+				ONG.pessoaRest.excluir({
+					data : id,
+					success : function(msg) {
+						  console.log(msg);
+						  ONG.pessoaJuridica.busca();
+					},
+					error : function(err) {
+						  console.log('err' ,err);
+						  bootbox.alert(err.responseText);
+					} 
+				});
+			}
+		}); 
+	};
 
     ONG.pessoaJuridica.buscaEstado = function(){
     	var cfg = {							
@@ -373,9 +356,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoaJuridica.montaSelectEstado = function(listEstado) {
+    	var option = '';
+    	$('#estado').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#estado')); 
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estado'));
+				option = $( "<option></option>" ).appendTo($('#estado'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
@@ -388,9 +374,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoaJuridica.montaSelectCidade = function( listaCidade ) {
+    	var option = '';
+    	$('#cidade').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#cidade')); 
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
+				option = $( "<option></option>" ).appendTo( $( '#cidade' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
@@ -400,7 +389,7 @@ $(document).ready(function(){
     // EDITAR CIDADE E ESTADO
     ONG.pessoaJuridica.buscaEstadoedit = function(){
     	var cfg = {							
-			url: ONG.contextPath + "/rest/estado/nome/*" + 1,
+			url: ONG.contextPath + "/rest/estado/nome/*",
 			success: function(listEstado){													
 				ONG.pessoaJuridica.montaSelectEstadoedit(listEstado);
 			},
@@ -410,11 +399,13 @@ $(document).ready(function(){
 		};					
 		ONG.ajax.get(cfg);
     }
-    ONG.pessoaJuridica.buscaCidadeedit = function(id) {
+    ONG.pessoaJuridica.buscaCidadeedit = function(id, callback) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
 			success: function(listaCidade) {		
 				ONG.pessoaJuridica.montaSelectCidadeedit(listaCidade);
+				if(callback != undefined)
+					callback();
 			},
 			error: function(err) {							
 				bootbox.alert("Erro ao Buscar Cidade, entrar em contato com o Administrador se o problema persistir! " + err);
@@ -424,9 +415,12 @@ $(document).ready(function(){
     }
 
     ONG.pessoaJuridica.montaSelectEstadoedit = function(listEstado) {
+    	var option = '';
+    	$('#estadoedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#estadoedit')); 
     	if(listEstado != undefined && listEstado.length > 0 && listEstado[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listEstado.length; i++) {
-				var option = $( "<option></option>" ).appendTo($('#estadoedit'));
+				option = $( "<option></option>" ).appendTo($('#estadoedit'));
 				option.attr( "value", listEstado[i].id );
 				option.html( listEstado[i].nome );
 			}
@@ -439,13 +433,27 @@ $(document).ready(function(){
     }
 
     ONG.pessoaJuridica.montaSelectCidadeedit = function( listaCidade ) {
+    	var option = '';
+    	$('#cidadeedit').find('option').remove();
+		option = $( "<option value=''>Selecione</option>" ).appendTo($('#cidadeedit'));   
     	if(listaCidade != undefined && listaCidade.length > 0 && listaCidade[0].id != undefined) { // montando meus estados
 			for(var i = 0; i < listaCidade.length; i++){
-				var option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );
+				option = $( "<option></option>" ).appendTo( $( '#cidadeedit' ) );
 				option.attr( "value", listaCidade[i].id );
 				option.html( listaCidade[i].nome );
 			}
 		}
-    }
+    };
+    
+    
+    
+    ONG.pessoaJuridica.modaladd = function(){    	
+    	ONG.pessoaJuridica.buscaEstado();
+    };
+    
+    ONG.pessoaJuridica.modaledit = function(idPess){
+		ONG.pessoaJuridica.buscaEstadoedit();
+		ONG.pessoaJuridica.buscID(idPess);
+    };
 });
 

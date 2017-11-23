@@ -1,23 +1,29 @@
 ONG.pessoaFisica = new Object();
 
 $(document).ready(function(){
+	$(document).keypress(function(e) {
+	    if(e.which == 13) {
+	    	ONG.pessoaFisica.consultapesf();
+	    }
+	});
+	mask = function() {
+	    $(".maskFone").text(function(i, text) {
+	        text = text.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
+	        return text;
+	    });
+	};
 	ONG.pessoaFisica.consultapesf=function(){
-		
 	    var busca=$("#conspf").val();	  	
 	    ONG.pessoaFisica.buscapefisica(undefined,busca);
 	}		
 	
 	ONG.pessoaFisica.buscapefisica = function(listPesF, busca){
-
 		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
-		
 		html += 
-			
 			"<thead class='table table-striped'>" +
 				"<tr>" +	
-				
-					"<th> CPF </th>" + 
 					"<th> Nome </th> " +
+					"<th> CPF </th>" + 
 					"<th> RG </th>" + 
 					"<th> E-mail </th>" +
 					"<th> Telefone contato </th>" +
@@ -30,33 +36,27 @@ $(document).ready(function(){
 		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){			  
 			  	for(var i = 0; i < listPesF.length; i++){
 					html += "<tr>";		
-					html += "<td>" + listPesF[i].cpf + "</td>";
 					html += "<td>" + listPesF[i].nome + "</td>";
+					html += "<td>" + listPesF[i].cpf + "</td>";
 					html += "<td>" + listPesF[i].rg + "</td>";
-					//html += "<td>" + listPesF[i].nascimento + "</td>";
 				    html += "<td>" + listPesF[i].email + "</td>";
-
+				    
 					if(listPesF[i].foneFixo != null && listPesF[i].foneMovel != null){
-						html += "<td>"+	 
-									listPesF[i].foneFixo + " - " + listPesF[i].foneMovel +										
-								"</td>";
+						html += "<td><p class='small maskFone'>"+	 
+									listPesF[i].foneFixo + "</p><p class='small maskFone'>" + 
+									listPesF[i].foneMovel +										
+								"</p></td>";
 					}else if(listPesF[i].foneFixo != null && listPesF[i].foneMovel == null){
-						html += "<td>"+
+						html += "<td><p class='maskFone'>"+
 									listPesF[i].foneFixo+
-								"</td>"
+								"</p></td>"
 					}else if( listPesF[i].foneMovel != null && listPesF[i].foneFixo == null){
-						html += "<td>"+
+						html += "<td><p class='maskFone'>"+
 									listPesF[i].foneMovel+
-								"</td>"
+								"</p></td>"
 					}
-					//html += "<td>" + listPesF[i].responsavel + "</td>";
-					//html += "<td>" + listPesF[i].estado + "</td>";
-					//html += "<td>" + listPesF[i].cidade + "</td>";
-					//html += "<td>" + listPesF[i].bairro + "</td>";
 					html += "<td>" + listPesF[i].rua + "</td>";
-					//html += "<td>" + listPesF[i].complemento + "</td>";
 					html += "<td>" + listPesF[i].numero + "</td>";
-
 					html += "<td>"+
 							"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaFisica.modaledit("+listPesF[i].id+")'>Editar</button>"+ " " + " " +
 							"<button type='button'class='btn btn-trash' onclick='ONG.pessoaFisica.confExcluir("+listPesF[i].id+")'>Excluir</button>"+
@@ -95,6 +95,7 @@ $(document).ready(function(){
 				},
 			},
 		});
+		mask();
 	}
 	
 	ONG.pessoaFisica.buscapefisica(undefined, "");
@@ -255,13 +256,10 @@ $(document).ready(function(){
     };
 
     ONG.pessoaFisica.editarPF = function() {
-
     	var msg  = "";
-    	
     	if($("#id").val() == ""){
     		msg += " Entrar em contato com o administrador, falha ao editar pessoas, campo id vindo vazio";
     	}
-    	
 		msg += ONG.pessoaFisica.validaVazio("Nome ", $("#nomeedit").val());
 		msg += ONG.pessoaFisica.validaVazio("CPF: ", $("#cpfedit").val());
 		msg += ONG.pessoaFisica.validaVazio("RG: ", $("#rgedit").val());
@@ -317,42 +315,23 @@ $(document).ready(function(){
 	    	bootbox.alert(msg);
 	    }
     };
-
     ONG.pessoaFisica.confExcluir = function(id){
-    	bootbox.confirm({
-
-		    message: "Você Deseja excluir?",
-		    buttons: {
-		        confirm: {
-
-		            label: 'Sim',
-		            className: 'btn-success',
-		        },
-		        cancel: {
-
-		            label: 'Não',
-		            className: 'btn-danger'
-		        }
-		    },		    
-		    callback: function (result) {		        
-		        if(result == true){
-					ONG.pessoaRest.excluir({
-						data : id,
-						success: function (data){
-							
-							bootbox.alert(data);	
-							setTimeout(function(){
-		    	    	         location.reload();
-		    	    	    }, 1000);           	
-						},
-						error: function (err){				
-							bootbox.alert("Erro ao deletar o contato: " + err.responseText);
-						}
-					});
-		        }
-		    }
-		});		
-    }
+		bootbox.confirm("Deseja Excluir?", function(confirmed) {
+			if(confirmed) {
+				ONG.pessoaRest.excluir({
+					data : id,
+					success : function(msg) {
+						  console.log(msg);
+						  ONG.pessoaFisica.consultapesf();
+					},
+					error : function(err) {
+						  console.log('err' ,err);
+						  bootbox.alert(err.responseText);
+					} 
+				});
+			}
+		}); 
+	};
 
     ONG.pessoaFisica.buscaEstado = function(){
     	var cfg = {							

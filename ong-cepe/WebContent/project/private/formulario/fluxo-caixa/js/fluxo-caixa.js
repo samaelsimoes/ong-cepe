@@ -277,7 +277,6 @@ $(document).ready(function(){
 		}
     }
 
-	// MODAL CADASTRAR, busca todos dados do campos html-selected PESSOA EVENTO CENTRO DE CUSTO E SL
 
     ONG.fluxoCaixa.buscaCusto = function() {
     	ONG.centrocustoRest.pesquisarNome({
@@ -358,7 +357,7 @@ $(document).ready(function(){
 				ONG.fluxoCaixa.montaselectpessoas(listapessoa);
 			},
 			error: function(err){	
-				bootbox.alert("Erro ao realizar busca de pessoas:"+err.responseText);
+				bootbox.alert("Erro ao buscar Pessoas"+err.responseText);
 			}
 		};
 		ONG.ajax.get(cfg);
@@ -407,7 +406,7 @@ $(document).ready(function(){
 	    		ONG.fluxoCaixa.preencheedit(dados);
 			},
 			error: function(err){							
-				bootbox.alert("Erro ao Buscar informações de Fluxo de caixa, entrar em contato com o Administrador se o problema persistir!");
+				bootbox.alert("Erro ao pesquisar Operação por ID"+err.responseText);
 			}
 		});
     }
@@ -419,7 +418,7 @@ $(document).ready(function(){
     			ONG.fluxoCaixa.montaselectedcentrocustoedit(lcenter);
     		},
     		error: function(err){	
-    			bootbox.alert("Erro ao realizar busca do centro de custo:"+err.responseText);
+    			bootbox.alert("Erro ao buscar Centro de Custo"+err.responseText);
     		}
     	});
     }
@@ -622,7 +621,14 @@ $(document).ready(function(){
 				$("#pessoaedit").val(dados.pessoa.id);
 			if(dados.centroCustoDestino != null )
 				$("#centrodecustoedit2").val(dados.centroCustoDestino.id);
-		
+			if(dados.tipo == 2){
+				$('#centrodecustoedit2').prop("disabled", false);
+			} else {
+				$('#centrodecustoedit2').prop("disabled", true);
+			} 
+			//Conforme alinhado com o prof. Daniel, não pode editar o tipo de Operação
+			$('#tipofluxoedit').prop("disabled", true);
+			
     };
     
     

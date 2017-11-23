@@ -1,6 +1,10 @@
 ONG.pessoa = new Object();
 $(document).ready(function(){
-	
+	$(document).keypress(function(e) {
+	    if(e.which == 13) {
+	    	ONG.pessoaJuridica.busca();
+	    }
+	});
 	mask = function() {
 	    $(".maskFone").text(function(i, text) {
 	        text = text.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
@@ -18,12 +22,12 @@ $(document).ready(function(){
 			"<thead class='table table-striped '>" +
 				"<tr>" +	
 					"<th> Nome / Razão social </th>" + 
-					"<th> Tipo </th> " +
 					"<th> Cpf / CNPJ </th>" +
+					"<th> Tipo </th> " +
 					"<th> Telefone contato </th>" +
 					"<th> Email </th>" +
+					"<th class='col-md-2'> Cidade </th>" +
 					"<th> Status </th>" +
-//					"<th> Cidade </th>" +
 					"<th> Ações</th>" +
 				"</tr>" +
 			"</thead>" +					
@@ -33,18 +37,17 @@ $(document).ready(function(){
 					html += "<tr>";					
 						html += "<td>" + listallpes[i].nome + "</td>";
 				
-						if (listallpes[i].tipo == 1) {
-							html += "<td>" + "Pessoa Física" + "</td>";
-						}else if (listallpes[i].tipo == 2) {
-							html += "<td>" + "Pessoa Juridica" + "</td>";
-						}					
-						
-						
 						if (listallpes[i].tipo == 2) {
 							html += "<td>" + listallpes[i].cnpj + "</td>";
 						}else if (listallpes[i].tipo  == 1){
 							html += "<td>" + listallpes[i].cpf + "</td>";
-				  		}
+						}
+						
+						if (listallpes[i].tipo == 1) {
+							html += "<td>" + "PF" + "</td>";
+						}else if (listallpes[i].tipo == 2) {
+							html += "<td>" + "PJ" + "</td>";
+						}					
 						
 						if(listallpes[i].foneFixo != null && listallpes[i].foneMovel != null){
 							html += "<td><p class='small maskFone'>"+	 
@@ -61,6 +64,7 @@ $(document).ready(function(){
 									"</p></td>"
 						}
 						html += "<td>" + listallpes[i].email + "</td>";
+						html += "<td>" + listallpes[i].cidade.nome+" - "+ listallpes[i].cidade.estado.uf + "</td>";
 						
 						if (listallpes[i].status == 1) {
 							html += "<td>" + "Ativo" + "</td>";
@@ -104,7 +108,7 @@ $(document).ready(function(){
 		$("#resupsall").html(html);
 		$('#tabela').tablesorter({
 			headers: { 			// (começa do zero)
-				5: {			// Desativa a ordenação para essa coluna 
+				7: {			// Desativa a ordenação para essa coluna 
 					sorter: false 
 				},
 			},
@@ -155,7 +159,7 @@ $(document).ready(function(){
 				});	
 			},			
 			error: function(err){				
-				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
+				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário"+err.responseText);
 			}
 		});
     };
@@ -182,7 +186,7 @@ $(document).ready(function(){
 
 			},			
 			error: function(err){				
-				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário ");
+				bootbox.alert("Ocorreu erro ao chamar os dados do evento para o Formulário"+err.responseText);
 			}
 		});
     };
@@ -194,7 +198,7 @@ $(document).ready(function(){
 				ONG.pessoa.montaSelectEstadoEdit2(listEstado2);
 			},
 			error: function(err){							
-				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! " + err);
+				bootbox.alert("Erro ao Buscar Estado, entrar em contato com o Administrador se o problema persistir! "+err.responseText);
 			}
 		};					
 		ONG.ajax.get(cfg);

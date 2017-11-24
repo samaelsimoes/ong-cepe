@@ -30,7 +30,6 @@ public class PessoaService  implements Service<Pessoa>{
 	}
 
 	public void adicionar()  throws GlobalException {
-		pessoa.setCidade(new CidadeService(this.pessoa.getCidade()).pesquisaId());
 		new PessoaDAO(this.pessoa).persist();
 	}
 

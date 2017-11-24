@@ -3,7 +3,6 @@
  **/
 package br.com.cepe.entity.pojo.endereco;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +16,7 @@ public class Cidade {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nome;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Estado estado;
 	
 	

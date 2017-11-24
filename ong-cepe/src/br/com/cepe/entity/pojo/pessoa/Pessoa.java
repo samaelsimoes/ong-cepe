@@ -1,7 +1,6 @@
 
 package br.com.cepe.entity.pojo.pessoa;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,7 +31,7 @@ public class Pessoa {
 	private String rua;
 	private int numero;
 	private String bairro;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Cidade cidade;
 	private String complemento;
 		

@@ -290,7 +290,7 @@ $(document).ready(function(){
 					cidade : { 
 						id: parseInt($("#cidadeedit").val())
 					}					
-		    	}
+		    	};
 		    	
 				ONG.pessoaRest.editar({
 					data : dadosPJ,
@@ -341,7 +341,7 @@ $(document).ready(function(){
 			}
 		};					
 		ONG.ajax.get(cfg);
-    }
+    };
     ONG.pessoaJuridica.buscaCidade = function(id) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
@@ -353,8 +353,7 @@ $(document).ready(function(){
 			}
 		};					
 		ONG.ajax.get(cfg);
-    }
-
+    };
     ONG.pessoaJuridica.montaSelectEstado = function(listEstado) {
     	var option = '';
     	$('#estado').find('option').remove();
@@ -371,8 +370,7 @@ $(document).ready(function(){
 				ONG.pessoaJuridica.buscaCidade( valor );
 			});
 		}
-    }
-
+    };
     ONG.pessoaJuridica.montaSelectCidade = function( listaCidade ) {
     	var option = '';
     	$('#cidade').find('option').remove();
@@ -384,8 +382,7 @@ $(document).ready(function(){
 				option.html( listaCidade[i].nome );
 			}
 		}
-    }
-
+    };
     // EDITAR CIDADE E ESTADO
     ONG.pessoaJuridica.buscaEstadoedit = function(){
     	var cfg = {							
@@ -398,7 +395,7 @@ $(document).ready(function(){
 			}
 		};					
 		ONG.ajax.get(cfg);
-    }
+    };
     ONG.pessoaJuridica.buscaCidadeedit = function(id, callback) {
     	var cfg = {							 
 			url: ONG.contextPath +  "/rest/cidade/estado/" + id,
@@ -412,8 +409,7 @@ $(document).ready(function(){
 			}
 		};					
 		ONG.ajax.get(cfg);
-    }
-
+    };
     ONG.pessoaJuridica.montaSelectEstadoedit = function(listEstado) {
     	var option = '';
     	$('#estadoedit').find('option').remove();
@@ -430,8 +426,7 @@ $(document).ready(function(){
 				ONG.pessoaJuridica.buscaCidadeedit( valor );
 			});
 		}
-    }
-
+    };
     ONG.pessoaJuridica.montaSelectCidadeedit = function( listaCidade ) {
     	var option = '';
     	$('#cidadeedit').find('option').remove();

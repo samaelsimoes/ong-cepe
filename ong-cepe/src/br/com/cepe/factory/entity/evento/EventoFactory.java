@@ -8,6 +8,7 @@ import java.util.List;
 import org.codehaus.jackson.node.ObjectNode;
 
 import br.com.cepe.entity.pojo.evento.Beneficente;
+import br.com.cepe.entity.pojo.evento.Competicao;
 import br.com.cepe.entity.pojo.evento.Evento;
 import br.com.cepe.entity.pojo.evento.Sessao;
 import br.com.cepe.entity.pojo.evento.Viagem;
@@ -25,6 +26,7 @@ public class EventoFactory extends ObjMapper {
 		EVENTO_CLASSES.put(1, Beneficente.class);
 		EVENTO_CLASSES.put(2, Sessao.class);
 		EVENTO_CLASSES.put(3, Viagem.class);
+		EVENTO_CLASSES.put(4, Competicao.class);
 	}
 
 	public EventoFactory(String eventoStr) throws GlobalException {

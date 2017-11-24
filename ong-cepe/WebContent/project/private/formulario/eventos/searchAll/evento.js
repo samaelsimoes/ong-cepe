@@ -10,9 +10,7 @@ $(document).ready(function(){
 	    ONG.evento.searchEvent(undefined,busca);
 	}; 	
 	ONG.evento.searchEvent = function(listEvent, busca){
-
 		var html = "<table id='tabela' class='tablesorter table table-responsive custom-table-margin-b'>";
-		
 		html += 
 			"<thead class='table table-striped '>" +
 				"<tr>" +
@@ -31,11 +29,8 @@ $(document).ready(function(){
 				"</tr>" +
 			"</thead>" +
 			"<tbody>";					
-		
 		    if(listEvent != undefined && listEvent.length > 0 && listEvent[0].id != undefined){
-			  
 			  	for(var i = 0; i < listEvent.length; i++){
-			  		
 					html += "<tr>";					
 						html += "<td>" + listEvent[i].nome + "</td>";
 						html += "<td>" + listEvent[i].modalidade.nome + "</td>";
@@ -46,14 +41,17 @@ $(document).ready(function(){
 									"</td>";
 						}else if(listEvent[i].tipo == 2){
 							html += "<td>"
-										+"Sessao"+
+										+"Sessão"+
 									"</td>"
 						}else if( listEvent[i].tipo == 3){
 							html += "<td>"
 										+"Viagem"+
 									"</td>"
+						}else if( listEvent[i].tipo == 4){
+							html += "<td>"
+										+"Competição"+
+									"</td>"
 						}
-						
 						html += "<td>" + listEvent[i].data.split("-").reverse().join("/") + "</td>";
 						html += "<td><p class='small'>" + listEvent[i].descricao + "</p></td>";
 						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";

@@ -41,6 +41,8 @@ $(document).ready(function(){
 							html += "<td>Doação</td>";
 						}else if(listFluxo[i].classificacao == 3){
 							html += "<td>Custo Operacional</td>";
+						}else if(listFluxo[i].classificacao == 4){
+							html += "<td>Patrocínio</td>";
 						}
 						
 						if(listFluxo[i].pessoa == null || listFluxo[i].pessoa == undefined){

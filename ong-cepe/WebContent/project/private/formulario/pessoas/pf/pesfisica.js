@@ -189,21 +189,21 @@ $(document).ready(function(){
             $("#email").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
             ($("#email").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
                 
-            exp+="E-mail invalido" +"</br>"
+            exp+="E-mail inválido" +"</br>"
             + "ex: teste_@teste.com.br"
             document.getElementById("email").focus();
         }
         if(!$("#cpf").val().match(/^\d{11,12}$/)){
-        	exp+="cpf invalido ! </br> " + "</br>";
+        	exp+="cpf inválido ! </br> " + "</br>";
         }
-        if(!$("#rg").val().match(/^\d{9,13}$/)){
-        	exp+="rg invalido ! </br> " + "</br>";
+        if(!$("#rg").val().match(/^\d{5,13}$/)){
+        	exp+="rg inválido ! </br> " + "</br>";
         }
         if(!$("#cep").val().match(/^\d{8,9}$/)){
-        	exp+="Cep invalido ! </br> " + "</br>";
+        	exp+="Cep inválido ! </br> " + "</br>";
         }
         if(!$("#telfixo").val().match(/^\d{10,13}$/)){    
-            exp+="Telefone Fixo invalido ! </br> " + "</br>";
+            exp+="Telefone Fixo inválido ! </br> " + "</br>";
         }
     	return exp;
     };
@@ -215,21 +215,21 @@ $(document).ready(function(){
             $("#emailedit").val().lastIndexOf(".") + 1 == email.length || //valida se tem texto depois do ponto
             ($("#emailedit").val().indexOf("@") + 1 == $("#email").val().indexOf("."))){ //valida se tem texto entre o @ e o .{
                 
-            exp += "E-mail invalido" +"</br>"
+            exp += "E-mail inválido" +"</br>"
             + "ex: teste_@teste.com.br"
             document.getElementById("emailedit").focus();
         }
         if(!$("#cpfedit").val().match(/^\d{11,12}$/)){
-        	exp += "cpf invalido ! </br> " + "</br>";
+        	exp += "cpf inválido ! </br> " + "</br>";
         }
         if(!$("#rgedit").val().match(/^\d{9,13}$/)){
-        	exp += "rg invalido ! </br> " + "</br>";
+        	exp += "rg inválido ! </br> " + "</br>";
         }
         if(!$("#cepedit").val().match(/^\d{8,9}$/)){
-        	exp += "Cep invalido ! </br> " + "</br>";
+        	exp += "Cep inválido ! </br> " + "</br>";
         }
         if(!$("#telfixoedit").val().match(/^\d{10,13}$/)){    
-            exp += "Telefone Fixo invalido ! </br> " + "</br>";
+            exp += "Telefone Fixo inválido ! </br> " + "</br>";
         }
     	return exp;
     };

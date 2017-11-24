@@ -29,6 +29,7 @@ $(document).ready(function(){
 					"<th> Telefone contato </th>" +
 					"<th> Rua </th>" +
 					"<th> Número </th>" +
+					"<th> Status </th>" +					
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";	
@@ -57,6 +58,11 @@ $(document).ready(function(){
 					}
 					html += "<td>" + listPesF[i].rua + "</td>";
 					html += "<td>" + listPesF[i].numero + "</td>";
+					if (listPesF[i].status == 1) {
+						html += "<td>" + "Ativo" + "</td>";
+					}else if (listPesF[i].status == 2) {
+						html += "<td>" + "Inativo" + "</td>";
+					}
 					html += "<td>"+
 							"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaFisica.modaledit("+listPesF[i].id+")'>Editar</button>"+ " " + " " +
 							"<button type='button'class='btn btn-trash' onclick='ONG.pessoaFisica.confExcluir("+listPesF[i].id+")'>Excluir</button>"+
@@ -90,7 +96,7 @@ $(document).ready(function(){
 		$("#resupsfisica").html(html);
 		$('#tabela').tablesorter({
 			headers: { 			// (começa do zero)
-				7: {			// Desativa a ordenação para essa coluna 
+				8: {			// Desativa a ordenação para essa coluna 
 					sorter: false 
 				},
 			},
@@ -150,7 +156,9 @@ $(document).ready(function(){
 					data : dadosPF,
         			success: function(msg){		
         				bootbox.alert(msg);
-        			},
+        				ONG.pessoaFisica.consultapesf();
+    					$('input').val('');
+    					$('#modaladd').modal('toggle');        			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
         			}
@@ -301,8 +309,10 @@ $(document).ready(function(){
 				ONG.pessoaRest.editar({
 					data : dadosPF,
 					success:function(data){	
-						
-						bootbox.alert(data);				
+        				bootbox.alert(msg);
+        				ONG.pessoaFisica.consultapesf();
+    					$('input').val('');
+    					$('#modaledit').modal('toggle');  
 					},
 					error: function(err){	
 						bootbox.alert( err.responseText); 

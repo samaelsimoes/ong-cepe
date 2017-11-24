@@ -33,6 +33,7 @@ $(document).ready(function(){
 					"<th> Rua </th>" +
 					"<th> Complemento </th>" +
 					"<th> Número </th>" +
+					"<th> Status </th>" +					
 					"<th style='width: 15%;'> Ações</th>" +
 				"</tr>" +
 			"</thead>";					
@@ -65,7 +66,11 @@ $(document).ready(function(){
 					html += "<td>" + listPesj[i].rua + "</td>";
 					html += "<td>" + listPesj[i].complemento + "</td>";
 					html += "<td>" + listPesj[i].numero + "</td>";
-
+					if (listPesF[i].status == 1) {
+						html += "<td>" + "Ativo" + "</td>";
+					}else if (listPesF[i].status == 2) {
+						html += "<td>" + "Inativo" + "</td>";
+					}
 					html += "<td>"+
 								"<button type='button' class='btn btn-pencil' data-toggle='modal' data-target='#modaledit' data-whatever='@getbootstrap' onclick='ONG.pessoaJuridica.modaledit("+listPesj[i].id+")'>Editar</button>"+ " " + " " +
 								"<button type='button'class='btn btn-trash' onclick='ONG.pessoaJuridica.confExcluir("+listPesj[i].id+")'>Excluir</button>"+
@@ -148,7 +153,10 @@ $(document).ready(function(){
 				ONG.pessoaRest.inserir({
 					data : dadosPJ,
         			success: function(msg){		
-        				bootbox.alert(msg);          	
+        				bootbox.alert(msg);
+        				ONG.pessoaJuridica.busca();
+    					$('input').val('');
+    					$('#modaladd').modal('toggle');
         			},
         			error: function(err){								
         				bootbox.alert("Erro ao realizar cadastro, entrar em contato com o Administrador se o problema persistir!");
@@ -294,11 +302,11 @@ $(document).ready(function(){
 		    	
 				ONG.pessoaRest.editar({
 					data : dadosPJ,
-					success:function(data) {	
-						bootbox.alert(data);	
-						setTimeout(function(){
-	    	    	         location.reload();
-	    	    	    }, 1000);
+					success:function(msg) {	
+        				bootbox.alert(msg);
+        				ONG.pessoaJuridica.busca();
+    					$('input').val('');
+    					$('#modaledit').modal('toggle');
 					},
 					error: function(err) {	
 						bootbox.alert("Erro ao Editar PJ"+err.responseText); 

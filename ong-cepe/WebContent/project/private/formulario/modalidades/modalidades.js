@@ -25,7 +25,7 @@ $(document).ready(function(){
 						"<tr>" +
 							"<th>Nome</th>" +
 							"<th>Descrição</th>" +
-							"<th>Tipo</th>" +
+//							"<th>Tipo</th>" +
 							"<th>Restrições</th>" +
 							"<th>Observações</th>" +
 							"<th class='actions col-md-2'>Ações</th>" +
@@ -37,7 +37,7 @@ $(document).ready(function(){
 				html += "<tr>"+
 				"<td>"+lista[i].nome+"</td>"+
 				"<td>"+lista[i].descricao+"</td>"+				
-				"<td>"+lista[i].tipo+"</td>"+				
+//				"<td>"+lista[i].tipo+"</td>"+				
 				"<td>"+lista[i].restricoes+"</td>"+				
 				"<td>"+lista[i].observacoes+"</td>"+				
 				"<td class='actions  text-center'>"+
@@ -48,7 +48,7 @@ $(document).ready(function(){
 			}
 		} else {
 			if(lista == undefined || (lista != undefined && lista.length > 0)){
-				if(valorPesquisa == ""){ valorPesquisa = "*"; }
+				if(valorPesquisa == "" || valorPesquisa == undefined){ valorPesquisa = "*"; }
 				
 				ONG.modalidadeRest.pesquisarNome({
 					data : valorPesquisa,
@@ -81,7 +81,7 @@ $(document).ready(function(){
 				nome: $("#nome").val(),
 				descricao:$("#descricao").val(),
 				restricoes:$("#restricoes").val(),
-				tipo:$("#tipo").val(),
+				tipo:1,
 				observacoes:$("#observacoes").val(),
 				centroCusto:{
 					id: $("#costcenteradd").val()
@@ -133,7 +133,7 @@ $(document).ready(function(){
 				$("#nomeEdit").val(modalidadeEdit.nome);
 				$("#descricaoEdit").val(modalidadeEdit.descricao);
 				$("#restricoesEdit").val(modalidadeEdit.restricoes);
-				$("#tipoEdit").val(modalidadeEdit.tipo);
+//				$("#tipoEdit").val(modalidadeEdit.tipo);
 				$("#observacoesEdit").val(modalidadeEdit.observacoes);
 			},
 			error : function(err) {
@@ -150,7 +150,7 @@ $(document).ready(function(){
 			nome: $("#nomeEdit").val(),
 			descricao:$("#descricaoEdit").val(),
 			restricoes:$("#restricoesEdit").val(),
-			tipo:parseInt($("#tipoEdit").val()),
+			tipo:1,
 			observacoes:$("#observacoesEdit").val(),
 			centroCusto:{
 				id: parseInt($("#costcenteredit").val())

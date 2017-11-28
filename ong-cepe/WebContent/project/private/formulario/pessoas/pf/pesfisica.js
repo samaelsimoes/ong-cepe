@@ -222,7 +222,7 @@ $(document).ready(function(){
         if(!$("#cpfedit").val().match(/^\d{11,12}$/)){
         	exp += "cpf inválido ! </br> " + "</br>";
         }
-        if(!$("#rgedit").val().match(/^\d{9,13}$/)){
+        if(!$("#rgedit").val().match(/^\d{5,13}$/)){
         	exp += "rg inválido ! </br> " + "</br>";
         }
         if(!$("#cepedit").val().match(/^\d{8,9}$/)){

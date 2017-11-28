@@ -5,8 +5,10 @@ import java.util.List;
 
 import br.com.cepe.daoconnect.CidadeDAO;
 import br.com.cepe.daoconnect.EventoDAO;
+import br.com.cepe.daoconnect.FluxoCaixaDAO;
 import br.com.cepe.daoconnect.ModalidadeDAO;
 import br.com.cepe.datatype.HOperator;
+import br.com.cepe.entity.pojo.caixa.Operacao;
 import br.com.cepe.entity.pojo.endereco.Cidade;
 import br.com.cepe.entity.pojo.evento.Evento;
 import br.com.cepe.entity.pojo.modalidade.Modalidade;
@@ -116,11 +118,6 @@ public class EventoService  implements Service<Evento>{
 	public List<Evento> pesquisaDataContem()throws GlobalException{
 		return (List<Evento>) new EventoDAO().findGeneric("data", HOperator.CONTAINS, valorStr);
 	}
-
-	public void excluir()  throws GlobalException {
-		new EventoDAO(this.num).delete();
-	}
-
 	
 	public void alterar()  throws GlobalException{		
 		new EventoDAO(this.evento).update();		
@@ -131,5 +128,17 @@ public class EventoService  implements Service<Evento>{
 			int num) throws GlobalException {
 		return null;
 	}
+	
+
+	public void excluir()  throws GlobalException {
+		
+		List<Operacao> operacoes = new FluxoCaixaDAO().findGenericInt("evento_id", HOperator.EQUALS, this.num);
+		if(operacoes.isEmpty())
+			new EventoDAO(this.num).delete();
+		else
+			throw new GlobalException("Não foi possível excluir o evento, existem operações financeiras vinculadas");
+		
+	}
+
 
 }

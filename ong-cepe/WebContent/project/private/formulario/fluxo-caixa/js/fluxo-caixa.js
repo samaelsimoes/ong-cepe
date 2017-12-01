@@ -226,6 +226,7 @@ $(document).ready(function(){
 					bootbox.alert(msg);
 					ONG.fluxoCaixa.pesquisar();
 					$('input').val('');
+					$('textarea').val('');					
 					$('#modaladd').modal('toggle');
 				},
 				error: function(err){							
@@ -579,6 +580,7 @@ $(document).ready(function(){
 					bootbox.alert(msg);
 					ONG.fluxoCaixa.pesquisar();
 					$('input').val('');
+					$('textarea').val('');										
 					$('#modaledit').modal('toggle');
 				},
 				error: function(err){							

@@ -66,9 +66,9 @@ $(document).ready(function(){
 					html += "<td>" + listPesj[i].rua + "</td>";
 					html += "<td>" + listPesj[i].complemento + "</td>";
 					html += "<td>" + listPesj[i].numero + "</td>";
-					if (listPesF[i].status == 1) {
+					if (listPesj[i].status == 1) {
 						html += "<td>" + "Ativo" + "</td>";
-					}else if (listPesF[i].status == 2) {
+					}else if (listPesj[i].status == 2) {
 						html += "<td>" + "Inativo" + "</td>";
 					}
 					html += "<td>"+

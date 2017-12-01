@@ -34,8 +34,12 @@ $(document).ready(function(){
 				"</tr>" +
 			"</thead>";	
 		html += "<tbody>";
-		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){			  
+		    if(listPesF != undefined && listPesF.length > 0 && listPesF[0].id != undefined){	
+		    	
+		    	
+		    	
 			  	for(var i = 0; i < listPesF.length; i++){
+			  		
 					html += "<tr>";		
 					html += "<td>" + listPesF[i].nome + "</td>";
 					html += "<td>" + listPesF[i].cpf + "</td>";
@@ -56,11 +60,13 @@ $(document).ready(function(){
 									listPesF[i].foneMovel+
 								"</p></td>"
 					}
+
 					html += "<td>" + listPesF[i].rua + "</td>";
 					html += "<td>" + listPesF[i].numero + "</td>";
-					if (listPesF[i].status == 1) {
+					
+					if ( listPesF[i].status == 1 ) {
 						html += "<td>" + "Ativo" + "</td>";
-					}else if (listPesF[i].status == 2) {
+					}else if ( listPesF[i].status == 2 ) {
 						html += "<td>" + "Inativo" + "</td>";
 					}
 					html += "<td>"+

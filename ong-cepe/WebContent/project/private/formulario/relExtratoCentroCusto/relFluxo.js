@@ -342,13 +342,20 @@ $(document).ready(function(){
 			} else if ( listPesq[i].tipo == 2) {
 				tipomsg = "Transferência";
 			} 
+			var retorno = "";
+			if( listPesq[i].evento != null  ) {
+				retorno = {text: listPesq[i].evento.nome, style: 'tablefont', alignment: 'center'}
+			}else if ( listPesq[i].evento == null ) {
+				retorno = {text: "sem evento", style: 'tablefont', alignment: 'center'}
+			} 
+			
 			table_body.push(
 				[
 					{text: listPesq[i].data.substring(0,10), style: 'tablefont', alignment: 'center'},
 					{text: tipomsg, style: 'tablefont', alignment: 'center'},
 					{text: listPesq[i].descricao, style: 'tablefont', alignment: 'center'},
 					{text: listPesq[i].usuario.nome, style: 'tablefont', alignment: 'center'},
-					{text: listPesq[i].evento.nome, style: 'tablefont', alignment: 'center'},
+					retorno,
 					{text: "R$ " + parseFloat(listPesq[i].valor).toFixed(2).replace('.',','), style: 'tablefont', alignment: 'center'}
 				]	
 			);

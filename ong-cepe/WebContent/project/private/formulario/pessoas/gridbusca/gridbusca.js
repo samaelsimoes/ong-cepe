@@ -22,11 +22,11 @@ $(document).ready(function(){
 			"<thead class='table table-striped '>" +
 				"<tr>" +	
 					"<th> Nome / Razão social </th>" + 
-					"<th> Cpf / CNPJ </th>" +
+					"<th style='width: 13%;'> Cpf / CNPJ </th>" +
 					"<th> Tipo </th> " +
 					"<th> Telefone contato </th>" +
-					"<th> Email </th>" +
-					"<th class='col-md-2'> Cidade </th>" +
+					"<th style='width: 15%;'> Email </th>" +
+					"<th style='width: 10%;'> Cidade </th>" +
 					"<th> Status </th>" +
 					"<th> Ações</th>" +
 				"</tr>" +
@@ -68,7 +68,7 @@ $(document).ready(function(){
 						
 						if (listallpes[i].status == 1) {
 							html += "<td>" + "Ativo" + "</td>";
-						}else if (listallpes[i].status == 2) {
+						}else if (listallpes[i].status == 0) {
 							html += "<td>" + "Inativo" + "</td>";
 						}
 						if ( listallpes[i].tipo == 1) {

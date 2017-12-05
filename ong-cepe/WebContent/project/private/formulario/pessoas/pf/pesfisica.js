@@ -66,7 +66,7 @@ $(document).ready(function(){
 					
 					if ( listPesF[i].status == 1 ) {
 						html += "<td>" + "Ativo" + "</td>";
-					}else if ( listPesF[i].status == 2 ) {
+					}else if ( listPesF[i].status == 0 ) {
 						html += "<td>" + "Inativo" + "</td>";
 					}
 					html += "<td>"+

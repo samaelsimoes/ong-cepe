@@ -356,7 +356,7 @@ $(document).ready(function(){
 					{text: listPesq[i].descricao, style: 'tablefont', alignment: 'center'},
 					{text: listPesq[i].usuario.nome, style: 'tablefont', alignment: 'center'},
 					retorno,
-					{text: "R$ " + parseFloat(listPesq[i].valor).toFixed(2).replace('.',','), style: 'tablefont', alignment: 'center'}
+					{text: "R$ " + parseFloat(listPesq[i].valor).toFixed(2).replace('.',','), style: 'tablefont', alignment: 'right'}
 				]	
 			);
 		}
@@ -464,6 +464,8 @@ $(document).ready(function(){
 					// alignment: 'justify'
 				}
 			}
-		pdfMake.createPdf(formatgeneratorPDF).open();
+		var n = new Date();
+		var nomearq = String(n).substring(8,10)+"_"+(1+n.getMonth())+"_"+String(n).substring(11,24).replace(' ','_')+'_extratoCEPE';
+		pdfMake.createPdf(formatgeneratorPDF).download(nomearq+".pdf");
 	}
 })

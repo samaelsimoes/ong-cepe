@@ -93,10 +93,11 @@ $(document).ready(function(){
 			ONG.modalidadeRest.inserir({
 				data : newCad,
 				success : function(msg) {
-					console.log('success', msg);
-					bootbox.alert(msg, function(){ 
-						$(location).attr('href', ONG.contextPath+'/project/private/modalidades.html'); });
-					
+					bootbox.alert(msg);
+					ONG.modalidade.pesquisar();
+					$('input').val('');
+					$('textarea').val('');					
+					$('#modaladd').modal('toggle');					
 				},
 				error : function(err) {
 					console.log('err' ,err);

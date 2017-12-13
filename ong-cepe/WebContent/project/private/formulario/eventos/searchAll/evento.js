@@ -19,7 +19,7 @@ $(document).ready(function(){
 					"<th> Tipo </th>" +
 					"<th> Data </th>" +
 					"<th class='col-md-2'> Descrição </th>" +
-					"<th> Estado </th>" +
+//					"<th> Estado </th>" +
 					"<th> Cidade </th>" +
 					"<th> Bairro </th>" +
 //					"<th> Rua </th>" +
@@ -54,8 +54,8 @@ $(document).ready(function(){
 						}
 						html += "<td>" + listEvent[i].data.split("-").reverse().join("/") + "</td>";
 						html += "<td><p class='small'>" + listEvent[i].descricao + "</p></td>";
-						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
-						html += "<td>" + listEvent[i].cidade.nome + "</td>";
+//						html += "<td>" + listEvent[i].cidade.estado.nome + "</td>";
+						html += "<td>" + listEvent[i].cidade.estado.sigla + "-" +listEvent[i].cidade.nome+ "</td>";
 						html += "<td>" + listEvent[i].bairro + "</td>";
 //						html += "<td>" + listEvent[i].rua + "</td>";
 //						html += "<td>" + listEvent[i].numero + "</td>";
@@ -148,7 +148,6 @@ $(document).ready(function(){
 	            		id: parseInt($("#modalidade").val())
 	            	},
 	            };
-            	debugger;
             	var cfg = {
         			url: ONG.contextPath +"/rest/evento/",
         			data: dadosEvent,
